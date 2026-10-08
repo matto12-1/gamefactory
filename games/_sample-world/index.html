@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ko"><head><meta name="gf-version" content="399a5c8957"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>가짜 짧은 판</title>
+<link rel="stylesheet" href="../../kit/gf-hud.css?v=399a5c8957">
+<style>
+*{box-sizing:border-box}body{margin:0;height:100dvh;overflow:hidden;font-family:system-ui,"Malgun Gothic",sans-serif;color:var(--gf-ink);background:radial-gradient(ellipse at 75% 20%,#d8f1ff80,transparent 38%),linear-gradient(#409eff 0%,#86d0f5 49%,#a6d8b0 65%,#7cb695 66%,#d4bf9c 82%,#677d91 83%,#3b536c 100%)}
+p{margin:0}[hidden]{display:none!important}
+.controls{position:absolute;top:62%;left:50%;transform:translateX(-50%);display:flex;gap:12px}
+.controls button{min-width:150px;min-height:54px;font-size:20px}
+.gf-note .details{display:flex;flex-wrap:wrap;gap:4px 12px;margin-top:6px;color:var(--gf-sub);font-size:12px}
+.winner{position:absolute;left:50%;top:48%;transform:translate(-50%,-50%);padding:24px 36px;font-size:clamp(28px,4vw,56px);font-weight:900;color:var(--gf-gold);white-space:nowrap}
+.ended .gf-question,.ended .gf-answers,.ended .controls{visibility:hidden}
+@media(max-width:600px){.controls{top:calc(var(--gf-band) + 338px)}.controls button{min-width:150px}.winner{top:56%;font-size:28px;padding:20px}.gf-note .details{font-size:11px}}
+@media(max-height:600px) and (min-width:601px){.controls{top:auto;bottom:110px}.gf-note{font-size:12px}.gf-goal{max-width:240px}}
+</style></head>
+<body>
+<div class="gf-hud">
+  <section class="gf-chip"><p class="gf-label">점수</p><strong class="gf-score" id="score">0</strong></section>
+  <section class="gf-chip"><p class="gf-label">남은 시간</p><strong class="gf-time">1:00</strong><div class="gf-bar"><i style="width:100%"></i></div></section>
+  <section class="gf-chip"><p class="gf-label">목숨</p><div class="gf-hearts">♥♥♥</div></section>
+</div>
+<section class="gf-question gf-chip"><p>가짜 게임이에요</p><div class="gf-big">8 + 7 = ?</div></section>
+<div class="gf-answers"><button class="gf-answer"><small>1</small>13</button><button class="gf-answer"><small>2</small>15</button><button class="gf-answer"><small>3</small>17</button></div>
+<div class="controls"><button class="gf-button gf-primary" data-test="start">시작</button><button class="gf-button gf-primary" data-test="finish" hidden>끝내기</button></div>
+<section class="gf-goal gf-chip" data-test="goal" hidden><p class="gf-label">오늘의 도전</p><strong id="goal-text"></strong></section>
+<section class="gf-note gf-chip">손가락으로 답을 눌러요 · 키보드 1·2·3<div class="details"><span data-test="sound-state"></span><span data-test="mode"></span><span id="state">시작해 보세요</span><span id="pause"></span></div></section>
+<div class="winner gf-chip" data-test="winner" hidden>왼쪽 이겼어요</div>
+<script src="../../kit/gf-kit.js?v=399a5c8957"></script><script>
+const start = document.querySelector('[data-test="start"]'), finish = document.querySelector('[data-test="finish"]'), state = document.getElementById('state');
+document.querySelector('[data-test="mode"]').textContent = GF.mode;
+start.onclick = async () => { start.disabled = true; await GF.start(); state.textContent = '진행 중'; start.hidden = true; finish.hidden = false; };
+finish.onclick = () => {
+  finish.disabled = true;
+  if (GF.mode === 'solo') { const score = GF.seed === null ? 500 : 100 + (GF.seed * 7919) % 900; document.getElementById('score').textContent = score; GF.stamp('first'); if (score >= 800) GF.stamp('big'); state.textContent = score + '점'; GF.finish({ score }); }
+  else { state.textContent = '왼쪽 이겼어요'; document.body.classList.add('ended'); document.querySelector('[data-test="winner"]').hidden = false; GF.finish(); }
+};
+GF.on('pause', () => { document.getElementById('pause').textContent = '멈춤'; finish.disabled = true; });
+GF.on('resume', () => { document.getElementById('pause').textContent = ''; finish.disabled = false; });
+function soundState(on) { document.querySelector('[data-test="sound-state"]').textContent = `소리 ${on ? '켬' : '끔'}`; }
+soundState(GF.sound); GF.on('sound', ({ on }) => soundState(on));
+GF.on('goal', ({ top }) => { document.querySelector('[data-test="goal"]').hidden = false; document.getElementById('goal-text').textContent = top === null ? '오늘 첫 1등이 되어 보세요' : `오늘 1등 ${top.toLocaleString('ko-KR')}점`; });
+GF.ready();
+</script></body></html>

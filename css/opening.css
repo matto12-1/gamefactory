@@ -1,0 +1,72 @@
+/* 0 오프닝: 3안 B 「학교 앞 오락실」 (10-07 Matto 결정)
+   배경 그림은 반투명하게 눌러 두고, 천천히 다가오기 · 오락기 화면 깜빡임 · 빈 도장 칸에 도장 찍히기 · 반짝이.
+   그림 위 효과의 자리(%)는 그림(16:9) 기준이라, 그림과 효과를 같은 판(.op-move)에 올려 함께 움직인다. */
+
+
+.opening-page { margin: 0; background: var(--gf-bg); overflow: hidden; }
+.op { position: relative; width: 100vw; height: 100dvh; max-width: none; padding: 0; overflow: hidden; color: var(--gf-cream); }
+
+/* 그림 판: 화면을 덮는 16:9 판(가로·세로 중 큰 쪽에 맞춤) */
+.op-scene { position: absolute; left: 50%; top: 50%; width: max(100vw, 177.78dvh); height: max(56.25vw, 100dvh); transform: translate(-50%, -50%); }
+.op-move { position: absolute; inset: 0; transform-origin: 50% 45%; animation: op-drift 26s ease-in-out infinite alternate; }
+.op-img { width: 100%; height: 100%; display: block; opacity: .62; filter: saturate(1.15); }
+@keyframes op-drift { from { transform: scale(1.02) translate(0, 0); } to { transform: scale(1.09) translate(-1%, -1.2%); } }
+
+/* 오락기 두 화면이 번갈아 번쩍인다 (그림 속 화면 자리) */
+.op-screen { position: absolute; top: 36%; width: 10.6%; height: 14.5%; border-radius: 4px; mix-blend-mode: screen;
+  background: radial-gradient(closest-side, var(--gf-mint) 0%, var(--gf-dot-light) 45%, transparent 100%); opacity: .15; }
+.op-screen.left { left: 37.2%; animation: op-flash 2.4s steps(6) infinite; }
+.op-screen.right { left: 52.6%; animation: op-flash 2.4s steps(6) infinite 1.2s; }
+@keyframes op-flash { 0%, 100% { opacity: .1; } 20% { opacity: .75; } 35% { opacity: .25; } 55% { opacity: .6; } }
+
+/* 도장판의 빈 칸에 도장이 「쾅」 찍혔다 사라진다 (모으는 맛) */
+.op-stamp { position: absolute; width: 3.1%; aspect-ratio: 1; border-radius: 50%; border: .35vmax solid var(--gf-green); opacity: 0;
+  background: radial-gradient(circle, var(--gf-yellow) 0 28%, transparent 30%); box-shadow: 0 0 1.2vmax var(--gf-yellow); }
+.op-stamp.s1 { left: 31.7%; top: 24.6%; animation: op-stamp 7s ease-out infinite 2s; }
+.op-stamp.s2 { left: 35%; top: 24.6%; animation: op-stamp 7s ease-out infinite 5.5s; }
+@keyframes op-stamp { 0% { opacity: 0; transform: scale(2.2) rotate(-25deg); } 6% { opacity: 1; transform: scale(.9) rotate(4deg); }
+  10% { transform: scale(1) rotate(0); } 40% { opacity: 1; } 55%, 100% { opacity: 0; transform: scale(1); } }
+
+/* 반짝이: 네모난 점(도트 느낌)이 깜빡이며 떠오른다 */
+.op-sparks i { position: absolute; width: .45%; aspect-ratio: 1; background: var(--gf-cream); box-shadow: 0 0 .6vmax var(--gf-yellow); opacity: 0; animation: op-spark 4.8s steps(8) infinite; }
+.op-sparks i:nth-child(1) { left: 52%; top: 12%; } .op-sparks i:nth-child(2) { left: 61%; top: 8%; animation-delay: .6s; }
+.op-sparks i:nth-child(3) { left: 70%; top: 15%; animation-delay: 1.2s; } .op-sparks i:nth-child(4) { left: 79%; top: 10%; animation-delay: 1.8s; }
+.op-sparks i:nth-child(5) { left: 88%; top: 18%; animation-delay: 2.4s; } .op-sparks i:nth-child(6) { left: 66%; top: 30%; animation-delay: 3s; }
+.op-sparks i:nth-child(7) { left: 84%; top: 34%; animation-delay: 3.6s; } .op-sparks i:nth-child(8) { left: 44%; top: 30%; animation-delay: 4.2s; }
+.op-sparks i:nth-child(9) { left: 8%; top: 20%; animation-delay: .9s; } .op-sparks i:nth-child(10) { left: 15%; top: 38%; animation-delay: 2.1s; }
+.op-sparks i:nth-child(11) { left: 57%; top: 26%; animation-delay: 3.3s; } .op-sparks i:nth-child(12) { left: 93%; top: 6%; animation-delay: 4.5s; }
+@keyframes op-spark { 0% { opacity: 0; transform: translateY(0); } 25% { opacity: 1; } 60% { opacity: .2; } 75% { opacity: .9; } 100% { opacity: 0; transform: translateY(-2.5vmax); } }
+
+/* 반투명 막: 위(이름)와 아래(단추) 쪽을 더 어둡게 */
+.op-shade { position: absolute; inset: 0; background:
+  linear-gradient(180deg, var(--gf-overlay) 0%, var(--gf-dot-light) 32%, transparent 55%, var(--gf-overlay) 100%),
+  radial-gradient(ellipse at 50% 55%, transparent 40%, var(--gf-overlay) 100%); }
+
+/* 사이트 이름 자리: 화면 한가운데 (10-07 Matto: 「중앙상단말고 중앙으로」. 이름은 4단계에서 정한다) */
+.op-title { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); margin: 0; width: max-content; max-width: 92vw; text-align: center;
+  font-size: clamp(36px, 7.2vw, 104px); font-weight: 900; letter-spacing: .02em; line-height: 1.1; color: var(--gf-cream);
+  -webkit-text-stroke: clamp(2px, .35vw, 5px) var(--gf-ink); paint-order: stroke fill;
+  text-shadow: 0 .08em 0 var(--gf-ink), 0 .16em 0 var(--gf-yellow), 0 .26em .5em var(--gf-overlay); animation: op-bob 3.2s steps(4) infinite; }
+@keyframes op-bob { 0%, 100% { transform: translate(-50%, -50%); } 50% { transform: translate(-50%, calc(-50% - .08em)); } }
+
+/* 입장하기: 가운데 아래 (그림 B는 바닥이 비어 있다) */
+.op-enter { position: absolute; left: 50%; bottom: 11%; transform: translateX(-50%); min-height: 64px; padding: .5em 2em;
+  font: inherit; font-size: clamp(20px, 2.6vw, 32px); font-weight: 900; letter-spacing: .08em; color: var(--gf-ink); cursor: pointer;
+  background: var(--gf-yellow); border: 4px solid var(--gf-ink); border-radius: 14px; box-shadow: 0 6px 0 var(--gf-ink), 0 0 0 0 var(--gf-dot-light);
+  animation: op-call 2s ease-out infinite; }
+.op-enter:hover { background: var(--gf-acc-hi); }
+.op-enter:active { transform: translate(-50%, 4px); box-shadow: 0 2px 0 var(--gf-ink); }
+.op-enter:focus-visible { outline: 4px solid var(--gf-cream); outline-offset: 4px; }
+@keyframes op-call { 0% { box-shadow: 0 6px 0 var(--gf-ink), 0 0 0 0 var(--gf-dot-light); } 70%, 100% { box-shadow: 0 6px 0 var(--gf-ink), 0 0 0 22px transparent; } }
+
+/* MattoLAB 공식 마크 (mattolab-brand .labmark, 어두운 바탕이라 Matto는 크림색) */
+.op-lab { position: absolute; right: clamp(14px, 2.2vw, 32px); bottom: clamp(12px, 2vw, 28px); margin: 0;
+  font-family: Pretendard, sans-serif; font-size: clamp(16px, 1.6vw, 22px); letter-spacing: -.012em; line-height: 1; }
+.op-lab i { font-style: normal; font-weight: 500; color: var(--gf-cream); }
+.op-lab b { font-weight: 800; color: var(--gf-green); }
+
+@media (prefers-reduced-motion: reduce) {
+  .op-move, .op-screen, .op-stamp, .op-sparks i, .op-title, .op-enter { animation: none; }
+}
+
+.op-title { font-family:DoHyeon,Pretendard,sans-serif; }

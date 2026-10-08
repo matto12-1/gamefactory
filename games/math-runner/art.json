@@ -1,0 +1,113 @@
+{
+  "slots": {
+    "bg-sky": {
+      "file": "art/bg-sky.webp",
+      "w": 1376,
+      "h": 768,
+      "frames": 1,
+      "anchors": {
+        "horizon": 432
+      }
+    },
+    "runner-run": {
+      "file": "art/runner-run.webp",
+      "w": 178,
+      "h": 305,
+      "frames": 5,
+      "anchors": {}
+    },
+    "runner-fall": {
+      "file": "art/runner-fall.webp",
+      "w": 281,
+      "h": 247,
+      "frames": 1,
+      "anchors": {}
+    },
+    "runner-cheer": {
+      "file": "art/runner-cheer.webp",
+      "w": 201,
+      "h": 287,
+      "frames": 1,
+      "anchors": {}
+    },
+    "gate-0": {
+      "file": "art/gate-0.webp",
+      "w": 424,
+      "h": 711,
+      "frames": 1,
+      "anchors": {
+        "plate": {
+          "x": 110,
+          "y": 31,
+          "w": 199,
+          "h": 116
+        }
+      }
+    },
+    "gate-1": {
+      "file": "art/gate-1.webp",
+      "w": 424,
+      "h": 711,
+      "frames": 1,
+      "anchors": {
+        "plate": {
+          "x": 112,
+          "y": 31,
+          "w": 199,
+          "h": 116
+        }
+      }
+    },
+    "gate-2": {
+      "file": "art/gate-2.webp",
+      "w": 424,
+      "h": 711,
+      "frames": 1,
+      "anchors": {
+        "plate": {
+          "x": 112,
+          "y": 31,
+          "w": 199,
+          "h": 116
+        }
+      }
+    },
+    "coin": {
+      "file": "art/coin.webp",
+      "w": 139,
+      "h": 144,
+      "frames": 1,
+      "anchors": {}
+    },
+    "bits": {
+      "file": "art/bits.webp",
+      "w": 150,
+      "h": 156,
+      "frames": 1,
+      "anchors": {}
+    },
+    "tree": {
+      "file": "art/tree.webp",
+      "w": 179,
+      "h": 191,
+      "frames": 1,
+      "anchors": {}
+    },
+    "shop": {
+      "file": "art/shop.webp",
+      "w": 208,
+      "h": 168,
+      "frames": 1,
+      "anchors": {}
+    }
+  },
+  "palette": {
+    "road": "#a7a39a",
+    "roadAlt": "#9d998f",
+    "line": "#f5f2e9",
+    "curbA": "#e04a3a",
+    "curbB": "#f5f2e9",
+    "grassA": "#52ce1e",
+    "grassB": "#45bb1d"
+  }
+}

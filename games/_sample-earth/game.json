@@ -1,0 +1,44 @@
+{
+  "id": "_sample-earth",
+  "title": "지구를 지켜라",
+  "summary": "나무를 심고 쓰레기를 나누며 지구를 지켜요.",
+  "grades": [
+    1,
+    6
+  ],
+  "subjects": [
+    "과학"
+  ],
+  "tags": [
+    "계기교육"
+  ],
+  "kind": "adventure",
+  "minutes": 10,
+  "modes": [
+    "solo"
+  ],
+  "entry": "index.html",
+  "cover": "cover.webp",
+  "exitButton": "top-left",
+  "ranking": {
+    "enabled": false
+  },
+  "stamps": [
+    {
+      "id": "scene1",
+      "name": "첫 장면",
+      "how": "첫 장면 보기"
+    },
+    {
+      "id": "scene2",
+      "name": "둘째 장면",
+      "how": "둘째 장면 보기"
+    }
+  ],
+  "occasions": [
+    {
+      "name": "지구의 날",
+      "date": "04-22"
+    }
+  ]
+}

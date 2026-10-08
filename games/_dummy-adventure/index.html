@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="ko"><head><meta name="gf-version" content="399a5c8957"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>가짜 긴 모험</title>
+<style>body{font-family:system-ui;background:#eee;color:#222;padding:24px}button{min-width:100px;min-height:44px;font:inherit;margin:8px}</style></head>
+<body><p data-test="scene"></p><p id="pause"></p><button data-test="next">다음 장면</button><button data-test="exit">나가기</button>
+<script src="../../kit/gf-kit.js?v=399a5c8957"></script><script>
+const saved = GF.load(); let scene = Number.isSafeInteger(saved?.scene) && saved.scene >= 0 ? saved.scene : 0;
+const next = document.querySelector('[data-test="next"]');
+const show = () => { document.querySelector('[data-test="scene"]').textContent = String(scene); }; show();
+next.onclick = () => { scene++; show(); GF.save({scene}); if (scene === 1 || scene === 2) GF.stamp('scene' + scene); };
+document.querySelector('[data-test="exit"]').onclick = () => GF.exit();
+GF.on('pause', () => { next.disabled = true; document.getElementById('pause').textContent = '멈춤'; });
+GF.on('resume', () => { next.disabled = false; document.getElementById('pause').textContent = ''; });
+GF.ready();
+</script></body></html>

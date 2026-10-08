@@ -1,0 +1,78 @@
+{
+  "id": "math-runner",
+  "title": "연산 러너",
+  "summary": "문제를 보고 정답 문으로 쌩 달려요.",
+  "subjects": ["수학"],
+  "family": "runner",
+  "play": {},
+  "grades": [
+    1,
+    6
+  ],
+  "kind": "short",
+  "minutes": 2,
+  "modes": [
+    "solo",
+    "duo"
+  ],
+  "entry": "index.html",
+  "cover": "cover.webp",
+  "exitButton": "top-left",
+  "occasions": [],
+  "tags": [
+    "새 게임"
+  ],
+  "ranking": {
+    "enabled": true,
+    "maxScore": 10000,
+    "minDurationMs": 10000,
+    "maxScorePerSec": 80,
+    "stars": [
+      50,
+      150,
+      300,
+      500,
+      750,
+      1000,
+      1300,
+      1700,
+      2200,
+      2800
+    ]
+  },
+  "stamps": [
+    {
+      "id": "first",
+      "name": "첫 달리기",
+      "how": "한 판을 끝까지 달려요",
+      "rule": {
+        "finish": true
+      }
+    },
+    {
+      "id": "combo10",
+      "name": "척척 계산",
+      "how": "정답 문을 10번 잇달아 지나가요",
+      "rule": {
+        "combo": 10
+      }
+    },
+    {
+      "id": "score1000",
+      "name": "천 점 돌파",
+      "how": "한 판에 1,000점을 넘겨요",
+      "rule": {
+        "score": 1000
+      }
+    },
+    {
+      "id": "nomiss",
+      "name": "실수 없는 길",
+      "how": "한 번도 안 틀리고 30문제를 맞혀요",
+      "rule": {
+        "right": 30,
+        "wrong": 0
+      }
+    }
+  ]
+}

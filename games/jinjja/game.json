@@ -1,0 +1,25 @@
+{
+  "id": "jinjja",
+  "title": "진짜가짜 탐정단",
+  "summary": "가짜 뉴스와 수상한 광고를 가려내는 탐정이 되어요.",
+  "grades": [4, 6],
+  "subjects": ["정보", "국어"],
+  "tags": ["계기교육", "미디어"],
+  "kind": "adventure",
+  "minutes": 30,
+  "modes": ["solo"],
+  "entry": "index.html",
+  "cover": "cover.webp",
+  "exitButton": "top-left",
+  "ranking": { "enabled": false },
+  "stamps": [
+    { "id": "ch1", "name": "출처 탐정", "how": "1장 「출처의 비밀」 해결하기" },
+    { "id": "ch2", "name": "사진 감별사", "how": "2장 「사진은 거짓말을 한다」 해결하기" },
+    { "id": "ch3", "name": "광고 꿰뚫기", "how": "3장 「누가 이득을 보나」 해결하기" },
+    { "id": "ch4", "name": "정보 지킴이", "how": "4장 「내 정보를 지켜라」 해결하기" },
+    { "id": "ch5", "name": "추천의 비밀", "how": "5장 「왜 이게 내게 보일까」 해결하기" },
+    { "id": "final", "name": "진짜가짜 탐정", "how": "최종 임무 「진짜가짜 대작전」 끝내기" }
+  ],
+  "occasions": [],
+  "source": "F:/게임 만들기/Dokdo/진짜가짜탐정단.html"
+}

@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="ko"><head><meta name="gf-version" content="399a5c8957"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>손맛 견본</title>
+<link rel="stylesheet" href="gf-hud.css?v=399a5c8957">
+<style>
+*{box-sizing:border-box}body{margin:0;height:100dvh;overflow:hidden;font-family:Pretendard,sans-serif;background:var(--gf-sky);color:var(--gf-cream)}
+canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated;touch-action:none}h1{position:absolute;top:14px;left:24px;font:32px DoHyeon;margin:0;pointer-events:none}
+.hint{position:absolute;left:50%;top:32%;transform:translateX(-50%);text-align:center;pointer-events:none;white-space:nowrap;font-size:20px}
+.hint strong{display:block;font:42px DoHyeon;color:var(--gf-yellow);margin-bottom:10px}
+.controls{position:absolute;bottom:20px;left:20px;right:20px;display:flex;flex-wrap:wrap;justify-content:center;gap:10px;padding:16px;background:var(--gf-hud);border:1px solid var(--gf-hud-line);border-radius:16px}
+.controls button{min-height:50px;font-size:18px}.gf-goal{top:86px;bottom:auto;right:20px;width:260px}.gf-goal strong{font-size:24px}p{margin:0}[hidden]{display:none!important}
+@media(max-width:900px){.controls{display:grid;grid-template-columns:repeat(4,minmax(0,1fr))}.controls button{padding:10px 4px;font-size:17px}.hint{top:35%}.gf-goal{width:250px}}
+@media(max-width:540px){.controls{left:12px;right:12px;grid-template-columns:repeat(2,minmax(0,1fr));padding:10px;gap:8px}.gf-goal{top:86px;left:auto;right:12px;width:190px}.hint strong{font-size:30px}.hint{font-size:14px}.gf-hud{right:auto}.gf-goal strong{font-size:18px}}
+</style></head><body>
+<canvas aria-label="손맛 효과를 눌러 보는 놀이판"></canvas><h1>손맛 견본</h1>
+<div class="gf-hud"><section class="gf-chip"><p class="gf-label">점수</p><strong class="gf-score" id="score">0</strong></section></div>
+<section class="gf-goal gf-chip" id="goal" hidden><p class="gf-label">오늘의 도전</p><strong></strong></section>
+<p class="hint"><strong>아무 데나 눌러 보세요</strong>별이 터지고, 톡 튀어 올라요</p>
+<div class="controls"><button class="gf-button gf-primary" data-action="right">맞음</button><button class="gf-button" data-action="wrong">틀림</button><button class="gf-button" data-action="hit">때리기</button><button class="gf-button" data-action="combo">연속 5번</button><button class="gf-button" data-action="best">1등 넘기</button><button class="gf-button" data-action="count">셈 시작</button><button class="gf-button" data-action="end">끝 연출</button><button class="gf-button" data-action="sound">소리 켬</button></div>
+<script src="gf-kit.js?v=399a5c8957"></script><script src="gf-juice.js?v=399a5c8957"></script><script>
+const canvas = document.querySelector('canvas'), ctx = canvas.getContext('2d');
+const fx = new GFJuice.Fx({ seed:GF.seed ?? 1,unit:4 }), combo = new GFJuice.Combo();
+const scoreEl = document.getElementById('score'), goal = GFJuice.goal(document.getElementById('goal'));
+let width,height,ratio,score = 0,alternate = false,paused = false,manual = false,last = performance.now();
+function resize(){width = innerWidth;height = innerHeight;ratio = Math.min(devicePixelRatio || 1,2);canvas.width = width*ratio;canvas.height = height*ratio;draw();}
+function draw(){ctx.setTransform(ratio,0,0,ratio,0,0);ctx.fillStyle = '#245e4a';ctx.fillRect(0,0,width,height);ctx.save();fx.camera(ctx);ctx.fillStyle = '#397a58';for(let y=0;y<height;y+=40)for(let x=0;x<width;x+=40)ctx.fillRect(x+12,y+12,4,4);
+ctx.fillStyle = '#cce5ca';ctx.fillRect(width/2-24,height/2-24,48,48);ctx.fillStyle = '#3c382e';ctx.fillRect(width/2-12,height/2-8,8,8);ctx.fillRect(width/2+8,height/2-8,8,8);ctx.fillRect(width/2-8,height/2+10,20,4);ctx.restore();fx.draw(ctx);}
+function step(seconds){manual = true;for(let left=Math.max(0,seconds);left>0;){const dt=Math.min(1/60,left);fx.update(dt);left-=dt;}draw();}
+window.__JUICE = { fx,combo,step };
+function right(x=width/2,y=height/2){score+=120;GFJuice.react.right(fx,x,y,{ points:120,combo });GFJuice.rollNumber(scoreEl,score);goal.update(score);draw();}
+canvas.addEventListener('pointerdown',event=>{if(paused)return;document.querySelector('.hint').hidden=true;GFJuice.react.press(fx,event.clientX,event.clientY);alternate=!alternate;if(alternate)right(event.clientX,event.clientY);else GFJuice.react.hit(fx,event.clientX,event.clientY);draw();});
+document.querySelector('.controls').addEventListener('click',async event=>{const button=event.target.closest('button');if(!button||paused)return;document.querySelector('.hint').hidden=true;const x=width/2,y=height/2;GFJuice.react.press(fx,x,y);
+switch(button.dataset.action){case 'right':right();break;case 'wrong':GFJuice.react.wrong(fx,x,y,{combo});break;case 'hit':GFJuice.react.hit(fx,x,y);break;
+case 'combo':combo.miss();for(let i=0;i<5;i++)right(x+(i-2)*Math.min(100,width/8),y);break;
+case 'best':goal.setGoal(1000);score=1120;GFJuice.rollNumber(scoreEl,score);goal.update(score);fx.burst(width/2,40,{kind:'confetti',count:48});break;
+case 'count':button.disabled=true;await GFJuice.countdown({parent:document.body});button.disabled=false;break;
+case 'end':button.disabled=true;await GFJuice.finale({parent:document.body});button.disabled=false;break;
+case 'sound':GFJuice.sfx.setEnabled(!GFJuice.sfx.enabled);button.textContent=GFJuice.sfx.enabled?'소리 켬':'소리 끔';button.setAttribute('aria-pressed',String(GFJuice.sfx.enabled));break;}draw();});
+GF.on('pause',()=>paused=true);GF.on('resume',()=>{paused=false;last=performance.now();});GF.on('sound',({on})=>document.querySelector('[data-action="sound"]').textContent=on?'소리 켬':'소리 끔');
+document.querySelector('[data-action="sound"]').textContent=GFJuice.sfx.enabled?'소리 켬':'소리 끔';
+function frame(time){const dt=Math.min((time-last)/1000,.05);last=time;if(!paused&&!manual){fx.update(dt);draw();}requestAnimationFrame(frame);}addEventListener('resize',resize);resize();requestAnimationFrame(frame);GF.ready();
+</script></body></html>

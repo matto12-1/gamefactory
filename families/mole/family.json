@@ -1,0 +1,49 @@
+{
+  "id": "mole",
+  "name": "두더지 틀",
+  "about": "나오는 것 가운데 맞는 것만 잡는 틀",
+  "content": "mole/1",
+  "art": [
+    { "slot": "bg-wide", "kind": "scene", "size": [1376, 768], "what": "가로 배경. 구멍 9개가 뒤 3개, 가운데 3개, 앞 3개로 원근을 이룬다", "anchors": { "holes": ["ellipse", 9] } },
+    { "slot": "bg-tall", "kind": "scene", "size": [768, 1376], "what": "세로 배경. 구멍 9개가 뒤 3개, 가운데 3개, 앞 3개로 원근을 이룬다", "anchors": { "holes": ["ellipse", 9] } },
+    { "slot": "mole-up", "kind": "sprite", "what": "구멍에서 올라와 빈 팻말을 든 두더지. 몸 아래는 반듯하게 잘린다", "anchors": { "base": "point", "holeW": "number", "sign": "box" } },
+    { "slot": "mole-hit", "kind": "sprite", "what": "맞아서 어지러운 두더지", "anchors": { "base": "point", "holeW": "number" } },
+    { "slot": "mole-taunt", "kind": "sprite", "what": "혀를 내밀고 놀리는 두더지", "anchors": { "base": "point", "holeW": "number" } },
+    { "slot": "hammer", "kind": "sprite", "what": "세운 뿅망치. 머리가 위", "anchors": { "head": "point", "grip": "point" } },
+    { "slot": "dirt", "kind": "sprite", "what": "튀는 흙덩이" }
+  ],
+  "title": { "sprite": "mole-up" },
+  "keys": {
+    "solo": ["KeyQ", "KeyW", "KeyE", "KeyA", "KeyS", "KeyD", "KeyZ", "KeyX", "KeyC"],
+    "left": ["KeyQ", "KeyW", "KeyE", "KeyA", "KeyS", "KeyD"],
+    "right": ["KeyU", "KeyI", "KeyO", "KeyJ", "KeyK", "KeyL"]
+  },
+  "round": { "seconds": 90, "lives": 3, "duoSeconds": 60 },
+  "play": {
+    "rule": "바르게 쓴 말만 잡아요!",
+    "note": "두더지를 눌러요 · 키보드 Q W E / A S D / Z X C",
+    "noteDuo": "왼쪽 Q W E / A S D · 오른쪽 U I O / J K L"
+  },
+  "defaults": {
+    "grades": [1, 6], "kind": "short", "minutes": 2, "modes": ["solo", "duo"],
+    "entry": "index.html", "cover": "cover.webp", "exitButton": "top-left",
+    "occasions": [], "tags": ["새 게임"],
+    "ranking": { "enabled": true, "maxScore": 5000, "minDurationMs": 10000, "maxScorePerSec": 60, "stars": [50, 120, 210, 330, 470, 620, 790, 950, 1120, 1290] },
+    "stamps": [
+      { "id": "first", "name": "첫 뿅망치", "how": "한 판을 끝까지 해요", "rule": { "finish": true } },
+      { "id": "combo10", "name": "맞춤법 척척", "how": "바른 말을 10번 잇달아 잡아요", "rule": { "combo": 10 } },
+      { "id": "sharp", "name": "매의 눈", "how": "틀린 말은 하나도 안 잡고 바른 말 30개를 잡아요", "rule": { "right": 30, "wrong": 0 } },
+      { "id": "score1000", "name": "천 점 뿅망치", "how": "한 판에 1,000점을 넘겨요", "rule": { "score": 1000 } }
+    ]
+  },
+  "limits": { "right": 10, "wrong": 10, "tip": 30, "bandMin": 20 },
+  "example": {
+    "about": "예시 낱말 묶음. 1~2학년은 a, 3~4학년은 b 70%와 a 30%, 5~6학년은 c 60%와 b 40%를 섞는다",
+    "mix": { "1": { "a": 1 }, "2": { "a": 1 }, "3": { "b": 0.7, "a": 0.3 }, "4": { "b": 0.7, "a": 0.3 }, "5": { "c": 0.6, "b": 0.4 }, "6": { "c": 0.6, "b": 0.4 } },
+    "bands": {
+      "a": [ { "right": "학교", "wrong": ["학꾜"] }, { "right": "국어", "wrong": ["구거"] } ],
+      "b": [ { "right": "돼요", "wrong": ["되요"], "tip": "되어요를 줄이면 돼요" }, { "right": "안 돼요", "wrong": ["안 되요"], "tip": "되어요를 줄이면 돼요" } ],
+      "c": [ { "right": "눈곱", "wrong": ["눈꼽"] }, { "right": "깊숙이", "wrong": ["깊숙히"] } ]
+    }
+  }
+}

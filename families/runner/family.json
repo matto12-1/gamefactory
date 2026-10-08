@@ -1,0 +1,50 @@
+{
+  "id": "runner",
+  "name": "달리기 틀",
+  "about": "문제를 보고 정답이 적힌 문으로 달려 지나가는 틀",
+  "content": "runner/1",
+  "art": [
+    { "slot": "bg-sky", "kind": "scene", "size": [1376, 768], "what": "먼 하늘과 산. 지평선 아래 길과 풀은 틀이 색으로 칠한다", "anchors": { "horizon": "number" } },
+    { "slot": "runner-run", "kind": "sprite", "frames": 5, "what": "뒤에서 본 달리는 아이 5장" },
+    { "slot": "runner-fall", "kind": "sprite", "what": "넘어진 아이" },
+    { "slot": "runner-cheer", "kind": "sprite", "what": "두 팔을 든 아이" },
+    { "slot": "gate-0", "kind": "sprite", "what": "빨간 문(왼쪽 길). 문 안쪽은 비어 있다", "anchors": { "plate": "box" } },
+    { "slot": "gate-1", "kind": "sprite", "what": "파란 문(가운데 길). 문 안쪽은 비어 있다", "anchors": { "plate": "box" } },
+    { "slot": "gate-2", "kind": "sprite", "what": "노란 문(오른쪽 길). 문 안쪽은 비어 있다", "anchors": { "plate": "box" } },
+    { "slot": "coin", "kind": "sprite", "what": "동전" },
+    { "slot": "bits", "kind": "sprite", "what": "튀는 조각 무리" },
+    { "slot": "tree", "kind": "sprite", "what": "길가 나무" },
+    { "slot": "shop", "kind": "sprite", "what": "길가 가게" }
+  ],
+  "palette": ["road", "roadAlt", "line", "curbA", "curbB", "grassA", "grassB"],
+  "title": { "sprite": "runner-cheer" },
+  "keys": {
+    "solo": ["Digit1", "Digit2", "Digit3", "Numpad1", "Numpad2", "Numpad3", "ArrowLeft", "ArrowRight", "Space"],
+    "left": ["KeyA", "KeyS", "KeyD"],
+    "right": ["KeyJ", "KeyK", "KeyL"]
+  },
+  "round": { "seconds": 120, "lives": 3, "duoSeconds": 90 },
+  "play": {
+    "rule": "정답이 적힌 문으로 달려요!",
+    "note": "문을 눌러요 · 키보드 1 2 3 (← → 스페이스도 돼요)",
+    "noteDuo": "왼쪽 A S D · 오른쪽 J K L"
+  },
+  "defaults": {
+    "grades": [1, 6], "kind": "short", "minutes": 2, "modes": ["solo", "duo"],
+    "entry": "index.html", "cover": "cover.webp", "exitButton": "top-left",
+    "occasions": [], "tags": ["새 게임"],
+    "ranking": { "enabled": true, "maxScore": 10000, "minDurationMs": 10000, "maxScorePerSec": 80, "stars": [50, 150, 300, 500, 750, 1000, 1300, 1700, 2200, 2800] },
+    "stamps": [
+      { "id": "first", "name": "첫 달리기", "how": "한 판을 끝까지 달려요", "rule": { "finish": true } },
+      { "id": "combo10", "name": "척척 계산", "how": "정답 문을 10번 잇달아 지나가요", "rule": { "combo": 10 } },
+      { "id": "score1000", "name": "천 점 돌파", "how": "한 판에 1,000점을 넘겨요", "rule": { "score": 1000 } },
+      { "id": "nomiss", "name": "실수 없는 길", "how": "한 번도 안 틀리고 30문제를 맞혀요", "rule": { "right": 30, "wrong": 0 } }
+    ]
+  },
+  "limits": { "q": 40, "a": 8, "wrong": 8, "bandMin": 20 },
+  "example": {
+    "about": "예시 문제 묶음. 한 묶음에 20문제 이상 넣는다",
+    "mix": { "1": { "a": 1 }, "2": { "a": 1 }, "3": { "a": 1 }, "4": { "a": 1 }, "5": { "a": 1 }, "6": { "a": 1 } },
+    "bands": { "a": [ { "q": "프랑스의 수도는?", "a": "파리", "wrong": ["로마", "런던"] }, { "q": "7 + 8 = □", "a": "15", "wrong": ["14", "16"] } ] }
+  }
+}

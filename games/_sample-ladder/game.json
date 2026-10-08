@@ -1,0 +1,54 @@
+{
+  "id": "_sample-ladder",
+  "title": "낱말 사다리",
+  "summary": "낱말을 이어 사다리를 올라가요.",
+  "grades": [
+    3,
+    4
+  ],
+  "subjects": [
+    "국어"
+  ],
+  "tags": [
+    "새 게임"
+  ],
+  "kind": "short",
+  "minutes": 2,
+  "modes": [
+    "solo"
+  ],
+  "entry": "index.html",
+  "cover": "cover.webp",
+  "exitButton": "top-left",
+  "ranking": {
+    "enabled": true,
+    "maxScore": 99999,
+    "minDurationMs": 1000,
+    "maxScorePerSec": 1000,
+    "stars": [
+      50,
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900
+    ]
+  },
+  "stamps": [
+    {
+      "id": "first",
+      "name": "첫 판",
+      "how": "한 판 끝내기"
+    },
+    {
+      "id": "big",
+      "name": "큰 점수",
+      "how": "800점 이상 받기"
+    }
+  ],
+  "occasions": []
+}

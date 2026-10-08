@@ -1,0 +1,906 @@
+{
+  "version": "399a5c8957",
+  "games": [
+    {
+      "id": "_dummy",
+      "title": "가짜 짧은 판",
+      "summary": "시작하고 끝내 보세요.",
+      "grades": [
+        1,
+        6
+      ],
+      "subjects": [
+        "수학"
+      ],
+      "tags": [],
+      "kind": "short",
+      "minutes": 1,
+      "modes": [
+        "solo",
+        "duo",
+        "tv"
+      ],
+      "entry": "index.html",
+      "cover": "games/_dummy/cover.02d117f2.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": true
+      },
+      "stamps": [
+        {
+          "id": "first",
+          "name": "첫 판",
+          "how": "한 판 끝내기"
+        },
+        {
+          "id": "big",
+          "name": "큰 점수",
+          "how": "800점 이상 받기"
+        }
+      ],
+      "occasions": [],
+      "needsKeyboard": false,
+      "v": "6a7e4a3496"
+    },
+    {
+      "id": "_dummy-adventure",
+      "title": "가짜 긴 모험",
+      "summary": "장면을 넘기며 도장을 받아요.",
+      "grades": [
+        1,
+        6
+      ],
+      "subjects": [
+        "사회"
+      ],
+      "tags": [
+        "계기교육"
+      ],
+      "kind": "adventure",
+      "minutes": 10,
+      "modes": [
+        "solo"
+      ],
+      "entry": "index.html",
+      "cover": "games/_dummy-adventure/cover.23c7db72.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": false
+      },
+      "stamps": [
+        {
+          "id": "scene1",
+          "name": "첫 장면",
+          "how": "첫 장면 보기"
+        },
+        {
+          "id": "scene2",
+          "name": "둘째 장면",
+          "how": "둘째 장면 보기"
+        }
+      ],
+      "occasions": [],
+      "needsKeyboard": false,
+      "v": "c8c36a270b"
+    },
+    {
+      "id": "_sample-clock",
+      "title": "시계탑 탐험대",
+      "summary": "시계 바늘을 보고 시간을 맞혀요.",
+      "grades": [
+        1,
+        2
+      ],
+      "subjects": [
+        "수학"
+      ],
+      "tags": [
+        "새 게임"
+      ],
+      "kind": "short",
+      "minutes": 2,
+      "modes": [
+        "solo"
+      ],
+      "entry": "index.html",
+      "cover": "games/_sample-clock/cover.a583bb5e.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": true
+      },
+      "stamps": [
+        {
+          "id": "first",
+          "name": "첫 판",
+          "how": "한 판 끝내기"
+        },
+        {
+          "id": "big",
+          "name": "큰 점수",
+          "how": "800점 이상 받기"
+        }
+      ],
+      "occasions": [],
+      "needsKeyboard": false,
+      "v": "be783f2a19"
+    },
+    {
+      "id": "_sample-crossing",
+      "title": "길건너 대작전",
+      "summary": "신호를 살피며 안전하게 길을 건너요.",
+      "grades": [
+        1,
+        6
+      ],
+      "subjects": [
+        "안전"
+      ],
+      "tags": [],
+      "kind": "short",
+      "minutes": 2,
+      "modes": [
+        "solo"
+      ],
+      "entry": "index.html",
+      "cover": "games/_sample-crossing/cover.d8295557.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": true
+      },
+      "stamps": [
+        {
+          "id": "first",
+          "name": "첫 판",
+          "how": "한 판 끝내기"
+        },
+        {
+          "id": "big",
+          "name": "큰 점수",
+          "how": "800점 이상 받기"
+        }
+      ],
+      "occasions": [],
+      "needsKeyboard": false,
+      "v": "31d8bd7145"
+    },
+    {
+      "id": "_sample-dokdo",
+      "title": "독도 지킴이 항해",
+      "summary": "배를 타고 독도로 가서 섬을 지켜요.",
+      "grades": [
+        4,
+        6
+      ],
+      "subjects": [
+        "사회"
+      ],
+      "tags": [
+        "계기교육"
+      ],
+      "kind": "adventure",
+      "minutes": 10,
+      "modes": [
+        "solo"
+      ],
+      "entry": "index.html",
+      "cover": "games/_sample-dokdo/cover.ce1542b4.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": false
+      },
+      "stamps": [
+        {
+          "id": "scene1",
+          "name": "첫 장면",
+          "how": "첫 장면 보기"
+        },
+        {
+          "id": "scene2",
+          "name": "둘째 장면",
+          "how": "둘째 장면 보기"
+        }
+      ],
+      "occasions": [
+        {
+          "name": "독도의 날",
+          "date": "10-25",
+          "leadDays": 14
+        }
+      ],
+      "needsKeyboard": false,
+      "v": "38f563bd02"
+    },
+    {
+      "id": "_sample-earth",
+      "title": "지구를 지켜라",
+      "summary": "나무를 심고 쓰레기를 나누며 지구를 지켜요.",
+      "grades": [
+        1,
+        6
+      ],
+      "subjects": [
+        "과학"
+      ],
+      "tags": [
+        "계기교육"
+      ],
+      "kind": "adventure",
+      "minutes": 10,
+      "modes": [
+        "solo"
+      ],
+      "entry": "index.html",
+      "cover": "games/_sample-earth/cover.923da075.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": false
+      },
+      "stamps": [
+        {
+          "id": "scene1",
+          "name": "첫 장면",
+          "how": "첫 장면 보기"
+        },
+        {
+          "id": "scene2",
+          "name": "둘째 장면",
+          "how": "둘째 장면 보기"
+        }
+      ],
+      "occasions": [
+        {
+          "name": "지구의 날",
+          "date": "04-22",
+          "leadDays": 14
+        }
+      ],
+      "needsKeyboard": false,
+      "v": "e75984bcb2"
+    },
+    {
+      "id": "_sample-fraction",
+      "title": "분수 피자 가게",
+      "summary": "피자를 나누며 분수를 알아봐요.",
+      "grades": [
+        3,
+        4
+      ],
+      "subjects": [
+        "수학"
+      ],
+      "tags": [],
+      "kind": "short",
+      "minutes": 3,
+      "modes": [
+        "solo"
+      ],
+      "entry": "index.html",
+      "cover": "games/_sample-fraction/cover.c12f55f4.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": true
+      },
+      "stamps": [
+        {
+          "id": "first",
+          "name": "첫 판",
+          "how": "한 판 끝내기"
+        },
+        {
+          "id": "big",
+          "name": "큰 점수",
+          "how": "800점 이상 받기"
+        }
+      ],
+      "occasions": [],
+      "needsKeyboard": false,
+      "v": "42bd9e79e9"
+    },
+    {
+      "id": "_sample-gugudan",
+      "title": "구구단 기차",
+      "summary": "기차 칸에 맞는 답을 실어 보내요.",
+      "grades": [
+        2,
+        3
+      ],
+      "subjects": [
+        "수학"
+      ],
+      "tags": [
+        "새 게임"
+      ],
+      "kind": "short",
+      "minutes": 2,
+      "modes": [
+        "solo",
+        "duo"
+      ],
+      "entry": "index.html",
+      "cover": "games/_sample-gugudan/cover.d05d6e8a.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": true
+      },
+      "stamps": [
+        {
+          "id": "first",
+          "name": "첫 판",
+          "how": "한 판 끝내기"
+        },
+        {
+          "id": "big",
+          "name": "큰 점수",
+          "how": "800점 이상 받기"
+        }
+      ],
+      "occasions": [],
+      "needsKeyboard": false,
+      "v": "7b9a6b25f4"
+    },
+    {
+      "id": "_sample-hangul",
+      "title": "한글날 비밀 서고",
+      "summary": "옛 서고를 탐험하며 한글의 비밀을 찾아요.",
+      "grades": [
+        3,
+        6
+      ],
+      "subjects": [
+        "국어"
+      ],
+      "tags": [
+        "계기교육"
+      ],
+      "kind": "adventure",
+      "minutes": 10,
+      "modes": [
+        "solo"
+      ],
+      "entry": "index.html",
+      "cover": "games/_sample-hangul/cover.863904a6.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": false
+      },
+      "stamps": [
+        {
+          "id": "scene1",
+          "name": "첫 장면",
+          "how": "첫 장면 보기"
+        },
+        {
+          "id": "scene2",
+          "name": "둘째 장면",
+          "how": "둘째 장면 보기"
+        }
+      ],
+      "occasions": [
+        {
+          "name": "한글날",
+          "date": "10-09",
+          "leadDays": 14
+        }
+      ],
+      "needsKeyboard": false,
+      "v": "6919c6100b"
+    },
+    {
+      "id": "_sample-history",
+      "title": "시대 줄 세우기",
+      "summary": "옛날 이야기를 시간 순서대로 놓아요.",
+      "grades": [
+        5,
+        6
+      ],
+      "subjects": [
+        "사회"
+      ],
+      "tags": [],
+      "kind": "short",
+      "minutes": 3,
+      "modes": [
+        "solo"
+      ],
+      "entry": "index.html",
+      "cover": "games/_sample-history/cover.1fcbba13.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": true
+      },
+      "stamps": [
+        {
+          "id": "first",
+          "name": "첫 판",
+          "how": "한 판 끝내기"
+        },
+        {
+          "id": "big",
+          "name": "큰 점수",
+          "how": "800점 이상 받기"
+        }
+      ],
+      "occasions": [],
+      "needsKeyboard": false,
+      "v": "6617ac8271"
+    },
+    {
+      "id": "_sample-insect",
+      "title": "곤충 채집 도감",
+      "summary": "풀밭의 곤충을 찾아 도감을 채워요.",
+      "grades": [
+        3,
+        4
+      ],
+      "subjects": [
+        "과학"
+      ],
+      "tags": [],
+      "kind": "short",
+      "minutes": 2,
+      "modes": [
+        "solo"
+      ],
+      "entry": "index.html",
+      "cover": "games/_sample-insect/cover.0fae0018.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": true
+      },
+      "stamps": [
+        {
+          "id": "first",
+          "name": "첫 판",
+          "how": "한 판 끝내기"
+        },
+        {
+          "id": "big",
+          "name": "큰 점수",
+          "how": "800점 이상 받기"
+        }
+      ],
+      "occasions": [],
+      "needsKeyboard": false,
+      "v": "73a57e9797"
+    },
+    {
+      "id": "_sample-ladder",
+      "title": "낱말 사다리",
+      "summary": "낱말을 이어 사다리를 올라가요.",
+      "grades": [
+        3,
+        4
+      ],
+      "subjects": [
+        "국어"
+      ],
+      "tags": [
+        "새 게임"
+      ],
+      "kind": "short",
+      "minutes": 2,
+      "modes": [
+        "solo"
+      ],
+      "entry": "index.html",
+      "cover": "games/_sample-ladder/cover.ac9adbb0.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": true
+      },
+      "stamps": [
+        {
+          "id": "first",
+          "name": "첫 판",
+          "how": "한 판 끝내기"
+        },
+        {
+          "id": "big",
+          "name": "큰 점수",
+          "how": "800점 이상 받기"
+        }
+      ],
+      "occasions": [],
+      "needsKeyboard": false,
+      "v": "e866277adf"
+    },
+    {
+      "id": "_sample-market",
+      "title": "장터 셈하기",
+      "summary": "장터에서 물건값과 거스름돈을 세어요.",
+      "grades": [
+        3,
+        4
+      ],
+      "subjects": [
+        "사회"
+      ],
+      "tags": [],
+      "kind": "short",
+      "minutes": 3,
+      "modes": [
+        "solo"
+      ],
+      "entry": "index.html",
+      "cover": "games/_sample-market/cover.fa9a09f6.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": true
+      },
+      "stamps": [
+        {
+          "id": "first",
+          "name": "첫 판",
+          "how": "한 판 끝내기"
+        },
+        {
+          "id": "big",
+          "name": "큰 점수",
+          "how": "800점 이상 받기"
+        }
+      ],
+      "occasions": [],
+      "needsKeyboard": false,
+      "v": "3f8cde6d39"
+    },
+    {
+      "id": "_sample-quiz",
+      "title": "오늘의 퀴즈쇼",
+      "summary": "오늘의 퀴즈를 풀며 아는 것을 뽐내요.",
+      "grades": [
+        1,
+        6
+      ],
+      "subjects": [
+        "국어"
+      ],
+      "tags": [],
+      "kind": "short",
+      "minutes": 3,
+      "modes": [
+        "solo",
+        "duo"
+      ],
+      "entry": "index.html",
+      "cover": "games/_sample-quiz/cover.b5ed9cbf.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": true
+      },
+      "stamps": [
+        {
+          "id": "first",
+          "name": "첫 판",
+          "how": "한 판 끝내기"
+        },
+        {
+          "id": "big",
+          "name": "큰 점수",
+          "how": "800점 이상 받기"
+        }
+      ],
+      "occasions": [],
+      "needsKeyboard": false,
+      "v": "c55c2e715b"
+    },
+    {
+      "id": "_sample-spelling",
+      "title": "받아쓰기 숲길",
+      "summary": "들은 낱말을 쓰며 숲길을 건너요.",
+      "grades": [
+        1,
+        2
+      ],
+      "subjects": [
+        "국어"
+      ],
+      "tags": [],
+      "kind": "short",
+      "minutes": 2,
+      "modes": [
+        "solo",
+        "duo"
+      ],
+      "entry": "index.html",
+      "cover": "games/_sample-spelling/cover.6742b856.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": true
+      },
+      "stamps": [
+        {
+          "id": "first",
+          "name": "첫 판",
+          "how": "한 판 끝내기"
+        },
+        {
+          "id": "big",
+          "name": "큰 점수",
+          "how": "800점 이상 받기"
+        }
+      ],
+      "occasions": [],
+      "needsKeyboard": false,
+      "v": "61e6fde55c"
+    },
+    {
+      "id": "_sample-stars",
+      "title": "별자리 잇기",
+      "summary": "반짝이는 별을 이어 별자리를 찾아요.",
+      "grades": [
+        3,
+        6
+      ],
+      "subjects": [
+        "과학"
+      ],
+      "tags": [
+        "새 게임"
+      ],
+      "kind": "short",
+      "minutes": 2,
+      "modes": [
+        "solo"
+      ],
+      "entry": "index.html",
+      "cover": "games/_sample-stars/cover.74fe843b.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": true
+      },
+      "stamps": [
+        {
+          "id": "first",
+          "name": "첫 판",
+          "how": "한 판 끝내기"
+        },
+        {
+          "id": "big",
+          "name": "큰 점수",
+          "how": "800점 이상 받기"
+        }
+      ],
+      "occasions": [],
+      "needsKeyboard": false,
+      "v": "3323b9fb22"
+    },
+    {
+      "id": "_sample-world",
+      "title": "세계 여행 퀴즈",
+      "summary": "여러 나라를 여행하며 퀴즈를 풀어요.",
+      "grades": [
+        5,
+        6
+      ],
+      "subjects": [
+        "사회"
+      ],
+      "tags": [],
+      "kind": "short",
+      "minutes": 3,
+      "modes": [
+        "solo",
+        "duo"
+      ],
+      "entry": "index.html",
+      "cover": "games/_sample-world/cover.f3bd460a.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": true
+      },
+      "stamps": [
+        {
+          "id": "first",
+          "name": "첫 판",
+          "how": "한 판 끝내기"
+        },
+        {
+          "id": "big",
+          "name": "큰 점수",
+          "how": "800점 이상 받기"
+        }
+      ],
+      "occasions": [],
+      "needsKeyboard": false,
+      "v": "5c0183a4ab"
+    },
+    {
+      "id": "jinjja",
+      "title": "진짜가짜 탐정단",
+      "summary": "가짜 뉴스와 수상한 광고를 가려내는 탐정이 되어요.",
+      "grades": [
+        4,
+        6
+      ],
+      "subjects": [
+        "정보",
+        "국어"
+      ],
+      "tags": [
+        "계기교육",
+        "미디어"
+      ],
+      "kind": "adventure",
+      "minutes": 30,
+      "modes": [
+        "solo"
+      ],
+      "entry": "index.html",
+      "cover": "games/jinjja/cover.3e9475ba.webp",
+      "exitButton": "top-left",
+      "ranking": {
+        "enabled": false
+      },
+      "stamps": [
+        {
+          "id": "ch1",
+          "name": "출처 탐정",
+          "how": "1장 「출처의 비밀」 해결하기"
+        },
+        {
+          "id": "ch2",
+          "name": "사진 감별사",
+          "how": "2장 「사진은 거짓말을 한다」 해결하기"
+        },
+        {
+          "id": "ch3",
+          "name": "광고 꿰뚫기",
+          "how": "3장 「누가 이득을 보나」 해결하기"
+        },
+        {
+          "id": "ch4",
+          "name": "정보 지킴이",
+          "how": "4장 「내 정보를 지켜라」 해결하기"
+        },
+        {
+          "id": "ch5",
+          "name": "추천의 비밀",
+          "how": "5장 「왜 이게 내게 보일까」 해결하기"
+        },
+        {
+          "id": "final",
+          "name": "진짜가짜 탐정",
+          "how": "최종 임무 「진짜가짜 대작전」 끝내기"
+        }
+      ],
+      "occasions": [],
+      "source": "F:/게임 만들기/Dokdo/진짜가짜탐정단.html",
+      "needsKeyboard": false,
+      "v": "cdc93a0d0a"
+    },
+    {
+      "id": "math-runner",
+      "title": "연산 러너",
+      "summary": "문제를 보고 정답 문으로 쌩 달려요.",
+      "subjects": [
+        "수학"
+      ],
+      "family": "runner",
+      "play": {},
+      "grades": [
+        1,
+        6
+      ],
+      "kind": "short",
+      "minutes": 2,
+      "modes": [
+        "solo",
+        "duo"
+      ],
+      "entry": "index.html",
+      "cover": "games/math-runner/cover.a0f43fe0.webp",
+      "exitButton": "top-left",
+      "occasions": [],
+      "tags": [
+        "새 게임"
+      ],
+      "ranking": {
+        "enabled": true
+      },
+      "stamps": [
+        {
+          "id": "first",
+          "name": "첫 달리기",
+          "how": "한 판을 끝까지 달려요",
+          "rule": {
+            "finish": true
+          }
+        },
+        {
+          "id": "combo10",
+          "name": "척척 계산",
+          "how": "정답 문을 10번 잇달아 지나가요",
+          "rule": {
+            "combo": 10
+          }
+        },
+        {
+          "id": "score1000",
+          "name": "천 점 돌파",
+          "how": "한 판에 1,000점을 넘겨요",
+          "rule": {
+            "score": 1000
+          }
+        },
+        {
+          "id": "nomiss",
+          "name": "실수 없는 길",
+          "how": "한 번도 안 틀리고 30문제를 맞혀요",
+          "rule": {
+            "right": 30,
+            "wrong": 0
+          }
+        }
+      ],
+      "needsKeyboard": false,
+      "v": "e104a5ed87"
+    },
+    {
+      "id": "spell-mole",
+      "title": "맞춤법 두더지",
+      "summary": "바르게 쓴 말을 든 두더지만 뿅! 잡아요.",
+      "subjects": [
+        "국어"
+      ],
+      "family": "mole",
+      "play": {},
+      "grades": [
+        1,
+        6
+      ],
+      "kind": "short",
+      "minutes": 2,
+      "modes": [
+        "solo",
+        "duo"
+      ],
+      "entry": "index.html",
+      "cover": "games/spell-mole/cover.b572f768.webp",
+      "exitButton": "top-left",
+      "occasions": [],
+      "tags": [
+        "새 게임"
+      ],
+      "ranking": {
+        "enabled": true
+      },
+      "stamps": [
+        {
+          "id": "first",
+          "name": "첫 뿅망치",
+          "how": "한 판을 끝까지 해요",
+          "rule": {
+            "finish": true
+          }
+        },
+        {
+          "id": "combo10",
+          "name": "맞춤법 척척",
+          "how": "바른 말을 10번 잇달아 잡아요",
+          "rule": {
+            "combo": 10
+          }
+        },
+        {
+          "id": "sharp",
+          "name": "매의 눈",
+          "how": "틀린 말은 하나도 안 잡고 바른 말 30개를 잡아요",
+          "rule": {
+            "right": 30,
+            "wrong": 0
+          }
+        },
+        {
+          "id": "score1000",
+          "name": "천 점 뿅망치",
+          "how": "한 판에 1,000점을 넘겨요",
+          "rule": {
+            "score": 1000
+          }
+        }
+      ],
+      "needsKeyboard": false,
+      "v": "82ec278358"
+    }
+  ]
+}

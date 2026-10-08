@@ -1,0 +1,80 @@
+{
+  "id": "spell-mole",
+  "title": "맞춤법 두더지",
+  "summary": "바르게 쓴 말을 든 두더지만 뿅! 잡아요.",
+  "subjects": [
+    "국어"
+  ],
+  "family": "mole",
+  "play": {},
+  "grades": [
+    1,
+    6
+  ],
+  "kind": "short",
+  "minutes": 2,
+  "modes": [
+    "solo",
+    "duo"
+  ],
+  "entry": "index.html",
+  "cover": "cover.webp",
+  "exitButton": "top-left",
+  "occasions": [],
+  "tags": [
+    "새 게임"
+  ],
+  "ranking": {
+    "enabled": true,
+    "maxScore": 5000,
+    "minDurationMs": 10000,
+    "maxScorePerSec": 60,
+    "stars": [
+      50,
+      120,
+      210,
+      330,
+      470,
+      620,
+      790,
+      950,
+      1120,
+      1290
+    ]
+  },
+  "stamps": [
+    {
+      "id": "first",
+      "name": "첫 뿅망치",
+      "how": "한 판을 끝까지 해요",
+      "rule": {
+        "finish": true
+      }
+    },
+    {
+      "id": "combo10",
+      "name": "맞춤법 척척",
+      "how": "바른 말을 10번 잇달아 잡아요",
+      "rule": {
+        "combo": 10
+      }
+    },
+    {
+      "id": "sharp",
+      "name": "매의 눈",
+      "how": "틀린 말은 하나도 안 잡고 바른 말 30개를 잡아요",
+      "rule": {
+        "right": 30,
+        "wrong": 0
+      }
+    },
+    {
+      "id": "score1000",
+      "name": "천 점 뿅망치",
+      "how": "한 판에 1,000점을 넘겨요",
+      "rule": {
+        "score": 1000
+      }
+    }
+  ]
+}
