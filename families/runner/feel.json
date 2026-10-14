@@ -1,0 +1,19 @@
+{
+  "moments": {
+    "gatePass": {
+      "hitstop": {"on":true,"ms":60},
+      "shake": {"on":true,"px":6,"ms":150},
+      "burst": {"on":true,"n":28,"shapes":["spark","dot"],"size":[6,14],"speed":[300,700],"life":[500,900]},
+      "popup": {"on":true,"px":52,"pop":[0.5,1.25,1],"popMs":160,"riseMs":450},
+      "fly": {"on":true,"ms":450,"to":"score"},
+      "hudBump": {"on":true,"scale":1.2,"ms":120,"to":"score"},
+      "sound": {"on":true,"slot":"hit","vol":1,"pitchPerCombo":1,"pitchMax":12}
+    },
+    "fall": {"shake":{"on":true,"px":3,"ms":100},"crack":{"on":true,"to":"combo"},"sound":{"on":true,"slot":"wrong","vol":0.4}},
+    "lane": {"tiltDeg":8,"tiltMs":120,"burst":{"on":true,"n":3,"shapes":["dust"],"size":[3,6],"speed":[30,80],"life":[180,300]}},
+    "coin": {"burst":{"on":true,"n":5,"shapes":["spark"],"size":[3,6],"speed":[40,90],"life":[200,350]},"label":{"on":true,"text":"번개!","px":32,"ms":600},"sound":{"on":true,"slot":"count","vol":0.5,"jitter":2}},
+    "treasure": {"popup":{"on":true,"px":60,"pop":[0.5,1.25,1],"popMs":160,"riseMs":450},"burst":{"on":true,"n":48,"shapes":["star","spark"],"size":[6,16],"speed":[300,700],"life":[500,900]},"sound":{"on":true,"slot":"specialGet","vol":1}},
+    "special": {"banner":{"on":true,"text":"보물 문제!","px":44,"ms":1600,"slide":true}}
+  },
+  "combo": {"tiers":[{"n":3,"text":"좋아!"},{"n":5,"text":"연속 5!"},{"n":10,"text":"대단해!"},{"n":15,"text":"15연속!"},{"n":20,"text":"불꽃 연속!"},{"n":30,"text":"전설!"}]}
+}

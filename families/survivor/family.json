@@ -1,0 +1,651 @@
+{
+  "id": "survivor",
+  "name": "버티기 틀",
+  "about": "몰려오는 적을 피해 다니면 무기가 저절로 싸우고, 레벨이 오를 때 고른 카드의 문제를 맞혀 힘을 받는 틀",
+  "content": "survivor/1",
+  "feel": "feel.json",
+  "endShow": true,
+  "learn": true,
+  "art": [
+    {"slot": "person-0-a", "kind": "sprite", "px": [24,32], "what": "0번 주몽: 고구려를 세운 사람. 고구려 무덤 벽화 사냥꾼처럼 깃털 두 개 꽂은 관, 짧은 저고리와 통 넓은 바지, 손에 활. 오른쪽을 보고 선 자세 가. 최종 24x32", "first": true},
+    {"slot": "person-0-b", "kind": "sprite", "px": [24,32], "what": "0번 주몽: 가 자세에서 한 발 내딛은 자세 나. 최종 24x32", "first": true},
+    {"slot": "person-1-a", "kind": "sprite", "px": [24,32], "what": "1번 을지문덕: 고구려 장수. 비늘 갑옷과 둥근 투구, 허리에 칼, 지휘하는 손짓. 오른쪽을 보고 선 자세 가. 최종 24x32"},
+    {"slot": "person-1-b", "kind": "sprite", "px": [24,32], "what": "1번 을지문덕: 가 자세에서 한 발 내딛은 자세 나. 최종 24x32"},
+    {"slot": "person-2-a", "kind": "sprite", "px": [24,32], "what": "2번 대조영: 발해를 세운 사람. 고구려풍 비늘 갑옷, 털 달린 망토, 손에 돌팔매 끈. 오른쪽을 보고 선 자세 가. 최종 24x32"},
+    {"slot": "person-2-b", "kind": "sprite", "px": [24,32], "what": "2번 대조영: 가 자세에서 한 발 내딛은 자세 나. 최종 24x32"},
+    {"slot": "person-3-a", "kind": "sprite", "px": [24,32], "what": "3번 장보고: 청해진의 바다 장수. 짧은 뱃사람 옷과 머리띠, 손에 긴 창, 허리에 밧줄. 오른쪽을 보고 선 자세 가. 최종 24x32"},
+    {"slot": "person-3-b", "kind": "sprite", "px": [24,32], "what": "3번 장보고: 가 자세에서 한 발 내딛은 자세 나. 최종 24x32"},
+    {"slot": "person-4-a", "kind": "sprite", "px": [24,32], "what": "4번 강감찬: 고려 장군. 고려 갑옷과 투구, 손에 큰 북채, 등에 작은 북. 오른쪽을 보고 선 자세 가. 최종 24x32"},
+    {"slot": "person-4-b", "kind": "sprite", "px": [24,32], "what": "4번 강감찬: 가 자세에서 한 발 내딛은 자세 나. 최종 24x32"},
+    {"slot": "person-5-a", "kind": "sprite", "px": [24,32], "what": "5번 최무선: 화약을 만든 고려 사람. 고려 관리 옷(단령)과 두건, 두 손에 둥근 화약 단지. 오른쪽을 보고 선 자세 가. 최종 24x32"},
+    {"slot": "person-5-b", "kind": "sprite", "px": [24,32], "what": "5번 최무선: 가 자세에서 한 발 내딛은 자세 나. 최종 24x32"},
+    {"slot": "person-6-a", "kind": "sprite", "px": [24,32], "what": "6번 세종: 조선 임금. 붉은 곤룡포(가슴에 둥근 금빛 무늬, 글자 없음), 익선관, 손에 책. 오른쪽을 보고 선 자세 가. 최종 24x32"},
+    {"slot": "person-6-b", "kind": "sprite", "px": [24,32], "what": "6번 세종: 가 자세에서 한 발 내딛은 자세 나. 최종 24x32"},
+    {"slot": "person-7-a", "kind": "sprite", "px": [24,32], "what": "7번 이순신: 조선 수군 장수. 남색 두정갑(쇠못 박은 갑옷), 투구, 손에 긴 칼. 오른쪽을 보고 선 자세 가. 최종 24x32"},
+    {"slot": "person-7-b", "kind": "sprite", "px": [24,32], "what": "7번 이순신: 가 자세에서 한 발 내딛은 자세 나. 최종 24x32"},
+    {"slot": "person-8-a", "kind": "sprite", "px": [24,32], "what": "8번 김유신: 신라 장군. 신라 비늘 갑옷과 깃 달린 투구, 손에 곧은 칼. 오른쪽을 보고 선 자세 가. 최종 24x32"},
+    {"slot": "person-8-b", "kind": "sprite", "px": [24,32], "what": "8번 김유신: 가 자세에서 한 발 내딛은 자세 나. 최종 24x32"},
+    {"slot": "person-9-a", "kind": "sprite", "px": [24,32], "what": "9번 광개토 대왕: 고구려 임금. 금빛 관과 쇠비늘 갑옷, 붉은 망토. 오른쪽을 보고 선 자세 가. 최종 24x32"},
+    {"slot": "person-9-b", "kind": "sprite", "px": [24,32], "what": "9번 광개토 대왕: 가 자세에서 한 발 내딛은 자세 나. 최종 24x32"},
+    {"slot": "person-10-a", "kind": "sprite", "px": [24,32], "what": "10번 서희: 고려 문신. 자주색 관리 옷(단령)과 사모, 두 손으로 홀을 든 차분한 모습. 무기 없음. 오른쪽을 보고 선 자세 가. 최종 24x32"},
+    {"slot": "person-10-b", "kind": "sprite", "px": [24,32], "what": "10번 서희: 가 자세에서 한 발 내딛은 자세 나. 최종 24x32"},
+    {"slot": "person-11-a", "kind": "sprite", "px": [24,32], "what": "11번 장영실: 조선 과학자. 엷은 관리 옷과 사모, 품에 작은 물시계(항아리 모양). 오른쪽을 보고 선 자세 가. 최종 24x32"},
+    {"slot": "person-11-b", "kind": "sprite", "px": [24,32], "what": "11번 장영실: 가 자세에서 한 발 내딛은 자세 나. 최종 24x32"},
+    {"slot": "person-12-a", "kind": "sprite", "px": [24,32], "what": "12번 김만덕: 조선 제주 여성 상인. 단정한 한복 치마저고리와 쪽 찐 머리, 어깨에 쌀자루. 오른쪽을 보고 선 자세 가. 최종 24x32"},
+    {"slot": "person-12-b", "kind": "sprite", "px": [24,32], "what": "12번 김만덕: 가 자세에서 한 발 내딛은 자세 나. 최종 24x32"},
+    {"slot": "person-13-a", "kind": "sprite", "px": [24,32], "what": "13번 정약용: 조선 학자. 흰 도포와 검은 갓, 손에 작은 거중기 모형(나무 도르래). 오른쪽을 보고 선 자세 가. 최종 24x32"},
+    {"slot": "person-13-b", "kind": "sprite", "px": [24,32], "what": "13번 정약용: 가 자세에서 한 발 내딛은 자세 나. 최종 24x32"},
+    {"slot": "person-14-a", "kind": "sprite", "px": [24,32], "what": "14번 선덕 여왕: 신라 여왕. 나뭇가지 모양 신라 금관, 붉은 옷, 손에 작은 첨성대 모형. 오른쪽을 보고 선 자세 가. 최종 24x32"},
+    {"slot": "person-14-b", "kind": "sprite", "px": [24,32], "what": "14번 선덕 여왕: 가 자세에서 한 발 내딛은 자세 나. 최종 24x32"},
+    {"slot": "face-0", "kind": "sprite", "px": [40,40], "what": "0번 주몽의 어깨 위 얼굴(가슴까지): 고구려를 세운 사람. 고구려 무덤 벽화 사냥꾼처럼 깃털 두 개 꽂은 관, 짧은 저고리와 통 넓은 바지, 손에 활. 최종 40x40", "first": true},
+    {"slot": "face-1", "kind": "sprite", "px": [40,40], "what": "1번 을지문덕의 어깨 위 얼굴(가슴까지): 고구려 장수. 비늘 갑옷과 둥근 투구, 허리에 칼, 지휘하는 손짓. 최종 40x40", "first": true},
+    {"slot": "face-2", "kind": "sprite", "px": [40,40], "what": "2번 대조영의 어깨 위 얼굴(가슴까지): 발해를 세운 사람. 고구려풍 비늘 갑옷, 털 달린 망토, 손에 돌팔매 끈. 최종 40x40", "first": true},
+    {"slot": "face-3", "kind": "sprite", "px": [40,40], "what": "3번 장보고의 어깨 위 얼굴(가슴까지): 청해진의 바다 장수. 짧은 뱃사람 옷과 머리띠, 손에 긴 창, 허리에 밧줄. 최종 40x40", "first": true},
+    {"slot": "face-4", "kind": "sprite", "px": [40,40], "what": "4번 강감찬의 어깨 위 얼굴(가슴까지): 고려 장군. 고려 갑옷과 투구, 손에 큰 북채, 등에 작은 북. 최종 40x40", "first": true},
+    {"slot": "face-5", "kind": "sprite", "px": [40,40], "what": "5번 최무선의 어깨 위 얼굴(가슴까지): 화약을 만든 고려 사람. 고려 관리 옷(단령)과 두건, 두 손에 둥근 화약 단지. 최종 40x40", "first": true},
+    {"slot": "face-6", "kind": "sprite", "px": [40,40], "what": "6번 세종의 어깨 위 얼굴(가슴까지): 조선 임금. 붉은 곤룡포(가슴에 둥근 금빛 무늬, 글자 없음), 익선관, 손에 책. 최종 40x40", "first": true},
+    {"slot": "face-7", "kind": "sprite", "px": [40,40], "what": "7번 이순신의 어깨 위 얼굴(가슴까지): 조선 수군 장수. 남색 두정갑(쇠못 박은 갑옷), 투구, 손에 긴 칼. 최종 40x40", "first": true},
+    {"slot": "face-8", "kind": "sprite", "px": [40,40], "what": "8번 김유신의 어깨 위 얼굴(가슴까지): 신라 장군. 신라 비늘 갑옷과 깃 달린 투구, 손에 곧은 칼. 최종 40x40"},
+    {"slot": "face-9", "kind": "sprite", "px": [40,40], "what": "9번 광개토 대왕의 어깨 위 얼굴(가슴까지): 고구려 임금. 금빛 관과 쇠비늘 갑옷, 붉은 망토. 최종 40x40"},
+    {"slot": "face-10", "kind": "sprite", "px": [40,40], "what": "10번 서희의 어깨 위 얼굴(가슴까지): 고려 문신. 자주색 관리 옷(단령)과 사모, 두 손으로 홀을 든 차분한 모습. 무기 없음. 최종 40x40"},
+    {"slot": "face-11", "kind": "sprite", "px": [40,40], "what": "11번 장영실의 어깨 위 얼굴(가슴까지): 조선 과학자. 엷은 관리 옷과 사모, 품에 작은 물시계(항아리 모양). 최종 40x40"},
+    {"slot": "face-12", "kind": "sprite", "px": [40,40], "what": "12번 김만덕의 어깨 위 얼굴(가슴까지): 조선 제주 여성 상인. 단정한 한복 치마저고리와 쪽 찐 머리, 어깨에 쌀자루. 최종 40x40"},
+    {"slot": "face-13", "kind": "sprite", "px": [40,40], "what": "13번 정약용의 어깨 위 얼굴(가슴까지): 조선 학자. 흰 도포와 검은 갓, 손에 작은 거중기 모형(나무 도르래). 최종 40x40"},
+    {"slot": "face-14", "kind": "sprite", "px": [40,40], "what": "14번 선덕 여왕의 어깨 위 얼굴(가슴까지): 신라 여왕. 나뭇가지 모양 신라 금관, 붉은 옷, 손에 작은 첨성대 모형. 최종 40x40"},
+    {"slot": "foe-0-a", "kind": "sprite", "px": [28,28], "what": "0번 한 군사: 한나라 보병. 붉은 옷과 둥근 투구, 긴 창. 오른쪽을 보고 걷는 자세 가. 최종 28x28"},
+    {"slot": "foe-0-b", "kind": "sprite", "px": [28,28], "what": "0번 한 군사: 걷는 자세 나. 최종 28x28"},
+    {"slot": "foe-1-a", "kind": "sprite", "px": [28,28], "what": "1번 수 군사: 수나라 보병. 노란빛 갑옷, 둥근 방패와 칼. 오른쪽을 보고 걷는 자세 가. 최종 28x28"},
+    {"slot": "foe-1-b", "kind": "sprite", "px": [28,28], "what": "1번 수 군사: 걷는 자세 나. 최종 28x28"},
+    {"slot": "foe-2-a", "kind": "sprite", "px": [28,28], "what": "2번 당 군사: 당나라 보병. 붉은 비늘 갑옷과 깃 달린 투구, 창. 오른쪽을 보고 걷는 자세 가. 최종 28x28"},
+    {"slot": "foe-2-b", "kind": "sprite", "px": [28,28], "what": "2번 당 군사: 걷는 자세 나. 최종 28x28"},
+    {"slot": "foe-3-a", "kind": "sprite", "px": [28,28], "what": "3번 해적: 바다 도적. 줄무늬 옷과 머리띠, 굽은 칼. 오른쪽을 보고 걷는 자세 가. 최종 28x28"},
+    {"slot": "foe-3-b", "kind": "sprite", "px": [28,28], "what": "3번 해적: 걷는 자세 나. 최종 28x28"},
+    {"slot": "foe-4-a", "kind": "sprite", "px": [28,28], "what": "4번 거란 기병: 말 탄 거란 군사. 털 모자와 가죽 갑옷, 활. 말과 사람이 한 덩어리. 오른쪽을 보고 걷는 자세 가. 최종 28x28"},
+    {"slot": "foe-4-b", "kind": "sprite", "px": [28,28], "what": "4번 거란 기병: 걷는 자세 나. 최종 28x28"},
+    {"slot": "foe-5-a", "kind": "sprite", "px": [28,28], "what": "5번 몽골 기병: 말 탄 몽골 군사. 털 달린 둥근 모자와 누빈 옷, 활. 말과 사람이 한 덩어리. 오른쪽을 보고 걷는 자세 가. 최종 28x28"},
+    {"slot": "foe-5-b", "kind": "sprite", "px": [28,28], "what": "5번 몽골 기병: 걷는 자세 나. 최종 28x28"},
+    {"slot": "foe-6-a", "kind": "sprite", "px": [28,28], "what": "6번 여진 군사: 털가죽 옷과 털 모자, 도끼. 오른쪽을 보고 걷는 자세 가. 최종 28x28"},
+    {"slot": "foe-6-b", "kind": "sprite", "px": [28,28], "what": "6번 여진 군사: 걷는 자세 나. 최종 28x28"},
+    {"slot": "foe-7-a", "kind": "sprite", "px": [28,28], "what": "7번 왜구: 고려 말 바다 도적. 짧은 옷과 머리띠, 긴 칼. 오른쪽을 보고 걷는 자세 가. 최종 28x28"},
+    {"slot": "foe-7-b", "kind": "sprite", "px": [28,28], "what": "7번 왜구: 걷는 자세 나. 최종 28x28"},
+    {"slot": "foe-8-a", "kind": "sprite", "px": [28,28], "what": "8번 일본군: 임진왜란 일본 보병. 삿갓 모양 투구와 몸통 갑옷, 조총. 오른쪽을 보고 걷는 자세 가. 최종 28x28"},
+    {"slot": "foe-8-b", "kind": "sprite", "px": [28,28], "what": "8번 일본군: 걷는 자세 나. 최종 28x28"},
+    {"slot": "foe-9-a", "kind": "sprite", "px": [28,28], "what": "9번 청 군사: 청나라 군사. 둥근 투구로 머리를 다 가린 비단 갑옷, 창. 오른쪽을 보고 걷는 자세 가. 최종 28x28"},
+    {"slot": "foe-9-b", "kind": "sprite", "px": [28,28], "what": "9번 청 군사: 걷는 자세 나. 최종 28x28"},
+    {"slot": "foe-10-a", "kind": "sprite", "px": [28,28], "what": "10번 프랑스 수병: 병인양요 프랑스 수병. 둥근 수병 모자와 줄무늬 깃 옷, 총. 오른쪽을 보고 걷는 자세 가. 최종 28x28"},
+    {"slot": "foe-10-b", "kind": "sprite", "px": [28,28], "what": "10번 프랑스 수병: 걷는 자세 나. 최종 28x28"},
+    {"slot": "foe-11-a", "kind": "sprite", "px": [28,28], "what": "11번 미국 수병: 신미양요 미국 수병. 챙 달린 모자와 남색 옷, 총. 오른쪽을 보고 걷는 자세 가. 최종 28x28"},
+    {"slot": "foe-11-b", "kind": "sprite", "px": [28,28], "what": "11번 미국 수병: 걷는 자세 나. 최종 28x28"},
+    {"slot": "boss-0", "kind": "sprite", "px": [72,72], "what": "0번 큰 적: 공성탑(바퀴 달린 높은 나무 탑). 사람이 타거나 붙어 있지 않다. 최종 72x72"},
+    {"slot": "boss-1", "kind": "sprite", "px": [72,72], "what": "1번 큰 적: 충차(성문을 부수는 지붕 달린 통나무 수레). 사람이 타거나 붙어 있지 않다. 최종 72x72"},
+    {"slot": "boss-2", "kind": "sprite", "px": [72,72], "what": "2번 큰 적: 큰 돛배(돛 둘 달린 나무 배, 아래는 물결). 사람이 타거나 붙어 있지 않다. 최종 72x72"},
+    {"slot": "boss-3", "kind": "sprite", "px": [72,72], "what": "3번 큰 적: 투석기(긴 팔이 달린 나무 돌 던지개). 사람이 타거나 붙어 있지 않다. 최종 72x72"},
+    {"slot": "boss-4", "kind": "sprite", "px": [72,72], "what": "4번 큰 적: 철갑 수레(쇠판을 두른 큰 나무 수레). 사람이 타거나 붙어 있지 않다. 최종 72x72"},
+    {"slot": "boss-5", "kind": "sprite", "px": [72,72], "what": "5번 큰 적: 안택선(층 지붕이 있는 일본 큰 배, 아래는 물결). 사람이 타거나 붙어 있지 않다. 최종 72x72"},
+    {"slot": "boss-6", "kind": "sprite", "px": [72,72], "what": "6번 큰 적: 증기 군함(굴뚝에서 연기가 나는 쇠 군함, 아래는 물결). 사람이 타거나 붙어 있지 않다. 최종 72x72"},
+    {"slot": "shot-arrow", "kind": "sprite", "px": [16,8], "what": "오른쪽을 향한 화살. 최종 16x8"},
+    {"slot": "shot-dart", "kind": "sprite", "px": [12,6], "what": "짧고 날랜 아기살(편전). 최종 12x6"},
+    {"slot": "shot-blade", "kind": "sprite", "px": [12,12], "what": "비파형 동검(비파 모양 날의 청동 칼). 칼끝이 오른쪽. 최종 12x12"},
+    {"slot": "shot-swing", "kind": "sprite", "px": [40,40], "what": "칼을 휘두른 하얀 반달 자국. 오른쪽으로 볼록. 최종 40x40"},
+    {"slot": "shot-spear", "kind": "sprite", "px": [32,8], "what": "오른쪽을 향한 창 찌르기(창과 짧은 바람 줄). 최종 32x8"},
+    {"slot": "shot-rider", "kind": "sprite", "px": [40,32], "what": "오른쪽으로 달리는 철갑 기병(개마무사). 말과 사람 모두 쇠비늘. 최종 40x32"},
+    {"slot": "shot-stone", "kind": "sprite", "px": [8,8], "what": "작은 돌멩이. 최종 8x8"},
+    {"slot": "shot-rock", "kind": "sprite", "px": [20,20], "what": "큰 바위. 최종 20x20"},
+    {"slot": "shot-trap", "kind": "sprite", "px": [10,10], "what": "마름쇠(네 갈래 쇠가시). 최종 10x10"},
+    {"slot": "shot-wave", "kind": "sprite", "px": [40,24], "what": "오른쪽으로 말려 드는 물살. 최종 40x24"},
+    {"slot": "shot-ship", "kind": "sprite", "px": [48,32], "what": "오른쪽을 향한 거북선(지붕에 쇠못, 용머리). 아래 물결 조금. 최종 48x32"},
+    {"slot": "shot-ball", "kind": "sprite", "px": [10,10], "what": "검은 쇠 포탄. 최종 10x10"},
+    {"slot": "shot-bomb", "kind": "sprite", "px": [14,14], "what": "비격진천뢰(심지 달린 둥근 쇠 폭탄). 최종 14x14"},
+    {"slot": "shot-rocket", "kind": "sprite", "px": [16,8], "what": "오른쪽으로 나는 신기전 화살(꼬리에 불꽃). 최종 16x8"},
+    {"slot": "fx-smoke-0", "kind": "sprite", "px": [16,16], "what": "하얀 연기 뭉치 작은 것. 최종 16x16"},
+    {"slot": "fx-smoke-1", "kind": "sprite", "px": [16,16], "what": "하얀 연기 뭉치 퍼지는 것. 최종 16x16"},
+    {"slot": "fx-smoke-2", "kind": "sprite", "px": [16,16], "what": "하얀 연기 흩어지는 것. 최종 16x16"},
+    {"slot": "fx-boom-0", "kind": "sprite", "px": [32,32], "what": "주황 불꽃 터짐 시작. 최종 32x32"},
+    {"slot": "fx-boom-1", "kind": "sprite", "px": [32,32], "what": "불꽃 터짐 끝, 연기 섞임. 최종 32x32"},
+    {"slot": "fx-spark", "kind": "sprite", "px": [8,8], "what": "노란 반짝 별. 최종 8x8"},
+    {"slot": "icon-0", "kind": "sprite", "px": [32,32], "what": "무기 아이콘: 활. 최종 32x32"},
+    {"slot": "icon-1", "kind": "sprite", "px": [32,32], "what": "무기 아이콘: 비파형 동검. 최종 32x32"},
+    {"slot": "icon-2", "kind": "sprite", "px": [32,32], "what": "무기 아이콘: 환도. 최종 32x32"},
+    {"slot": "icon-3", "kind": "sprite", "px": [32,32], "what": "무기 아이콘: 창. 최종 32x32"},
+    {"slot": "icon-4", "kind": "sprite", "px": [32,32], "what": "무기 아이콘: 돌팔매. 최종 32x32"},
+    {"slot": "icon-5", "kind": "sprite", "px": [32,32], "what": "무기 아이콘: 북. 최종 32x32"},
+    {"slot": "icon-6", "kind": "sprite", "px": [32,32], "what": "무기 아이콘: 마름쇠. 최종 32x32"},
+    {"slot": "icon-7", "kind": "sprite", "px": [32,32], "what": "무기 아이콘: 물살. 최종 32x32"},
+    {"slot": "icon-8", "kind": "sprite", "px": [32,32], "what": "무기 아이콘: 화포(작은 대포). 최종 32x32"},
+    {"slot": "icon-9", "kind": "sprite", "px": [32,32], "what": "무기 아이콘: 신기전(화살 묶음). 최종 32x32"},
+    {"slot": "icon-10", "kind": "sprite", "px": [32,32], "what": "유물 아이콘: 물소뿔. 최종 32x32"},
+    {"slot": "icon-11", "kind": "sprite", "px": [32,32], "what": "유물 아이콘: 통아(나무 대롱). 최종 32x32"},
+    {"slot": "icon-12", "kind": "sprite", "px": [32,32], "what": "유물 아이콘: 쇠미늘 갑옷. 최종 32x32"},
+    {"slot": "icon-13", "kind": "sprite", "px": [32,32], "what": "유물 아이콘: 철갑 말 머리. 최종 32x32"},
+    {"slot": "icon-14", "kind": "sprite", "px": [32,32], "what": "유물 아이콘: 염초(화약 가루 단지). 최종 32x32"},
+    {"slot": "icon-15", "kind": "sprite", "px": [32,32], "what": "유물 아이콘: 수레바퀴. 최종 32x32"},
+    {"slot": "icon-16", "kind": "sprite", "px": [32,32], "what": "유물 아이콘: 쇠못 박은 덮개. 최종 32x32"},
+    {"slot": "icon-17", "kind": "sprite", "px": [32,32], "what": "유물 아이콘: 지휘 깃발(무늬 없음). 최종 32x32"},
+    {"slot": "icon-18", "kind": "sprite", "px": [32,32], "what": "유물 아이콘: 소가죽. 최종 32x32"},
+    {"slot": "icon-19", "kind": "sprite", "px": [32,32], "what": "유물 아이콘: 물시계(항아리). 최종 32x32"},
+    {"slot": "icon-20", "kind": "sprite", "px": [32,32], "what": "진화 아이콘: 각궁(굽은 활). 최종 32x32"},
+    {"slot": "icon-21", "kind": "sprite", "px": [32,32], "what": "진화 아이콘: 편전과 통아. 최종 32x32"},
+    {"slot": "icon-22", "kind": "sprite", "px": [32,32], "what": "진화 아이콘: 돌아오는 동검(동검과 둥근 바람). 최종 32x32"},
+    {"slot": "icon-23", "kind": "sprite", "px": [32,32], "what": "진화 아이콘: 회오리 칼바람. 최종 32x32"},
+    {"slot": "icon-24", "kind": "sprite", "px": [32,32], "what": "진화 아이콘: 개마무사(투구 쓴 말 머리). 최종 32x32"},
+    {"slot": "icon-25", "kind": "sprite", "px": [32,32], "what": "진화 아이콘: 큰 바위. 최종 32x32"},
+    {"slot": "icon-26", "kind": "sprite", "px": [32,32], "what": "진화 아이콘: 천둥 북(북과 번개). 최종 32x32"},
+    {"slot": "icon-27", "kind": "sprite", "px": [32,32], "what": "진화 아이콘: 터지는 마름쇠. 최종 32x32"},
+    {"slot": "icon-28", "kind": "sprite", "px": [32,32], "what": "진화 아이콘: 거북선. 최종 32x32"},
+    {"slot": "icon-29", "kind": "sprite", "px": [32,32], "what": "진화 아이콘: 흥화진 물막이(가죽 둑과 물). 최종 32x32"},
+    {"slot": "icon-30", "kind": "sprite", "px": [32,32], "what": "진화 아이콘: 비격진천뢰. 최종 32x32"},
+    {"slot": "icon-31", "kind": "sprite", "px": [32,32], "what": "진화 아이콘: 변이중 화차(총구 여럿 달린 수레). 최종 32x32"},
+    {"slot": "icon-32", "kind": "sprite", "px": [32,32], "what": "진화 아이콘: 문종 화차(화살 구멍 가득한 수레). 최종 32x32"},
+    {"slot": "icon-33", "kind": "sprite", "px": [32,32], "what": "진화 아이콘: 산화신기전(불꽃 터지는 화살). 최종 32x32"},
+    {"slot": "gem-0", "kind": "sprite", "px": [8,10], "what": "작은 초록 곡옥(쉼표 모양 구슬). 최종 8x10"},
+    {"slot": "gem-1", "kind": "sprite", "px": [10,12], "what": "중간 파란 곡옥. 최종 10x12"},
+    {"slot": "gem-2", "kind": "sprite", "px": [12,14], "what": "큰 붉은 곡옥. 최종 12x14"},
+    {"slot": "coin", "kind": "sprite", "px": [10,10], "what": "엽전(가운데 네모 구멍). 최종 10x10"},
+    {"slot": "chest", "kind": "sprite", "px": [20,16], "what": "닫힌 나무 보물상자(쇠 장식). 최종 20x16"},
+    {"slot": "chest-open", "kind": "sprite", "px": [20,18], "what": "열린 보물상자, 안이 빛남. 최종 20x18"},
+    {"slot": "scroll", "kind": "sprite", "px": [12,12], "what": "말린 두루마리(끈 묶음). 최종 12x12"},
+    {"slot": "food", "kind": "sprite", "px": [12,10], "what": "떡 접시. 최종 12x10"},
+    {"slot": "magnet", "kind": "sprite", "px": [12,12], "what": "지남철(말굽 모양 자석). 최종 12x12"},
+    {"slot": "prop-0", "kind": "sprite", "px": [16,12], "what": "바닥 장식: 풀 포기. 최종 16x12"},
+    {"slot": "prop-1", "kind": "sprite", "px": [16,12], "what": "바닥 장식: 꽃 덤불. 최종 16x12"},
+    {"slot": "prop-2", "kind": "sprite", "px": [24,18], "what": "바닥 장식: 바위. 최종 24x18"},
+    {"slot": "prop-3", "kind": "sprite", "px": [32,48], "what": "바닥 장식: 소나무. 최종 32x48"},
+    {"slot": "prop-4", "kind": "sprite", "px": [24,16], "what": "바닥 장식: 덤불. 최종 24x16"},
+    {"slot": "prop-5", "kind": "sprite", "px": [40,20], "what": "바닥 장식: 무너진 돌담. 최종 40x20"},
+    {"slot": "prop-6", "kind": "sprite", "px": [16,32], "what": "바닥 장식: 무늬 없는 깃발. 최종 16x32"},
+    {"slot": "prop-7", "kind": "sprite", "px": [24,12], "what": "바닥 장식: 눈 더미. 최종 24x12"},
+    {"slot": "prop-8", "kind": "sprite", "px": [16,12], "what": "바닥 장식: 조개와 물풀. 최종 16x12"},
+    {"slot": "prop-9", "kind": "sprite", "px": [16,16], "what": "바닥 장식: 나무 상자. 최종 16x16"},
+    {"slot": "prop-10", "kind": "sprite", "px": [20,20], "what": "바닥 장식: 짚단. 최종 20x20"},
+    {"slot": "prop-11", "kind": "sprite", "px": [24,36], "what": "바닥 장식: 마른 나무. 최종 24x36"}
+  ],
+  "palette": [
+    "field",
+    "fieldDark",
+    "fieldLight",
+    "hill",
+    "hillDark",
+    "hillLight",
+    "shore",
+    "shoreDark",
+    "shoreLight",
+    "snow",
+    "snowDark",
+    "snowLight",
+    "stone",
+    "stoneDark",
+    "stoneLight",
+    "shadow",
+    "ink",
+    "gold",
+    "xp",
+    "hp"
+  ],
+  "title": {
+    "sprite": "person-0-a"
+  },
+  "keys": {
+    "solo": [
+      "ArrowUp",
+      "ArrowDown",
+      "ArrowLeft",
+      "ArrowRight",
+      "KeyW",
+      "KeyS",
+      "KeyA",
+      "KeyD",
+      "Digit1",
+      "Digit2",
+      "Digit3",
+      "Digit4",
+      "Numpad1",
+      "Numpad2",
+      "Numpad3",
+      "Numpad4",
+      "Space",
+      "Enter"
+    ],
+    "left": [],
+    "right": []
+  },
+  "round": {
+    "seconds": 180,
+    "lives": 3,
+    "duoSeconds": 300
+  },
+  "play": {
+    "rule": "적을 피해 다니면 무기가 저절로 싸워요!",
+    "note": "← → ↑ ↓ / W A S D 움직이기, 1 2 3 카드 고르기"
+  },
+  "defaults": {
+    "grades": [
+      1,
+      6
+    ],
+    "kind": "short",
+    "minutes": 3,
+    "modes": [
+      "solo"
+    ],
+    "entry": "index.html",
+    "cover": "cover.webp",
+    "exitButton": "top-left",
+    "occasions": [],
+    "tags": [
+      "새 게임"
+    ],
+    "ranking": {
+      "enabled": true,
+      "maxScore": 100000,
+      "minDurationMs": 20000,
+      "maxScorePerSec": 60,
+      "stars": [
+        300,
+        800,
+        1500,
+        2300,
+        3200,
+        4200,
+        5500,
+        7000,
+        9000,
+        12000
+      ]
+    },
+    "stamps": [
+      {
+        "id": "first",
+        "name": "첫 버티기",
+        "how": "한 판을 끝까지 버텨요",
+        "rule": {
+          "finish": true
+        }
+      },
+      {
+        "id": "combo5",
+        "name": "척척 역사",
+        "how": "문제 5개를 잇달아 맞혀요",
+        "rule": {
+          "combo": 5
+        }
+      },
+      {
+        "id": "score3000",
+        "name": "삼천 점 돌파",
+        "how": "한 판에 3,000점을 넘겨요",
+        "rule": {
+          "score": 3000
+        }
+      },
+      {
+        "id": "nomiss",
+        "name": "실수 없는 장수",
+        "how": "한 번도 안 틀리고 10문제를 맞혀요",
+        "rule": {
+          "right": 10,
+          "wrong": 0
+        }
+      }
+    ]
+  },
+  "limits": {
+    "q": 44,
+    "a": 12,
+    "wrong": 12,
+    "note": [
+      30,
+      60
+    ],
+    "name": 10,
+    "story": [
+      20,
+      70
+    ],
+    "bandMin": 20,
+    "does": 16
+  },
+  "example": {
+    "about": "예시 묶음이에요. 실제 게임은 싸움 단계 10칸과 띠마다 문제 20개 이상을 넣어요",
+    "eras": [
+      {
+        "id": "goguryeo",
+        "name": "고구려"
+      }
+    ],
+    "people": [
+      {
+        "id": "jumong",
+        "name": "주몽",
+        "person": 0,
+        "era": "goguryeo",
+        "story": "고구려를 세운 임금이에요. 활을 아주 잘 쏘았다고 전해져요"
+      }
+    ],
+    "heroes": [
+      {
+        "person": "jumong",
+        "weapon": "bow",
+        "perk": {
+          "stat": "shotSpeed",
+          "add": 0.1
+        },
+        "unlock": {
+          "stage": 0,
+          "coins": 0
+        }
+      }
+    ],
+    "allies": [],
+    "weapons": [
+      {
+        "id": "bow",
+        "name": "활",
+        "icon": 0,
+        "kind": "nearest",
+        "shot": "shot-arrow",
+        "does": "가까운 적에게 화살을 쏴요",
+        "story": "멀리 있는 적을 맞히는 무기예요. 고구려 사람들은 활을 잘 쏘았어요",
+        "levels": [
+          {
+            "dmg": 10,
+            "cd": 1.1,
+            "n": 1,
+            "pierce": 0,
+            "speed": 230,
+            "area": 0,
+            "dur": 1.6
+          },
+          {
+            "dmg": 10,
+            "cd": 1.1,
+            "n": 2,
+            "pierce": 0,
+            "speed": 230,
+            "area": 0,
+            "dur": 1.6
+          },
+          {
+            "dmg": 13,
+            "cd": 1.1,
+            "n": 2,
+            "pierce": 0,
+            "speed": 230,
+            "area": 0,
+            "dur": 1.6
+          },
+          {
+            "dmg": 13,
+            "cd": 1.1,
+            "n": 3,
+            "pierce": 0,
+            "speed": 230,
+            "area": 0,
+            "dur": 1.6
+          },
+          {
+            "dmg": 13,
+            "cd": 1.1,
+            "n": 3,
+            "pierce": 1,
+            "speed": 230,
+            "area": 0,
+            "dur": 1.6
+          },
+          {
+            "dmg": 13,
+            "cd": 0.94,
+            "n": 3,
+            "pierce": 1,
+            "speed": 230,
+            "area": 0,
+            "dur": 1.6
+          },
+          {
+            "dmg": 18,
+            "cd": 0.94,
+            "n": 3,
+            "pierce": 1,
+            "speed": 230,
+            "area": 0,
+            "dur": 1.6
+          },
+          {
+            "dmg": 18,
+            "cd": 0.94,
+            "n": 4,
+            "pierce": 1,
+            "speed": 230,
+            "area": 0,
+            "dur": 1.6
+          }
+        ]
+      }
+    ],
+    "relics": [
+      {
+        "id": "horn",
+        "name": "물소뿔",
+        "icon": 10,
+        "stat": "might",
+        "per": 0.08,
+        "story": "물소의 뿔을 붙이면 활이 더 세게 휘어져요"
+      }
+    ],
+    "evolutions": [
+      {
+        "id": "gakgung",
+        "name": "각궁",
+        "icon": 20,
+        "weapon": "bow",
+        "relic": "horn",
+        "real": true,
+        "kind": "nearest",
+        "shot": "shot-arrow",
+        "story": "물소뿔과 나무를 겹쳐 만든 활이에요. 작아도 아주 멀리 나가요",
+        "stats": {
+          "dmg": 28,
+          "cd": 0.7,
+          "n": 5,
+          "pierce": 2,
+          "speed": 300,
+          "area": 0,
+          "dur": 1.6
+        }
+      }
+    ],
+    "foes": [
+      {
+        "id": "sui",
+        "name": "수 군사",
+        "sprite": 1,
+        "hp": 9,
+        "speed": 28,
+        "dmg": 6
+      }
+    ],
+    "bosses": [
+      {
+        "id": "ram",
+        "name": "충차",
+        "sprite": 1,
+        "hp": 1000,
+        "speed": 18,
+        "dmg": 14
+      }
+    ],
+    "battles": [
+      {
+        "id": "salsu",
+        "name": "살수 대첩",
+        "year": "612년",
+        "era": "goguryeo",
+        "foes": [
+          "sui"
+        ],
+        "boss": "ram",
+        "ground": "field",
+        "rival": null,
+        "ally": null,
+        "story": "612년 을지문덕이 이끈 고구려군이 살수에서 수나라 군대를 크게 물리쳤어요"
+      }
+    ],
+    "stages": [
+      "salsu"
+    ],
+    "bands": {
+      "a": [
+        {
+          "id": "a1",
+          "q": "이 사람은 누구일까요?",
+          "a": "주몽",
+          "wrong": [
+            "을지문덕",
+            "세종 대왕"
+          ],
+          "pic": "jumong",
+          "topic": [
+            "jumong"
+          ],
+          "note": "주몽은 고구려를 세운 임금이에요. 활을 잘 쏘아 주몽이라고 불렸어요"
+        }
+      ],
+      "b": [
+        {
+          "id": "b1",
+          "q": "고구려 사람들이 잘 다룬 이 무기는 무엇일까요?",
+          "a": "활",
+          "wrong": [
+            "창",
+            "화포"
+          ],
+          "pic": "bow",
+          "topic": [
+            "bow"
+          ],
+          "note": "고구려 사람들은 말을 타고 활을 쏘는 솜씨가 뛰어났다고 전해져요"
+        }
+      ],
+      "c": [
+        {
+          "id": "c1",
+          "q": "살수 대첩은 언제 일어났을까요?",
+          "a": "612년",
+          "wrong": [
+            "1019년",
+            "1592년"
+          ],
+          "topic": [
+            "salsu"
+          ],
+          "note": "612년 을지문덕이 이끈 고구려군이 살수에서 수나라 군대를 물리쳤어요"
+        }
+      ]
+    }
+  },
+  "tuning": {
+    "view": {
+      "short": 360
+    },
+    "hero": {
+      "hp": 100,
+      "speed": 48,
+      "pickup": 80,
+      "regen": 0,
+      "invuln": 0.6
+    },
+    "spawn": {
+      "start": 0.9,
+      "perMin": 0.55,
+      "max": 180,
+      "ring": 40,
+      "ringEvery": 60,
+      "ringN": 20,
+      "eliteEvery": 150,
+      "chestEvery": 75
+    },
+    "xp": {
+      "base": 3,
+      "step": 3,
+      "square": 0.2,
+      "gem": [
+        1,
+        3,
+        8
+      ]
+    },
+    "level": {
+      "cards": 3,
+      "weaponsMax": 4,
+      "relicsMax": 4,
+      "alliesMax": 2,
+      "weaponMax": 8,
+      "relicMax": 5,
+      "allyMax": 5
+    },
+    "reask": {
+      "minS": 20,
+      "maxS": 30
+    },
+    "fall": {
+      "invuln": 2,
+      "clearR": 90
+    },
+    "score": {
+      "perSec": 5,
+      "right": 100,
+      "chest": 250,
+      "boss": 500
+    },
+    "coins": {
+      "perMin": 12,
+      "drop": 0.02,
+      "chest": 15,
+      "boss": 30,
+      "rivalBonus": 0.5,
+      "card": 20
+    },
+    "fever": {
+      "sec": 6,
+      "dmg": 2,
+      "comboEvery": 5
+    },
+    "stageMix": [
+      { "a": 1 }, { "a": 1 },
+      { "a": 0.6, "b": 0.4 }, { "a": 0.6, "b": 0.4 },
+      { "a": 0.3, "b": 0.7 }, { "a": 0.3, "b": 0.7 },
+      { "b": 0.4, "c": 0.6 }, { "b": 0.4, "c": 0.6 },
+      { "b": 0.3, "c": 0.7 }, { "b": 0.3, "c": 0.7 }
+    ],
+    "shop": {
+      "max": 5,
+      "cost": [
+        15,
+        30,
+        50,
+        75,
+        100
+      ],
+      "per": {
+        "might": 0.05,
+        "hp": 10,
+        "speed": 0.04,
+        "pickup": 0.1,
+        "wisdom": 0.05,
+        "regen": 0.2
+      }
+    },
+    "foe": {
+      "tierHp": 0.12,
+      "minuteHp": 0.25,
+      "fastSpeed": 1.35,
+      "fastHp": 0.8,
+      "eliteHp": 6,
+      "fastFrom": 120
+    },
+    "boss": {
+      "every": 3,
+      "minions": 6,
+      "stageAt": 120
+    }
+  }
+}

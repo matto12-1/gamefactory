@@ -1,0 +1,6 @@
+{
+  "id":"_dummy-adventure","title":"가짜 긴 모험","summary":"장면을 넘기며 도장을 받아요.",
+  "grades":[1,6],"subjects":["사회"],"tags":["계기교육"],"kind":"adventure","minutes":10,
+  "modes":["solo"],"entry":"index.html","cover":"cover.webp","exitButton":"top-left","ranking":{"enabled":false},
+  "stamps":[{"id":"scene1","name":"첫 장면","how":"첫 장면 보기"},{"id":"scene2","name":"둘째 장면","how":"둘째 장면 보기"}],"occasions":[]
+}

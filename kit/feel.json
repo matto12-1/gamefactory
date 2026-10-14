@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "moments": {
+    "right": {
+      "hitstop": { "on": true, "ms": 70, "msCombo10": 90 },
+      "squash": { "on": true, "sx": 1.35, "sy": 0.55, "over": 1.12, "ms": 220 },
+      "flash": { "on": true, "target": true, "ms": 50, "color": "#ffffff" },
+      "shake": { "on": true, "px": 7, "pxCombo10": 10, "ms": 150 },
+      "burst": { "on": true, "n": 28, "shapes": ["star", "dot"], "size": [6,14], "speed": [300,700], "life": [500,900] },
+      "ring": { "on": true, "r": 90, "ms": 250 },
+      "popup": { "on": true, "px": 52, "pop": [0.5,1.25,1.0], "popMs": 160, "riseMs": 450 },
+      "fly": { "on": true, "ms": 450, "to": "score" },
+      "hudBump": { "on": true, "scale": 1.2, "ms": 120, "to": "score" },
+      "sound": { "on": true, "slot": "hit", "vol": 1, "pitchPerCombo": 1, "pitchMax": 12 }
+    },
+    "wrong": {
+      "shake": { "on": true, "px": 3, "ms": 100 },
+      "tint": { "on": true, "color": "#ee6860", "a": 0.35, "ms": 200 },
+      "pose": { "on": true, "name": "mole-taunt", "ms": 400 },
+      "crack": { "on": true, "to": "combo" },
+      "sound": { "on": true, "slot": "wrong", "vol": 0.4 }
+    },
+    "miss": { "label": { "on": true, "text": "놓쳤어요", "px": 32, "ms": 600 }, "crack": { "on": true, "to": "combo" }, "sound": { "on": true, "slot": "miss", "vol": 0.3 } },
+    "combo": { "label": { "on": true, "text": "좋아!", "px": 40, "ms": 800 }, "burst": { "on": true, "n": 24, "shapes": ["star","spark"], "size": [6,14], "speed": [250,500], "life": [500,900] }, "sound": { "on": true, "slot": "comboTier", "vol": 1 } },
+    "feverStart": { "banner": { "on": true, "text": "피버!", "px": 52, "ms": 800, "slide": true }, "vignette": { "on": true, "color": "#ffc64a", "alpha": 0.15, "ms": 3000 }, "burst": { "on": true, "n": 30, "shapes": ["spark"], "size": [4,10], "speed": [80,200], "life": [800,1500] }, "sound": { "on": true, "slot": "feverStart", "vol": 1 }, "music": { "on": true, "mode": "fever" } },
+    "feverEnd": { "vignette": { "on": true, "color": "#ffc64a", "alpha": 0.1, "ms": 400 }, "sound": { "on": true, "slot": "feverEnd", "vol": 0.4 }, "music": { "on": true, "mode": "normal" } },
+    "special": { "ring": { "on": true, "r": 100, "ms": 400 }, "burst": { "on": true, "n": 12, "shapes": ["spark"], "size": [4,10], "speed": [100,200], "life": [500,900] }, "sound": { "on": true, "slot": "special", "vol": 0.8 } },
+    "specialGet": { "popup": { "on": true, "px": 60, "pop": [0.5,1.25,1], "popMs": 160, "riseMs": 450 }, "burst": { "on": true, "n": 48, "shapes": ["star","spark"], "size": [6,16], "speed": [300,700], "life": [500,900] }, "sound": { "on": true, "slot": "specialGet", "vol": 1 } },
+    "mission": { "banner": { "on": true, "text": "도전 성공!", "px": 44, "ms": 1000, "slide": true }, "sound": { "on": true, "slot": "mission", "vol": 0.8 } },
+    "overcome": { "label": { "on": true, "text": "극복!", "px": 48, "ms": 1000 }, "popup": { "on": true, "px": 52, "pop": [0.5,1.25,1], "popMs": 160, "riseMs": 450 }, "sound": { "on": true, "slot": "overcome", "vol": 0.8 } },
+    "best": { "banner": { "on": true, "text": "최고 기록!", "px": 48, "ms": 1200, "slide": true }, "confetti": { "on": true, "n": 60, "size": [6,12], "speed": [170,300], "life": [1700,2500] }, "sound": { "on": true, "slot": "best", "vol": 0.8 } },
+    "last10": { "banner": { "on": true, "text": "마지막 10초! 점수 두 배", "px": 44, "ms": 1200, "slide": true }, "vignette": { "on": true, "color": "#ed6860", "alpha": 0.15, "ms": 3000 }, "sound": { "on": true, "slot": "last10", "vol": 0.7 }, "music": { "on": true, "mode": "last10" } },
+    "last5": { "hudBump": { "on": true, "to": "time", "scale": 1.15, "ms": 120 }, "sound": { "on": true, "slot": "heartbeat", "vol": 0.5 } },
+    "end": { "banner": { "on": true, "text": "그만!", "px": 60, "ms": 300, "slide": false }, "confetti": { "on": true, "n": 120, "size": [6,12], "speed": [170,300], "life": [1700,2500] }, "sound": { "on": true, "slot": "end", "vol": 0.8 }, "music": { "on": true, "duck": true } }
+  },
+  "combo": { "tiers": [{"n":3,"text":"좋아!"},{"n":5,"text":"연속 5!"},{"n":10,"text":"대단해!"},{"n":15,"text":"굉장해!"},{"n":20,"text":"불꽃 연속!"},{"n":30,"text":"전설!"}], "every": 10, "everyText": "연속 {n}!", "particleGrow": 0.2, "labelPx": [40,44,48,52,56,60] },
+  "sounds": {
+    "rise": {"src":"synth","vol":0.82}, "hit": {"src":"synth","vol":1}, "wrong": {"src":"synth","vol":0.87}, "miss": {"src":"synth","vol":0.84}, "swing": {"src":"1-oga-swishes-swish-9.mp3","vol":0.91},
+    "comboTier": {"src":"2-subspace-512-sfx-sfx-sounds-powerup1.mp3","vol":1}, "feverStart": {"src":"1-kenney-music-jingles-jingles-pizzi07.mp3","vol":1}, "feverEnd": {"src":"1-kenney-digital-audio-highdown.mp3","vol":1}, "special": {"src":"1-kenney-interface-sounds-confirmation-004.mp3","vol":1}, "specialGet": {"src":"2-subspace-512-sfx-sfx-sounds-powerup2.mp3","vol":1},
+    "mission": {"src":"1-kenney-music-jingles-jingles-pizzi03.mp3","vol":1}, "overcome": {"src":"synth","vol":0.88}, "last10": {"src":"2-kenney-digital-audio-threetone1.mp3","vol":1}, "heartbeat": {"src":"synth","vol":0.86}, "end": {"src":"1-kenney-music-jingles-jingles-pizzi01.mp3","vol":1},
+    "count": {"src":"synth","vol":0.78}, "stamp": {"src":"1-kenney-impact-sounds-impactsoft-medium-001.mp3","vol":0.67}, "best": {"src":"1-kenney-music-jingles-jingles-pizzi12.mp3","vol":1}, "card": {"src":"synth","vol":0.81}, "button": {"src":"1-kenney-interface-sounds-click-001.mp3","vol":0.99}
+  },
+  "music": { "track": "2-happy-vibes.mp3", "volume": 0.18, "rates": {"normal":1,"fever":1.12,"last10":1.2}, "duck": 0.5, "fadeMs": 300 },
+  "limits": { "particles": 160, "screenFlashPerSec": 3, "screenFlashAlpha": 0.35, "light": {"slowMs":24,"backMs":18}, "reducedShare": 0.3 },
+  "card": { "minMs": 1800, "autoMs": {"g12":4000,"g34":3200,"g56":2800}, "duoMs":1200, "slideMs":180, "dim":0.3 }
+}

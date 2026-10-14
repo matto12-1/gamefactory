@@ -1,0 +1,49 @@
+{
+  "moments": {
+    "hit": {
+      "burst": {"on":true,"n":6,"shapes":["spark","dot"],"size":[3,7],"speed":[60,160],"life":[200,350]},
+      "sound": {"on":true,"slot":"hit","vol":0.35,"jitter":3}
+    },
+    "swing": {
+      "burst": {"on":true,"n":4,"shapes":["dust"],"size":[3,6],"speed":[30,80],"life":[180,300]},
+      "sound": {"on":true,"slot":"swing","vol":0.35}
+    },
+    "coin": {
+      "burst": {"on":true,"n":5,"shapes":["spark"],"size":[3,6],"speed":[40,90],"life":[200,350]},
+      "sound": {"on":true,"slot":"count","vol":0.5,"jitter":2}
+    },
+    "rise": {
+      "ring": {"on":true,"r":60,"ms":300},
+      "burst": {"on":true,"n":24,"shapes":["star","dot"],"size":[5,12],"speed":[200,500],"life":[400,800]},
+      "label": {"on":true,"text":"레벨 업!","px":36,"ms":900},
+      "sound": {"on":true,"slot":"rise","vol":0.8}
+    },
+    "treasure": {
+      "popup": {"on":true,"px":60,"pop":[0.5,1.25,1],"popMs":160,"riseMs":450},
+      "burst": {"on":true,"n":48,"shapes":["star","spark"],"size":[6,16],"speed":[300,700],"life":[500,900]},
+      "sound": {"on":true,"slot":"specialGet","vol":1}
+    },
+    "dizzy": {
+      "shake": {"on":true,"px":3,"ms":120},
+      "sound": {"on":true,"slot":"miss","vol":0.5}
+    },
+    "fall": {
+      "shake": {"on":true,"px":8,"ms":250},
+      "label": {"on":true,"text":"쓰러졌어요!","px":40,"ms":1200},
+      "sound": {"on":true,"slot":"wrong","vol":0.6}
+    },
+    "special": {
+      "banner": {"on":true,"text":"보스가 나타났어요!","px":44,"ms":1600,"slide":true}
+    }
+  },
+  "combo": {
+    "tiers": [
+      {"n":3,"text":"좋아!"},
+      {"n":5,"text":"척척!"},
+      {"n":10,"text":"역사 박사!"},
+      {"n":15,"text":"15연속!"},
+      {"n":20,"text":"불꽃 연속!"},
+      {"n":30,"text":"전설!"}
+    ]
+  }
+}

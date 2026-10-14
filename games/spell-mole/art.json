@@ -1,0 +1,1361 @@
+{
+  "pixel": true,
+  "ui": {
+    "start": {
+      "portrait": {
+        "file": "art/ui-start-portrait.fcabecfb5180.webp",
+        "w": 740,
+        "h": 1600,
+        "position": "50% 50%"
+      },
+      "landscape": {
+        "file": "art/ui-start-landscape.4c02d95e05c7.webp",
+        "w": 1600,
+        "h": 900,
+        "position": "50% 50%"
+      }
+    },
+    "result": {
+      "portrait": {
+        "file": "art/ui-result-portrait.fc1d6f6b8dc8.webp",
+        "w": 740,
+        "h": 1600,
+        "position": "50% 50%",
+        "defer": true
+      },
+      "landscape": {
+        "file": "art/ui-result-landscape.30642393af16.webp",
+        "w": 1600,
+        "h": 900,
+        "position": "50% 50%",
+        "defer": true
+      }
+    },
+    "map": {
+      "portrait": {
+        "file": "art/ui-map-portrait.7e035e5e8cee.webp",
+        "w": 740,
+        "h": 1600,
+        "defer": true
+      },
+      "landscape": {
+        "file": "art/ui-map-landscape.09e299dd8816.webp",
+        "w": 1600,
+        "h": 900,
+        "defer": true
+      }
+    },
+    "sign": {
+      "file": "art/sign.cbb9cf79b87c.webp",
+      "w": 1200,
+      "h": 390
+    },
+    "icons": [
+      {
+        "file": "art/ui-mode-icon-0.e2e6f8b77e99.webp",
+        "w": 96,
+        "h": 96
+      },
+      {
+        "file": "art/ui-mode-icon-1.6dcc4c4c9aed.webp",
+        "w": 96,
+        "h": 96
+      },
+      {
+        "file": "art/ui-mode-icon-2.ba017471dc6e.webp",
+        "w": 96,
+        "h": 96
+      },
+      {
+        "file": "art/ui-mode-icon-3.38708d414cec.webp",
+        "w": 96,
+        "h": 96,
+        "defer": true
+      },
+      {
+        "file": "art/ui-mode-icon-4.51bbee112bfd.webp",
+        "w": 96,
+        "h": 96,
+        "defer": true
+      },
+      {
+        "file": "art/ui-mode-icon-5.8f40073ffb60.webp",
+        "w": 96,
+        "h": 96,
+        "defer": true
+      },
+      {
+        "file": "art/ui-mode-icon-6.96819a9682b8.webp",
+        "w": 96,
+        "h": 96,
+        "defer": true
+      },
+      {
+        "file": "art/ui-mode-icon-7.254b3732b55d.webp",
+        "w": 96,
+        "h": 96,
+        "defer": true
+      },
+      {
+        "file": "art/ui-mode-icon-8.18c52aa7c9e1.webp",
+        "w": 96,
+        "h": 96,
+        "defer": true
+      }
+    ]
+  },
+  "slots": {
+    "bg-wide": {
+      "file": "art/bg-wide.webp",
+      "w": 1376,
+      "h": 768,
+      "frames": 1,
+      "anchors": {
+        "holes": [
+          {
+            "x": 497,
+            "y": 380,
+            "w": 100,
+            "h": 32
+          },
+          {
+            "x": 688,
+            "y": 380,
+            "w": 108,
+            "h": 32
+          },
+          {
+            "x": 880,
+            "y": 380,
+            "w": 102,
+            "h": 32
+          },
+          {
+            "x": 430,
+            "y": 482,
+            "w": 143,
+            "h": 45
+          },
+          {
+            "x": 689,
+            "y": 482,
+            "w": 153,
+            "h": 45
+          },
+          {
+            "x": 945,
+            "y": 482,
+            "w": 146,
+            "h": 45
+          },
+          {
+            "x": 309,
+            "y": 654,
+            "w": 216,
+            "h": 68
+          },
+          {
+            "x": 691,
+            "y": 654,
+            "w": 219,
+            "h": 68
+          },
+          {
+            "x": 1072,
+            "y": 654,
+            "w": 217,
+            "h": 68
+          }
+        ]
+      },
+      "layout": {
+        "w": 1376,
+        "h": 768,
+        "anchors": {
+          "holes": [
+            {
+              "x": 497,
+              "y": 380,
+              "w": 100,
+              "h": 32
+            },
+            {
+              "x": 688,
+              "y": 380,
+              "w": 108,
+              "h": 32
+            },
+            {
+              "x": 880,
+              "y": 380,
+              "w": 102,
+              "h": 32
+            },
+            {
+              "x": 430,
+              "y": 482,
+              "w": 143,
+              "h": 45
+            },
+            {
+              "x": 689,
+              "y": 482,
+              "w": 153,
+              "h": 45
+            },
+            {
+              "x": 945,
+              "y": 482,
+              "w": 146,
+              "h": 45
+            },
+            {
+              "x": 309,
+              "y": 654,
+              "w": 216,
+              "h": 68
+            },
+            {
+              "x": 691,
+              "y": 654,
+              "w": 219,
+              "h": 68
+            },
+            {
+              "x": 1072,
+              "y": 654,
+              "w": 217,
+              "h": 68
+            }
+          ]
+        }
+      },
+      "defer": true
+    },
+    "bg-tall": {
+      "file": "art/bg-tall.webp",
+      "w": 768,
+      "h": 1376,
+      "frames": 1,
+      "anchors": {
+        "holes": [
+          {
+            "x": 212,
+            "y": 862,
+            "w": 93,
+            "h": 40
+          },
+          {
+            "x": 384,
+            "y": 863,
+            "w": 99,
+            "h": 40
+          },
+          {
+            "x": 557,
+            "y": 863,
+            "w": 95,
+            "h": 40
+          },
+          {
+            "x": 174,
+            "y": 1013,
+            "w": 126,
+            "h": 53
+          },
+          {
+            "x": 384,
+            "y": 1013,
+            "w": 132,
+            "h": 53
+          },
+          {
+            "x": 595,
+            "y": 1013,
+            "w": 129,
+            "h": 53
+          },
+          {
+            "x": 134,
+            "y": 1206,
+            "w": 176,
+            "h": 78
+          },
+          {
+            "x": 385,
+            "y": 1206,
+            "w": 178,
+            "h": 78
+          },
+          {
+            "x": 637,
+            "y": 1206,
+            "w": 178,
+            "h": 78
+          }
+        ]
+      },
+      "layout": {
+        "w": 768,
+        "h": 1376,
+        "anchors": {
+          "holes": [
+            {
+              "x": 212,
+              "y": 862,
+              "w": 93,
+              "h": 40
+            },
+            {
+              "x": 384,
+              "y": 863,
+              "w": 99,
+              "h": 40
+            },
+            {
+              "x": 557,
+              "y": 863,
+              "w": 95,
+              "h": 40
+            },
+            {
+              "x": 174,
+              "y": 1013,
+              "w": 126,
+              "h": 53
+            },
+            {
+              "x": 384,
+              "y": 1013,
+              "w": 132,
+              "h": 53
+            },
+            {
+              "x": 595,
+              "y": 1013,
+              "w": 129,
+              "h": 53
+            },
+            {
+              "x": 134,
+              "y": 1206,
+              "w": 176,
+              "h": 78
+            },
+            {
+              "x": 385,
+              "y": 1206,
+              "w": 178,
+              "h": 78
+            },
+            {
+              "x": 637,
+              "y": 1206,
+              "w": 178,
+              "h": 78
+            }
+          ]
+        }
+      },
+      "defer": true
+    },
+    "mole-up": {
+      "file": "art/mole-up.webp",
+      "w": 80,
+      "h": 116,
+      "frames": 1,
+      "anchors": {
+        "base": {
+          "x": 40,
+          "y": 116
+        },
+        "holeW": 47,
+        "sign": {
+          "x": 3,
+          "y": 4,
+          "w": 75,
+          "h": 29
+        }
+      },
+      "layout": {
+        "w": 367,
+        "h": 470,
+        "anchors": {
+          "base": {
+            "x": 184,
+            "y": 468
+          },
+          "holeW": 215,
+          "sign": {
+            "x": 14,
+            "y": 13,
+            "w": 339,
+            "h": 140
+          }
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        15,
+        49,
+        51,
+        67
+      ],
+      "defer": true
+    },
+    "mole-hit": {
+      "file": "art/mole-hit.webp",
+      "w": 80,
+      "h": 116,
+      "frames": 1,
+      "anchors": {
+        "base": {
+          "x": 40,
+          "y": 116
+        },
+        "holeW": 47
+      },
+      "layout": {
+        "w": 351,
+        "h": 367,
+        "anchors": {
+          "base": {
+            "x": 176,
+            "y": 364
+          },
+          "holeW": 305
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        6,
+        85,
+        69,
+        31
+      ],
+      "defer": true
+    },
+    "mole-taunt": {
+      "file": "art/mole-taunt.webp",
+      "w": 80,
+      "h": 116,
+      "frames": 1,
+      "anchors": {
+        "base": {
+          "x": 40,
+          "y": 116
+        },
+        "holeW": 47
+      },
+      "layout": {
+        "w": 350,
+        "h": 304,
+        "anchors": {
+          "base": {
+            "x": 175,
+            "y": 301
+          },
+          "holeW": 305
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        14,
+        48,
+        53,
+        68
+      ],
+      "defer": true
+    },
+    "hammer": {
+      "file": "art/hammer.webp",
+      "w": 128,
+      "h": 128,
+      "frames": 1,
+      "anchors": {
+        "head": {
+          "x": 80,
+          "y": 58
+        },
+        "grip": {
+          "x": 80,
+          "y": 100
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        58,
+        47,
+        48,
+        57
+      ],
+      "defer": true
+    },
+    "dirt": {
+      "file": "art/dirt.webp",
+      "w": 10,
+      "h": 10,
+      "frames": 1,
+      "anchors": {},
+      "sourceScale": 29.3,
+      "maxScale": 14,
+      "ink": [
+        0,
+        0,
+        10,
+        10
+      ],
+      "defer": true
+    },
+    "mole-idle-2": {
+      "file": "art/mole-idle-2.webp",
+      "w": 80,
+      "h": 116,
+      "frames": 1,
+      "anchors": {
+        "base": {
+          "x": 40,
+          "y": 116
+        },
+        "holeW": 47
+      },
+      "layout": {
+        "w": 367,
+        "h": 470,
+        "anchors": {
+          "base": {
+            "x": 184,
+            "y": 468
+          },
+          "holeW": 215,
+          "sign": {
+            "x": 14,
+            "y": 13,
+            "w": 339,
+            "h": 140
+          }
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        15,
+        49,
+        51,
+        67
+      ],
+      "defer": true
+    },
+    "mole-blink": {
+      "file": "art/mole-blink.webp",
+      "w": 80,
+      "h": 116,
+      "frames": 1,
+      "anchors": {
+        "base": {
+          "x": 40,
+          "y": 116
+        },
+        "holeW": 47
+      },
+      "layout": {
+        "w": 367,
+        "h": 470,
+        "anchors": {
+          "base": {
+            "x": 184,
+            "y": 468
+          },
+          "holeW": 215,
+          "sign": {
+            "x": 14,
+            "y": 13,
+            "w": 339,
+            "h": 140
+          }
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        15,
+        49,
+        51,
+        67
+      ],
+      "defer": true
+    },
+    "mole-dizzy-1": {
+      "file": "art/mole-dizzy-1.webp",
+      "w": 80,
+      "h": 116,
+      "frames": 1,
+      "anchors": {
+        "base": {
+          "x": 40,
+          "y": 116
+        },
+        "holeW": 47
+      },
+      "layout": {
+        "w": 367,
+        "h": 470,
+        "anchors": {
+          "base": {
+            "x": 184,
+            "y": 468
+          },
+          "holeW": 215,
+          "sign": {
+            "x": 14,
+            "y": 13,
+            "w": 339,
+            "h": 140
+          }
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        13,
+        46,
+        55,
+        70
+      ],
+      "defer": true
+    },
+    "mole-dizzy-2": {
+      "file": "art/mole-dizzy-2.webp",
+      "w": 80,
+      "h": 116,
+      "frames": 1,
+      "anchors": {
+        "base": {
+          "x": 40,
+          "y": 116
+        },
+        "holeW": 47
+      },
+      "layout": {
+        "w": 367,
+        "h": 470,
+        "anchors": {
+          "base": {
+            "x": 184,
+            "y": 468
+          },
+          "holeW": 215,
+          "sign": {
+            "x": 14,
+            "y": 13,
+            "w": 339,
+            "h": 140
+          }
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        13,
+        46,
+        55,
+        70
+      ],
+      "defer": true
+    },
+    "mole-wink-2": {
+      "file": "art/mole-wink-2.webp",
+      "w": 80,
+      "h": 116,
+      "frames": 1,
+      "anchors": {
+        "base": {
+          "x": 40,
+          "y": 116
+        },
+        "holeW": 47
+      },
+      "layout": {
+        "w": 367,
+        "h": 470,
+        "anchors": {
+          "base": {
+            "x": 184,
+            "y": 468
+          },
+          "holeW": 215,
+          "sign": {
+            "x": 14,
+            "y": 13,
+            "w": 339,
+            "h": 140
+          }
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        14,
+        48,
+        53,
+        68
+      ],
+      "defer": true
+    },
+    "gold-mole-up": {
+      "file": "art/gold-mole-up.webp",
+      "w": 80,
+      "h": 116,
+      "frames": 1,
+      "anchors": {
+        "base": {
+          "x": 40,
+          "y": 116
+        },
+        "holeW": 47,
+        "sign": {
+          "x": 3,
+          "y": 4,
+          "w": 75,
+          "h": 29
+        }
+      },
+      "layout": {
+        "w": 367,
+        "h": 470,
+        "anchors": {
+          "base": {
+            "x": 184,
+            "y": 468
+          },
+          "holeW": 215,
+          "sign": {
+            "x": 14,
+            "y": 13,
+            "w": 339,
+            "h": 140
+          }
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        15,
+        48,
+        51,
+        68
+      ],
+      "defer": true
+    },
+    "gold-mole-idle-2": {
+      "file": "art/gold-mole-idle-2.webp",
+      "w": 80,
+      "h": 116,
+      "frames": 1,
+      "anchors": {
+        "base": {
+          "x": 40,
+          "y": 116
+        },
+        "holeW": 47
+      },
+      "layout": {
+        "w": 367,
+        "h": 470,
+        "anchors": {
+          "base": {
+            "x": 184,
+            "y": 468
+          },
+          "holeW": 215,
+          "sign": {
+            "x": 14,
+            "y": 13,
+            "w": 339,
+            "h": 140
+          }
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        15,
+        48,
+        51,
+        68
+      ],
+      "defer": true
+    },
+    "gold-mole-blink": {
+      "file": "art/gold-mole-blink.webp",
+      "w": 80,
+      "h": 116,
+      "frames": 1,
+      "anchors": {
+        "base": {
+          "x": 40,
+          "y": 116
+        },
+        "holeW": 47
+      },
+      "layout": {
+        "w": 367,
+        "h": 470,
+        "anchors": {
+          "base": {
+            "x": 184,
+            "y": 468
+          },
+          "holeW": 215,
+          "sign": {
+            "x": 14,
+            "y": 13,
+            "w": 339,
+            "h": 140
+          }
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        15,
+        49,
+        51,
+        67
+      ],
+      "defer": true
+    },
+    "gold-mole-hit": {
+      "file": "art/gold-mole-hit.webp",
+      "w": 80,
+      "h": 116,
+      "frames": 1,
+      "anchors": {
+        "base": {
+          "x": 40,
+          "y": 116
+        },
+        "holeW": 47
+      },
+      "layout": {
+        "w": 367,
+        "h": 470,
+        "anchors": {
+          "base": {
+            "x": 184,
+            "y": 468
+          },
+          "holeW": 215,
+          "sign": {
+            "x": 14,
+            "y": 13,
+            "w": 339,
+            "h": 140
+          }
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        6,
+        84,
+        69,
+        32
+      ],
+      "defer": true
+    },
+    "gold-mole-taunt": {
+      "file": "art/gold-mole-taunt.webp",
+      "w": 80,
+      "h": 116,
+      "frames": 1,
+      "anchors": {
+        "base": {
+          "x": 40,
+          "y": 116
+        },
+        "holeW": 47
+      },
+      "layout": {
+        "w": 367,
+        "h": 470,
+        "anchors": {
+          "base": {
+            "x": 184,
+            "y": 468
+          },
+          "holeW": 215,
+          "sign": {
+            "x": 14,
+            "y": 13,
+            "w": 339,
+            "h": 140
+          }
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        13,
+        48,
+        54,
+        68
+      ],
+      "defer": true
+    },
+    "gold-mole-dizzy-1": {
+      "file": "art/gold-mole-dizzy-1.webp",
+      "w": 80,
+      "h": 116,
+      "frames": 1,
+      "anchors": {
+        "base": {
+          "x": 40,
+          "y": 116
+        },
+        "holeW": 47
+      },
+      "layout": {
+        "w": 367,
+        "h": 470,
+        "anchors": {
+          "base": {
+            "x": 184,
+            "y": 468
+          },
+          "holeW": 215,
+          "sign": {
+            "x": 14,
+            "y": 13,
+            "w": 339,
+            "h": 140
+          }
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        13,
+        49,
+        55,
+        67
+      ],
+      "defer": true
+    },
+    "gold-mole-dizzy-2": {
+      "file": "art/gold-mole-dizzy-2.webp",
+      "w": 80,
+      "h": 116,
+      "frames": 1,
+      "anchors": {
+        "base": {
+          "x": 40,
+          "y": 116
+        },
+        "holeW": 47
+      },
+      "layout": {
+        "w": 367,
+        "h": 470,
+        "anchors": {
+          "base": {
+            "x": 184,
+            "y": 468
+          },
+          "holeW": 215,
+          "sign": {
+            "x": 14,
+            "y": 13,
+            "w": 339,
+            "h": 140
+          }
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        13,
+        49,
+        55,
+        67
+      ],
+      "defer": true
+    },
+    "gold-mole-wink-2": {
+      "file": "art/gold-mole-wink-2.webp",
+      "w": 80,
+      "h": 116,
+      "frames": 1,
+      "anchors": {
+        "base": {
+          "x": 40,
+          "y": 116
+        },
+        "holeW": 47
+      },
+      "layout": {
+        "w": 367,
+        "h": 470,
+        "anchors": {
+          "base": {
+            "x": 184,
+            "y": 468
+          },
+          "holeW": 215,
+          "sign": {
+            "x": 14,
+            "y": 13,
+            "w": 339,
+            "h": 140
+          }
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        13,
+        48,
+        55,
+        68
+      ],
+      "defer": true
+    },
+    "sign-blank": {
+      "file": "art/sign-blank.webp",
+      "w": 102,
+      "h": 30,
+      "frames": 1,
+      "anchors": {},
+      "sourceScale": 15.666666666666666,
+      "maxScale": 7,
+      "ink": [
+        0,
+        0,
+        102,
+        30
+      ],
+      "defer": true
+    },
+    "hole-back": {
+      "file": "art/hole-back.webp",
+      "w": 80,
+      "h": 40,
+      "frames": 1,
+      "anchors": {},
+      "sourceScale": 15.675,
+      "maxScale": 7,
+      "ink": [
+        3,
+        11,
+        75,
+        23
+      ],
+      "defer": true
+    },
+    "hole-front": {
+      "file": "art/hole-front.webp",
+      "w": 80,
+      "h": 40,
+      "frames": 1,
+      "anchors": {},
+      "sourceScale": 15.675,
+      "maxScale": 7,
+      "ink": [
+        3,
+        13,
+        75,
+        21
+      ],
+      "defer": true
+    },
+    "hammer-windup": {
+      "file": "art/hammer-windup.webp",
+      "w": 128,
+      "h": 128,
+      "frames": 1,
+      "anchors": {
+        "head": {
+          "x": 98,
+          "y": 60
+        },
+        "grip": {
+          "x": 80,
+          "y": 100
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        79,
+        42,
+        42,
+        61
+      ],
+      "defer": true
+    },
+    "hammer-strike": {
+      "file": "art/hammer-strike.webp",
+      "w": 128,
+      "h": 128,
+      "frames": 1,
+      "anchors": {
+        "head": {
+          "x": 49,
+          "y": 71
+        },
+        "grip": {
+          "x": 80,
+          "y": 100
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        32,
+        54,
+        54,
+        51
+      ],
+      "defer": true
+    },
+    "hammer-return": {
+      "file": "art/hammer-return.webp",
+      "w": 128,
+      "h": 128,
+      "frames": 1,
+      "anchors": {
+        "head": {
+          "x": 57,
+          "y": 68
+        },
+        "grip": {
+          "x": 80,
+          "y": 100
+        }
+      },
+      "sourceScale": 8,
+      "maxScale": 4,
+      "ink": [
+        42,
+        44,
+        45,
+        61
+      ],
+      "defer": true
+    },
+    "cloud-1": {
+      "file": "art/cloud-1.webp",
+      "w": 71,
+      "h": 26,
+      "frames": 1,
+      "anchors": {},
+      "sourceScale": 15.807692307692308,
+      "maxScale": 7,
+      "ink": [
+        0,
+        0,
+        71,
+        26
+      ],
+      "defer": true
+    },
+    "cloud-2": {
+      "file": "art/cloud-2.webp",
+      "w": 62,
+      "h": 24,
+      "frames": 1,
+      "anchors": {},
+      "sourceScale": 15.75,
+      "maxScale": 7,
+      "ink": [
+        0,
+        0,
+        62,
+        24
+      ],
+      "defer": true
+    },
+    "fx-star": {
+      "file": "art/fx-star.webp",
+      "w": 12,
+      "h": 12,
+      "frames": 1,
+      "anchors": {},
+      "sourceScale": 29.416666666666668,
+      "maxScale": 14,
+      "ink": [
+        0,
+        0,
+        12,
+        12
+      ],
+      "defer": true
+    },
+    "fx-dot": {
+      "file": "art/fx-dot.webp",
+      "w": 9,
+      "h": 9,
+      "frames": 1,
+      "anchors": {},
+      "sourceScale": 30.333333333333332,
+      "maxScale": 15,
+      "ink": [
+        0,
+        0,
+        9,
+        9
+      ],
+      "defer": true
+    },
+    "fx-impact": {
+      "file": "art/fx-impact.webp",
+      "w": 34,
+      "h": 32,
+      "frames": 1,
+      "anchors": {},
+      "sourceScale": 15.647058823529411,
+      "maxScale": 7,
+      "ink": [
+        0,
+        0,
+        34,
+        32
+      ],
+      "defer": true
+    }
+  },
+  "yard": {
+    "assets": {
+      "yard-tall-0": {
+        "file": "art/yard-tall-0.039fcf5491cf.webp",
+        "w": 768,
+        "h": 1376,
+        "defer": true
+      },
+      "yard-tall-1": {
+        "file": "art/yard-tall-1.2bd0db0ee42d.webp",
+        "w": 768,
+        "h": 1376,
+        "defer": true
+      },
+      "yard-tall-2": {
+        "file": "art/yard-tall-2.eb0185a102be.webp",
+        "w": 768,
+        "h": 1376,
+        "defer": true
+      },
+      "yard-wide-0": {
+        "file": "art/yard-wide-0.1b9e628e4059.webp",
+        "w": 1376,
+        "h": 768,
+        "defer": true
+      },
+      "yard-wide-1": {
+        "file": "art/yard-wide-1.1fcf0100caf6.webp",
+        "w": 1376,
+        "h": 768,
+        "defer": true
+      },
+      "yard-wide-2": {
+        "file": "art/yard-wide-2.ad09825f2906.webp",
+        "w": 1376,
+        "h": 768,
+        "defer": true
+      },
+      "hole": {
+        "file": "art/hole-mound.25132ffd489f.webp",
+        "w": 384,
+        "h": 282,
+        "defer": true
+      },
+      "rise": {
+        "file": "art/rise.498aabff4fff.webp",
+        "w": 192,
+        "h": 224,
+        "defer": true
+      },
+      "hold": {
+        "file": "art/hold.2606abfe72dd.webp",
+        "w": 192,
+        "h": 224,
+        "defer": true
+      },
+      "hit": {
+        "file": "art/hit.e0c7e018c93f.webp",
+        "w": 192,
+        "h": 112,
+        "defer": true
+      },
+      "taunt": {
+        "file": "art/taunt.52d74f6dd561.webp",
+        "w": 192,
+        "h": 224,
+        "defer": true
+      },
+      "cheer": {
+        "file": "art/cheer.421fb949cbd6.webp",
+        "w": 192,
+        "h": 224,
+        "defer": true
+      },
+      "gold": {
+        "file": "art/gold.07c2b6a52130.webp",
+        "w": 192,
+        "h": 224,
+        "defer": true
+      },
+      "boss": {
+        "file": "art/boss.7263faf6592c.webp",
+        "w": 384,
+        "h": 448,
+        "defer": true
+      },
+      "boss-hit": {
+        "file": "art/boss-hit.95fea9825a2b.webp",
+        "w": 384,
+        "h": 192,
+        "defer": true
+      },
+      "boss-down": {
+        "file": "art/boss-down.e8d77ad7709a.webp",
+        "w": 384,
+        "h": 192,
+        "defer": true
+      },
+      "hammer": {
+        "file": "art/hammer.d1a8b6d57ded.webp",
+        "w": 192,
+        "h": 192,
+        "defer": true
+      },
+      "hammer-gold": {
+        "file": "art/hammer-gold.a8da03925b57.webp",
+        "w": 192,
+        "h": 192,
+        "defer": true
+      },
+      "sign": {
+        "file": "art/sign.0c931bf151f2.webp",
+        "w": 320,
+        "h": 104,
+        "defer": true
+      },
+      "dust": {
+        "file": "art/dust.a38bae222255.webp",
+        "w": 96,
+        "h": 96,
+        "defer": true
+      },
+      "star": {
+        "file": "art/star.ea57ca79e992.webp",
+        "w": 96,
+        "h": 96,
+        "defer": true
+      }
+    }
+  }
+}

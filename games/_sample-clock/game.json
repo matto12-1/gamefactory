@@ -1,0 +1,54 @@
+{
+  "id": "_sample-clock",
+  "title": "시계탑 탐험대",
+  "summary": "시계 바늘을 보고 시간을 맞혀요.",
+  "grades": [
+    1,
+    2
+  ],
+  "subjects": [
+    "수학"
+  ],
+  "tags": [
+    "새 게임"
+  ],
+  "kind": "short",
+  "minutes": 2,
+  "modes": [
+    "solo"
+  ],
+  "entry": "index.html",
+  "cover": "cover.webp",
+  "exitButton": "top-left",
+  "ranking": {
+    "enabled": true,
+    "maxScore": 99999,
+    "minDurationMs": 1000,
+    "maxScorePerSec": 1000,
+    "stars": [
+      50,
+      100,
+      200,
+      300,
+      400,
+      500,
+      600,
+      700,
+      800,
+      900
+    ]
+  },
+  "stamps": [
+    {
+      "id": "first",
+      "name": "첫 판",
+      "how": "한 판 끝내기"
+    },
+    {
+      "id": "big",
+      "name": "큰 점수",
+      "how": "800점 이상 받기"
+    }
+  ],
+  "occasions": []
+}

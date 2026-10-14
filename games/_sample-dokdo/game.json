@@ -1,0 +1,44 @@
+{
+  "id": "_sample-dokdo",
+  "title": "독도 지킴이 항해",
+  "summary": "배를 타고 독도로 가서 섬을 지켜요.",
+  "grades": [
+    4,
+    6
+  ],
+  "subjects": [
+    "사회"
+  ],
+  "tags": [
+    "계기교육"
+  ],
+  "kind": "adventure",
+  "minutes": 10,
+  "modes": [
+    "solo"
+  ],
+  "entry": "index.html",
+  "cover": "cover.webp",
+  "exitButton": "top-left",
+  "ranking": {
+    "enabled": false
+  },
+  "stamps": [
+    {
+      "id": "scene1",
+      "name": "첫 장면",
+      "how": "첫 장면 보기"
+    },
+    {
+      "id": "scene2",
+      "name": "둘째 장면",
+      "how": "둘째 장면 보기"
+    }
+  ],
+  "occasions": [
+    {
+      "name": "독도의 날",
+      "date": "10-25"
+    }
+  ]
+}

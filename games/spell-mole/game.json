@@ -1,0 +1,377 @@
+{
+  "id": "spell-mole",
+  "title": "맞춤법 두더지",
+  "summary": "바르게 쓴 말을 든 두더지만 뿅! 잡아요.",
+  "subjects": [
+    "국어"
+  ],
+  "family": "mole",
+  "play": {},
+  "endShow": true,
+  "missions": [
+    {
+      "id": "combo15",
+      "kind": "combo",
+      "n": 15,
+      "text": "15연속"
+    },
+    {
+      "id": "golden",
+      "kind": "special",
+      "text": "황금 두더지 잡기"
+    },
+    {
+      "id": "fever2",
+      "kind": "fever",
+      "n": 2,
+      "text": "피버 2번"
+    }
+  ],
+  "grades": [
+    1,
+    6
+  ],
+  "kind": "short",
+  "minutes": 2,
+  "modes": [
+    "solo",
+    "duo"
+  ],
+  "entry": "index.html",
+  "cover": "cover.webp",
+  "exitButton": "top-left",
+  "occasions": [],
+  "tags": [
+    "새 게임"
+  ],
+  "ranking": {
+    "enabled": true,
+    "maxScore": 3000000,
+    "minDurationMs": 1000,
+    "maxScorePerSec": 1440,
+    "stars": [
+      50,
+      150,
+      290,
+      490,
+      730,
+      1070,
+      1460,
+      1950,
+      2540,
+      3170
+    ]
+  },
+  "stamps": [
+    {
+      "id": "all-missions",
+      "name": "도전 완료",
+      "how": "도전 셋을 모두 이뤄요",
+      "rule": {
+        "missions": "all"
+      }
+    },
+    {
+      "id": "first",
+      "name": "첫 뿅망치",
+      "how": "한 판을 끝까지 해요",
+      "rule": {
+        "finish": true
+      }
+    },
+    {
+      "id": "combo10",
+      "name": "맞춤법 척척",
+      "how": "바른 말을 10번 잇달아 잡아요",
+      "rule": {
+        "combo": 10
+      }
+    },
+    {
+      "id": "sharp",
+      "name": "매의 눈",
+      "how": "틀린 말은 하나도 안 잡고 바른 말 30개를 잡아요",
+      "rule": {
+        "right": 30,
+        "wrong": 0
+      }
+    },
+    {
+      "id": "score1000",
+      "name": "천 점 뿅망치",
+      "how": "한 판에 1,000점을 넘겨요",
+      "rule": {
+        "score": 1000
+      }
+    }
+  ],
+  "modeKit": {
+    "molePace": {
+      "grades": [
+        {
+          "maxGrade": 2,
+          "upSec": 4.2,
+          "minUpSec": 2.4
+        },
+        {
+          "maxGrade": 4,
+          "upSec": 3.6,
+          "minUpSec": 2
+        },
+        {
+          "maxGrade": 6,
+          "upSec": 3.2,
+          "minUpSec": 1.7
+        }
+      ],
+      "accelerationPerSec": {
+        "quick": 0.005,
+        "endless": 0.004,
+        "stage": 0.004
+      },
+      "maxTempo": 2.2,
+      "phases": [
+        {
+          "limit": 2,
+          "gapSec": 1.6,
+          "together": 1,
+          "upScale": 1
+        },
+        {
+          "limit": 3,
+          "gapSec": 2.2,
+          "together": 2,
+          "upScale": 1
+        },
+        {
+          "limit": 4,
+          "gapSec": 0.75,
+          "together": 1,
+          "upScale": 0.8
+        }
+      ]
+    },
+    "quick": {
+      "startSec": 120,
+      "maxSec": 300,
+      "onCorrectSec": 1.5,
+      "comboEvery": 10,
+      "comboSec": 3,
+      "onWrongSec": -3
+    },
+    "endless": {
+      "hearts": 3,
+      "heartMax": 3
+    },
+    "stage": {
+      "bossAt": [
+        5,
+        10
+      ],
+      "stages": [
+        {
+          "id": 1,
+          "title": "몸풀기",
+          "goal": {
+            "kind": "right",
+            "target": 10,
+            "label": "바른 말"
+          },
+          "timeSec": 60,
+          "hearts": 3,
+          "starRules": {
+            "accuracy": 0.8,
+            "maxWrong": 1
+          },
+          "yard": 0,
+          "speed": 0
+        },
+        {
+          "id": 2,
+          "title": "실수는 두 번까지",
+          "goal": {
+            "kind": "right",
+            "target": 11,
+            "label": "바른 말"
+          },
+          "timeSec": 60,
+          "hearts": 3,
+          "starRules": {
+            "accuracy": 0.8,
+            "maxWrong": 1
+          },
+          "yard": 0,
+          "speed": 0
+        },
+        {
+          "id": 3,
+          "title": "두 마리씩",
+          "goal": {
+            "kind": "right",
+            "target": 11,
+            "label": "바른 말"
+          },
+          "timeSec": 60,
+          "hearts": 3,
+          "starRules": {
+            "accuracy": 0.8,
+            "maxWrong": 1
+          },
+          "yard": 1,
+          "speed": 0
+        },
+        {
+          "id": 4,
+          "title": "빠른 두 마리씩",
+          "goal": {
+            "kind": "right",
+            "target": 10,
+            "label": "바른 말"
+          },
+          "timeSec": 60,
+          "hearts": 3,
+          "starRules": {
+            "accuracy": 0.8,
+            "maxWrong": 1
+          },
+          "yard": 1,
+          "speed": 0.2
+        },
+        {
+          "id": 5,
+          "title": "중간 보스",
+          "goal": {
+            "kind": "sentences",
+            "target": 3,
+            "label": "고친 문장"
+          },
+          "timeSec": 90,
+          "hearts": 3,
+          "starRules": {
+            "accuracy": 0.8,
+            "maxWrong": 1
+          },
+          "yard": 3,
+          "speed": 0
+        },
+        {
+          "id": 6,
+          "title": "연속 도전",
+          "goal": {
+            "kind": "combo",
+            "target": 6,
+            "label": "연속"
+          },
+          "timeSec": 60,
+          "hearts": 3,
+          "starRules": {
+            "accuracy": 0.8,
+            "maxWrong": 1
+          },
+          "yard": 2,
+          "speed": 0,
+          "phase": 1
+        },
+        {
+          "id": 7,
+          "title": "몰려온다",
+          "goal": {
+            "kind": "right",
+            "target": 17,
+            "label": "바른 말"
+          },
+          "timeSec": 75,
+          "hearts": 3,
+          "starRules": {
+            "accuracy": 0.8,
+            "maxWrong": 1
+          },
+          "yard": 2,
+          "speed": 0.15
+        },
+        {
+          "id": 8,
+          "title": "황금 두더지",
+          "goal": {
+            "kind": "golden",
+            "target": 8,
+            "label": "황금 두더지"
+          },
+          "timeSec": 60,
+          "hearts": 3,
+          "starRules": {
+            "accuracy": 0.8,
+            "maxWrong": 1
+          },
+          "yard": 2,
+          "speed": 0
+        },
+        {
+          "id": 9,
+          "title": "섞어서",
+          "goal": {
+            "kind": "right",
+            "target": 18,
+            "label": "바른 말"
+          },
+          "timeSec": 75,
+          "hearts": 3,
+          "starRules": {
+            "accuracy": 0.8,
+            "maxWrong": 1
+          },
+          "yard": 2,
+          "speed": 0.15
+        },
+        {
+          "id": 10,
+          "title": "대왕 두더지",
+          "goal": {
+            "kind": "sentences",
+            "target": 5,
+            "label": "고친 문장"
+          },
+          "timeSec": 90,
+          "hearts": 3,
+          "starRules": {
+            "accuracy": 0.8,
+            "maxWrong": 1
+          },
+          "yard": 3,
+          "speed": 0.4
+        }
+      ]
+    },
+    "powerups": [
+      {
+        "id": "clock",
+        "name": "시계 +10초",
+        "desc": "남은 시간을 늘려요",
+        "icon": 4,
+        "plays": [
+          "quick",
+          "endless"
+        ]
+      },
+      {
+        "id": "combo",
+        "name": "든든 콤보",
+        "desc": "한 번 틀려도 이어 가요",
+        "icon": 5
+      },
+      {
+        "id": "golden",
+        "name": "황금 손",
+        "desc": "황금 두더지를 더 만나요",
+        "icon": 3
+      },
+      {
+        "id": "hammer",
+        "name": "큰 망치",
+        "desc": "이웃의 바른 말도 함께 쳐요",
+        "icon": 0
+      }
+    ],
+    "powerupEvery": 25
+  }
+}
