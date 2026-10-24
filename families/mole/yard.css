@@ -1,0 +1,38 @@
+.gf-mole-yard .gf-learn-layer:not(.gf-learn-duo):not(.gf-mole-b2) {
+  left:auto!important; right:8px; top:auto!important; bottom:5px;
+  width:min(480px,calc(100vw - 16px))!important; height:auto!important;
+  padding:0; background:transparent; pointer-events:none;
+}
+.gf-mole-yard .gf-learn-layer:not(.gf-learn-duo):not(.gf-mole-b2) .gf-learn-card {
+  display:grid; grid-template-columns:1fr 1fr; gap:2px 10px;
+  padding:5px 12px; border-width:2px; border-radius:10px; overflow:visible;
+  pointer-events:auto; max-height:none; box-shadow:0 3px 0 #34241950;
+}
+.gf-mole-yard .gf-learn-layer:not(.gf-learn-duo):not(.gf-mole-b2) .gf-learn-word {font-size:clamp(20px,2.8vh,32px);line-height:1.2;}
+.gf-mole-yard .gf-learn-layer:not(.gf-learn-duo):not(.gf-mole-b2) .gf-learn-note {grid-column:1 / -1;font-size:15px;line-height:1.2;margin:1px 0!important;}
+@media(min-width:1600px) {
+  .gf-mole-yard .gf-learn-layer:not(.gf-learn-duo):not(.gf-mole-b2) {width:min(1000px,calc(100vw - 16px))!important;}
+  .gf-mole-yard .gf-learn-layer:not(.gf-learn-duo):not(.gf-mole-b2) .gf-learn-word {grid-column:1;grid-row:1;}
+  .gf-mole-yard .gf-learn-layer:not(.gf-learn-duo):not(.gf-mole-b2) .gf-learn-note {grid-column:2;grid-row:1;font-size:30px;}
+}
+.gf-mole-yard .gf-note {
+  color:#fff4d0; font-size:max(16px,2.1vh); font-weight:700;
+  text-shadow:0 2px 2px #321b0d,1px 0 #321b0d,-1px 0 #321b0d;
+}
+.gf-mole-yard .gf-question .gf-big {
+  color:#4c2918;
+  -webkit-text-stroke:1px #fff7df; paint-order:stroke fill;
+  text-shadow:0 1px #fff7df;
+}
+/* 혼자 판과 세로 화면 2인용은 문제 팻말을 크게 쓴다. 가로 화면 2인용은 쪽 판이 세로로 길어 팻말이 점수 줄 아래로 내려가므로,
+   틀(fitCompactQuestions)이 위쪽 10% 띠에 맞춰 정한 글자 크기를 따른다(3.5vh로 묶으면 띠를 넘는다, 10-21 1366×768에서 13%). */
+.gf-mole-yard .gf-question:not([data-test^="question-"]) .gf-big {font-size:3.5vh!important;}
+@media(orientation:portrait) {.gf-mole-yard .gf-question[data-test^="question-"] .gf-big {font-size:3.5vh!important;}}
+.gf-mole-yard .gf-question {background:#fff7df!important;}
+.gf-mole-yard .gf-mode-time-float {top:calc(100% + 4.5vh);-webkit-text-stroke:1px #193320;paint-order:stroke fill;}
+.gf-mole-yard .gf-assists .gf-note {font-size:max(16px,2.1vh)!important;color:#4c2918;font-weight:400;text-shadow:none;}
+.gf-mole-yard .gf-assists .gf-goal,.gf-mole-yard .gf-assists .gf-goal :is(p,strong,span) {font-size:max(14px,1.8vh)!important;color:#4c2918;}
+.gf-mole-yard .gf-assists .gf-goal {bottom:0!important;}
+@media(orientation:landscape) {
+  .gf-mole-yard .gf-assists .gf-note {font-size:2.8vh!important;}
+}
