@@ -1,0 +1,332 @@
+/* 깔끔한 게임 스토어(2026-10-29 대표 「나」): 판은 한 층. 홈 맨 위는 넓고 낮은 오늘의 활동 + 오늘의 도전, 그 아래 활동 종류 알약 한 줄과 가로 선반.
+   칸 너비는 본문(.board) 너비로 정한다(container). 쪽 바탕 · 색 값은 site.css :root. */
+:root { --cards:4; }
+.board { padding:1.25rem 1.5rem 2rem; container-type:inline-size; }
+.label { margin:0; font-weight:700; }
+.shelf-title h2, .myplay h2, .bento-shortcuts h2 { font-family:GF Sans,GF Sans Full,sans-serif; font-size:1.375rem; line-height:1.25; margin:0; font-weight:900; letter-spacing:-.02em; }
+.list-head h1 { font-family:GF Sans,GF Sans Full,sans-serif; font-size:2.25rem; line-height:1.15; margin:.25rem 0 .35rem; font-weight:900; letter-spacing:-.03em; }
+.hero h2 { font-family:GF Sans,GF Sans Full,sans-serif; font-size:2.25rem; line-height:1.15; margin:0; word-break:keep-all; font-weight:900; letter-spacing:-.03em; }
+/* 큰 화면에서 이어 하기·내 도장이 왼쪽 메뉴 카드로 보이면 본문 칸은 숨긴다(10-20 대표 「나」).
+   카드가 들어갈 자리가 없는 낮은 화면, 가는 메뉴, 폰에서는 본문 칸이 그대로 보인다(sidenav.js fitCards). */
+html[data-nav="full"][data-nav-cards="on"] .myplay { display:none; }
+.myplay { display:flex; align-items:stretch; gap:1rem; margin:0 0 1.75rem; min-width:0; }
+.myplay h2 { margin:0 0 .6rem; }
+.list-head { padding:0; margin:0 0 1rem; background:none; border:0; }
+.list-head p { margin:.2rem 0; color:var(--gf-sub); }
+
+/* ── 홈 맨 위 ──
+   넓은 본문: [오늘의 활동 | 오늘의 도전] 한 줄 + 활동 종류 한 줄. 표지는 16:9를 자르지 않는다(10-20 대표 「게임이 좀 잘려있네」):
+   칸 높이를 칸 너비의 약 1/3로 두면 표지가 왼쪽 약 59%, 글 칸이 오른쪽 약 41%가 된다. */
+.bento-tray { --chal:clamp(16rem,24cqw,22rem); --hero-h:clamp(13rem,calc((100cqw - var(--chal) - 1rem) * .33),18.5rem); display:grid; grid-template-columns:minmax(0,1fr) var(--chal); grid-template-rows:var(--hero-h) auto; grid-template-areas:"hero chal" "kinds kinds"; gap:1.25rem 1rem; margin:0 0 1.75rem; }
+.bento-side { display:contents; }
+.hero { grid-area:hero; position:relative; display:grid; grid-template-columns:calc(var(--hero-h) * 16 / 9) minmax(0,1fr); grid-template-rows:minmax(0,1fr); min-width:0; min-height:0; height:var(--hero-h); overflow:hidden; border:0; border-radius:20px; color:var(--gf-ink); background:#fff2ef; padding:0; }
+.hero .art { grid-column:1; grid-row:1; position:relative; width:100%; height:100%; min-height:0; overflow:hidden; }
+.hero .art img { display:block; width:100%; height:100%; object-fit:cover; }
+.hero-text { grid-column:2; grid-row:1; display:flex; flex-direction:column; justify-content:center; align-items:flex-start; gap:.35rem; min-width:0; padding:1.25rem 1.75rem; background:none; }
+.hero .label { font-size:.9375rem; color:var(--gf-sub); }
+.hero .sum { margin:.15rem 0 0; font-size:.9375rem; line-height:1.5; word-break:keep-all; color:var(--gf-sub); display:-webkit-box; -webkit-line-clamp:2; -webkit-box-orient:vertical; overflow:hidden; }
+.hero-cta { display:flex; flex-wrap:wrap; align-items:center; gap:.5rem .75rem; margin-top:.9rem; }
+.hero .why { font-size:.8125rem; font-weight:800; padding:.3rem .75rem; border-radius:999px; background:#fff; color:var(--coral-ink); }
+/* 넘기기(10-29 저녁): 장마다 표지 · 글이 같은 칸에 겹치고 보이는 장만 켠다(hero.js). 꺼진 장도 자리는 차지해서 칸 높이가 장마다 같다. */
+.hero { touch-action:pan-y; }
+.hero-slide { display:contents; }
+.hero-slide.off { visibility:hidden; }
+.hero-slide.enter > * { animation:hero-in .4s ease-out; }
+@keyframes hero-in { from { opacity:0; } to { opacity:1; } }
+/* 점은 표지 아래 가운데(기준 그림). 누르는 칸은 44px, 보이는 점은 8px · 지금 장은 22px 알약, 어떤 표지 위에서도 보이게 진한 띠를 깐다. */
+.hero-dots { grid-column:1; grid-row:1; align-self:end; justify-self:center; z-index:1; position:relative; display:flex; margin-bottom:.1rem; }
+.hero-dots::before { content:''; position:absolute; inset:.8rem .55rem; border-radius:999px; background:rgb(29 36 51 / .45); }
+.hero-dot { position:relative; display:grid; place-items:center; width:2.75rem; height:2.75rem; min-height:0; padding:0; border:0; border-radius:999px; background:none; cursor:pointer; }
+.hero-dot::before { content:''; width:.5rem; height:.5rem; border-radius:999px; background:rgb(255 255 255 / .6); transition:width .2s, background .2s; }
+.hero-dot:hover::before { background:#fff; }
+.hero-dot[aria-current=true]::before { width:1.375rem; background:#fff; }
+.hero-dot:focus-visible { outline:3px solid #fff; outline-offset:-6px; }
+/* 주 단추: 코랄 알약 하나(한 화면에 하나). 넘어가는 표시 › 는 읽지 않는 꾸밈 글자. */
+.btn.go { display:inline-flex; align-items:center; justify-content:center; gap:.4rem; min-height:3rem; padding:0 1.6rem; border:0; border-radius:999px; background:var(--coral); color:#fff; font-size:1.0625rem; font-weight:800; box-shadow:0 4px 12px #d93a2633; }
+.btn.go::after, .bento-challenge .btn::after, .all-more::after, .shelf-more::after { content:'\203A' / ''; font-size:1.35em; line-height:1; margin-top:-.1em; }
+.btn.go:hover { background:var(--coral-press); }
+.bento-challenge { grid-area:chal; position:relative; min-width:0; min-height:0; padding:14px; border:0; border-radius:20px; color:var(--gf-ink); background:#eef3f9; }
+.bento-challenge .panel { display:grid; grid-template-areas:"label" "art" "title" "score" "go"; grid-template-rows:auto minmax(0,1fr) auto auto auto; row-gap:.4rem; height:100%; margin:0; padding:0; border:0; background:none; box-shadow:none; border-radius:0; }
+.bento-challenge .panel-head, .bento-challenge .panel-head > div:not(.mini-art) { display:contents; }
+.bento-challenge .label { grid-area:label; align-self:center; min-height:1.75rem; display:flex; align-items:center; font-size:.9375rem; color:var(--gf-sub); }
+.bento-challenge .mini-art { grid-area:art; position:relative; width:100%; height:100%; min-height:0; border-radius:14px; overflow:hidden; }
+.bento-challenge .mini-art img { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+.bento-challenge h2 { grid-area:title; margin:.2rem 0 0; font:800 1.0625rem/1.3 GF Sans,GF Sans Full,sans-serif; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.bento-challenge .score { grid-area:score; margin:0; font-size:.8125rem; line-height:1.4; color:var(--gf-sub); overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.bento-challenge .medals { display:none; }
+/* 홈의 「도전하기」는 보조 단추(주 단추는 「바로 하기」 하나) */
+.bento-challenge .btn { grid-area:go; display:flex; align-items:center; justify-content:center; gap:.3rem; width:100%; min-height:2.75rem; margin:.2rem 0 0; padding:0 1rem; border:0; border-radius:999px; font-size:.9375rem; font-weight:800; background:#fff; color:var(--gf-ink); }
+.bento-challenge .btn:hover { background:#f8f9fb; }
+.bento-challenge-link { position:absolute; top:.35rem; right:.6rem; display:inline-flex; align-items:center; min-height:2.75rem; padding:0 .4rem; border-radius:999px; text-decoration:none; font-size:.875rem; font-weight:700; color:var(--link); }
+.bento-shortcuts { grid-area:kinds; min-width:0; padding:0; border:0; background:none; }
+.bento-shortcuts h2 { margin:0 0 .75rem; }
+/* 활동 종류: 넓은 알약 한 줄(옅은 뜻 색 면 · 두 톤 아이콘 · 이름 · 활동 수 · ›). 그림 위 흰 글이 없다(진단 14번). */
+.bento-tiles { display:grid; grid-template-columns:repeat(auto-fit,minmax(13rem,1fr)); gap:.75rem; }
+.bento-tiles a { display:grid; grid-template-columns:auto minmax(0,1fr) auto; align-items:center; gap:.85rem; min-height:4rem; padding:.55rem 1.1rem .55rem .8rem; border-radius:18px; background:var(--k-bg,var(--soft)); color:var(--gf-ink); text-decoration:none; transition:transform .15s ease,box-shadow .15s ease; }
+.bento-tiles a:hover { box-shadow:var(--card-depth); transform:translateY(-1px); }
+.k-icon { display:block; width:2.75rem; height:2.75rem; }
+.k-icon .ic { width:100%; height:100%; }
+.k-copy { display:grid; min-width:0; line-height:1.3; }
+.k-copy b { font-size:1.0625rem; font-weight:800; }
+.k-copy small { margin:0; font-size:.8125rem; color:var(--gf-sub); }
+.k-go { font-size:1.5rem; line-height:1; color:#8e97a6; }
+.k-duo { --k-bg:#eaf2ff; } .k-adventure { --k-bg:#e7f7ee; } .k-short { --k-bg:#fff1e6; } .k-tv { --k-bg:#e5f6fd; } .k-occasion { --k-bg:#ffeef1; }
+
+/* ── 칩 · 선반 · 카드 ── */
+.chip-line { display:flex; gap:.4rem; flex-wrap:wrap; min-width:0; }
+.chip-line button { border-radius:999px; padding:0 1rem; min-height:2.75rem; font-size:.875rem; font-weight:700; white-space:nowrap; background:var(--chip); color:var(--gf-ink); border:0; }
+.chip-line button:hover { background:var(--chip-hover); }
+.chip-line.grades > button { flex:0 0 auto; }
+.chip-line button[aria-pressed=true] { background:var(--coral); color:#fff; box-shadow:none; }
+.result-count { margin:0 0 0 auto; font-size:.875rem; font-weight:700; color:var(--gf-sub); }
+.shelf { min-width:0; margin:0 0 1.75rem; }
+.shelf-title { display:flex; align-items:center; gap:.75rem; margin-bottom:.5rem; }
+.shelf-title small { color:var(--gf-sub); font-size:.875rem; }
+.shelf-more { display:inline-flex; align-items:center; gap:.2rem; min-height:2.75rem; margin-left:auto; font-weight:700; font-size:.9375rem; white-space:nowrap; color:var(--link); text-decoration:none; }
+.arrows { margin-left:auto; display:flex; gap:.4rem; }
+.shelf-title .arrows { margin-left:0; }
+.arrow { padding:0; width:2.75rem; min-height:2.75rem; font-size:1.6rem; line-height:1; border-radius:50%; background:var(--chip); color:var(--gf-ink); border:0; }
+.arrow:hover:not(:disabled) { background:var(--chip-hover); }
+.arrow:disabled { opacity:.35; cursor:default; }
+/* 카드 그림자가 잘리지 않게 줄에 여백을 두고 같은 만큼 바깥으로 민다(여백 .5rem × 2 = 카드 사이 1rem, 카드 수 계산이 맞는다). */
+.rail { display:flex; gap:1rem; overflow-x:auto; overscroll-behavior-x:contain; scroll-snap-type:x mandatory; scroll-padding-inline:.5rem; scrollbar-width:none; padding:.25rem .5rem 1rem; margin:0 -.5rem -.5rem; }
+.rail::-webkit-scrollbar { display:none; }
+.game { position:relative; flex:0 0 calc((100% - (var(--cards) - 1)*1rem)/var(--cards)); min-width:0; display:flex; flex-direction:column; gap:0; overflow:hidden; text-align:left; scroll-snap-align:start; background:#fff; color:var(--gf-ink); border:0; border-radius:16px; padding:0; box-shadow:var(--card-depth); font-weight:400; transition:transform .18s ease-out,box-shadow .18s ease-out; }
+.game:hover { box-shadow:var(--lift); transform:translateY(-2px); }
+.game:focus-visible { outline-offset:2px; }
+.card-art { position:relative; width:100%; aspect-ratio:16/9; flex:none; overflow:hidden; }
+.game img { width:100%; height:100%; object-fit:cover; position:absolute; inset:0; }
+.meta { width:100%; padding:.7rem .9rem .85rem; min-width:0; color:var(--gf-ink); background:none; }
+.meta h3 { display:flex; align-items:baseline; gap:.4rem; font-family:GF Sans,GF Sans Full,sans-serif; font-size:1.0625rem; line-height:1.3; margin:0 0 .3rem; word-break:keep-all; font-weight:800; }
+.meta .sub { display:flex; align-items:center; gap:.4rem; min-width:0; margin:0; font-size:.8125rem; line-height:1.4; font-weight:500; color:var(--gf-sub); white-space:nowrap; }
+.meta .sub-text { min-width:0; overflow:hidden; text-overflow:ellipsis; }
+.meta .subj-dot { display:none; }
+.meta .tag { flex:none; padding:.1rem .5rem; border-radius:999px; font-size:.75rem; font-weight:800; background:var(--coral-tint); color:var(--coral-ink); }
+.pop-rank { flex:none; font:900 1.0625rem/1 GF Sans,sans-serif; color:var(--coral); }
+.game-grid { display:grid; grid-template-columns:repeat(var(--cards),minmax(0,1fr)); gap:1rem; }
+.game-grid > .is-more { display:none; }
+.all-more { display:flex; align-items:center; justify-content:center; gap:.3rem; width:fit-content; min-height:3rem; margin:1.25rem auto 0; padding:0 1.5rem; color:var(--gf-ink); font-weight:800; text-decoration:none; background:var(--chip); border:0; border-radius:999px; }
+.all-more:hover { background:var(--chip-hover); }
+.all-more[hidden] { display:none; }
+.pixel-art { background-color:var(--gf-cover-color,var(--gf-dot1)); background-image:repeating-conic-gradient(var(--gf-dot-light) 0% 25%,transparent 0% 50%); background-size:2rem 2rem; }
+.art img { width:100%; height:100%; object-fit:cover; }
+.myplay-games { flex:1; min-width:0; }
+.my-stamps { display:block; flex:0 0 16rem; padding:1rem 1.25rem; border:0; text-decoration:none; color:var(--gf-ink); background:var(--soft); border-radius:20px; }
+.myplay > .my-stamps:only-child { flex:1 1 auto; }
+.my-stamps h2 { display:inline-block; margin-right:1rem; }
+.my-stamps > b { font-size:2.25rem; font-weight:900; color:var(--coral); }
+.my-stamps p { margin:.3rem 0; font-size:.875rem; color:var(--gf-sub); }
+.stamp-row { display:flex; gap:.6rem; margin:.4rem 0; }
+.stamp-row .stamp-art { width:3.25rem; }
+.bar { height:.5rem; border-radius:999px; background:#e3e6ec; overflow:hidden; margin:.5rem 0; }
+.bar i { display:block; height:100%; border-radius:inherit; background:var(--coral); }
+.recent-best { margin:.3rem 0 0; font-size:.8125rem; font-weight:800; color:var(--coral-ink); }
+.shelf-all > .grades { margin:0 0 .9rem; }
+[hidden] { display:none!important; }
+/* 맨 아래 바닥글은 MattoLAB 공용 브랜드 푸터다(10-21 대표). 구조·크기는 assets/brand/brand.css(공용 사본, 고칠 곳은 f:/VibeCoding/promo/mattolab-brand)가 정하고
+   여기서는 이 사이트의 색과 자리만 정한다. 좌우 끝은 바로 위 「전체 게임」 격자와 같은 선: 바닥글 좌우 여백을 본문(.board)과 같게 두고,
+   공용 푸터의 가운데 묶기(최대 폭 1180px)와 좌우 22px는 끈다(마또의 아침신문과 같은 꼴). 그래서 위 가는 줄도 격자 폭만큼이다.
+   작은 글은 흐린 글 색(--gf-sub, 흰 바탕 대비 5.96)으로(진단 15번: 3.05였다). */
+.site-foot { position:relative; padding:0 1.5rem 1.5rem; }
+.site-foot .lab { --lab-wrap:none; margin:0; padding:14px 0 0; border-top:1px solid var(--gf-line);
+  --lab-ink:var(--gf-ink); --lab-dim:var(--gf-sub); --lab-line:var(--gf-line); --lab-hi:#d93a2629; --lab-sans:GF Sans; }
+/* 꼴은 한 줄 띠(labLine, 10-22 대표 「한줄띠」). 저작권 줄은 넓은 화면에서 왼쪽 메뉴판 아래 빈자리로 옮긴다(10-22 대표 「왼쪽 빈 공간으로」).
+   옮겨도 되는지는 home.js placeCopy가 잰다(맨 아래까지 내렸을 때 메뉴판과 겹치면 띠 아래 그대로).
+   왼쪽 끝은 메뉴판 속 MattoLAB 표시와 같은 선(메뉴판 왼쪽 .75rem + 안쪽 8px + .nav-foot .7rem), 아래 끝은 띠 글줄과 같은 선(.site-foot 아래 여백 1.5rem). */
+html[data-nav="full"] .site-foot.copy-left .lab-copy { position:absolute; bottom:1.5rem; left:calc(.75rem + 8px + .7rem - var(--nav-width));
+  width:calc(var(--nav-width) - .75rem - 16px - 1.4rem); padding:0; border:0; line-height:1.5; text-wrap:balance; }
+.empty-results { padding:1.5rem; background:var(--soft); border-radius:16px; }
+.empty-results button { border:0; border-radius:999px; background:#fff; font-weight:800; }
+.list-filters { display:flex; align-items:center; gap:1rem; margin-bottom:1rem; min-width:0; }
+.list-filters .grades { flex:1; }
+.game:active { transform:translateY(1px) scale(.99); }
+.btn.go:active { transform:translateY(1px) scale(.99); }
+.bento-tiles a:active { transform:translateY(1px) scale(.99); }
+@media (min-width:1700px) {
+  :root { --cards:5; }
+}
+@media (min-width:2300px) {
+  :root { --cards:6; }
+}
+@media (max-width:1000px) {
+  :root { --cards:3; }
+  .myplay { flex-direction:column; }
+  .my-stamps { flex-basis:auto; }
+}
+/* 본문이 좁으면(가는 메뉴 · 태블릿) 오늘의 활동이 한 줄을 다 쓰고, 오늘의 도전은 그 아래 낮은 한 줄로. */
+@container (max-width:58rem) {
+  .bento-tray { --hero-h:clamp(12rem,calc(100cqw * .33),18rem); grid-template-columns:minmax(0,1fr); grid-template-rows:var(--hero-h) auto auto; grid-template-areas:"hero" "chal" "kinds"; gap:.75rem; }
+  .bento-challenge { padding:.6rem .75rem; }
+  .bento-challenge .panel { grid-template-areas:"art label go" "art title go" "art score go"; grid-template-columns:auto minmax(0,1fr) auto; grid-template-rows:auto auto auto; column-gap:.85rem; row-gap:0; }
+  .bento-challenge .mini-art { width:6.5rem; height:auto; aspect-ratio:16/9; align-self:center; border-radius:10px; }
+  .bento-challenge .label { min-height:0; font-size:.8125rem; }
+  .bento-challenge h2 { margin:0; }
+  .bento-challenge .btn { width:auto; align-self:center; margin:0; padding:0 1.1rem; }
+  .bento-challenge-link { display:none; }
+  .bento-shortcuts h2 { margin-top:.5rem; }
+}
+/* 폰: 표지는 폭 가득(16:9 다 보임), 그 아래 흰 면에 이름과 오른쪽 주 단추. 활동 종류 알약은 옆으로 밀어 본다. */
+@container (max-width:36rem) {
+  .bento-tray { grid-template-rows:auto auto auto; gap:.75rem; margin-bottom:1.25rem; }
+  .hero { height:auto; grid-template-columns:minmax(0,1fr); grid-template-rows:auto auto; background:none; border-radius:0; overflow:visible; }
+  .hero .art { width:100%; height:auto; aspect-ratio:16/9; border-radius:16px; }
+  .hero-text { grid-column:1; grid-row:2; display:grid; grid-template-columns:minmax(0,1fr) auto; align-items:center; gap:0 .75rem; padding:.55rem .15rem 0; }
+  .hero-text > :not(.hero-cta) { grid-column:1; }
+  .hero-text > .hero-cta { grid-column:2; grid-row:1 / span 3; margin:0; flex-direction:column; align-items:flex-end; gap:.25rem; }
+  .hero h2 { font-size:1.5rem; }
+  .hero .label { font-size:.8125rem; }
+  .hero .sum { font-size:.8125rem; -webkit-line-clamp:1; margin:0; }
+  .hero .why { font-size:.75rem; padding:.2rem .6rem; background:var(--coral-tint); }
+  .btn.go { min-height:2.75rem; padding:0 1.15rem; font-size:.9375rem; }
+  .bento-challenge .mini-art { width:5rem; }
+  .bento-challenge .score { display:none; }
+  .bento-challenge .btn { padding:0 .9rem; font-size:.875rem; }
+  .bento-shortcuts h2 { font-size:1.125rem; margin:.25rem 0 .5rem; }
+  .bento-tiles { display:flex; overflow-x:auto; overscroll-behavior-x:contain; scrollbar-width:none; gap:.5rem; margin:0 -.75rem; padding:0 .75rem .25rem; }
+  .bento-tiles::-webkit-scrollbar { display:none; }
+  .bento-tiles a { flex:none; min-height:3rem; gap:.45rem; padding:.35rem .95rem .35rem .45rem; border-radius:999px; }
+  .k-icon { width:2.1rem; height:2.1rem; }
+  .k-copy b { font-size:.9375rem; }
+  .k-copy small, .k-go { display:none; }
+}
+@media (max-width:699px) {
+  :root { --cards:2; }
+  .board { padding:.75rem .75rem 1.5rem; }
+  .site-foot { padding-inline:.75rem; }
+  .shelf { margin-bottom:1.25rem; }
+  .shelf-title { flex-wrap:wrap; gap:.35rem; margin-bottom:.25rem; }
+  .shelf-title h2 { font-size:1.125rem; margin-right:auto; }
+  .shelf-title small { display:none; }
+  .shelf-more { font-size:.8125rem; margin-left:0; }
+  .shelf-title .arrows { margin-left:auto; }
+  .list-head h1 { font-size:1.75rem; }
+  .chip-line.grades { flex-wrap:nowrap; overflow-x:auto; scrollbar-width:none; padding:.1rem; }
+  /* 목록 쪽: 「게임 N개」를 학년 줄 위 한 줄로. 한 줄에 두면 넘기는 학년 줄이 그 글 앞에서 잘려 보였다(10-21). */
+  .list-filters { flex-wrap:wrap; gap:.35rem; }
+  .list-filters .grades { min-width:0; flex-basis:100%; }
+  .list-filters .result-count { order:-1; margin:0; }
+  .rail { gap:.75rem; padding:.2rem .375rem .75rem; margin:0 -.375rem -.25rem; scroll-padding-inline:.375rem; }
+  .game { flex-basis:calc((100% - (var(--cards) - 1)*.75rem)/var(--cards)); border-radius:14px; }
+  .game-grid { gap:.75rem; }
+  .meta { padding:.5rem .6rem .6rem; }
+  .meta h3 { font-size:.9375rem; margin-bottom:.15rem; }
+  .meta .sub { font-size:.75rem; gap:.3rem; }
+  .meta .tag { font-size:.75rem; padding:.05rem .4rem; }
+  .pop-rank { font-size:.9375rem; }
+  .myplay { gap:.75rem; }
+  .my-stamps { padding:.75rem 1rem; }
+}
+@media (prefers-reduced-motion:reduce) {
+  .game:hover { transform:none; }
+  .game:active { transform:none; }
+  .btn.go:active { transform:none; }
+  .bento-tiles a:hover { transform:none; }
+  .bento-tiles a:active { transform:none; }
+}
+
+/* ── 소개 창 ── 흰 창 한 장. 왼쪽 위 표지(16:9, 자르지 않음) 아래 흰 면에 과목 · 이름 · 소개, 오른쪽 학년과 모드 줄.
+   표지 위에 어두운 그라데이션과 흰 글을 얹지 않는다. 모드 아이콘은 아이콘 한 벌(게임별 입체 그림을 쓰지 않음, 진단 1번). */
+.game-intro{padding:0;border:0;border-radius:24px;width:min(62.5rem,calc(100% - 2.5rem));max-height:calc(100dvh - 2.5rem);overflow:auto;background:#fff;box-shadow:0 24px 64px #10182840;grid-template-columns:52% 48%;position:fixed;color:var(--gf-ink)}
+.game-intro[open]{display:grid}.game-intro::backdrop{background:#10182873}
+.intro-hero{position:relative;display:flex;flex-direction:column;min-height:0;overflow:hidden;background:#fff}
+.intro-hero>img,.intro-picture{position:relative;display:block;flex:none;width:100%;height:auto;aspect-ratio:16/9;object-fit:cover}
+.intro-picture img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.intro-title{position:static;padding:1.25rem 1.5rem 1.5rem;color:var(--gf-ink)}
+.intro-title h2{font:900 2.25rem/1.15 GF Sans,GF Sans Full,sans-serif;letter-spacing:-.03em;margin:.3rem 0 .5rem;word-break:keep-all}
+.intro-grade{font-size:.8125rem;font-weight:700;color:var(--gf-sub);margin:0}
+.intro-summary{font-size:.9375rem;line-height:1.55;color:var(--gf-sub);margin:0;word-break:keep-all}
+.intro-body{min-width:0;padding:1.5rem 1.5rem 1.25rem;display:flex;flex-direction:column;background:var(--soft)}
+.intro-body h3{font:800 1.0625rem/1.3 GF Sans,GF Sans Full,sans-serif;margin:0 0 .65rem;color:var(--gf-ink)}
+.intro-h3-modes{margin-top:1.25rem!important}
+.intro-grades{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:.5rem}
+.intro-grade-cell{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;min-height:3.5rem;padding:0;border:0;border-radius:14px;background:#fff;color:var(--gf-ink);box-shadow:0 1px 2px #1018280f;transition:background .12s}
+.intro-grade-cell:hover{background:#fff7f5}
+.intro-grade-cell b{font:900 1.375rem/1 GF Sans,sans-serif}.intro-grade-cell small{font:700 .75rem/1 GF Sans,sans-serif;color:var(--gf-sub);margin:0}
+.intro-check{display:none;position:absolute;top:.2rem;right:.2rem;width:1.1rem;height:1.1rem;border-radius:50%;place-items:center;background:#fff;color:var(--coral);font:900 .75rem/1 GF Sans,sans-serif}
+.intro-grade-cell[aria-pressed=true]{background:var(--coral);color:#fff;box-shadow:0 4px 12px #d93a2633}.intro-grade-cell[aria-pressed=true] small{color:#fff}.intro-grade-cell[aria-pressed=true] .intro-check{display:grid}
+.intro-modes{display:grid;gap:.5rem}
+.intro-mode{display:grid;grid-template-columns:3rem minmax(0,1fr) auto 1rem;grid-template-areas:"t n rec ch" "t d rec ch";align-items:center;column-gap:.8rem;row-gap:1px;min-height:4.75rem;text-align:left;padding:.6rem .9rem .6rem .7rem;border:0;border-radius:16px;background:#fff;box-shadow:0 1px 2px #1018280f;transition:background .15s,box-shadow .15s;width:100%;color:var(--gf-ink);font-weight:400}
+.intro-mode:hover{box-shadow:var(--card-depth);background:#fff}
+.intro-mode[aria-disabled=true]{opacity:.55;cursor:not-allowed;box-shadow:none}
+/* 지난번에 한 모드는 코랄 면(다시 하기 표시, 이 창의 주 단추) */
+.intro-mode-again{background:var(--coral);color:#fff;box-shadow:0 4px 12px #d93a2633}
+.intro-mode-again:hover{background:var(--coral-press)}
+.intro-icon{grid-area:t;width:3rem;height:3rem;border-radius:12px;display:grid;place-items:center;background:none}
+.intro-icon .ic{width:2.4rem;height:2.4rem}
+.intro-mode-again .intro-icon{background:#fff}
+.intro-mode-copy{display:contents}.intro-mode strong{grid-area:n;align-self:end;display:flex;align-items:center;font:800 1.125rem/1.25 GF Sans,GF Sans Full,sans-serif}
+.intro-kbd{display:inline-grid;place-items:center;min-width:1.3rem;height:1.2rem;margin-left:.5rem;padding:0 .25rem;border:1px solid var(--gf-line);border-bottom-width:2px;border-radius:.3rem;background:#fff;font:700 .75rem/1 GF Sans,sans-serif;color:var(--gf-sub)}
+.intro-mode small{grid-area:d;align-self:start;display:block;margin:0;font-size:.8125rem;line-height:1.45;color:var(--gf-sub);word-break:keep-all}
+.intro-mode-again small{color:#fff}
+.intro-rec{grid-area:rec;justify-self:end;padding:.3rem .6rem;border:0;border-radius:999px;background:var(--soft);font:700 .75rem/1.1 GF Sans,sans-serif;color:var(--gf-sub);white-space:nowrap}
+.intro-mode-again .intro-rec{background:#fff;color:var(--coral-ink)}
+.intro-arrow{grid-area:ch;font-size:1.375rem;color:#9aa3b2;text-align:right}
+.intro-mode-again .intro-arrow{color:#fff}
+.intro-start{min-height:3.25rem;border:0;border-radius:999px;background:var(--coral);color:#fff;font-size:1.0625rem;font-weight:800;box-shadow:0 4px 12px #d93a2633}
+.intro-start:hover{background:var(--coral-press)}
+.intro-grades+.intro-modes{margin-top:1.25rem}
+/* 시작 단추 하나뿐인 게임(영웅 키우기): 닫기 단추 아래에서 시작해 가운데에 세운다(진단 13번: 오른쪽이 비어 보였다). */
+.intro-body:not(:has(.intro-grades,.intro-mode)){justify-content:center;padding-top:4rem}
+.intro-close{position:absolute;right:.8rem;top:.8rem;width:2.75rem;height:2.75rem;min-height:2.75rem;padding:0;display:grid;place-items:center;z-index:2;border:0;border-radius:50%;font:400 1.75rem/1 GF Sans,sans-serif;background:#fff;color:var(--gf-ink);box-shadow:0 2px 10px #10182826;margin:0}
+.intro-ranks{font-size:.8125rem;color:var(--gf-sub);margin-top:.75rem;padding:0 .9rem .25rem;border-radius:14px;background:#fff}.intro-ranks small{font-size:1em}.intro-ranks summary{cursor:pointer;min-height:2.75rem;display:flex;align-items:center;font-weight:800;color:var(--gf-ink)}.intro-ranks [data-test=info-ranks]{padding:0 0 .5rem}.intro-keyboard{font-size:.8125rem;margin:.6rem 0 0}
+@media(min-width:621px) and (max-width:1060px){.game-intro{grid-template-columns:47% 53%}.intro-title h2{font-size:1.875rem}}
+@media(max-width:900px) and (orientation:portrait),(max-width:620px){.game-intro[open]{display:block}.game-intro{width:calc(100% - 1.25rem);max-height:calc(100dvh - 1.25rem);border-radius:22px}.intro-title{padding:.9rem 1rem 1rem}.intro-title h2{font-size:1.75rem;margin:.2rem 0 .35rem}.intro-body{padding:1rem 1rem .875rem}.intro-h3-modes{margin-top:1rem!important}.intro-grades{gap:.4rem}.intro-grade-cell{min-height:3.25rem}.intro-grade-cell b{font-size:1.25rem}.intro-modes{gap:.45rem}.intro-mode{grid-template-columns:2.6rem minmax(0,1fr) auto .875rem;grid-template-areas:"t n rec ch" "t d d ch";min-height:4rem;column-gap:.6rem;padding:.5rem .7rem .5rem .55rem}.intro-icon{width:2.6rem;height:2.6rem}.intro-icon .ic{width:2.1rem;height:2.1rem}.intro-mode strong{font-size:1.0625rem}.intro-rec{padding:.25rem .5rem}.intro-arrow{font-size:1.125rem}.intro-ranks{margin-top:.5rem}}
+@media(max-height:680px) and (min-width:621px){.intro-body{padding:1.125rem 1.25rem .875rem}.intro-h3-modes{margin-top:.875rem!important}.intro-grade-cell{min-height:3.125rem}.intro-mode{min-height:4.25rem}.intro-title{padding:.9rem 1.25rem 1rem}.intro-title h2{font-size:1.875rem}}
+@media(pointer:coarse),(orientation:portrait),(max-height:520px){.intro-kbd{display:none}}
+@media(prefers-reduced-motion:reduce){.intro-mode,.intro-grade-cell{transition:none}}
+/* 낮은 가로 폰: 표지 칸을 낮춰 첫 화면에 오늘의 활동 글과 단추가 든다. */
+@media (orientation:landscape) and (max-height:500px){html .bento-tray{--hero-h:10.5rem}}
+@media (orientation: landscape) and (max-height: 500px){
+ /* 폭 700px 아래 가로(작은 아이폰)에는 세로 폰의 11px 글자 규칙이 같이 걸려, 낮은 가로에서는 12px로 둔다. */
+ .hero :is(.label,.why){font-size:12px}
+ .game-intro{width:calc(100% - 16px);max-width:none;height:calc(100dvh - 16px);max-height:calc(100dvh - 16px);overflow:hidden;grid-template-columns:38% minmax(0,1fr)}
+ .game-intro .intro-hero{min-height:0;height:100%}
+ .game-intro .intro-title{padding:8px 12px 10px}
+ .game-intro .intro-title h2{font-size:22px;line-height:1.15;margin:4px 0}
+ .game-intro .intro-grade{font-size:13px;line-height:1.25}
+ .game-intro .intro-summary{font-size:13px;line-height:1.35;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+ .game-intro .intro-body{height:100%;min-height:0;padding:8px;display:grid;grid-template-columns:80px minmax(0,1fr);grid-template-rows:44px 20px minmax(0,1fr) 44px;gap:4px}
+ .game-intro .intro-body h3{align-self:center;font-size:15px;line-height:1.2;margin:0!important}
+ .game-intro .intro-body>h3:not(.intro-h3-modes){grid-column:1;grid-row:1;text-wrap:balance}
+ .game-intro .intro-grades{grid-column:2;grid-row:1;gap:4px;margin-right:52px}
+ .game-intro .intro-grade-cell{min-width:40px;min-height:44px;height:44px;gap:1px}
+ .game-intro .intro-grade-cell b{font-size:19px;line-height:22px}.game-intro .intro-grade-cell small{font-size:12px;line-height:14px}
+ .game-intro .intro-check{top:2px;right:2px;width:14px;height:14px;font-size:11px}
+ .game-intro .intro-h3-modes{grid-column:1/-1;grid-row:2}
+ .game-intro .intro-modes{grid-column:1/-1;grid-row:3;min-height:0;grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(0,1fr);gap:4px}
+ .game-intro .intro-mode{min-height:0;height:100%;grid-template-columns:30px minmax(0,1fr) auto 12px;grid-template-areas:"t n rec ch" "t d d ch";gap:2px 4px;padding:4px 6px}
+ .game-intro .intro-icon{width:30px;height:30px;border-radius:8px}.game-intro .intro-icon .ic{width:26px;height:26px}
+ .game-intro .intro-mode strong{font-size:16px;line-height:1.1}.game-intro .intro-mode small{font-size:12px;line-height:1.2}
+ .game-intro .intro-rec{font-size:12px;line-height:1.1;padding:1px 4px}
+ .game-intro .intro-arrow{font-size:16px}
+ .game-intro .intro-ranks{position:relative;grid-column:1/-1;grid-row:4;min-height:44px;margin:0;padding:0 8px;font-size:13px}
+ .game-intro .intro-ranks summary{float:left;width:118px;min-height:44px;font-size:13px}
+ .game-intro .intro-ranks [data-test=info-ranks]{display:flex;align-items:center;min-height:44px;margin-left:124px;padding:0;font-size:13px;line-height:1.2}
+ .game-intro .intro-ranks:not([open]) [data-test=info-ranks]{display:none}
+ .game-intro .intro-close{top:8px;right:8px;width:44px;height:44px;min-height:44px;font-size:28px}
+ .game-intro .intro-body:not(:has(.intro-grades)){grid-template-columns:minmax(0,1fr);grid-template-rows:44px minmax(0,1fr) 44px}
+ .game-intro .intro-body:not(:has(.intro-grades))>.intro-h3-modes{grid-row:1;padding-right:52px}
+ .game-intro .intro-body:not(:has(.intro-grades))>.intro-modes{grid-row:2}
+ .game-intro .intro-body:not(:has(.intro-grades))>.intro-ranks{grid-row:3}
+ .game-intro .intro-keyboard{grid-column:1/-1;grid-row:2;margin:0;font-size:13px;line-height:1.2}
+ .game-intro .intro-start{grid-column:1/-1;align-self:center;min-height:44px}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p){grid-template-columns:25% minmax(0,1fr)}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) .intro-body{grid-template-columns:minmax(0,1fr) 225px;grid-template-rows:20px 44px 20px minmax(0,1fr)}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) .intro-body>h3:not(.intro-h3-modes){grid-column:1;grid-row:1}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) .intro-grades{grid-column:1;grid-row:2;margin-right:0}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) .intro-h3-modes{grid-column:1;grid-row:3}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) .intro-modes{grid-column:1;grid-row:4}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) .intro-ranks{grid-column:2;grid-row:1/-1;align-self:start}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) .intro-ranks summary{float:none;width:100%;padding-right:44px;font-size:15px}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) [data-test=info-ranks]{display:block;min-height:0;margin:0}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) [data-test=info-ranks]>p{font-size:13px;line-height:1.2;margin:0 0 2px}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) .intro-mode{position:relative;grid-template-columns:24px minmax(0,1fr) auto;grid-template-rows:auto auto;grid-template-areas:"t n n" "d d rec";align-content:center;gap:1px 4px;padding:1px 5px}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) .intro-mode strong{padding-right:14px;align-self:center;word-break:normal;overflow-wrap:anywhere}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) .intro-icon{width:24px;height:24px}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) .intro-icon .ic{width:22px;height:22px}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) .intro-arrow{position:absolute;grid-area:auto;right:5px;top:5px;width:10px;font-size:14px}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) .intro-body:not(:has(.intro-grades)){grid-template-rows:44px minmax(0,1fr)}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) .intro-body:not(:has(.intro-grades))>.intro-h3-modes{grid-column:1;grid-row:1;padding-right:0}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) .intro-body:not(:has(.intro-grades))>.intro-modes{grid-column:1;grid-row:2}
+ .game-intro:has(.intro-ranks[open] [data-test=info-ranks]>p) .intro-body:not(:has(.intro-grades))>.intro-ranks{grid-column:2;grid-row:1/-1}
+}

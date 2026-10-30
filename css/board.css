@@ -1,0 +1,164 @@
+/* 순위표 · 도장판(2026-10-29 「나. 깔끔한 게임 스토어」): 판으로 감싸지 않고 여백과 가는 선으로 나눈다. 고른 것은 코랄. */
+.board-page { padding:1.25rem 1.5rem 2.5rem; }
+.page-head { display:flex; align-items:center; gap:1rem; flex-wrap:wrap; margin-bottom:.85rem; }
+.page-head h1 { margin:0; font:900 2.25rem/1.15 GF Sans,GF Sans Full,sans-serif; letter-spacing:-.03em; }
+.big-tabs { display:flex; gap:.4rem; padding:0; background:none; border-radius:999px; }
+.big-tabs button { border:0; border-radius:999px; background:var(--chip); padding:0 1.2rem; font-size:.9375rem; font-weight:800; }
+.big-tabs button:hover { background:var(--chip-hover); }
+.big-tabs button[aria-pressed=true] { background:var(--coral); color:#fff; }
+.muted { color:var(--gf-sub); }
+.rank-layout { display:grid; grid-template-columns:minmax(0,1fr); gap:1rem; align-items:start; }
+/* 고르는 줄 하나: 활동 칩 · 모드 칩 · 학년 고르기. 칸 이름(활동 · 모드 · 학년)은 읽기 프로그램에만 남긴다. */
+.rank-side { position:static; display:flex; flex-wrap:wrap; align-items:center; gap:.5rem 1rem; padding:0 0 1rem; background:none; border:0; border-bottom:1px solid var(--gf-line); border-radius:0; box-shadow:none; transition:opacity .2s; }
+.rank-side.dim { opacity:.45; }
+.side-block { display:flex; align-items:center; gap:.5rem; min-width:0; }
+.side-title { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+.rank-side > .side-block:first-child { flex:0 1 auto; max-width:100%; }
+.rank-games { display:flex; gap:.5rem; overflow-x:auto; scrollbar-width:none; padding:.15rem; min-width:0; }
+/* 줄 끝에 게임이 더 있으면 그쪽 끝을 흐리게(ranks.js가 more-left·more-right를 붙인다). */
+.rank-games.more-right { -webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 4rem),transparent); mask-image:linear-gradient(90deg,#000 calc(100% - 4rem),transparent); }
+.rank-games.more-left { -webkit-mask-image:linear-gradient(90deg,transparent,#000 4rem); mask-image:linear-gradient(90deg,transparent,#000 4rem); }
+.rank-games.more-left.more-right { -webkit-mask-image:linear-gradient(90deg,transparent,#000 4rem,#000 calc(100% - 4rem),transparent); mask-image:linear-gradient(90deg,transparent,#000 4rem,#000 calc(100% - 4rem),transparent); }
+.rank-game { display:flex; align-items:center; gap:.6rem; flex:0 0 auto; max-width:16rem; padding:.3rem 1rem .3rem .3rem; border:2px solid transparent; border-radius:999px; background:var(--chip); text-align:left; font-size:.9375rem; font-weight:800; }
+.rank-game:hover { background:var(--chip-hover); }
+.rank-game[aria-pressed=true] { background:var(--coral-tint); border-color:var(--coral); color:var(--coral-ink); }
+.rank-game-name { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.rank-thumb { flex:none; width:3.4rem; aspect-ratio:16/9; border-radius:999px; overflow:hidden; background:var(--gf-dot1); }
+.rank-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+.rank-side .chip-line { display:flex; flex-wrap:wrap; gap:.4rem; }
+.rank-side .chip-line button { border:0; border-radius:999px; padding:0 1rem; font-size:.875rem; font-weight:800; background:var(--chip); }
+.rank-side .chip-line button:hover { background:var(--chip-hover); }
+.rank-side .chip-line button[aria-pressed=true] { background:var(--gf-ink); color:#fff; }
+.rank-side select { appearance:none; width:auto; min-width:7.5rem; font-weight:800; font-size:.875rem; padding:0 2.4rem 0 1rem; border:0; border-radius:999px; background:var(--chip) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' fill='none' stroke='%231d2433' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right .9rem center / .7rem; }
+.rank-main { min-width:0; }
+.rank-top { display:flex; align-items:center; gap:.6rem; flex-wrap:wrap; }
+.rank-top h2 { margin:0; font:900 1.375rem/1.25 GF Sans,GF Sans Full,sans-serif; letter-spacing:-.02em; margin-right:auto; }
+.period-tabs { display:flex; gap:.4rem; }
+.period-tabs button { border:0; border-radius:999px; padding:0 1rem; font-weight:800; font-size:.875rem; background:var(--chip); }
+.period-tabs button:hover { background:var(--chip-hover); }
+.period-tabs button[aria-pressed=true] { background:var(--coral); color:#fff; }
+.rank-top .btn { border:0; border-radius:999px; background:var(--chip); font-size:.875rem; font-weight:800; }
+.rank-time { margin:.25rem 0 .5rem; color:var(--gf-sub); font-size:.875rem; min-height:1.4rem; }
+.rank-table { min-height:12rem; }
+.rank-list { list-style:none; margin:0; padding:0; display:grid; gap:0; border-top:1px solid var(--gf-line); }
+.rank-row { display:flex; align-items:center; gap:.9rem; padding:.65rem 1rem; background:#fff; border:0; border-bottom:1px solid var(--gf-line); border-radius:0; min-width:0; }
+.rank-row .medal { width:2.2rem; height:2.2rem; font-size:1rem; }
+.rank-row .who { display:flex; align-items:baseline; gap:.5rem; min-width:0; flex-wrap:wrap; }
+.rank-row .who b { font-size:1.0625rem; font-weight:800; }
+.rank-row .who .school { color:var(--gf-sub); font-size:.875rem; margin:0; }
+.rank-row small { color:var(--gf-sub); font-size:.875rem; margin:0; }
+.rank-row .value { margin-left:auto; display:flex; align-items:baseline; gap:.3rem; white-space:nowrap; }
+.rank-row .value b { font:900 1.375rem/1 GF Sans,sans-serif; }
+.rank-list.schools .rank-row .value { flex-direction:column; align-items:flex-end; gap:.1rem; }
+.rank-list.schools .rank-row .value b { font-size:1.125rem; }
+.rank-row.top1 { padding:.85rem 1rem; background:#fff9e8; }
+.rank-row.top1 .medal { width:2.6rem; height:2.6rem; font-size:1.125rem; }
+.rank-row.top1 .who b { font-size:1.25rem; }
+.rank-row.top1 .value b { font-size:1.625rem; }
+.rank-row.top2, .rank-row.top3 { background:#fff; }
+.rank-row.mine { outline:3px solid var(--coral); outline-offset:-3px; background:var(--coral-tint); }
+.rank-row.flash { animation:gf-flash 1.2s ease-out 2; }
+@keyframes gf-flash { 50% { background:#ffe4dd; } }
+.rank-empty { padding:1.5rem; background:var(--soft); border:0; border-radius:16px; }
+.rank-name { display:flex; align-items:center; gap:.8rem; flex-wrap:wrap; margin-top:1rem; }
+.rank-name button { border:0; border-radius:999px; background:var(--chip); font-weight:800; }
+.rank-name p { margin:0; color:var(--gf-sub); }
+[data-test=rank-rows] > p:only-child:not(.rank-empty) { padding:1.2rem; background:var(--soft); border-radius:16px; }
+/* 도장판 맨 위 한 줄: 도장 수(숫자만 코랄) · 받은 칭호 · 다음 칭호까지 막대 */
+.stamp-summary { display:grid; grid-template-columns:auto minmax(0,1fr) minmax(0,1.2fr); gap:1.5rem; align-items:center; padding:1.1rem 1.4rem; margin-bottom:1.75rem; background:var(--soft); border:0; border-radius:20px; box-shadow:none; }
+.stamp-summary .stamp-total { margin:0; font:900 2rem/1.1 GF Sans,GF Sans Full,sans-serif; white-space:nowrap; }
+.stamp-summary .stamp-total b { font-weight:900; color:var(--coral); }
+.title-box h2 { margin:0 0 .35rem; font:800 1rem/1.3 GF Sans,GF Sans Full,sans-serif; color:var(--gf-sub); }
+.title-box p { margin:0; }
+.title-chips { display:flex; flex-wrap:wrap; gap:.4rem; list-style:none; margin:0; padding:0; }
+.title-chips li { padding:.3rem .85rem; border-radius:999px; font-weight:800; font-size:.875rem; background:#fff; border:0; color:var(--gf-ink); }
+.title-chips li.set { background:#e7f7ee; color:#17663a; }
+.title-next .next { margin:0 0 .45rem; font-weight:800; }
+.title-next .bar { height:.6rem; border-radius:999px; background:#e3e6ec; overflow:hidden; }
+.title-next .bar i { display:block; height:100%; border-radius:inherit; background:var(--coral); }
+.first-hint { margin:.6rem 0 0; color:var(--gf-sub); }
+.first-hint a { font-weight:800; color:var(--link); text-decoration:none; }
+.stamp-games { display:grid; gap:1.75rem; }
+.stamp-game { padding:1rem 0 0; background:none; border:0; border-top:1px solid var(--gf-line); border-radius:0; }
+.stamp-game-head { display:flex; align-items:center; gap:.8rem; margin-bottom:.9rem; }
+.stamp-game-head .rank-thumb { width:4.6rem; border-radius:10px; }
+.stamp-game-head h2 { margin:0; font:800 1.125rem/1.3 GF Sans,GF Sans Full,sans-serif; }
+.stamp-tally { margin-left:auto; font-weight:800; font-size:.875rem; padding:.2rem .75rem; border-radius:999px; background:var(--chip); color:var(--gf-sub); }
+.stamp-tally.full { background:var(--coral); color:#fff; }
+.stamp-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(9rem,1fr)); gap:1rem; }
+.stamp-cell { display:grid; justify-items:center; align-content:start; gap:.25rem; text-align:center; padding:.6rem .4rem; border-radius:16px; }
+.stamp-cell .stamp-art { width:min(6.5rem,100%); }
+.stamp-cell h3 { margin:.3rem 0 0; font:800 .9375rem/1.3 GF Sans,GF Sans Full,sans-serif; word-break:keep-all; }
+.stamp-cell p { margin:0; font-size:.8125rem; word-break:keep-all; }
+.stamp-cell .when { color:#17663a; font-weight:700; }
+.stamp-cell .how { color:var(--gf-sub); }
+.stamp-cell.locked h3 { color:var(--gf-sub); }
+/* 순위표 아래 소식: 오늘의 도전 · 학교 대항전 (진단 6번: 위에 있어서 순위가 첫 화면 밖으로 밀렸다) */
+.rank-news { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1rem; margin-top:2rem; }
+.panel { min-width:0; display:flex; flex-direction:column; gap:.3rem; padding:1rem 1.25rem; background:var(--soft); border:0; border-radius:20px; box-shadow:none; }
+.panel h2 { margin:.1rem 0; font:800 1.125rem/1.3 GF Sans,GF Sans Full,sans-serif; }
+.panel p { margin:.1rem 0; }
+.panel-head { display:flex; align-items:center; gap:.8rem; min-width:0; }
+.panel .label { font-weight:700; font-size:.8125rem; color:var(--gf-sub); margin:0; }
+.panel .score { font-weight:700; font-size:.875rem; }
+.mini-art { position:relative; flex:none; width:5.6rem; aspect-ratio:16/9; border-radius:10px; overflow:hidden; background:var(--gf-cover-color,var(--gf-dot1)); }
+.mini-art img { display:block; width:100%; height:100%; object-fit:cover; }
+.medals { list-style:none; padding:0; margin:.35rem 0; display:grid; gap:.3rem; }
+.medals li { display:flex; align-items:center; gap:.6rem; min-height:2.2rem; min-width:0; }
+.medals li span:not(.medal) { min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.medals li em { margin-left:auto; font-style:normal; font-weight:800; }
+.medals small { margin-left:.4rem; font-size:.8125rem; color:var(--gf-sub); }
+/* 순위표의 「도전하기」는 이 쪽의 주 단추(코랄) */
+.panel .btn { display:inline-flex; align-items:center; justify-content:center; gap:.3rem; margin-top:.5rem; min-height:2.75rem; padding:0 1.3rem; border:0; border-radius:999px; background:var(--coral); color:#fff; font-weight:800; text-decoration:none; }
+.panel .btn:hover { background:var(--coral-press); }
+.panel .btn::after { content:'\203A' / ''; font-size:1.3em; line-height:1; margin-top:-.1em; }
+.more { margin-top:.5rem; display:inline-flex; align-items:center; gap:.2rem; min-height:2.75rem; align-self:flex-start; color:var(--link); font-weight:700; text-decoration:none; }
+.more::after { content:'\203A' / ''; font-size:1.3em; line-height:1; }
+.push { margin-top:auto; align-self:flex-start; }
+.when { color:var(--gf-sub); font-size:.875rem; }
+@media (max-width:899px) {
+  .stamp-summary { grid-template-columns:auto minmax(0,1fr); }
+  .title-next { grid-column:1 / -1; }
+}
+@media (max-width:599px) {
+  .board-page { padding:.9rem .75rem 2rem; }
+  .page-head { gap:.6rem; }
+  .page-head h1 { font-size:1.75rem; }
+  .big-tabs button { padding:0 .9rem; }
+  .rank-side { gap:.5rem; }
+  .rank-top h2 { font-size:1.125rem; width:100%; }
+  .period-tabs button { padding:0 .85rem; }
+  .rank-row { gap:.6rem; padding:.55rem .6rem; }
+  .rank-row .who { flex-direction:column; gap:0; }
+  .stamp-summary { grid-template-columns:minmax(0,1fr); gap:.8rem; padding:1rem; }
+  .stamp-grid { grid-template-columns:repeat(2,minmax(0,1fr)); }
+}
+@media (prefers-reduced-motion:reduce) {
+  .rank-row.flash { animation:none; }
+  .rank-side { transition:none; }
+}
+@media (max-width:699px) {
+  .rank-news { gap:.5rem; margin-top:1.25rem; }
+  .rank-news .panel { padding:.5rem .6rem; gap:0; font-size:.8125rem; line-height:1.25; border-radius:16px; }
+  .rank-news .panel p { margin:0; }
+  .rank-news .panel h2 { margin:0; font-size:.875rem; }
+  .rank-news .panel-head { gap:.375rem; }
+  .rank-news .panel-head > div { min-width:0; }
+  .rank-news .mini-art { width:2.25rem; border-radius:.3rem; }
+  .rank-news h2 { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .rank-news .score { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+  .rank-news .when { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; font-size:.8125rem; }
+  .rank-news .btn { min-height:2.75rem; padding:.25rem .6rem; margin:0; margin-top:auto; font-size:.8125rem; }
+  .rank-news .more { min-height:2.75rem; padding:.25rem .5rem; margin:0; margin-top:auto; font-size:.8125rem; }
+  .rank-news .challenge .medals { display:none; }
+  .rank-news .schools .medal { display:none; }
+  .rank-news .schools .medals li:not(:first-child) { display:none; }
+  .rank-news .medals + .when { display:none; }
+  .rank-news .medals { margin:0; gap:0; font-size:.8125rem; }
+  .rank-news .medals li { min-height:0; gap:.25rem; }
+  .rank-news .medals em { flex:none; white-space:nowrap; }
+}
+/* 낮은 가로 폰(A~F): 활동 칩 줄이 폭을 넘으면 옆으로 숨기지 않고 두 줄로 접는다. 세로 폰은 지금처럼 밀어 보는 한 줄. */
+@media (orientation:landscape) and (max-height:500px) {
+  .rank-side .rank-games { flex-wrap:wrap; overflow:visible; }
+}
