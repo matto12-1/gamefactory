@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="ko">
+<head><meta name="gf-version" content="bb38d3d327"><script data-gf-move>if(location.hash.startsWith('#move='))document.write("\u003cscript data-gf-move src=\"../../kit/domain-move.js?v=bb38d3d327\">\u003c/script>");</script><script src="../../kit/privacy-reset.js?v=bb38d3d327"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover">
+<title>와르르 돼지성</title>
+<style>
+@font-face{font-family:Galmuri;src:url(art/galmuri-wreck.woff2) format('woff2');font-display:swap}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:#6A6080;overscroll-behavior:none;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;color:#FFF6E5;font-family:Galmuri,"Apple SD Gothic Neo","Malgun Gothic",sans-serif;font-weight:400;font-synthesis:none;-webkit-font-smoothing:none;word-break:keep-all}
+[hidden]{display:none!important}
+canvas{position:fixed;left:0;top:0;display:block;touch-action:none;image-rendering:pixelated;transition:filter 2s linear}
+button{font:inherit;cursor:pointer;touch-action:manipulation;color:inherit}
+.go{font-size:var(--go,16px);min-height:44px;padding:0 calc(var(--dot,2px)*5);border:var(--dot,2px) solid #2B2540;border-radius:0;background:#FFC23C;color:#2B2540;box-shadow:inset 0 calc(var(--dot,2px)*-2) 0 #E28A2A,inset 0 var(--dot,2px) 0 #FFE9A8}
+.go:active{transform:translateY(var(--dot,2px));box-shadow:inset 0 var(--dot,2px) 0 #E28A2A}
+.go.sub{background:#F2D6A2;box-shadow:inset 0 calc(var(--dot,2px)*-2) 0 #C99A6B,inset 0 var(--dot,2px) 0 #FFF6E5}
+/* 불러오는 중 */
+#load{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;font-size:16px;background:#6A6080}
+#load p{margin:0}
+#loadScene{--sheet:url(data:image/png;base64,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);position:relative;align-self:flex-start;margin-left:var(--load-left,0px);width:calc(var(--load-dot,2px)*104);height:calc(var(--load-dot,2px)*50)}
+#loadScene span{position:absolute;display:block;background-image:var(--sheet);background-repeat:no-repeat;background-size:calc(var(--load-dot,2px)*148) calc(var(--load-dot,2px)*55);image-rendering:pixelated}
+#loadScene .king{left:calc(var(--load-dot,2px)*6);top:calc(var(--load-dot,2px)*12);width:calc(var(--load-dot,2px)*37);height:calc(var(--load-dot,2px)*26);animation:loadKing .48s steps(4) infinite}
+#loadScene .pig{left:calc(var(--load-dot,2px)*57);top:calc(var(--load-dot,2px)*21);width:calc(var(--load-dot,2px)*19);height:calc(var(--load-dot,2px)*17);background-position-y:calc(var(--load-dot,2px)*-26);animation:loadPig .48s steps(4) infinite}
+#loadScene .pig.second{left:calc(var(--load-dot,2px)*81);animation-delay:-.24s}
+#loadScene .floor{left:0;top:calc(var(--load-dot,2px)*38);width:100%;height:calc(var(--load-dot,2px)*12);background-position-y:calc(var(--load-dot,2px)*-43)}
+@keyframes loadKing{to{background-position-x:calc(var(--load-dot,2px)*-148)}}
+@keyframes loadPig{to{background-position-x:calc(var(--load-dot,2px)*-76)}}
+@media(prefers-reduced-motion:reduce){#loadScene .king,#loadScene .pig{animation:none}}
+/* 게임 첫 화면: 그림은 캔버스, 단추와 표기만 글 */
+#title{position:fixed;inset:0;pointer-events:none}
+#title h1{position:absolute;width:1px;height:1px;margin:0;overflow:hidden;clip-path:inset(50%)}
+#title .go{font-size:var(--go1,20px);position:absolute;left:var(--startX,50%);top:var(--startY,40%);transform:translateX(-50%);min-height:max(48px,calc(var(--dot,2px)*16));padding:0 calc(var(--dot,2px)*9);pointer-events:auto}
+#title .go:active{transform:translate(-50%,var(--dot,2px))}
+#creditBtn{position:fixed;right:max(4px,env(safe-area-inset-right));bottom:var(--creditBottom,8px);z-index:22;width:44px;height:44px;min-height:44px;padding:0;border-width:var(--dot2,2px);font-size:var(--t4,12px)}
+#creditShade{position:fixed;inset:0;z-index:21;background:rgba(43,37,64,.65);touch-action:none}
+#creditPanel{position:absolute;right:8px;bottom:calc(var(--creditBottom,8px) + 52px);width:max-content;max-width:calc(100% - 16px);max-height:calc(100% - var(--creditBottom,8px) - 128px);overflow:auto;padding:12px;border:var(--dot2,2px) solid #2B2540;background:#F2D6A2;color:#2B2540;box-shadow:inset 0 var(--dot2,2px) 0 #FFF6E5,inset 0 calc(var(--dot2,2px)*-2) 0 #C99A6B;font-size:var(--t3,12px);line-height:1.5;overflow-wrap:break-word}
+#creditPanel p{margin:0}
+@media(max-height:420px){#creditPanel{padding:6px 10px;font-size:12px;line-height:1.25}}
+/* 단계 지도 · 폭탄 칸 · 새 것 안내 */
+#map{position:fixed;inset:0;pointer-events:none}
+.node{position:absolute;margin:0;padding:0;border:0;background:none;pointer-events:auto;cursor:pointer;touch-action:manipulation}
+.node:disabled{pointer-events:none;cursor:default}
+.node:focus-visible{outline:var(--dot2,2px) solid #FFC23C}
+#mapBack{position:fixed;left:var(--backX,8px);top:var(--menuTop,8px)}
+#homeBtn{position:fixed;left:var(--backX,8px);top:var(--menuTop,8px);display:flex;align-items:center;justify-content:center;gap:6px;z-index:2;white-space:nowrap}
+#homeBtn canvas{position:static;flex:none;transition:none}
+#homeBtn.panel{left:8px;top:auto;bottom:8px}
+#bombBtn{position:fixed;margin:0;padding:0;border:0;background:none;cursor:pointer;touch-action:manipulation}
+#teach{text-wrap:balance;position:fixed;left:50%;top:calc(var(--dot,2px)*20);transform:translateX(-50%);width:max-content;max-width:94vw;padding:calc(var(--dot,2px)*2) calc(var(--dot,2px)*4);border:var(--dot2,2px) solid #FFC23C;background:#2B2540;color:#FFF6E5;font-size:var(--tt,14px);line-height:1.5;text-align:center;white-space:pre-line;pointer-events:none}
+/* 끝 화면 */
+#end{position:fixed;left:0;right:0;top:0;padding:var(--dot,2px) var(--fr,12px) calc(var(--dot,2px)*2);text-align:center;pointer-events:none;background:#3F3851;isolation:isolate}
+#endBg{position:absolute;top:0;z-index:-1;transition:none}
+#end h2{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;min-height:calc(var(--dot,2px)*17);margin:0;padding:0 calc(var(--dot,2px)*13) calc(var(--dot,2px)*5);font-size:var(--te,24px);font-weight:400;line-height:1.15;color:#2B2540;white-space:nowrap}
+#end p{text-wrap:balance;white-space:pre-line;margin:2px 0 0;padding:0 10px;font-size:var(--t2,12px);line-height:1.2}
+#end p:empty{display:none}
+#end #endP{margin:0;font-size:var(--t1,28px);line-height:calc(var(--dot,2px)*12);color:#FFC23C;text-shadow:var(--dot2,1px) var(--dot2,1px) 0 #2B2540}
+@media(orientation:portrait){#end{padding-top:50px}}
+@media(max-height:420px){#end{bottom:0;padding-top:3vh}#end .btns{margin-top:3vh}}
+#end .btns{margin-top:clamp(4px,1.6vh,14px);display:flex;flex-wrap:wrap;gap:8px;justify-content:center;pointer-events:auto}
+#end .btns .go{white-space:nowrap}
+#board{margin:clamp(3px,1.2vh,10px) auto 0;padding:0 6px}
+/* 낮은 폰 가로의 끝 화면: 위에 판, 아래에 놀이 장면(대표 「안 1」). 조건은 view.js endTopPanel과 같아야 한다 */
+@media(max-height:419.9px) and (min-width:640px){
+#end:not(.card){bottom:auto;display:grid;grid-template-columns:minmax(0,38%) minmax(0,1fr);grid-template-rows:minmax(var(--frameRow,0px),auto);column-gap:calc(var(--dot,2px)*3);align-items:center;padding:calc(var(--dot,2px)*3) calc(var(--dot,2px)*8) calc(var(--dot,2px)*2)}
+#end:not(.card) h2{grid-column:1/3;justify-self:center;min-height:calc(var(--dot,2px)*10);padding-bottom:var(--dot,2px);align-self:start}
+#end:not(.card) #endP{grid-column:1;grid-row:2}
+#end:not(.card) #endS{grid-column:1;grid-row:3;margin:0}
+#end:not(.card) #endW{grid-column:1;grid-row:4;margin:0;font-size:var(--t4,12px)}
+#end:not(.card) #board{grid-column:2;grid-row:2/4;margin:0 auto}
+#end:not(.card) .btns{grid-column:2;grid-row:4;margin-top:var(--dot,2px)}
+#end:not(.card) .bc{line-height:1}
+#end.wrongs #endW{grid-column:2;grid-row:2}#end.wrongs #board{grid-row:3}
+}
+/* 667×260 사이트 안: 판 아래 여백과 단추 위 여백을 빼서 깬 왕의 왕관이 판 뒤에 가리지 않게(5차 평가) */
+@media(max-height:279.9px) and (min-width:640px){
+#end:not(.card){padding-bottom:0}
+#end:not(.card) .btns{margin-top:0}
+}
+#board .row{display:flex;justify-content:center;gap:clamp(2px,.8vw,7px);margin-bottom:clamp(2px,.7vh,6px)}
+.bc{width:clamp(32px,min(9.2vw,9vh),72px);padding:clamp(1px,.5vh,5px) 0;border:var(--dot2,2px) solid #2B2540;line-height:1.1;font-size:var(--t3,12px);color:#FFF6E5;background:#564E68;box-shadow:inset 0 var(--dot2,2px) 0 #6C6280,inset 0 calc(var(--dot2,2px)*-1) 0 #3F3851}
+.bc b,.bc i{display:block;font-style:normal;font-weight:400}
+.bc.b1{background:#FDCD92;color:#2B2540;box-shadow:inset 0 var(--dot2,2px) 0 #FFE8BE,inset 0 calc(var(--dot2,2px)*-1) 0 #D68C64}
+.bc.b2{background:#FFC23C;color:#2B2540;box-shadow:inset 0 var(--dot2,2px) 0 #FFE9A8,inset 0 calc(var(--dot2,2px)*-1) 0 #E28A2A}
+.bc.new{animation:bcPop .36s steps(4) both;outline:var(--dot2,2px) solid #FFF6E5;outline-offset:calc(var(--dot2,2px)*-2)}
+@keyframes bcPop{0%{transform:translateY(calc(var(--dot,2px)*-1))}100%{transform:none}}
+/* 일시 정지 */
+body:not([data-ui-state=play]) #pauseBtn{display:none}
+#pauseBtn{position:fixed;right:max(8px,1vw);top:max(8px,1vh);min-width:44px;min-height:44px;padding:0 8px;font-size:var(--t3,12px);border:var(--dot2,2px) solid #2B2540;border-radius:0;background:#F2D6A2;color:#2B2540}
+#pause{position:fixed;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:clamp(8px,2.4vh,18px);background:rgba(43,37,64,.8)}
+#pause h2{margin:0;font-size:var(--t1,24px);font-weight:400}
+#pause .btns{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+</style>
+</head>
+<body>
+<canvas id="c" data-test="board"></canvas>
+<button id="pauseBtn" data-test="pause-open" aria-label="일시 정지">멈춤</button>
+<div id="title" data-test="title">
+  <h1>와르르 돼지성</h1>
+  <button class="go" id="start" data-test="start" hidden>시작</button>
+</div>
+<div id="map" data-test="map" hidden></div>
+<button class="go sub" id="mapBack" data-test="map-back" hidden>뒤로</button>
+<button id="bombBtn" data-test="bomb" aria-label="폭탄" hidden></button>
+<div id="teach" data-test="teach" role="status" hidden></div>
+<div id="load"><div id="loadScene" aria-hidden="true"><span class="floor"></span><span class="king"></span><span class="pig"></span><span class="pig second"></span></div><p id="loadMsg">불러오는 중</p><button class="go" id="reload" hidden>다시 불러오기</button></div>
+<div id="end" data-test="end" hidden>
+  <canvas id="endBg"></canvas>
+  <h2 id="endT"></h2>
+  <p id="endP" data-test="end-score"></p>
+  <p id="endS"></p>
+  <div id="board"></div>
+  <p id="endW"></p>
+  <div class="btns"><button class="go" id="again" data-test="again"></button><button class="go sub" id="again2" data-test="again-first" hidden>처음부터</button><button class="go sub" id="endMap" data-test="to-map" hidden>지도</button></div>
+</div>
+<div id="pause" data-test="pause" hidden>
+  <h2>일시 정지</h2>
+  <div class="btns"><button class="go" id="goOn" data-test="resume">계속</button><button class="go sub" id="restart" data-test="restart">처음부터</button></div>
+</div>
+<div id="creditShade" data-test="credits-shade" hidden>
+  <section id="creditPanel" data-test="credits-panel" role="dialog" aria-modal="true" aria-label="출처" tabindex="-1">
+    <p>그림: Pixel Frog 「Kings and Pigs」 (CC BY 4.0), 일부 고침</p>
+    <p>불꽃: Patch 「pixelfx」 (MIT), 일부 고침</p>
+    <p>음악: Juhani Junkala (CC0)</p>
+    <p>효과음: Kenney · rubberduck · Juhani Junkala (CC0)</p>
+    <p>글꼴: 갈무리, 도현 (OFL)</p>
+  </section>
+</div>
+<button class="go sub" id="creditBtn" data-test="credits" aria-expanded="false" aria-controls="creditPanel" hidden>출처</button>
+<button class="go sub" id="homeBtn" data-test="game-home" hidden><canvas id="homeIcon" aria-hidden="true"></canvas><span>홈</span></button>
+<script>
+// 그림 묶음을 받기 전에도 놀이 화면과 같은 기기 화소 정수 배로 보인다.
+(() => {
+  const fit = () => {
+    const w = innerWidth, h = innerHeight, d = devicePixelRatio || 1, wide = w > h * 1.05;
+    const k = Math.max(1, Math.floor(Math.min(h / ((h < 420 ? 5 : 7) * 16 + (wide ? 12 : 30)), w / (wide ? 192 : 104)) * d));
+    const s = document.documentElement.style;
+    s.setProperty('--load-dot', k / d + 'px'); s.setProperty('--load-left', Math.round((Math.round(w * d) - 104 * k) / 2) / d + 'px');
+  };
+  fit(); addEventListener('resize', fit);
+})();
+</script>
+<script src="../../kit/gf-kit.js?v=bb38d3d327"></script>
+<script src="js/rules.js?v=bb38d3d327"></script>
+<script src="js/atlas.js?v=bb38d3d327"></script>
+<script src="js/audio.js?v=bb38d3d327"></script>
+<script src="js/view.js?v=bb38d3d327"></script>
+<script src="js/cast.js?v=bb38d3d327"></script>
+<script src="js/game.js?v=bb38d3d327"></script>
+</body>
+</html>
