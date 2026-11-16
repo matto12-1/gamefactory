@@ -1,0 +1,479 @@
+/* Concept 3 cloth bookmarks. Geometry is measured without changing the spread. */
+#dex .dex-places {position:absolute;grid-area:auto;display:flex;align-items:flex-end;justify-self:auto;isolation:isolate;z-index:6;height:var(--bookmark-height,40px);pointer-events:none;}
+#dex button.dex-place {flex:none;box-sizing:border-box;width:var(--bookmark-width,60px);height:var(--bookmark-height,40px);min-height:40px;min-width:0;padding:0;margin:0;pointer-events:auto;font-family:Galmuri11;font-size:var(--bookmark-font,16px);font-weight:700;line-height:1.2;color:#10342d;isolation:isolate;}
+#dex .dex-cloth-host {position:absolute;inset:0;display:grid;place-items:start center;pointer-events:none;z-index:-1;}
+#dex[data-bookmarks='external'] .dex-cloth-host {bottom:calc(-6 * var(--dot));}
+#dex .dex-cloth .dex-place-name {position:relative;white-space:nowrap;box-shadow:none;}
+#dex .dex-cloth[aria-selected='true'] > .dex-place-name {box-shadow:none;}
+#dex .dex-cloth[aria-selected='true'] .dex-cloth-host {filter:drop-shadow(2px 0 #fff4d8) drop-shadow(-2px 0 #fff4d8);}
+#dex[data-bookmarks='external'] .dex-places {z-index:-2;}
+#dex[data-tab='web'][data-bookmarks='external'] .dex-places {z-index:2;}
+#dex[data-tab='web'][data-bookmarks='external'] .dex-cloth-host {clip-path:inset(0 0 calc(6 * var(--dot)) 0);}
+#dex[data-bookmarks='external'] .dex-place[aria-selected='true'] {height:calc(var(--bookmark-height) + 4 * var(--dot));}
+#dex[data-bookmarks='external'] .dex-place-name {display:block;margin-left:30%;translate:0 calc(-2 * var(--dot));}
+/* 천 그림 없는 기본 단추 책갈피(새 물 셋으로 일곱 · 여덟 칸이 된 뒤, q01 2026-11-05): 이름은 한 줄로 가운데, 천 자리 몫(30%)을 비우지 않는다. */
+#dex .dex-place .dex-place-name {white-space:nowrap;}
+#dex[data-bookmarks='external'] .dex-place:not(.dex-cloth) .dex-place-name {margin-left:0;text-align:center;}
+#dex .dex-places[data-fit='scroll']::-webkit-scrollbar {display:none;}
+#dex .dex-cloth[aria-disabled='true'] {opacity:1;}
+#dex .dex-cloth[aria-disabled='true'] .dex-cloth-host {filter:grayscale(.85) saturate(.3) brightness(.62);opacity:.8;}
+#dex .dex-cloth[aria-disabled='true'] .dex-place-name {color:#fff4d8;}
+#dex .dex-cloth .dex-place-now {top:1px;left:1px;right:auto;width:12px;height:12px;background:none;}
+#dex[data-bookmarks='external'] .dex-cloth .dex-place-now {width:calc(12 * var(--dot));height:calc(12 * var(--dot));}
+#dex .dex-cloth .dex-place-lock {width:8px;height:10px;top:1px;right:1px;color:#fff4d8;background:none;}
+#dex .dex-place-lock svg {display:block;width:100%;height:100%;shape-rendering:crispEdges;}
+#dex .dex-dots[aria-hidden='true'] > [data-go] {flex:none;width:40px;height:40px;display:grid;place-items:center;}
+#dex .dex-left { position:relative; }
+#dex .dex-boss-progress { position:static;order:10;grid-column:1/-1;width:100%;margin:0;text-align:center;font-size:16px;line-height:24px;color:#10342d; }
+/* 큰 화면: 주인 진도 글이 책 바닥 테두리(약 249점)에 닿아 아래가 잘려 보였다(q02). 기록 줄(222)과 함께 3점 올린다. */
+@media(min-width:1200px) and (min-height:700px){#dex .dex-boss-progress{position:absolute;left:calc(45 * var(--dot));top:calc(234 * var(--dot));width:calc(132 * var(--dot));font-size:24px;line-height:calc(12 * var(--dot));}}
+/* Phone pages keep room for full food pictures and their unchanged names. */
+@media(max-width:599px) {
+ /* 주인 진도 한 줄이 늘어난 만큼 쪽 사이 틈을 줄여 아래 설명 칸을 확보한다. */
+ #dex[data-tab='fish'] .dex-spread {row-gap:2px;}
+ #dex[data-tab='fish'] .dex-right {grid-template-rows:minmax(190px,auto) minmax(112px,1fr) minmax(96px,1fr);}
+ /* 그림과 글 크기는 유지하고 사진 밖 여백을 본문 세 칸에 돌려준다. */
+ #dex[data-tab='fish'] .dex-left {gap:0;}
+ #dex[data-tab='fish'] .dex-photo,#dex[data-tab='fish'] .dex-name {padding-top:0;padding-bottom:0;}
+ #dex[data-tab='fish'] .dex-photo {min-height:64px;}
+ #dex[data-tab='fish'] .dex-habitat {height:calc(28 * var(--dot));}
+ #dex[data-tab='fish'] .dex-habitat-labels {gap:2px;}
+ #dex[data-tab='fish'] .dex-home {min-height:190px;}
+ #dex[data-tab='fish'] .dex-eats {min-height:0;}
+ #dex[data-tab='fish'] .dex-eats li {gap:0;}
+}
+@media(max-width:599px),(min-width:600px) and (max-height:520px) {
+ #dex[data-tab='fish'] .food-bubble {height:auto;min-height:calc(26 * var(--dot));}
+}
+@media(min-width:600px) and (max-height:520px) {
+ #dex[data-tab='fish'] .dex-left:has(.dex-record > span:only-child) {grid-template-columns:minmax(0,1fr);}
+ #dex[data-tab='fish'] .dex-left:has(.dex-record > span:only-child) .dex-name,#dex[data-tab='fish'] .dex-left:has(.dex-record > span:only-child) .dex-record {grid-column:1;max-width:100%;}
+ #dex[data-tab='fish'] .dex-eco .dex-line {white-space:normal;overflow-wrap:break-word;}
+ #dex[data-tab='fish'] .dex-habitat-labels {flex-wrap:wrap;gap:0 4px;}
+ #dex[data-tab='fish'] .dex-plain {white-space:normal;}
+}
+@media(min-width:600px) and (max-height:340px) {
+ #dex[data-tab='fish'] .dex-spread {margin-top:-16px;height:calc(100vh - 62px);}
+ #dex[data-tab='fish'] .dex-left,#dex[data-tab='fish'] .dex-right {margin-top:0;}
+ #dex[data-tab='fish'] .dex-left {row-gap:0;}
+ #dex[data-tab='fish'] .dex-photo {margin-bottom:0;padding-top:calc(3 * var(--dot));padding-bottom:calc(4 * var(--dot));}
+ #dex[data-tab='fish'] .dex-name {padding-top:var(--dot);padding-bottom:var(--dot);}
+ #dex[data-tab='fish'] .dex-right {grid-template-columns:172px minmax(0,1fr);grid-template-rows:110px 46px minmax(0,1fr);padding-right:16px;box-sizing:border-box;}
+ #dex[data-tab='fish'] .dex-food .dex-label {height:28px;min-height:28px;line-height:28px!important;}
+ #dex[data-tab='fish'] .dex-chain {padding-top:0;padding-bottom:0;gap:0;}
+ #dex[data-tab='fish'] .dex-chain .dex-label {height:28px;min-height:28px;line-height:28px!important;}
+ #dex[data-tab='fish'] .dex-eco {grid-template-columns:minmax(0,1fr) 54px 68px;}
+ #dex[data-tab='fish'] .dex-eco .dex-label {width:54px;padding:0;}
+ #dex[data-tab='fish'] .dex-eats {flex:1;min-height:0;}
+ #dex[data-tab='fish'] .eco-label {overflow-wrap:break-word;word-break:keep-all;}
+}
+@media(min-width:761px) and (max-height:340px) {
+ /* 키 큰 그림(가재 · 재첩 · 문어 ...)도 글을 밀어내지 않게 사진 위아래 여백을 접는다. */
+ #dex[data-tab='fish'] .dex-photo {padding-top:0;padding-bottom:0;}
+ /* Keep tall native art intact. Fold the title before reducing either the
+    16px story or the specimen itself. 이름 옆 기록이 접히면 줄이 늘어난다. */
+ #dex[data-tab='fish'] .dex-spread:is([data-id='chammuneo'],[data-id='wangjamjari'],[data-id='chamge'],[data-id='jaecheop'],[data-id='boraseongge'],[data-id='byeolbulgasari'],[data-id='haepari'],[data-id='mulbanggae'],[data-id='chamgaeguri'],[data-id='kungoni'],[data-id='badageobuk']) .dex-name {font-size:16px;line-height:24px;padding-top:0;padding-bottom:0;}
+ /* 이 여섯은 이름을 접어도 기록이 두 줄이라 20px이 모자란다. 어느 쪽에나 같은 주인 안내를 내주고 그림과 설명을 지킨다. */
+ #dex[data-tab='fish'] .dex-spread:is([data-id='boraseongge'],[data-id='haepari'],[data-id='mulbanggae'],[data-id='chamgaeguri'],[data-id='kungoni'],[data-id='badageobuk']) .dex-boss-progress {display:none;}
+ /* 갯벌(t07)의 키 큰 그림 다섯도 같은 차례로 접는다(q01 2026-11-05, 780×290에서 주인 안내가 3~17px 잘림). 칠게는 기록이 따로 한 줄이라 주인 안내도 내준다. */
+ #dex[data-tab='fish'] .dex-spread:is([data-id='munchigajami'],[data-id='nakji'],[data-id='chilge'],[data-id='sseok'],[data-id='bungjangeo-boss']) .dex-name {font-size:16px;line-height:24px;padding-top:0;padding-bottom:0;}
+ #dex[data-tab='fish'] .dex-spread[data-id='chilge'] .dex-boss-progress {display:none;}
+}
+/* 사는 물 줄(두 물 이상에 사는 종, watersOf): 「생태계」 칸(큰 화면은 물 이름 표가 붙는 칸) 그림 바로 아래 한 줄(q02, 대표 정함).
+   전에는 사는 곳 칸 글 뒤에 붙어 큰 화면에서 숨고 작은 화면에서 사는 곳 칸 바닥을 밀었다(q01). 기본: 칸 흐름에서 물 이름 다음, 좁으면 낱말 단위로 고르게 꺾는다. */
+#dex .dex-eco .dex-waters {margin:0;font-size:16px;line-height:20px;word-break:keep-all;text-wrap:balance;color:#10342d;}
+/* 폰 가로(키 340 이하): 생태계 칸 한 줄(그림 · 이름표 · 물 이름) 밑에 칸 너비로 한 줄(16px 줄). 먹는 것 칸이 6px, 생태계 그림 줄이 10px을 내준다(먹이 관계 칸은 그대로 72px).
+   그림 줄이 낮아져 긴 물 이름(바닷가 갯바위)이 두 줄이면 넘쳐서, 물 이름 칸을 90px로 넓혀 한 단계 작은 글 한 줄로 둔다. */
+@media(min-width:600px) and (max-height:340px) {
+ #dex[data-tab='fish'] .dex-right:has(.dex-waters) {grid-template-rows:104px 52px minmax(0,1fr);}
+ #dex[data-tab='fish'] .dex-eco:has(.dex-waters) {grid-template-rows:minmax(0,1fr) 16px;grid-template-columns:minmax(0,1fr) 64px 90px;row-gap:0;}
+ #dex[data-tab='fish'] .dex-eco .dex-waters {grid-column:1/-1;grid-row:2;font-size:12px;line-height:16px;white-space:nowrap;text-align:left;}
+}
+/* 큰 화면: 그림 위를 접어(들쭉날쭉한 바닥 테두리는 그대로) 그림 밑 11점에 칸 너비로 한 줄. 쪽 점 줄(책 238점) 위에서 끝난다.
+   칸 너비(접힌 책 120점)로 두어야 가장 긴 줄(「바닷가 갯바위와 먼바다에 살아요」)도 한 단계 줄이지 않고 들어간다. */
+@media(min-width:1200px) and (min-height:700px) {
+ #dex[data-tab='fish'] .dex-eco:has(.dex-waters) .dex-eco-pic {height:calc(84 * var(--dot));overflow:hidden;}
+ #dex[data-tab='fish'] .dex-eco:has(.dex-waters) .eco-scene-match {top:calc(-18 * var(--dot));}
+ #dex[data-tab='fish']:has(.dex-place[data-place='valley'][aria-selected='true']) .dex-eco:has(.dex-waters) .dex-eco-pic {height:calc(78 * var(--dot));}
+ #dex[data-tab='fish'] .dex-eco .dex-waters {position:absolute;left:0;top:calc(109 * var(--dot));width:100%;height:calc(11 * var(--dot));display:flex;justify-content:center;align-items:center;white-space:nowrap;font-size:16px;line-height:calc(11 * var(--dot));z-index:4;}
+}
+@media(max-width:599px) {
+ #dex[data-tab='web'] .web-details {translate:0 -64px;}
+}
+/* Dex 2 keeps its own leather book. Every raster dot is the stage's K. */
+#dex[data-tab='fish'] { color:#10342d; box-shadow:none!important; outline:none!important; }
+#dex[data-tab='fish'] .dex-name,#dex[data-tab='fish'] .dex-label,#dex[data-tab='fish'] .dex-record,#dex[data-tab='fish'] .dex-tab { color:#10342d; }
+#dex .dex-eco-match,#dex .dex-water-match,#dex .dex-tape-match,#dex .dex-habitat-match,#dex .eco-scene-match,#dex .food-drop-match,#dex .dex-sprout,#dex .dex-tab-icon-match,#dex .turn-match { display:none; }
+.dex-food-decor { position:absolute;pointer-events:none; }
+#dex .dex-gutter,#dex .dex-gutter-top,#dex .dex-tie-left,#dex .dex-tie-right,#dex .dex-leaf-big,#dex .dex-leaf-small,#dex .dex-stain,#dex .dex-curl-top,#dex .dex-curl-right,#dex .dex-curl-left { display:none; position:absolute; pointer-events:none; }
+#dex[data-tab='fish'] .dex-prev .turn-pic { transform:none; }
+#dex[data-tab='fish'] .turn-pic:has(.turn-match-small) { width:calc(22 * var(--dot)); height:calc(34 * var(--dot)); }
+#dex[data-tab='fish'] .turn-match-small { position:absolute; left:0; top:0; }
+#dex[data-tab='fish'] .dex-dots i { position:relative; background:none; box-shadow:none; width:calc(7 * var(--dot)); height:calc(7 * var(--dot)); }
+#dex[data-tab='fish'] .dex-dots i .n-sprite { position:absolute; left:0; top:0; }
+#dex[data-tab='fish'] .dex-label { position:relative; background:none; box-shadow:none; }
+#dex[data-tab='fish'] .dex-back { width:max(40px,calc(29 * var(--dot))); height:max(40px,calc(29 * var(--dot))); }
+/* 생물을 누르면 뜨는 이름표: 칸 이름표와 같은 종이 테이프(match-dex-label). */
+#dex .eco-tag { position:absolute; z-index:8; pointer-events:none; white-space:nowrap; width:max-content; box-sizing:border-box; height:calc(22 * var(--dot)); padding:0 calc(8 * var(--dot)); font-size:24px; line-height:calc(22 * var(--dot)); color:#10342d; }
+#dex [data-tag] { cursor:pointer; }
+@media(max-width:1199px),(max-height:699px) {
+ #dex[data-tab='fish'] .dex-label {height:32px;min-height:32px;line-height:32px!important;box-sizing:border-box;flex:none;}
+ #dex .eco-tag { height:32px; padding:0 12px; font-size:16px; line-height:32px; }
+}
+@media(min-width:600px) and (max-height:340px) {
+ #dex[data-tab='fish'] .dex-eco {grid-template-columns:minmax(0,1fr) 64px 76px;grid-template-rows:minmax(0,1fr);gap:2px;align-items:center;}
+ #dex[data-tab='fish'] .dex-eco-pic {grid-column:1;grid-row:1;}
+ #dex[data-tab='fish'] .dex-eco .dex-label {grid-column:2;grid-row:1;width:64px;padding:0 8px;margin:0;}
+ #dex[data-tab='fish'] .dex-eco .dex-line {grid-column:3;grid-row:1;}
+}
+
+@media(min-width:1200px) and (min-height:700px) {
+ #dex.dex-book[data-tab='fish'] {
+  position:fixed; left:round(nearest,calc(50% - 233 * var(--dot)),var(--dot)); top:round(nearest,calc(50% - 118 * var(--dot)),var(--dot));
+  translate:none; transform:none; width:calc(530 * var(--dot)); height:calc(256 * var(--dot));
+  min-width:0; min-height:0; max-width:none; max-height:none; padding:0; display:block; overflow:visible; gap:0; box-shadow:none; outline:none;
+ }
+ #dex[data-tab='fish'] .dex-tabs { position:absolute; left:calc(16 * var(--dot)); top:calc(-21 * var(--dot)); width:calc(218 * var(--dot)); height:calc(27 * var(--dot)); display:block; margin:0; }
+ #dex[data-tab='fish'] button.dex-tab { position:absolute; left:0; top:0; width:calc(113 * var(--dot)); height:calc(27 * var(--dot)); min-height:0; min-width:0; padding:0; display:block; font-size:36px; line-height:calc(15 * var(--dot)); translate:none; transform:none; }
+ #dex[data-tab='fish'] button.dex-tab[data-tab='web'] { left:calc(116 * var(--dot)); top:calc(1 * var(--dot)); width:calc(101 * var(--dot)); height:calc(26 * var(--dot)); }
+ #dex[data-tab='fish'] .dex-tab > span:last-child { position:absolute; left:calc(58 * var(--dot)); top:calc(7 * var(--dot)); box-shadow:none; white-space:nowrap; }
+ #dex[data-tab='fish'] .dex-tab[data-tab='web'] > span:last-child { left:calc(45 * var(--dot)); }
+ #dex[data-tab='fish'] .dex-tab .ico { position:absolute; left:calc(23 * var(--dot)); top:calc(9 * var(--dot)); width:calc(24 * var(--dot)); height:calc(10 * var(--dot)); }
+ #dex[data-tab='fish'] .dex-tab[data-tab='web'] .ico { left:calc(13 * var(--dot)); top:calc(6 * var(--dot)); width:calc(22 * var(--dot)); height:calc(15 * var(--dot)); }
+ #dex[data-tab='fish'] .dex-tab .ico > :not(.dex-tab-icon-match) { display:none; }
+ #dex[data-tab='fish'] .dex-tab-icon-match { display:block; position:absolute; left:0; top:0; }
+ #dex[data-tab='fish'] .dex-back { position:absolute; left:calc(501 * var(--dot)); top:calc(-30 * var(--dot)); width:max(40px,calc(29 * var(--dot))); height:max(40px,calc(29 * var(--dot))); min-height:40px; min-width:40px; margin:0; padding:0; }
+ #dex[data-tab='fish'] .dex-back .ico { width:calc(13 * var(--dot)); height:calc(13 * var(--dot)); }
+ #dex[data-tab='fish'] .dex-spread { position:absolute; left:0; top:0; width:100%; height:100%; display:block; }
+ #dex[data-tab='fish'] .dex-left { position:absolute; left:0; top:0; width:calc(245 * var(--dot)); height:calc(250 * var(--dot)); display:block; }
+ #dex[data-tab='fish'] .dex-photo { position:absolute; --window-width:max(180,var(--portrait-width,188)); left:calc((127.5 - (var(--window-width) + 15) / 2) * var(--dot)); top:calc(28 * var(--dot)); width:calc((var(--window-width) + 15) * var(--dot)); height:calc(158 * var(--dot)); max-width:none; padding:calc(7 * var(--dot)) calc(8 * var(--dot)) calc(5 * var(--dot)) calc(7 * var(--dot)); margin:0; background:none; box-shadow:none; }
+ #dex[data-tab='fish'] .dex-portrait { position:relative; width:calc(var(--window-width) * var(--dot)); height:calc(146 * var(--dot)); overflow:hidden; display:flex; align-items:center; justify-content:center; }
+ #dex[data-tab='fish'] .dex-portrait > canvas:not(.dex-water) { position:relative; top:calc(-6 * var(--dot)); flex:none; z-index:1; }
+ #dex[data-tab='fish'] .dex-portrait { justify-content:flex-start; }
+ #dex[data-tab='fish'] .dex-portrait > canvas:not(.dex-water) { left:calc((var(--window-width) - var(--portrait-width,188)) / 2 * var(--dot)); }
+ #dex[data-tab='fish'] .dex-water-mobile,#dex[data-tab='fish'] .dex-photo .dex-tape { display:none; }
+ #dex[data-tab='fish'] .dex-water-match { display:block; position:absolute; z-index:0; }
+ #dex[data-tab='fish'] .dex-tape-match { display:block; position:absolute; left:calc((var(--window-width) + 15) / 2 * var(--dot) - 30.5 * var(--dot)); top:calc(-10 * var(--dot)); z-index:3; pointer-events:none; }
+ #dex[data-tab='fish'] .dex-name { position:absolute; left:calc(38 * var(--dot)); top:calc(177 * var(--dot)); width:calc(187 * var(--dot)); height:calc(42 * var(--dot)); margin:0; padding:0; display:flex; align-items:center; justify-content:center; font-size:72px; line-height:calc(29 * var(--dot)); color:#14352e; box-shadow:none; background:none; z-index:2; }
+ #dex[data-tab='fish'] .dex-name > span { position:relative; top:calc(-1 * var(--dot)); line-height:calc(34 * var(--dot)); }
+ #dex[data-tab='fish'] .dex-sprout { display:block; position:absolute; top:calc(11 * var(--dot)); pointer-events:none; }
+ #dex[data-tab='fish'] .dex-sprout-left { left:calc(37 * var(--dot)); }
+ #dex[data-tab='fish'] .dex-sprout-right { left:calc(131 * var(--dot)); }
+ /* 넉 자 넘는 이름은 잎 장식이 글자를 덮어서 뺀다(q04). */
+ #dex[data-tab='fish'] .dex-name[data-long='true'] .dex-sprout { display:none; }
+ /* 먹이 자료가 없어 접은 칸(q05): 칸 이름 아래 가운데에 이미 있는 글 3줄 안. */
+ #dex[data-tab='fish'] .dex-more { position:absolute; left:calc(8 * var(--dot)); top:calc(36 * var(--dot)); width:calc(128 * var(--dot)); height:calc(74 * var(--dot)); margin:0; display:grid; align-content:center; justify-items:center; gap:calc(4 * var(--dot)); }
+ #dex[data-tab='fish'] .dex-more .dex-line { margin:0; text-align:center; font-size:24px; line-height:calc(14 * var(--dot)); word-break:keep-all; text-wrap:balance; }
+ /* 먹이 자료가 없는 생물의 글은 「먹는 것」 칸 안 가운데에(칸을 벗어나 쪽 위 테두리를 넘었다, q04). */
+ #dex[data-tab='fish'] .dex-food > .dex-line { position:absolute; left:calc(8 * var(--dot)); top:calc(50 * var(--dot)); width:calc(126 * var(--dot)); margin:0; text-align:center; font-size:24px; line-height:calc(14 * var(--dot)); word-break:keep-all; }
+ #dex[data-tab='fish'] .dex-record { position:absolute; left:calc(36 * var(--dot)); top:calc(222 * var(--dot)); width:calc(150 * var(--dot)); height:calc(12 * var(--dot)); margin:0; display:flex; flex-wrap:nowrap; justify-content:center; align-items:center; gap:calc(3 * var(--dot)); font-size:24px; line-height:calc(12 * var(--dot)); white-space:nowrap; }
+ #dex[data-tab='fish'] .dex-record b { font-size:24px; }
+ #dex[data-tab='fish'] .dex-crown { padding:0; background:none; }
+ #dex[data-tab='fish'] .dex-crown .n-sprite { width:calc(12 * var(--dot)); height:calc(12 * var(--dot)); }
+ #dex[data-tab='fish'] .dex-story,#dex[data-tab='fish'] .dex-clue { display:none; }
+ #dex[data-tab='fish'] .dex-gutter { display:block; left:calc(240 * var(--dot)); top:calc(7 * var(--dot)); width:calc(11 * var(--dot)); height:calc(240 * var(--dot)); z-index:1; }
+ #dex[data-tab='fish'] .dex-gutter-top { display:block; left:calc(237 * var(--dot)); top:0; z-index:2; }
+ #dex[data-tab='fish'] .dex-rings { position:absolute; left:calc(236 * var(--dot)); top:calc(18 * var(--dot)); width:calc(17 * var(--dot)); height:calc(205 * var(--dot)); background:none; z-index:3; }
+ #dex[data-tab='fish'] .dex-right { position:absolute; left:calc(245 * var(--dot)); top:calc(4 * var(--dot)); width:calc(276 * var(--dot)); height:calc(245 * var(--dot)); display:grid; grid-template-columns:calc(132 * var(--dot)) calc(144 * var(--dot)); grid-template-rows:calc(114 * var(--dot)) calc(131 * var(--dot)); gap:0; }
+ #dex[data-tab='fish'] .dex-part { position:relative; padding:0; margin:0; display:block; gap:0; overflow:visible; }
+ #dex[data-tab='fish'] .dex-home::after,#dex[data-tab='fish'] .dex-eco::after { top:calc(12 * var(--dot)); bottom:calc(12 * var(--dot)); right:calc(-1 * var(--dot)); background:repeating-linear-gradient(to bottom,#a09e86 0 calc(2 * var(--dot)),transparent 0 calc(3 * var(--dot))); }
+ #dex[data-tab='fish'] .dex-eco::after { top:0; bottom:calc(73 * var(--dot)); }
+ #dex[data-tab='fish'] .dex-home::before,#dex[data-tab='fish'] .dex-food::before { left:calc(14 * var(--dot)); right:0; bottom:calc(-1 * var(--dot)); background:repeating-linear-gradient(to right,#a09e86 0 calc(2 * var(--dot)),transparent 0 calc(3 * var(--dot))); }
+ #dex[data-tab='fish'] .dex-food::before { left:0; right:calc(9 * var(--dot)); }
+ #dex[data-tab='fish'] .dex-label { position:absolute; left:calc(35 * var(--dot)); top:calc(9 * var(--dot)); width:calc(59 * var(--dot)); height:calc(22 * var(--dot)); padding:0; margin:0; font-size:36px; line-height:calc(22 * var(--dot)); color:#10342d; white-space:nowrap; z-index:4; }
+ #dex[data-tab='fish'] .dex-food .dex-label { left:calc(39 * var(--dot)); top:calc(10 * var(--dot)); width:calc(61 * var(--dot)); height:calc(22 * var(--dot)); }
+ #dex[data-tab='fish'] .dex-eco .dex-label { left:calc(35 * var(--dot)); top:calc(6 * var(--dot)); width:calc(64 * var(--dot)); }
+ #dex[data-tab='fish'] .dex-chain .dex-label { left:calc(28 * var(--dot)); top:calc(6 * var(--dot)); width:calc(71 * var(--dot)); }
+ #dex[data-tab='fish'] .dex-eco-normal { display:none; }
+ #dex[data-tab='fish'] .dex-eco-match { display:inline; }
+ #dex[data-tab='fish'] .dex-window { position:absolute; left:calc(14 * var(--dot)); top:calc(23 * var(--dot)); width:calc(110 * var(--dot)); height:calc(86 * var(--dot)); min-height:0; margin:0; overflow:visible; }
+ #dex[data-tab='fish'] .dex-habitat,#dex[data-tab='fish'] .dex-habitat-labels,#dex[data-tab='fish'] .dex-home .dex-line,#dex[data-tab='fish'] .dex-food .eco-label,#dex[data-tab='fish'] .dex-eco .dex-line { display:none; }
+ #dex[data-tab='fish'] .dex-habitat-match { display:block; position:absolute; left:0; top:0; }
+ #dex[data-tab='fish'] .dex-eco-pic { position:absolute; left:calc(14 * var(--dot)); top:calc(24 * var(--dot)); width:calc(106 * var(--dot)); height:calc(102 * var(--dot)); min-height:0; display:block; }
+ #dex[data-tab='fish'] .eco-scene-mobile { display:none; }
+ #dex[data-tab='fish'] .eco-scene-match { display:block; position:absolute; left:0; top:0; }
+ /* 계곡 풍경 원본 맨 위의 옛 글 조각은 제목 아래 표시창 밖으로 접는다. 원본 그림과 점 크기는 그대로다. */
+ #dex[data-tab='fish']:has(.dex-place[data-place='valley'][aria-selected='true']) .dex-eco-pic {top:calc(30 * var(--dot));height:calc(89 * var(--dot));overflow:hidden;}
+ #dex[data-tab='fish']:has(.dex-place[data-place='valley'][aria-selected='true']) .eco-scene-match {top:calc(-13 * var(--dot));}
+ #dex[data-tab='fish'] .dex-eats { position:absolute; left:0; top:0; width:calc(144 * var(--dot)); height:calc(114 * var(--dot)); min-height:0; margin:0; padding:0; display:block; }
+ #dex[data-tab='fish'] .dex-window,#dex[data-tab='fish'] .dex-eats,#dex[data-tab='fish'] .dex-eco-pic,#dex[data-tab='fish'] .dex-links { background:none; box-shadow:none; border:0; }
+ #dex[data-tab='fish'] .dex-eats li { position:absolute; left:calc(10 * var(--dot)); top:calc(28 * var(--dot)); width:calc(61 * var(--dot)); height:calc(48 * var(--dot)); margin:0; padding:0; display:grid; place-items:center; }
+ #dex[data-tab='fish'] .dex-eats li:nth-child(2) { left:calc(70 * var(--dot)); top:calc(41 * var(--dot)); width:calc(60 * var(--dot)); height:calc(41 * var(--dot)); }
+ #dex[data-tab='fish'] .dex-eats li:nth-child(3) { left:calc(33 * var(--dot)); top:calc(68 * var(--dot)); width:calc(78 * var(--dot)); height:calc(42 * var(--dot)); }
+ #dex[data-tab='fish'] .food-bubble { position:absolute; inset:0; width:100%; height:100%; min-width:0; display:grid; place-items:center; }
+ #dex[data-tab='fish'] .food-bubble .bubble-bg { display:none; }
+ #dex[data-tab='fish'] .food-drop-match { display:block; position:absolute; left:0; top:0; pointer-events:none; }
+ #dex[data-tab='fish'] .dex-links { position:absolute; left:calc(-12 * var(--dot)); top:0; width:calc(156 * var(--dot)); height:calc(127 * var(--dot)); margin:0; max-width:none; display:block; }
+ #dex[data-tab='fish'] .chain-diagram { position:absolute; inset:0; width:100%; height:100%; }
+ #dex[data-tab='fish'] .chain-diagram > * { position:absolute; }
+ #dex[data-tab='fish'] .chain-node { display:grid; place-items:center; width:calc(40 * var(--dot)); height:calc(40 * var(--dot)); }
+ #dex[data-tab='fish'] .chain-node-1 { width:calc(27 * var(--dot)); height:calc(37 * var(--dot)); }
+ #dex[data-tab='fish'] .chain-node-2 { width:calc(25 * var(--dot)); height:calc(34 * var(--dot)); }
+ #dex[data-tab='fish'] .chain-node-4 { width:calc(64 * var(--dot)); height:calc(43 * var(--dot)); }
+ #dex[data-tab='fish'] .chain-node-5 { width:calc(66 * var(--dot)); height:calc(61 * var(--dot)); }
+ #dex[data-tab='fish'] .chain-drop-match { position:absolute; left:0; top:0; pointer-events:none; }
+ #dex[data-tab='fish'] .chain-node .eco-pic { position:relative; z-index:1; }
+ #dex[data-tab='fish'] .dex-empty { position:absolute; left:calc(30 * var(--dot)); top:calc(42 * var(--dot)); width:calc(80 * var(--dot)); font-size:48px; line-height:calc(40 * var(--dot)); margin:0;border:0;background:none; box-shadow:none; }
+ #dex[data-tab='fish'] .dex-spread[data-met='false'] .dex-label {visibility:visible;}
+ #dex[data-tab='fish'] .dex-spread[data-met='false'] .dex-part::before,#dex[data-tab='fish'] .dex-spread[data-met='false'] .dex-part::after {display:none;}
+ #dex[data-tab='fish'] .dex-unknown { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); }
+ #dex[data-tab='fish'] .dex-turn { position:absolute; left:calc(-13 * var(--dot)); top:calc(83 * var(--dot)); width:calc(29 * var(--dot)); height:calc(81 * var(--dot)); min-width:40px; min-height:40px; margin:0; padding:0; translate:none; transform:none; z-index:5; }
+ #dex[data-tab='fish'] .dex-next { left:calc(518 * var(--dot)); right:auto; top:calc(81 * var(--dot)); width:calc(26 * var(--dot)); height:calc(60 * var(--dot)); }
+ #dex[data-tab='fish'] .turn-pic:has(.turn-match) { position:absolute; inset:0; width:100%; height:100%; }
+ #dex[data-tab='fish'] .turn-match-small { display:none; }
+ #dex[data-tab='fish'] .turn-match { display:block; position:absolute; left:0; top:0; }
+ #dex[data-tab='fish'] .dex-dots { position:absolute; left:calc(171 * var(--dot)); top:calc(238 * var(--dot)); width:max(calc(130 * var(--dot)), calc(22 * var(--dot) + max(44px, calc(12 * var(--dot))) * var(--dex-pages, 9))); height:calc(15 * var(--dot)); padding:0 calc(11 * var(--dot)); display:flex; flex-wrap:nowrap; align-items:center; gap:0; box-sizing:border-box; z-index:5; }
+ /* 점 칸은 누르는 폭 40px 이상(q06, 전에는 22~30px). 줄은 왼쪽 끝을 두고 오른쪽으로만 늘린다(q02: 넘친 점이 주인 진도 글과 겹쳤다). */
+ #dex[data-tab='fish'] .dex-dots button { width:max(44px, calc(12 * var(--dot))); height:max(44px,calc(15 * var(--dot))); min-width:0; flex:none; padding:0; margin:0; }
+ #dex[data-tab='fish'] .dex-tie-left { display:block; left:calc(-15 * var(--dot)); top:calc(3 * var(--dot)); z-index:5; }
+ #dex[data-tab='fish'] .dex-tie-right { display:block; left:calc(522 * var(--dot)); top:calc(143 * var(--dot)); z-index:5; }
+ #dex[data-tab='fish'] .dex-leaf-big { display:block; left:calc(26 * var(--dot)); top:calc(153 * var(--dot)); z-index:4; }
+ #dex[data-tab='fish'] .dex-leaf-small { display:block; left:calc(205 * var(--dot)); top:calc(216 * var(--dot)); z-index:4; }
+ #dex[data-tab='fish'] .dex-stain { display:block; left:calc(182 * var(--dot)); top:calc(222 * var(--dot)); } /* 기록 글 위에 얹혀 「가장」을 가렸다(q06). 글 오른쪽 빈 곳으로. */
+ #dex[data-tab='fish'] .dex-curl-top { display:block; left:calc(502 * var(--dot)); top:calc(4 * var(--dot)); z-index:2; }
+ #dex[data-tab='fish'] .dex-curl-right { display:block; left:calc(503 * var(--dot)); top:calc(232 * var(--dot)); z-index:2; }
+ #dex[data-tab='fish'] .dex-curl-left { display:block; left:calc(10 * var(--dot)); top:calc(223 * var(--dot)); z-index:2; }
+ html[data-notebook-dpr='1.5'] #dex[data-tab='fish'] .dex-name { font-size:64px; }
+ html[data-notebook-dpr='1.5'] #dex[data-tab='fish'] .dex-tab { font-size:32px; }
+ html[data-notebook-dpr='1.5'] #dex[data-tab='fish'] .dex-label { font-size:32px; }
+ html[data-notebook-compact='true'] #dex[data-tab='fish'] .dex-name { font-size:48px; }
+ html[data-notebook-compact='true'] #dex[data-tab='fish'] .dex-tab { font-size:24px; }
+ html[data-notebook-compact='true'] #dex[data-tab='fish'] .dex-label { font-size:24px; }
+ html[data-notebook-compact='true'] #dex[data-tab='fish'] .dex-record,html[data-notebook-compact='true'] #dex[data-tab='fish'] .dex-record b { font-size:16px; }
+}
+/* The smallest school screen folds the horizontal offset before changing
+   any native artwork. The two page-turn tabs then stay inside 1200px. */
+@media(min-width:1200px) and (max-width:1299px) and (min-height:700px) {
+ #dex.dex-book[data-tab='fish'] { left:round(nearest,calc(50% - 265 * var(--dot)),var(--dot)); }
+}
+/* Fish and web share one viewport anchor, including their protruding home
+   button. Bookmark measurement reads this same position in both views. */
+@media(min-width:1200px) and (min-height:700px) {
+ #dex.dex-book .dex-back {position:fixed!important;left:round(nearest,clamp(var(--dot),calc(50vw + 268 * var(--dot)),calc(100vw - 30 * var(--dot))),var(--dot))!important;right:auto;top:round(nearest,max(var(--dot),calc(50vh - 148 * var(--dot))),var(--dot))!important;}
+}
+@media(min-width:900px) and (max-width:1199px),(min-width:1200px) and (max-height:699px) {
+ #dex .dex-empty {font-size:36px;}
+}
+/* Fold only the tablet book's page margins. The portrait, habitat and food
+   sprites retain their native sizes; each content column loses under 10%. */
+@media(min-width:1200px) and (min-height:700px) {
+ #dex.dex-book[data-tab='fish'][data-edge-fold='true'] {width:calc(500 * var(--dot));left:round(nearest,calc(50% - 250 * var(--dot)),var(--dot))!important;}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-left {width:calc(230 * var(--dot));}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-photo {left:calc((115 - (var(--window-width) + 15) / 2) * var(--dot));}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-name {left:calc(26 * var(--dot));}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-record {left:calc(24 * var(--dot));}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-boss-progress {left:calc(33 * var(--dot));}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-gutter {left:calc(225 * var(--dot));}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-gutter-top {left:calc(222 * var(--dot));}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-rings {left:calc(221 * var(--dot));}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-right {left:calc(230 * var(--dot));width:calc(264 * var(--dot));grid-template-columns:calc(120 * var(--dot)) calc(144 * var(--dot));}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-window {left:calc(10 * var(--dot));}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-dots {left:calc(156 * var(--dot));}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-tie-left {left:0;}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-tie-right {left:calc(492 * var(--dot));}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-leaf-big {left:calc(14 * var(--dot));}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-leaf-small {left:calc(193 * var(--dot));}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-curl-top {left:calc(472 * var(--dot));}
+ #dex[data-tab='fish'][data-edge-fold='true'] .dex-curl-right {left:calc(473 * var(--dot));}
+}
+
+/* 정보 1: 가안 + 먹이 관계. 같은 쪽의 읽는 글은 모두 같은 크기다.
+   줄 높이는 내용대로(max-content). auto였을 때 낮은 큰 가로(1366×650)는 칸 높이에 맞춰 줄이 줄어 글이 아래 칸을 덮었고, 넘침도 못 재 넘겨 읽기로 안 바뀌었다(11-12). */
+#dex[data-tab='fish'] .dex-right.info-dex {
+ --info-font:24px;--info-line:32px;
+ display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:max-content max-content max-content max-content;
+ grid-template-areas:'home food' 'home eco' 'facts facts' 'chain chain';height:auto;
+ align-content:start;gap:6px 10px;padding:14px 14px 14px 24px;box-sizing:border-box;overflow:visible;
+}
+#dex .info-dex .dex-part {position:relative!important;left:auto!important;top:auto!important;display:flex!important;flex-direction:column;align-items:stretch;justify-content:start;width:auto!important;height:auto!important;min-height:0!important;margin:0!important;padding:0!important;gap:4px;text-align:left;overflow:visible;}
+#dex .info-dex .dex-part::before,#dex .info-dex .dex-part::after {display:none!important;}
+#dex .info-dex .dex-part>* {flex-shrink:0!important;}
+#dex .info-dex .dex-spot {translate:none!important;transform:none!important;background:none;padding:0;white-space:normal;}
+#dex .info-dex .dex-waters {white-space:normal!important;flex-basis:100%;text-wrap:pretty;}
+#dex .info-dex .info-habitat {padding:0!important;background:none;border:0;}
+#dex .info-dex .dex-home {grid-area:home;}
+#dex .info-dex .dex-food {grid-area:food;}
+#dex .info-dex .dex-eco {grid-area:eco;flex-direction:row;align-items:center;flex-wrap:wrap;gap:0 8px;}
+#dex .info-dex .dex-facts {grid-area:facts;}
+#dex .info-dex .dex-chain {grid-area:chain;flex-direction:row;align-items:center;gap:8px;}
+#dex .info-dex .dex-label {position:relative!important;left:auto!important;top:auto!important;align-self:start;display:flex!important;align-items:center;justify-content:center;flex:none;width:max-content!important;height:32px!important;min-height:32px!important;min-width:104px;padding:0 10px!important;margin:0!important;white-space:nowrap;}
+#dex .info-dex .dex-label span,#dex .info-dex .dex-spot,#dex .info-dex .dex-line,#dex .info-dex .dex-line span,#dex .info-dex .eco-label,#dex .info-dex .info-fact-text,#dex .info-dex .dex-waters {position:static!important;display:block!important;margin:0!important;width:auto!important;height:auto!important;font-size:var(--info-font)!important;line-height:var(--info-line)!important;word-break:keep-all;overflow-wrap:normal;text-align:left;}
+#dex .info-dex .info-home-heading {display:flex;gap:4px 8px;flex-wrap:wrap;align-items:center;}
+#dex .info-dex .dex-line span {text-wrap:pretty;}
+#dex .info-dex .info-habitat {position:static!important;display:flex!important;align-items:start;justify-content:start;align-self:start;flex:none;width:auto!important;height:auto!important;min-height:0!important;overflow:visible;margin:0!important;}
+#dex .info-dex .info-habitat>canvas {position:static;}
+#dex .info-dex .dex-eats {position:static!important;display:flex!important;flex-direction:column;align-items:stretch;justify-content:start;flex:none;width:auto!important;height:auto!important;min-height:0!important;gap:4px;margin:0;padding:0;}
+#dex .info-dex .dex-eats li {position:relative!important;left:auto!important;top:auto!important;display:grid!important;grid-template-columns:60px minmax(0,1fr);align-items:center;justify-items:start;flex:none;width:auto!important;height:auto!important;min-height:44px;gap:6px;margin:0;padding:0;}
+#dex .info-dex .eco-label {max-width:100%;}
+#dex .info-dex .eco-pic.eco-name {font-size:var(--info-font)!important;line-height:var(--info-line)!important;white-space:normal;word-break:keep-all;}
+#dex .dex-eats .eco-label,#dex .dex-eats .eco-name {white-space:nowrap!important;text-wrap:nowrap!important;}
+/* F의 쉬운 먹이 이름(물벼룩 같은 작은 동물)은 큰 도감에서도 한 줄 칸보다 길다.
+   설명 쪽의 먹이는 주어진 칸 안에서 낱말 사이로 넘기고, 글자 크기는 유지한다. */
+#dex .info-dex .dex-eats .eco-label,#dex .info-dex .dex-eats .eco-name {white-space:normal!important;text-wrap:balance!important;min-width:0;}
+@media(min-width:600px) and (max-height:520px) {
+ #dex .dex-eats {flex-wrap:wrap;}
+ #dex .dex-eats li {flex:1 0 max-content;}
+}
+@media(min-width:761px) and (max-height:520px) {
+ #dex[data-tab='fish'] .dex-right:not(.info-dex) {grid-template-columns:140px minmax(0,1fr);}
+ #dex .dex-right:not(.info-dex) .dex-eats {flex-wrap:nowrap;gap:4px 8px;width:100%;margin-left:0;}
+}
+#dex .info-dex .dex-eats li.info-food-name {grid-template-columns:minmax(0,1fr);}
+#dex .info-dex .info-food-name .eco-name {grid-column:1/-1;max-width:100%;min-height:44px;text-align:left;}
+#dex .info-dex .eco-pic {position:static!important;flex:none;min-width:0;min-height:0;padding:0;background:none;box-shadow:none;}
+#dex .info-dex .info-facts {list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px;}
+#dex .info-dex .info-fact-row {display:flex;align-items:start;gap:8px;padding:0 0 2px;border-bottom:var(--dot) dotted #b9b69d;min-width:0;}
+#dex .info-dex .info-fact-star {position:static;font-size:var(--info-font)!important;line-height:var(--info-line)!important;color:#c98a3c;}
+#dex .info-dex .info-locked {color:#677361;}
+#dex .info-dex .dex-links {position:static!important;display:flex!important;align-items:center;justify-content:space-around;gap:4px;flex:1;width:auto!important;height:auto!important;min-height:44px;min-width:0;margin:0;}
+#dex .info-dex .dex-arrow {position:static!important;width:auto!important;height:auto!important;flex:none;font-size:var(--info-font);line-height:var(--info-line);}
+#dex .info-dex .dex-links .eco-pic {display:grid;place-items:center;min-width:44px;min-height:44px;}
+#dex .info-chain-creature {display:flex;flex-direction:column;align-items:center;gap:4px;min-width:0;}
+#dex .info-chain-name {display:block;font-size:max(16px,var(--info-font))!important;line-height:1.4!important;text-align:center;white-space:normal;}
+#dex .info-dex[data-no-food='true'] {grid-template-areas:'home home' 'eco eco' 'facts facts' 'chain chain';}
+#dex .info-dex[data-no-food='true'] .dex-home {display:flex!important;gap:4px;}
+#dex .info-dex[data-no-food='true'] .info-home-heading {grid-column:1/-1;}
+@media(min-width:1600px) and (min-height:700px) {
+ #dex[data-tab='fish'] .dex-right.info-dex {--info-font:32px;--info-line:42.6666667px;}
+ #dex .info-dex .dex-label {height:42.6666667px!important;min-height:42.6666667px!important;}
+}
+@media(min-width:600px) and (max-width:1199px) and (min-height:521px) {
+ #dex[data-tab='fish'] .dex-right.info-dex {grid-template-columns:minmax(0,1fr);grid-template-areas:'home' 'food' 'eco' 'facts' 'chain';grid-template-rows:auto;gap:6px;padding-left:20px;}
+ #dex .info-dex .dex-home {display:grid!important;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;}
+ #dex .info-dex .info-home-heading {grid-column:1/-1;}
+ #dex .info-dex .dex-eats {flex-direction:row;}
+ #dex .info-dex .dex-eats li {display:flex!important;flex:1;flex-direction:column;align-items:center;gap:2px;}
+ #dex .info-dex .eco-label {text-align:center!important;}
+}
+@media(max-width:599px) {
+ #dex[data-tab='fish'] .dex-right.info-dex {--info-font:18px;--info-line:24px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:max-content max-content max-content max-content;gap:4px 6px;padding:6px 10px 8px;}
+ #dex .info-dex .dex-label {height:26px!important;min-height:26px!important;min-width:80px;padding:0 6px!important;}
+ #dex .info-dex .dex-eats li {grid-template-columns:36px minmax(0,1fr);gap:2px;min-height:44px;}
+ #dex .info-dex .dex-eco {gap:0;}
+ #dex .info-dex .info-facts {gap:4px;}
+ #dex .info-dex .info-fact-row {gap:6px;border-bottom-width:1px;padding-bottom:2px;}
+ #dex .info-dex .dex-chain {gap:4px;}
+}
+@media(min-width:600px) and (max-height:520px) {
+ #dex[data-tab='fish'] .dex-right.info-dex {--info-font:12px;--info-line:16px;grid-template-columns:minmax(0,1fr) minmax(0,1fr);grid-template-rows:auto auto auto auto;grid-template-areas:'home food' 'home eco' 'facts facts' 'chain chain';padding:6px 28px 6px 20px;gap:2px 6px;}
+ /* 글이 16px(배율 2는 18px)로 커져 이름표 높이는 줄 높이를 따른다(전엔 12px 글에 맞춘 20px). */
+ #dex .info-dex .dex-label {height:max(20px,var(--info-line))!important;min-height:max(20px,var(--info-line))!important;min-width:62px;padding:0 6px!important;}
+ /* 16px 먹이 이름(「하루살이 애벌레」)이 한 줄을 고집하면 칸 밖 쪽 넘김 화살표(x 740~780) 밑까지 나갔다. 오른쪽 여백 28px, 이름은 낱말 단위로 줄을 바꾼다. */
+ #dex .info-dex .dex-eats .eco-label {white-space:normal!important;text-wrap:wrap!important;word-break:keep-all;overflow-wrap:normal;}
+ #dex .info-dex .dex-home {display:grid!important;grid-template-columns:82px minmax(0,1fr);align-items:start;gap:2px 4px;}
+ #dex .info-dex .info-home-heading {grid-column:1/-1;flex-wrap:nowrap;gap:4px;}
+ #dex .info-dex .dex-eats {flex-direction:row;gap:2px;}
+ #dex .info-dex .dex-eats li {display:flex!important;flex:1;flex-direction:column;align-items:center;gap:0;min-height:44px;}
+ #dex .info-dex .eco-label {text-align:center!important;}
+ #dex .info-dex .info-facts {flex-direction:row;gap:6px;}
+ #dex .info-dex .info-fact-row {flex:1;gap:4px;border-bottom-width:1px;}
+ #dex .info-dex .dex-chain {gap:4px;}
+ #dex .info-dex .dex-links {min-height:44px;}
+ #dex .info-dex .dex-waters {flex-basis:100%;}
+}
+@media(min-width:1200px) and (min-height:700px) {
+ #dex .info-dex .dex-label {height:max(32px,calc(22 * var(--dot)))!important;min-height:max(32px,calc(22 * var(--dot)))!important;}
+ #dex .info-dex .dex-waters {max-width:calc(100% - 32px);min-width:0;}
+}
+
+#dex .info-dex-scroll,#dex .info-chain-step {display:contents;}
+#dex .dex-right .dex-chain {padding-right:calc(20 * var(--dot))!important;box-sizing:border-box;}
+#dex:has(.info-dex) .dex-left {touch-action:pan-y;}
+#dex .info-dex .dex-links[data-wrap='true'] {flex-wrap:wrap;justify-content:flex-start;}
+#dex .info-dex .dex-links[data-wrap='true'] .info-chain-step {display:inline-flex;align-items:center;gap:4px;flex:none;white-space:nowrap;}
+#dex[data-tab='fish'] .dex-right.info-dex[data-info-scroll='true'] {display:flex;flex-direction:column;min-height:0;overflow:visible;}
+#dex .info-dex[data-info-scroll='true'] .info-dex-scroll {display:grid;align-content:start;grid-auto-rows:max-content;flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#10342d #fff4d8;touch-action:pan-y;}
+#dex .info-dex[data-info-scroll='true'] .dex-label {height:max(var(--info-line),calc(22 * var(--dot)))!important;min-height:max(var(--info-line),calc(22 * var(--dot)))!important;}
+#dex .info-dex[data-info-scroll='true'] .dex-eco,#dex .info-dex[data-info-scroll='true'] .dex-chain {flex-direction:column;flex-wrap:nowrap;align-items:stretch;gap:4px;}
+#dex .info-dex[data-info-scroll='true'] .dex-waters {flex:none!important;min-width:0;max-width:100%;align-self:stretch;text-wrap:balance;translate:none!important;}
+#dex .info-dex[data-info-scroll='true'] .info-fact-text {flex:1;min-width:0;text-wrap:balance;}
+#dex .info-dex[data-info-scroll='true'] .dex-line span {text-wrap:balance;}
+#dex .info-dex[data-info-scroll='true'] .dex-eats {flex-direction:column;}
+#dex .info-dex[data-info-scroll='true'] .dex-eats li {display:grid!important;grid-template-columns:60px minmax(0,1fr);flex:none;justify-items:start;}
+#dex .info-dex[data-info-scroll='true'] .dex-eats li.info-food-name {grid-template-columns:minmax(0,1fr);}
+#dex .info-dex[data-info-scroll='true'] .eco-label {text-align:left!important;text-wrap:balance;}
+#dex .info-dex[data-info-scroll='true'] .info-facts {flex-direction:column;}
+#dex .info-dex[data-info-scroll='true'] .info-home-heading {flex-wrap:wrap;}
+#dex .info-dex[data-info-scroll='true'] .dex-links {flex:none;width:100%!important;flex-wrap:wrap;justify-content:flex-start;gap:4px;}
+#dex .info-dex[data-info-scroll='true'] .info-chain-step {display:inline-flex;align-items:center;gap:4px;white-space:nowrap;flex:none;}
+@media(min-width:600px) and (max-width:1199px) and (min-height:521px) {
+ #dex .info-dex[data-info-scroll='true'] .dex-home .dex-line {grid-column:1/-1;}
+}
+@media(max-width:599px) {
+ #dex .info-dex[data-info-scroll='true'] .info-dex-scroll {grid-template-columns:minmax(0,1fr)!important;grid-template-areas:'home' 'food' 'eco' 'facts' 'chain'!important;row-gap:8px!important;}
+ #dex .info-dex[data-info-scroll='true'] .dex-home {display:grid!important;grid-template-columns:82px minmax(0,1fr);gap:4px 8px;}
+ #dex .info-dex[data-info-scroll='true'] .dex-home .dex-line {grid-column:1/-1;}
+}
+@media(min-width:600px) and (max-height:340px) {
+ #dex[data-tab='fish']:has(.info-dex) .dex-spread {grid-template-columns:minmax(348px,1fr) calc(8 * var(--dot)) minmax(0,1.8fr);}
+ #dex .info-dex[data-info-scroll='true'] .dex-home .dex-line {grid-column:1/-1;}
+ #dex[data-tab='fish']:has(.info-dex) .dex-left {row-gap:0;}
+ #dex[data-tab='fish']:has(.info-dex) .dex-name {margin-left:20px;font-size:var(--info-left-font);line-height:24px;padding-top:0;padding-bottom:0;}
+ #dex[data-tab='fish']:has(.info-dex) .dex-boss-progress {line-height:22px;}
+ #dex[data-tab='fish']:has(.info-dex) .dex-left:has(.dex-record>span:only-child) {grid-template-columns:auto minmax(0,1fr);}
+ #dex[data-tab='fish']:has(.info-dex) .dex-left:has(.dex-record>span:only-child) .dex-name {grid-column:1;}
+ #dex[data-tab='fish']:has(.info-dex) .dex-left:has(.dex-record>span:only-child) .dex-record {grid-column:2;}
+ #dex[data-tab='fish']:has(.info-dex) .dex-record {row-gap:2px;line-height:24px;}
+ html[data-notebook-dpr='2'] #dex[data-tab='fish']:has(.info-dex) .dex-left {row-gap:4px;}
+ html[data-notebook-dpr='2'] #dex[data-tab='fish']:has(.info-dex) .dex-story,
+ html[data-notebook-dpr='2'] #dex[data-tab='fish']:has(.info-dex) .dex-boss-progress {line-height:26px;}
+}
+#dex .info-dex[data-info-scroll='true'][data-more='true']::before {content:'';position:absolute;left:var(--info-scroll-left);right:var(--info-scroll-right);bottom:var(--info-scroll-bottom);height:16px;background:linear-gradient(transparent,#fff4d8);pointer-events:none;z-index:8;}
+#dex .info-dex[data-info-scroll='true'][data-more='true']::after {content:'';position:absolute;right:calc(var(--info-scroll-right) + 4px);bottom:calc(var(--info-scroll-bottom) + 4px);width:12px;height:12px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%2310342d' stroke-width='2'%3E%3Cpath d='m2 4 4 4 4-4'/%3E%3C/svg%3E") center/12px 12px no-repeat;pointer-events:none;z-index:9;}
+/* 가로 태블릿(1024×768 · 1100×800 · 1180×820): 설명 쪽이 370~440px라 두 칸으로 나누면 사는 곳 글이 180px 칸에서
+   「강 가운데쯤 / 모래와 자갈 / 바닥을 다녀요」 세 줄 기둥이 되고, 먹이 이름이 그림 밑 좁은 칸에서 잘려 겹쳤다(11-12 출시 점검 R3-04).
+   한 칸으로 쌓고 사는 곳 그림은 글 위에, 먹이는 그림 옆에 이름을 둔다. */
+@media(min-width:900px) and (max-width:1199px) and (min-height:521px) and (orientation:landscape) {
+ #dex[data-tab='fish'] .dex-right.info-dex {grid-template-columns:minmax(0,1fr);grid-template-areas:'home' 'food' 'eco' 'facts' 'chain';}
+ #dex .info-dex .dex-home {display:flex!important;flex-direction:column;}
+ #dex .info-dex .info-home-heading {flex-direction:row;align-items:center;}
+ #dex .info-dex .dex-eats {flex-direction:column;}
+ #dex .info-dex .dex-eats li {display:grid!important;grid-template-columns:60px minmax(0,1fr);flex:none;align-items:center;justify-items:start;gap:0 8px;}
+ #dex .info-dex .dex-eats li.info-food-name {grid-template-columns:minmax(0,1fr);}
+ #dex .info-dex .eco-label {text-align:left!important;}
+ #dex .info-dex .dex-line {text-wrap:balance;}
+ /* 관찰 쪽(지켜본 물고기 · 새 · 해파리)은 옛 짜임: 2:3 두 칸에서 사는 곳 글이 154px 네 줄 기둥, 먹이 이름 셋이 한 줄에서 서로 겹쳤다.
+    사는 곳은 두 칸 폭(그림 밑에 글), 먹이(그림 옆 이름) · 생태계는 반반, 먹이 관계는 두 칸 폭. */
+ #dex[data-tab='fish'] .dex-right:not(.info-dex) {grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);grid-template-areas:'home home' 'food eco' 'chain chain';grid-template-rows:max-content max-content max-content;align-content:start;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;}
+ #dex[data-tab='fish'] .dex-right:not(.info-dex) > .dex-part {height:auto!important;min-height:0!important;}
+ #dex .dex-right:not(.info-dex) .dex-home {align-items:flex-start;}
+ #dex .dex-right:not(.info-dex) .dex-home > .dex-line {align-self:stretch;text-align:left;text-wrap:balance;}
+ #dex .dex-right:not(.info-dex) .dex-eats {flex-direction:column;align-items:stretch;justify-content:flex-start;}
+ #dex .dex-right:not(.info-dex) .dex-eats li {flex:none;flex-direction:row;justify-content:flex-start;align-items:center;gap:8px;}
+ #dex .dex-right:not(.info-dex) .dex-eats li > .eco-label {flex:1 1 0;min-width:0;text-align:left;}
+ #dex .dex-right:not(.info-dex) .dex-eats[data-text-wrap] li {flex-wrap:wrap;}
+ #dex .dex-right:not(.info-dex) .dex-eats[data-text-wrap] .eco-label {white-space:normal!important;text-wrap:balance!important;word-break:keep-all;overflow-wrap:normal;min-width:min-content;}
+ #dex .dex-right:not(.info-dex) .dex-waters {text-wrap:balance;}
+ #dex .dex-right:not(.info-dex) .dex-home::after,#dex .dex-right:not(.info-dex) .dex-eco::after {display:none;}
+ #dex .dex-right:not(.info-dex) .dex-food > .dex-label {align-self:flex-start;}
+ /* 생태계 그림(떠 있는 장면 조각)은 칸 높이를 안 만든다. 줄 높이가 내용대로라 그림 창 높이를 정해 둔다. */
+ #dex .dex-right:not(.info-dex) .dex-eco-pic {flex:none;align-self:stretch;height:calc(36 * var(--dot));overflow:hidden;}
+}
+
+/* 누를 곳 44px(취향 15): 낮은 폰 가로의 돌아가기(40×40)는 그림 크기를 두고 보이지 않는 누름 칸만 넓힌다
+   (2026-11-11 출시 점검 고칠 것 8). 책갈피 · 쪽 넘김은 화면 맨 위 · 맨 옆 가장자리에 붙어 바깥쪽이 화면 끝까지 눌린다. */
+@media(min-width:600px) and (max-height:340px) {
+  #dex .dex-back::after { content:''; position:absolute; inset:-2px; background:transparent; }
+}
+/* 세로 태블릿(800×1280 · 768×1024): 물고기 쪽 위 · 설명 쪽 아래. 옆으로 펼치면 그림 칸(408px)이 폭을 다 써서
+   설명 칸이 146px 낱말 기둥이 되고 「다슬기」가 「다슬」로 잘렸다(2026-11-11 출시 점검 고칠 것 5 · 12). */
+@media(min-width:600px) and (max-width:1199px) and (min-height:521px) and (orientation:portrait) {
+ #dex[data-tab='fish'] .dex-spread {grid-template-columns:minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);row-gap:8px;}
+ #dex[data-tab='fish'] .dex-rings {display:none;}
+ /* 관찰 쪽(옛 네 칸, info-dex 아님): 두 줄을 반씩 나누면 768×1024에서 사는 곳 글이 생태계 칸을 덮었다. 줄 높이는 내용대로. */
+ #dex[data-tab='fish'] .dex-right:not(.info-dex) {grid-template-rows:max-content max-content;align-content:start;overflow-y:auto;overscroll-behavior:contain;touch-action:pan-y;}
+ #dex[data-tab='fish'] .dex-right:not(.info-dex) > .dex-part {height:auto!important;min-height:0!important;}
+ #dex[data-tab='fish'] .dex-right .dex-line {text-wrap:balance;}
+ /* 판 높이 상한(820px)을 풀어 아래 설명이 덜 숨게: 위아래 바다 · 낚시꾼은 판 둘레로 조금씩 보인다. */
+ #dex.dex-book[data-tab='fish'] {height:min(1080px,calc(100vh - 24px));}
+ /* 왼쪽 쪽 글이 판 폭을 다 쓰니 큰 화면(1280×800)과 같은 24px. 16px는 12화소 격자에서 12px로 내려가 설명 24px 옆에서 너무 작았다. */
+ #dex[data-tab='fish'] .dex-record,#dex[data-tab='fish'] .dex-record b,#dex[data-tab='fish'] .dex-story,#dex[data-tab='fish'] .dex-clue,#dex[data-tab='fish'] .dex-boss-progress {font-size:24px;line-height:32px;}
+}
+
+/* 돌아가기 이름표(인디 채점 2026-11-12, 꼴은 ui-redesign.css 「돌아가기 한 꼴」): 둥근 집 그림 아래에 매단다.
+   단추 자리 · 크기는 그대로 둬 책갈피 자리 셈(dex-bookmarks.mjs)에 끼지 않는다. 화면 끝에 붙은 단추라 오른쪽 끝을 맞춘다.
+   책 모서리 장식(접힌 쪽 끝)보다 위에 둔다. 폰 세로는 위 줄이 탭 · 쪽 점으로 차 있고 아래는 물고기 사진이라 접는다(폰 가로도 접음).
+   글 맞춤(text-fit)은 단추 상자 밖 글을 넘친 것으로 보고 한 단계 줄이므로 data-text-wrap으로 뺀다. */
+#dex button.dex-back { z-index:7; }
+#dex .dex-back > .back-label { position:absolute; top:100%; right:0; left:auto; }
+@media (max-width:599px) { #dex .dex-back > .back-label { display:none; } }

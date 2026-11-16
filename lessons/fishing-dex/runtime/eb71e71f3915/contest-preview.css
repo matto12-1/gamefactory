@@ -1,0 +1,213 @@
+/* 낚시 대회 시작 창 · 발표(ui.mjs renderContestStart · renderContestAnnounce, 판 2 2026-11-08). 파일 이름은 옛 「오늘 나올 물고기」 쪽에서 남았다.
+   뼈대 생김새다: 대회장 안에 선 상대 · 보드판 · 발표 쥬스는 따로 다듬는다. 글은 큰 화면 24px, 폰 16px. */
+#start .contest-hello, #start .contest-again { display:block; font-size:14px; line-height:20px; font-weight:400; color:var(--ink); word-break:keep-all; text-wrap:balance; }
+/* 얼굴 칸(ui.mjs contestFaces): 머리와 어깨를 칸 아래 가운데에 붙인다. 넷이 한 배율이라 칸만 같으면 크기 차이가 곧 사람 차이다. */
+#start .contest-rival .start-pic, #start .contest-rank .start-pic { display:flex; align-items:flex-end; justify-content:center; overflow:hidden; }
+#start .contest-face { display:block; flex:none; image-rendering:pixelated; }
+/* 시작 창 상대 칸(폰 세로 밖): 얼굴 → 이름 → 첫 말을 위에서부터 쌓는다(첫 말이 칸 아래에 붙어 셋의 글 높이가 들쭉날쭉했다). */
+@media (min-width:481px) {
+  #start .contest-rival { display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:4px; }
+  #start .contest-rival .start-pic { width:100%; height:88px; flex:none; }
+  /* 짧은 이름 줄은 notebook.css의 align-self:start와 flex 줄(이름 span이 왼쪽)에 눌려 왼쪽에 붙었다. 칸 폭으로 펴고 가운데로. */
+  #start .contest-rivals > .contest-rival.start-task > p { margin:0; align-self:stretch; justify-content:center; text-align:center; }
+  #start .contest-rival > p > span { font-weight:700; }
+}
+@media (max-width:480px) { #start .contest-rival .start-pic { width:64px; height:64px; } }
+#start .contest-ranks { grid-template-columns:minmax(0,1fr); gap:6px; }
+/* 여백은 시작 칸 기본(ui-redesign.css: 위 9점은 틀 띠, 왼쪽 12점은 고리 자리)을 그대로 쓴다. */
+#start .contest-rank { grid-template-columns:auto 56px minmax(0,1fr); align-items:center; justify-items:start; text-align:left; }
+/* 한 줄 칸으로 두어 글 덩이를 줄 가운데에 놓는다. 시작 칸 기본(notebook.css 「auto 1fr auto」)이면 넷이 같은 높이로 늘 때
+   글이 맨 위 칸에 붙어, 배율 2 · 1280×800 접힌 순위표에서 이름 · 점수 줄 윗부분이 틀 윗선에 가려졌다(인디 채점 2026-11-12). */
+#start .start-task.contest-rank { grid-template-rows:minmax(0,1fr); }
+/* 안 나온 줄은 투명하게(수첩 틀은 visibility:hidden 칸을 건너뛰어 나중에 나온 줄에 틀이 없었다). */
+#start .contest-rank { --contest-accent:var(--sage); }
+#start .contest-rank[data-me="true"] { --contest-accent:var(--coral); }
+#start .contest-rank[data-rank="1"] { --contest-accent:var(--gold); }
+#start .contest-rank[data-shown="false"] { opacity:0; }
+#contest-finish, #contest-begin { position:fixed; left:50%; top:50%; transform:translate(-50%,-50%); z-index:50; font:700 48px/1.2 Galmuri11,sans-serif; color:#593d24; padding:6px 16px; background:#fff0c6; box-shadow:0 4px 0 #795134; pointer-events:none; white-space:nowrap; }
+#start[data-contest="announce"] { isolation:isolate; padding-right:max(28px,calc(12 * var(--dot))); }
+.contest-confetti { position:fixed; z-index:60; pointer-events:none; image-rendering:pixelated; }
+#start[data-contest="announce"] > :not(.n-frame) { position:relative; z-index:1; }
+.contest-first-trophy { position:absolute; right:calc(5 * var(--dot)); top:50%; width:calc(30 * var(--dot)); height:calc(32 * var(--dot)); object-fit:contain; image-rendering:pixelated; transform-origin:center; pointer-events:none; }
+.contest-first-spark { position:absolute; right:calc(14 * var(--dot)); top:calc(2 * var(--dot)); image-rendering:pixelated; pointer-events:none; }
+#hud .contest-tag[hidden] { display:none; }
+#start .contest-rank .sprite-box { height:56px; width:56px; }
+#start .contest-place { font-size:20px; line-height:24px; min-width:2.6em; }
+#start .contest-rank-text { display:grid; gap:2px; min-width:0; }
+#start .contest-rank-text p { display:block; margin:0; word-break:keep-all; overflow-wrap:anywhere; }
+/* 대회 기록 깨기 도장(판 3 단계 4): 내 줄 점수 옆 「새 기록」. 글 크기는 줄과 같고 붉은 테만 두른다. */
+#start .contest-record { display:inline-block; padding:0 4px; border:2px solid #b4472f; border-radius:2px; color:#b4472f; line-height:1.15; white-space:nowrap; }
+#start .contest-line { font-size:14px; line-height:20px; font-weight:400; }
+#start .contest-tie {font-size:14px;line-height:20px;word-break:keep-all;overflow-wrap:normal;}
+.contest-tie-part {display:inline-block;white-space:nowrap!important;}
+/* 두 덩이가 두 줄로 갈리면 첫 줄 끝 「·」를 숨긴다(ui.mjs foldTie). 자리는 남긴다. */
+[data-tie-wrapped] > .contest-tie-part > .contest-tie-dot {visibility:hidden;}
+/* 점은 늘 자기 덩이 글꼴을 따른다(끝 수첩의 `.next-text span` 크기 규칙이 안쪽 span까지 잡는다). */
+.contest-tie-dot {font:inherit!important;letter-spacing:inherit!important;}
+#start[data-contest='announce'][data-has-ties='true'] {max-height:calc(100dvh - 16px);display:flex;flex-direction:column;box-sizing:border-box;}
+#start[data-has-ties='true'] > h2,#start[data-has-ties='true'] > .sub,#start[data-has-ties='true'] > button {flex:none;}
+#start[data-has-ties='true'] .contest-ranks {min-height:0;max-height:calc(100dvh - 176px);overflow-y:auto;overscroll-behavior:contain;flex-shrink:1;}
+
+/* 주인 카드 먼저 읽기(ui.mjs renderCard): 까닭 읽는 카드와 같은 짜임에서 줄만 가운데로 */
+#hud.on-board { background:none; }
+#hud.on-board::before { display:none; }
+#hud.on-board .tools { margin-left:auto; }
+#hud .contest-text { position:relative; }
+#hud .contest-score-gain { position:fixed; font-size:16px; line-height:20px; color:#593d24; font-weight:700; pointer-events:none; }
+#hud .contest-score-gain[hidden] { display:none; }
+#hud .tools > .icon-btn { min-width:44px; min-height:44px; }
+#map .place.primary.n-button { min-height:max(44px,calc(20 * var(--dot))); height:max(44px,calc(20 * var(--dot))); }
+#end[data-contest='end'] .next-ico { width:calc(12 * var(--dot)); height:calc(12 * var(--dot)); }
+#hud .contest-board { position:fixed; box-sizing:border-box; padding:calc(3 * var(--board-dot)); overflow:hidden; display:grid; grid-template-rows:minmax(0,1fr) calc(23 * var(--board-dot)); gap:0; pointer-events:none; color:#593d24; }
+#hud .contest-board[hidden] { display:none; }
+html #hud.on-board .contest-board .tasks.contest { position:static; display:flex; justify-content:space-evenly; align-items:center; width:100%; max-width:none; height:100%; gap:0; padding:0; margin:0; }
+html #hud.on-board .contest-board .contest-tag { flex:0 1 auto; min-width:0; min-height:0; height:auto; margin:0; padding:0; gap:calc(2 * var(--board-dot)); filter:none; color:#593d24; }
+html #hud.on-board .contest-board .contest-tag .contest-ico { width:calc(12 * var(--board-dot)); height:calc(12 * var(--board-dot)); }
+html #hud.on-board .contest-board .contest-text { display:grid; align-items:center; gap:0; white-space:nowrap; }
+html #hud.on-board .contest-board .contest-text b { display:inline-block; font-size:24px; line-height:28px; transform-origin:center; }
+html #hud.on-board .contest-board .contest-text small { display:block; font-size:16px; line-height:18px; color:#593d24; }
+html #hud.on-board .contest-board .slots { position:static; display:flex; align-items:center; justify-content:center; gap:0; width:100%; max-width:none; height:100%; min-height:0; margin:0; padding:0; }
+html #hud.on-board .contest-board .slot { position:relative; inset:auto; width:calc(26 * var(--board-dot)); min-width:0; height:calc(23 * var(--board-dot)); min-height:0; margin:0; padding:0; flex:none; }
+html #hud.on-board .contest-board .slot-progress { position:static; color:#593d24; font-size:16px; line-height:20px; margin:0 calc(2 * var(--board-dot)) 0 0; }
+html #hud.on-board .contest-board .hud-decoration, html #hud.on-board .contest-board .contest-tag > .n-frame, html #hud.on-board .contest-board .slots > .n-frame { display:none; }
+/* 잡은 칸은 평소 큰 화면 위 띠와 같은 그림(26×23점, 1점 겹침)을 그대로 쓴다. 20×15점으로 줄이면 칸 그림과 빈 물고기가 눌려 회색 띠처럼 보였다. */
+html #hud.on-board .contest-board .slot + .slot { margin-left:calc(-1 * var(--board-dot)); }
+html #hud.on-board .contest-board .slot > .slot-empty { max-width:none; max-height:none; }
+html #hud.on-board .contest-board .slot > .pocket-fish { max-width:100%; max-height:100%; }
+
+#card.read-first .slip-why { justify-content:center; text-align:center; }
+#card.read-first .slip-why > span { word-break:keep-all; text-wrap:balance; }
+/* 폰: 안내 줄이 읽을 줄보다 커지지 않게 */
+@media (max-height:520px), (max-width:480px) { html #card.slip.read-first .card-act > .ask { font-size:16px; } }
+
+/* 큰 화면: 글 24px 이상 */
+@media (min-width:1200px) and (min-height:700px) {
+  /* 위 띠 잎과 책 바깥 책갈피 · 끈의 공간도 판 크기에 넣는다. 그림과 글 자리는 그대로다. */
+  #hud.on-board:has(.tasks.contest) { height:calc(53 * var(--dot)); }
+  #hud:has(.tasks.contest) ~ #end[data-contest='end'] { box-sizing:content-box; padding-right:calc(11 * var(--dot)); padding-bottom:var(--dot); }
+  #hud:has(.tasks.contest) ~ #end[data-contest='end'][data-edge-fold='true'] { padding-right:var(--dot); }
+  /* 큰 방패는 원래 29×27점이다. 점은 그대로 두고 30점 줄 가운데에 상자를 놓는다. */
+  #end[data-contest='end'] .next-ico { top:var(--dot); width:calc(30 * var(--dot)); height:calc(28 * var(--dot)); }
+  #hud .contest-score-gain { font-size:24px; line-height:28px; }
+  #start .contest-line, #start .contest-tie { font-size:24px; line-height:32px; }
+  /* 첫 말은 이름보다 한 단계 작게: 24px이면 196px 칸에서 서너 줄로 쪼개졌다(1280×800). */
+  #start .contest-hello, #start .contest-again { font-size:20px; line-height:28px; }
+  #start .contest-rival > p > span { font-size:24px; line-height:30px; }
+  #start .contest-rival .start-pic { height:128px; }
+  /* 미끼 줄(둘)이 들면 128px 칸 위가 78px씩 비고(얼굴은 40px, 칸 아래에 붙음) 시작 창이 73px 넘쳐 1280×800 얼음강에서
+     「대회 시작」이 판 밑에 잘렸다(2026-11-14 3차 채점 사진, Claude). 얼굴 칸만 56px로, 얼굴 크기는 그대로. */
+  #start[data-contest='start'].has-baits .contest-rival .start-pic { height:56px; }
+  #start .contest-place { font-size:32px; line-height:40px; }
+  /* 이름과 점수가 발표의 몫이다. 기본 크기(16px 안팎)면 아래 한마디(24px)보다 작아 순위표가 거꾸로 읽혔다(1695×902). */
+  #start .contest-rank-text p:first-child { font-size:24px; line-height:30px; }
+  /* 96px 그림 칸이면 1280×800에서 「다음」이 판 밖으로 밀린다(86px). 72px로. 두 칸 두 줄은 글 칸이 좁아져 쓰지 않는다. */
+  #start .contest-rank { grid-template-columns:auto 72px minmax(0,1fr); }
+  #start .contest-rank .sprite-box { height:72px; width:72px; }
+  #start[data-compact-ranks='true'] .contest-rank { grid-template-columns:auto 56px minmax(0,1fr); padding-top:12px; padding-bottom:4px; }
+  #start[data-compact-ranks='true'] .contest-rank .sprite-box { width:56px; height:56px; }
+}
+@media (min-width:1200px) and (min-height:700px) and (max-height:760px) {
+  #start[data-contest='start'], #start[data-contest='announce'] { width:min(calc(100vw - 80px),800px); max-width:none; }
+}
+
+/* 폰 가로(가장 빡빡하다): 발표 넷을 두 줄 두 칸으로 */
+@media (max-height:520px) and (min-width:600px) {
+  #start .contest-ranks { grid-template-columns:repeat(2, minmax(0,1fr)); gap:4px; }
+  #start .contest-rank .sprite-box { height:40px; width:40px; }
+  #start .contest-rank { grid-template-columns:auto 40px minmax(0,1fr); }
+  #start .contest-hello, #start .contest-again, #start .contest-line { font-size:14px; line-height:18px; }
+  #start .contest-rival .start-pic { height:40px; }
+  /* 위 9px는 틀 윗띠 자리: 4px이면 세 줄 한마디가 칸을 채워 이름 · 점수 줄 윗부분이 틀 윗선에 걸렸다(2026-11-12 밤). */
+  #start[data-contest='announce'] .contest-rank { padding-top:9px; padding-bottom:3px; }
+  #start[data-contest='announce'] .contest-rank-text p:first-child { font-size:16px; line-height:20px; }
+  /* 「새 기록」 도장(판 3 단계 4): 667×260 칸은 한 줄에 125px 남짓이라 도장 글을 12px로 줄여 「나 27점 새 기록」을 한 줄에 둔다. */
+  #start[data-contest='announce'] .contest-record { font-size:12px; line-height:14px; padding:0 2px; }
+  html #hud.on-board .contest-board .contest-text b { font-size:16px; line-height:20px; }
+  html #hud.on-board .contest-board .contest-text small { display:none; }
+}
+
+/* 가장 낮은 폰 가로(667×260 등): 발표 판의 「대회 결과」 띠를 빼고 장소 줄에 붙여 한 줄로 쓴다.
+   띠와 장소 줄이 따로 있으면 3 · 4등 칸의 둘째 줄이 판 밖으로 45px 잘렸다(2026-11-11 출시 점검 고칠 것 4). */
+#start .sub-tail { display:none; }
+@media (max-height:300px) and (min-width:600px) {
+  #start[data-contest='announce'] { padding-top:12px; padding-bottom:12px; }
+  #start[data-contest='announce'] > h2 { display:none; }
+  #start[data-contest='announce'] .sub-tail { display:inline; }
+}
+
+/* 폰 세로 */
+.contest-map-venue { position:absolute; display:grid; place-items:center; padding:0; min-width:44px; min-height:44px; background:none; border:0; border-radius:0; box-shadow:none; z-index:3; cursor:pointer; }
+.contest-map-venue img { display:block; image-rendering:pixelated; pointer-events:none; max-width:none; }
+.contest-map-venue:not([aria-disabled="true"]):active { translate:none; transform:none; }
+.contest-map-venue:not([aria-disabled="true"]):active > img { translate:0 2px; }
+.contest-map-venue[aria-disabled="true"], #map .contest-map-venue .contest-map-label:disabled { cursor:default; }
+.contest-map-venue:focus-visible { outline:3px solid #593d24; outline-offset:3px; }
+.contest-map-venue .map-contest-trophy { position:absolute; left:100%; bottom:0; width:calc(15 * var(--map-dot)); height:calc(16 * var(--map-dot)); }
+/* 이름표도 대회장 단추의 한 부분이라 눌린다(2026-11-09 대표 「이름 눌러도 들어갈 수 있게」). 다른 곳 이름표처럼 누르는 꼴이다. */
+#map .contest-map-venue .contest-map-label { max-width:none; color:var(--ink); pointer-events:auto; cursor:pointer; }
+.title-contest-trophies { position:absolute; top:50%; transform:translateY(-50%); display:flex; pointer-events:none; }
+.title-contest-trophies[hidden] { display:none; }
+.title-contest-trophies canvas { flex:none; image-rendering:pixelated; }
+@media (max-width:480px) {
+  #start[data-contest] > .primary { width:min(100%, 260px); min-height:48px; }
+}
+/* 폰 세로 발표: 「1등」 칸(56px)에 글은 30px 남짓이라 대사 칸이 131px로 좁아 「가물치는 / 지렁이보다 / 블루길을 좋아해.」로 조각났다
+   (2026-11-11 출시 점검 고칠 것 12). 등수 칸을 40px로. 미끼 이름이 갈라지지 않게 대사(contest-rivals.mjs)는 이름 안 띄어쓰기를 붙인다. */
+@media (max-width:599px) {
+  #start .contest-rank { grid-template-columns:auto 40px minmax(0,1fr); }
+}
+
+/* 판 4: 겨루기는 고르기 전부터 보이고, 저수지는 남은 걸기 · 다섯 칸을 쓰지 않는다. */
+#start .contest-rule, #start .contest-tiers { margin:0; font-size:16px; line-height:22px; word-break:keep-all; }
+#start .contest-meta { min-width:0; }
+#start[data-contest='start'] .start-baits button, #start[data-contest='start'] .start-bait-label { font-size:16px!important; }
+#hud.contest-count .slots { display:none!important; }
+#hud.contest-count .contest-board { grid-template-rows:minmax(0,1fr); }
+#map .contest-map-label .venue-rule { display:block; font-size:16px; line-height:20px; font-weight:400; white-space:normal; }
+#map .contest-map-venue .place.contest-map-label { height:auto; min-height:44px; display:grid; grid-template-columns:minmax(0,1fr); gap:2px; padding:6px 14px 8px 22px; white-space:normal; }
+#map .contest-map-venue .place.contest-map-label b { color:var(--ink); text-shadow:none; }
+/* 마친 날 둘째 줄. 「새 기록」 도장과 같은 붉은 글(종이 바탕 4.9:1). */
+#map .contest-map-label .venue-done { display:block; font-size:16px; line-height:20px; font-weight:400; color:#b4472f; }
+@media (min-width:600px) and (min-height:521px) {
+  #start[data-contest='start'] .contest-rivals { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  #start[data-contest='start'] .contest-rival:first-child { grid-column:1/-1; display:grid; grid-template-columns:72px 112px minmax(0,1fr); align-items:center; gap:8px; }
+  #start[data-contest='start'] .contest-rival:first-child .start-pic { grid-column:1; grid-row:1; width:72px; height:72px; }
+  #start[data-contest='start'] .contest-rival:first-child > p:not(.contest-hello):not(.contest-again) { grid-column:2; grid-row:1; }
+  #start[data-contest='start'] .contest-rival:first-child > .contest-hello, #start[data-contest='start'] .contest-rival:first-child > .contest-again { grid-column:3; grid-row:1; text-align:left; }
+}
+@media (max-height:520px), (max-width:599px) {
+  #start .contest-hello, #start .contest-again, #start .contest-line, #start .contest-tie, #start .contest-record { font-size:16px; line-height:20px; }
+  #start .contest-rank-text p { overflow-wrap:break-word; }
+  #start .start-task.contest-rank { grid-template-columns:32px 24px minmax(0,1fr); column-gap:4px; padding-left:8px; padding-right:8px; }
+  #start .contest-rank .sprite-box { width:24px; height:24px; }
+  #start .contest-place { min-width:0; font-size:16px; line-height:22px; }
+}
+@media (max-height:520px) and (min-width:600px) {
+  #start[data-contest='start'] { display:grid; grid-template-columns:auto minmax(0,1fr); column-gap:12px; row-gap:2px; padding:6px 20px; }
+  #start[data-contest='start'] > h2 { grid-column:1; grid-row:1; align-self:center; margin:0; }
+  #start[data-contest='start'] .contest-meta { grid-column:2; grid-row:1; }
+  #start[data-contest='start'] .contest-meta .sub { margin:0; }
+  #start[data-contest='start'] .start-tasks { grid-column:1/-1; grid-row:2; margin:2px 0; }
+  #start[data-contest='start'] .start-baits { grid-column:1/-1; grid-row:3; margin:2px 0; }
+  #start[data-contest='start'] > .primary { grid-column:1; grid-row:4; min-height:44px; align-self:center; }
+  #start[data-contest='start'] > .tip { grid-column:2; grid-row:4; align-self:center; margin:0; }
+  #start[data-contest='start'] .contest-rival .start-pic { height:24px; }
+  #start[data-contest='start'] .contest-rival { gap:0; padding-top:4px; padding-bottom:4px; }
+  #start[data-contest='start'].has-baits { grid-template-columns:minmax(0,1fr) 240px; grid-template-rows:auto minmax(0,1fr) auto; }
+  #start[data-contest='start'].has-baits > h2 { display:none; }
+  #start[data-contest='start'].has-baits .contest-meta { grid-column:1; grid-row:1; }
+  #start[data-contest='start'].has-baits .start-tasks { grid-column:1; grid-row:2; min-height:0; }
+  #start[data-contest='start'].has-baits .contest-rivals { grid-template-columns:repeat(2,minmax(0,1fr)); }
+  #start[data-contest='start'].has-baits .contest-rival:first-child { grid-column:1/-1; display:grid; grid-template-columns:24px 78px minmax(0,1fr); align-items:center; gap:4px; padding-top:10px; padding-bottom:8px; }
+  #start[data-contest='start'].has-baits .contest-rival:first-child .start-pic { grid-column:1; grid-row:1; width:24px; }
+  #start[data-contest='start'].has-baits .contest-rival:first-child > p:not(.contest-hello):not(.contest-again) { grid-column:2; grid-row:1; }
+  #start[data-contest='start'].has-baits .contest-rival:first-child > .contest-hello, #start[data-contest='start'].has-baits .contest-rival:first-child > .contest-again { grid-column:3; grid-row:1; text-align:left; }
+  #start[data-contest='start'].has-baits .start-baits { grid-column:2; grid-row:1/3; display:flex; flex-wrap:wrap; gap:2px; padding:0; margin:0; overflow:visible; align-content:start; min-height:210px; }
+  #start[data-contest='start'].has-baits .start-baits .start-bait-label { position:static; flex-basis:100%; width:100%; height:20px; font-size:16px!important; line-height:20px; }
+  #start[data-contest='start'].has-baits .start-baits button { flex:0 0 calc(50% - 1px); min-height:44px; min-width:0; flex-direction:column; padding:0; font-size:16px!important; line-height:20px; }
+  #start[data-contest='start'].has-baits .start-baits button span { font-size:16px!important; }
+  #start[data-contest='start'].has-baits > .primary { grid-column:2; grid-row:3; width:100%; }
+  #start[data-contest='start'].has-baits > .tip { grid-column:1; grid-row:3; max-width:none; }
+  #start[data-contest='start'] .contest-meta p { line-height:20px; }
+  #start[data-contest='start'] .contest-hello, #start[data-contest='start'] .contest-again { line-height:20px!important; }
+}

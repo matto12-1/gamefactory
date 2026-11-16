@@ -1,0 +1,7 @@
+#restoreNote {position:fixed;z-index:18;pointer-events:none;display:flex;flex-direction:column;gap:4px;padding:8px 12px;border:2px solid #243f40;background:#fff4d8;color:#243f40;font-family:Galmuri11,sans-serif;font-size:24px;line-height:32px;white-space:nowrap;word-break:keep-all;overflow-wrap:normal;max-width:calc(100vw - 16px);}
+#restoreNote[hidden] {display:none;}
+#restoreNote b {font-weight:bold;}
+/* 폰은 16px(배율 2는 18px로 맞춰진다): 12px 쪽지는 읽기 힘들었다(인디 채점 2026-11-12). */
+@media(max-width:599px),(max-height:420px) {#restoreNote {font-size:16px;line-height:22px;gap:2px;padding:6px 8px;}}
+/* 좁은 폰은 한 줄에 다 안 들어가 끝 글자가 칸 밖으로 나갔다(11-15 검수, 360폭 물까마귀). 어절 단위로 줄을 바꾼다. */
+@media(max-width:599px) {#restoreNote {white-space:normal;}}

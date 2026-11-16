@@ -1,0 +1,698 @@
+/* Task 7a: shared notebook parts. Their source pixels keep the stage's integer K. */
+#title .title-book,#title .title-actions,#title .title-label {min-width:0;max-width:100%;}
+#title {--title-kicker-font:48px;--title-name-font:96px;}
+#title .title-kicker {font-size:round(nearest,var(--title-kicker-font),var(--font-step,4px))!important;line-height:1.6!important;}
+#title .title-name {font-size:round(nearest,var(--title-name-font),var(--font-step,4px))!important;line-height:1.6!important;}
+@media(max-width:1500px) {#title {--title-kicker-font:32px;--title-name-font:64px;}}
+@media(max-width:599px) {#title {--title-name-font:48px;}}
+@media(min-width:600px) {
+ #title .title-card {max-height:90%;grid-template-rows:minmax(0,1fr) auto;}
+ #title .title-book {min-height:0;grid-template-rows:auto minmax(0,1fr);}
+ #title .title-scraps {min-height:0;}
+}
+/* A viewport change reaches CSS before the next resize callback. Keep the
+   authored low-screen title on its 12px font grid during that interval. */
+@media (min-width:600px) and (max-height:520px) {
+ #title {--title-name-font:32px;--title-kicker-font:32px;}
+ #title .title-card {top:4px;height:calc(100% - 8px);max-height:none;grid-template-rows:minmax(0,1fr) auto;gap:4px;}
+ #title .title-book {min-height:0;grid-template-rows:auto minmax(0,1fr);padding:min(calc(5 * var(--dot)),8px) min(calc(9 * var(--dot)),14px) min(calc(7 * var(--dot)),10px) min(calc(10 * var(--dot)),16px);}
+ #title .title-label {padding:min(calc(4 * var(--dot)),6px) min(calc(12 * var(--dot)),18px);}
+ #title .title-scraps {min-height:0;}
+ #title .title-actions > [data-act='play'] {height:44px;min-height:44px;}
+ #title .title-actions {gap:4px;}
+ #title .title-row {flex-wrap:nowrap;gap:8px;}
+ #title .title-row .round-btn {flex:1;min-width:0;width:auto;height:44px;min-height:44px;}
+ #title .title-row .button-disc {width:40px;height:40px;}
+ #title .crown-atlas-foot {position:relative;left:auto;right:auto;bottom:auto;margin:0;padding:0 6px;min-height:20px;line-height:20px;}
+ #title .crown-atlas-foot span {line-height:20px!important;}
+}
+/* First-fight copy leaves the paper fringe and leaf clear. The underlying
+   catch announcement waits beneath the modal guide. */
+#bubble.intro-guide[data-coach] {padding-right:max(28px,calc(14 * var(--dot)));}
+#bubble.intro-guide[data-coach] .bubble-text {text-align:left;word-break:keep-all;overflow-wrap:normal;}
+body.with-coach #pop#pop {visibility:hidden;}
+@media (min-width:600px) and (max-height:520px) {
+ #intro .intro-head {gap:4px;}
+}
+button.n-button[data-notebook-frame='tag-coral'] { min-height:max(40px,calc(20 * var(--dot))); height:max(40px,calc(20 * var(--dot))); padding:0 calc(6 * var(--dot)) 0 calc(14 * var(--dot)); font-size:24px; line-height:32px; }
+button.n-button[data-notebook-frame^='badge'], #lookBtn.n-button { padding:0; width:max(40px,calc(20 * var(--dot))); height:max(40px,calc(20 * var(--dot))); min-width:40px; min-height:40px; display:grid; place-items:center; }
+.title-card [data-act='play'].n-button { min-height:max(40px,calc(20 * var(--dot))); }
+.title-row { display:flex; justify-content:center; gap:16px; }
+.title-row button.n-button { min-width:40px; padding:0; flex-direction:row; }
+.title-row button .n-sprite { display:block; }
+.title-label, #start h2, #map h2 { position:relative; padding:calc(4 * var(--dot)) calc(12 * var(--dot)); text-align:center; }
+/* 「도감 완성」 상 표지의 천 조각 무늬(판 3 단계 7): 이름판 오른쪽 위, 한 점 굵기 그대로 */
+#title .title-patch { position:absolute; top:calc(5 * var(--dot)); right:calc(5 * var(--dot)); width:calc(16 * var(--dot)); height:calc(16 * var(--dot)); image-rendering:pixelated; pointer-events:none; z-index:1; }
+#start .start-task { position:relative; padding:calc(9 * var(--dot)) calc(5 * var(--dot)) calc(5 * var(--dot)) calc(12 * var(--dot)); }
+#map .place.primary.n-button { height:auto; padding:calc(4 * var(--dot)) calc(5 * var(--dot)) calc(4 * var(--dot)) calc(14 * var(--dot)); }
+#map .place.primary.n-button { display:flex; align-items:center; min-height:max(40px,calc(20 * var(--dot))); height:max(40px,calc(20 * var(--dot))); padding:0 calc(6 * var(--dot)) 0 calc(14 * var(--dot)); }
+#map .place.primary b { font-size:16px; line-height:24px; }
+/* 산호 꼬리표 위 물 이름: 짙은 초록 글은 판(#bd816f)과 2.79:1이었다(인디 채점 2026-11-12). 다른 산호 꼬리표처럼 크림 글 + 짙은 1점 테두리 */
+#map .place.primary.n-button b { color:#fff4d8; text-shadow:calc(-1 * var(--dot)) 0 #243f40,var(--dot) 0 #243f40,0 calc(-1 * var(--dot)) #243f40,0 var(--dot) #243f40; }
+#map .map-summary { margin:0; max-width:220px; font-size:16px; line-height:24px; }
+#map .map-summary > span { white-space:nowrap; }
+/* 잠긴 곳 안내 글은 이름 아래 줄로(한 줄에 붙으면 「연못마을 하천에서…」로 읽힌다, 2026-10-30). */
+#map .place .lock { display:block; }
+#map .round-btn .ico, #dex .round-btn .ico, #end .round-btn .ico, #pause .round-btn .ico, .start-task .ico { width:calc(12 * var(--dot)); height:calc(12 * var(--dot)); }
+
+/* HUD footprints stay in the same physical areas used by top-check and the scene. */
+#hud .task { padding:calc(9 * var(--dot)) calc(4 * var(--dot)) calc(4 * var(--dot)) calc(12 * var(--dot)); min-height:64px; }
+#hud .task-pic { height:24px; }
+#hud .slots { position:relative; padding:calc(3 * var(--dot)) calc(5 * var(--dot)); height:max(44px,calc(20 * var(--dot))); }
+#hud .slot { position:relative; background:none; border:0; padding:0 calc(2 * var(--dot)); height:max(32px,calc(14 * var(--dot))); min-height:32px; }
+#hud .slot-progress { color:var(--ink); text-shadow:none; }
+#hud .tools { align-items:center; }
+#hud .task-info .spot-chip { display:none; }
+#hud .task-info { display:block; }
+#hud .task-info .clue { font-size:16px; line-height:22px; }
+
+/* card-2: photo, ribbon, short facts and three picture choices on one vertical page. */
+#card.panel { left:50%; right:auto; top:calc(50% + 38px); transform:translate(-50%,-50%); width:min(720px,calc(100vw - 24px)); max-height:calc(100vh - 140px); padding:calc(9 * var(--dot)) calc(9 * var(--dot)) calc(10 * var(--dot)) calc(14 * var(--dot)); display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto auto auto auto; gap:10px; overflow:visible; text-align:left; align-items:stretch; }
+#card .card-rings { position:absolute; left:calc(3 * var(--dot)); top:calc(8 * var(--dot)); bottom:calc(8 * var(--dot)); width:calc(8 * var(--dot)); }
+#card .card-pic { grid-column:1; grid-row:1; height:min(26vh,250px); padding:calc(7 * var(--dot)) calc(7 * var(--dot)) calc(13 * var(--dot)); }
+#card .card-top { grid-column:1; grid-row:2; position:relative; display:flex; align-items:center; justify-content:center; min-height:calc(18 * var(--dot)); padding:calc(4 * var(--dot)) calc(10 * var(--dot)); gap:8px; }
+#card .card-top h2, #card .card-top .size { font-size:32px; line-height:40px; margin:0; }
+#card .badge { flex:none; margin:0; line-height:24px; font-size:16px; }
+#card .card-sticker { position:absolute; left:calc(-2 * var(--dot)); top:calc(-5 * var(--dot)); padding:calc(3 * var(--dot)) calc(4 * var(--dot)); color:var(--paper); }
+#card .record, #card .big-stamp { font-size:16px; line-height:24px; margin-left:8px; padding:0; background:none; white-space:nowrap; }
+#card .card-lines { grid-column:1; grid-row:3; width:100%; align-self:center; padding:0; }
+#card .card-lines p { display:flex; align-items:center; gap:12px; margin:4px 0; font-size:16px; line-height:24px; word-break:keep-all; }
+#card .fact-pic { display:grid; place-items:center; position:relative; width:max(48px,calc(12 * var(--dot))); height:max(32px,calc(12 * var(--dot))); flex:none; overflow:hidden; }
+#card .card-phrase-break { display:none; }
+#card .card-act { grid-column:1; grid-row:4; display:block; min-width:0; }
+#card .card-act > p { margin:4px 0; font-size:16px; line-height:24px; text-align:center; }
+#card .card-rule { position:relative; display:block; height:calc(2 * var(--dot)); margin:4px 0; }
+#card .homes, #card .options { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; margin-top:6px; }
+#card .home.n-button { display:grid; justify-items:center; min-height:148px; padding:calc(4 * var(--dot)) calc(4 * var(--dot)) calc(6 * var(--dot)); gap:6px; font-size:16px; line-height:24px; }
+#card .option.n-button { display:grid; align-content:center; justify-items:center; min-height:116px; padding:calc(4 * var(--dot)); font-size:16px; line-height:24px; }
+#card .photo-tape { z-index:2; top:calc(-16 * var(--dot)); }
+#card.quiz .card-lines { display:none; }
+
+/* Pause and end use whole round stamps and a tag of fixed source height. */
+#pause .pause-buttons button.primary[data-notebook-frame='tag-coral'], #end.end-book .end-buttons button.primary[data-notebook-frame='tag-coral'] { min-height:max(44px,calc(20 * var(--dot))); height:max(44px,calc(20 * var(--dot))); padding:0 calc(6 * var(--dot)) 0 calc(14 * var(--dot)); }
+#pause button.icon-toggle, #pause button.round-btn, #end.end-book .end-buttons button.round-btn { width:max(40px,calc(20 * var(--dot))); height:max(40px,calc(20 * var(--dot))); }
+#end .sticker { top:calc(-5 * var(--dot)); left:calc(-1 * var(--dot)); }
+#end .new-fish { margin-top:calc(4 * var(--dot)); }
+#end .photo-frame { position:relative; }
+#end .end-tape { position:absolute; left:50%; top:0; translate:-50% 0; pointer-events:none; }
+#end .end-leaf { position:absolute; left:0; bottom:0; pointer-events:none; }
+#end.end-book .end-buttons button.primary, #end.end-book .end-buttons button.round-btn { min-height:max(44px,calc(20 * var(--dot))); height:max(44px,calc(20 * var(--dot))); }
+
+/* A book has one size for met and unknown pages. Tabs sit on its upper edge. */
+#dex.dex-book { height:min(820px,calc(100vh - 24px)); grid-template-rows:auto minmax(0,1fr) 40px; overflow:visible; }
+#dex .dex-tabs { align-self:start; margin-top:calc(-14 * var(--dot)); position:relative; z-index:2; gap:calc(2 * var(--dot)); }
+#dex button.dex-tab { padding:calc(5 * var(--dot)) calc(8 * var(--dot)); height:max(40px,calc(24 * var(--dot))); min-height:40px; align-self:start; }
+#dex .dex-tab .ico { width:calc(12 * var(--dot)); height:calc(12 * var(--dot)); }
+#dex .dex-photo .dex-tape { top:calc(-16 * var(--dot)); }
+#dex .dex-tab[aria-selected='true'] { z-index:2; translate:0 calc(2 * var(--dot)); }
+#dex .dex-tab[aria-selected='true'] > span { box-shadow:none; }
+#dex .dex-tab[aria-selected='false'] { z-index:1; }
+#dex .dex-portrait { position:relative; isolation:isolate; }
+#dex .dex-portrait > :not(.dex-water) { position:relative; z-index:1; flex:none; }
+#dex .dex-water { position:absolute; z-index:0; }
+#dex .dex-record { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:4px 8px; }
+#dex .dex-name { padding-top:calc(4 * var(--dot)); padding-bottom:calc(4 * var(--dot)); }
+#dex .dex-crown { display:inline-grid; padding:0; background:none; }
+#dex .dex-right { position:relative; }
+#dex .dex-spread { align-self:stretch; }
+#dex .dex-window { display:grid; place-items:center; align-content:center; min-height:0; width:100%; flex:1 1 auto; overflow:visible; }
+#dex .dex-window > canvas { position:static; }
+#dex .dex-spot { position:absolute; left:50%; top:0; translate:-50% 0; font-size:16px; line-height:24px; padding:0 6px; color:var(--ink); background:var(--paper); white-space:nowrap; z-index:1; }
+#dex .dex-empty { display:grid; place-items:center; color:#9ba99a; border:var(--dot) dashed #c2caba; font-size:32px; line-height:40px; width:70%; flex:1; margin:8px; }
+#dex .dex-right > .dex-unknown { position:absolute; left:50%; top:50%; translate:-50% -50%; padding:4px 12px; background:var(--paper); white-space:nowrap; }
+#dex .dex-part { overflow:hidden; }
+#dex .dex-eaters { gap:4px; }
+#dex .eco-label { line-height:24px; }
+#dex .dex-spread[data-met='false'] .dex-right { grid-template-columns:repeat(2,minmax(0,1fr)); grid-template-rows:minmax(0,1fr) 32px minmax(0,1fr); grid-template-areas:'home food' 'unknown unknown' 'eco chain'; }
+#dex .dex-spread[data-met='false'] .dex-label { visibility:hidden; }
+#dex .dex-spread[data-met='false'] .dex-unknown { grid-area:unknown; position:static; translate:none; margin:0; align-self:center; justify-self:center; padding:0; }
+#start h2, #map h2 { line-height:48px; }
+#pause .pause-title { line-height:48px; }
+
+/* A desktop sidebar uses the blank paper beside the single valley canvas. */
+#dex.dex-book[data-tab='web'] { grid-template-rows:auto minmax(0,1fr); }
+#dex .dex-web { display:grid; grid-template-columns:minmax(0,1fr) minmax(240px,310px); grid-template-rows:auto minmax(0,1fr); grid-template-areas:'banner banner' 'stage detail'; gap:12px 24px; align-content:center; }
+#dex .web-banner { grid-area:banner; justify-self:center; line-height:48px; }
+#dex .web-stage { grid-area:stage; justify-self:center; align-self:center; }
+#dex .web-details { grid-area:detail; align-self:center; display:grid; gap:16px; justify-items:center; width:100%; }
+#dex .web-caption { display:grid; gap:12px; }
+#dex .web-caption .web-name { position:relative; margin:0; padding:calc(3 * var(--dot)) calc(10 * var(--dot)); font-size:16px; line-height:24px; }
+#dex .web-counts { display:flex; gap:16px; margin:0; font-size:16px; line-height:24px; }
+#dex .web-legend { width:100%; padding-top:16px; border-top:var(--dot) dotted #c2caba; }
+#dex .web-legend p { margin:6px 0; font-size:16px; line-height:24px; }
+#dex .web-legend i { display:inline-block; width:24px; height:calc(2 * var(--dot)); margin-right:8px; vertical-align:middle; background:var(--ink); }
+#dex .web-legend .food-key { background:#bdc9a1; outline:var(--dot) solid var(--ink); }
+#dex .web-legend .eater-key { background:#e9b3a0; outline:var(--dot) solid var(--ink); }
+#dex .web-legend .group-key { background:none; height:0; border-top:var(--dot) dashed var(--ink); }
+/* 먹이그물은 색으로만 가르지 않는다(인디 채점 2026-11-12, 색각 흉내에서 두 색 1.01:1): 범례는 화살표 방향 · 실선 · 점선을 글로, 개수 줄은 색 칸 옆에 「먹이 · 먹는 생물」 글 */
+#dex .web-legend .arrow-key { background:var(--ink); }
+#dex .web-legend .arrow-key::after { content:''; position:absolute; right:calc(-1 * var(--dot)); top:calc(-1.5 * var(--dot)); border-left:calc(3 * var(--dot)) solid var(--ink); border-top:calc(2.5 * var(--dot)) solid transparent; border-bottom:calc(2.5 * var(--dot)) solid transparent; }
+#dex .web-counts > span { display:inline-flex; align-items:center; gap:6px; }
+#dex .web-counts i { display:inline-block; width:14px; height:calc(2 * var(--dot)); outline:var(--dot) solid var(--ink); }
+#dex .web-counts .food-key { background:#bdc9a1; }
+#dex .web-counts .eater-key { background:#e9b3a0; }
+#dex.web-measure .dex-web { grid-template-columns:minmax(0,1fr) minmax(240px,310px); }
+#dex.web-measure .web-stage { align-self:stretch; justify-self:stretch; }
+
+@media(max-width:599px) {
+  button.n-button[data-notebook-frame='tag-coral'] { font-size:16px; line-height:24px; }
+  #hud .task.current { padding:calc(9 * var(--dot)) calc(4 * var(--dot)) calc(4 * var(--dot)) calc(12 * var(--dot)); min-height:56px; height:auto; }
+  #hud .slots { padding:calc(3 * var(--dot)) calc(5 * var(--dot)); }
+  #hud .slot { width:40px; min-width:40px; height:36px; min-height:36px; }
+  #hud .task.current .task-info { display:block; }
+  #card.panel { top:calc(50% + 48px); max-height:calc(100vh - 148px); gap:6px; padding:calc(8 * var(--dot)) calc(7 * var(--dot)) calc(9 * var(--dot)) calc(13 * var(--dot)); }
+  #card .card-pic { height:170px; }
+  #card .card-top { min-height:40px; padding:calc(3 * var(--dot)) calc(5 * var(--dot)); }
+  #card .card-top h2, #card .card-top .size { font-size:16px; line-height:24px; }
+  #card .card-lines p { gap:8px; line-height:24px; margin:3px 0; }
+  #card .fact-pic { width:32px; height:28px; }
+  #card .home.n-button { min-height:102px; padding:calc(4 * var(--dot)); gap:4px; }
+  #card .option.n-button { min-height:96px; }
+  #dex.dex-book { height:calc(100vh - 32px); grid-template-rows:auto minmax(0,1fr) 40px; }
+  #dex .dex-spread { grid-template-rows:auto minmax(0,1fr); }
+  #dex .dex-tabs { margin-top:calc(-12 * var(--dot)); }
+  #dex button.dex-tab { padding:calc(5 * var(--dot)) calc(8 * var(--dot)); gap:4px; }
+  #dex .dex-right { grid-template-rows:minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr); }
+  #dex .dex-part { padding:4px; gap:2px; }
+  #dex .dex-label { line-height:24px; }
+  #dex .dex-home .dex-line { line-height:22px; }
+  #dex .dex-window > canvas { max-width:none; }
+  #dex .dex-spot { font-size:14px; line-height:20px; }
+  #dex .dex-photo { padding-bottom:calc(8 * var(--dot)); }
+  #dex .dex-portrait { height:100px; }
+  #dex .dex-name { font-size:24px; line-height:32px; padding:calc(3 * var(--dot)) calc(10 * var(--dot)); }
+  #dex .dex-left { gap:4px; }
+  #dex .dex-story { line-height:22px; }
+  #dex .dex-links { gap:4px; }
+  #dex .dex-eaters { flex-direction:row; flex-wrap:wrap; max-width:88px; justify-content:center; gap:2px; }
+  #dex .eco-label { font-size:14px; line-height:20px; }
+}
+@media(max-height:520px) and (min-width:600px) {
+ #end:has(.new-fish:nth-child(4)) .end-new { gap:8px; }
+  button.n-button[data-notebook-frame='tag-coral'] { font-size:16px; line-height:24px; }
+  #hud .task { min-height:44px; height:44px; padding:calc(9 * var(--dot)) calc(3 * var(--dot)) calc(3 * var(--dot)) calc(12 * var(--dot)); }
+  #hud .task-pic { height:20px; }
+  #hud .task-info { display:none; }
+  #hud .slot { height:36px; min-height:36px; }
+  /* Preserve the former low HUD footprint used by the physics and top-check. */
+  #hud .tools > .icon-btn { width:48px; height:48px; min-width:48px; min-height:48px; }
+  #hud .slots { height:42px; padding-top:0; padding-bottom:0; }
+  #hud .slot { width:42px; height:42px; min-height:42px; }
+  #card.panel { top:calc(50% + 30px); width:calc(100vw - 24px); max-height:calc(100vh - 72px); grid-template-columns:minmax(0,1fr) minmax(0,2.4fr); grid-template-rows:auto auto auto; padding:calc(5 * var(--dot)) calc(8 * var(--dot)) calc(6 * var(--dot)) calc(14 * var(--dot)); gap:4px 16px; }
+  #card .card-pic { grid-column:1; grid-row:1 / 4; height:210px; align-self:center; }
+  #card .card-top { grid-column:2; grid-row:1; min-height:36px; padding:calc(3 * var(--dot)) calc(6 * var(--dot)); }
+  #card .card-top h2, #card .card-top .size { font-size:16px; line-height:24px; }
+  #card .card-lines { grid-column:2; grid-row:2; }
+  #card .card-lines p { font-size:16px; line-height:22px; gap:8px; margin:0; }
+  #card .fact-pic { width:max(24px,calc(12 * var(--dot))); height:max(24px,calc(12 * var(--dot))); }
+  #card .card-act { grid-column:2; grid-row:3; }
+  #card .card-act > p { font-size:16px; line-height:22px; margin:2px 0; }
+  #card .home.n-button { min-height:86px; padding:calc(3 * var(--dot)) calc(3 * var(--dot)) calc(5 * var(--dot)); gap:2px; }
+  #card .option.n-button { min-height:78px; padding:calc(3 * var(--dot)); }
+  #card .card-rule { margin:0; }
+  #dex.dex-book { height:calc(100vh - 16px); grid-template-rows:40px minmax(0,1fr); }
+  #dex .dex-tabs { margin-top:calc(-9 * var(--dot)); }
+  #dex .dex-record, #dex .dex-story, #dex .dex-clue { line-height:22px; }
+  #dex .dex-portrait { height:calc(62 * var(--dot)); }
+  #dex .dex-photo { padding-bottom:calc(12 * var(--dot)); }
+  #dex .dex-right { grid-template-columns:minmax(0,1fr) minmax(0,1.6fr); grid-template-rows:minmax(0,1fr) minmax(0,1fr); grid-template-areas:'home food' 'eco chain'; }
+  #dex .dex-part { padding:2px 4px; gap:2px; }
+  #dex .dex-eaters { flex-direction:column; gap:2px; }
+  #dex .eco-label { font-size:14px; line-height:20px; }
+  #dex .dex-name { padding-top:calc(4 * var(--dot)); padding-bottom:calc(4 * var(--dot)); }
+  #start { width:calc(100vw - 24px); display:grid; grid-template-columns:minmax(0,1fr) auto; gap:4px 12px; }
+  #start h2 { grid-column:1; margin:0; }
+  #start .sub { grid-column:1; margin:0; }
+  #start .start-tasks { grid-column:1; grid-row:3 / 6; margin:0; }
+  #start .start-task { padding-top:calc(9 * var(--dot)); padding-bottom:calc(4 * var(--dot)); }
+  #start .start-task .sprite-box { height:36px; }
+  #start .start-task p { line-height:24px; }
+  #start > .primary { grid-column:2; grid-row:1 / 4; align-self:center; }
+  #start .tip { grid-column:2; max-width:220px; line-height:24px; }
+  #map .map-summary { order:-1; max-width:180px; font-size:14px; line-height:20px; }
+  #map .map-summary > span { display:block; }
+}
+@media (max-width:430px) {
+  #map .map-summary > span { display:block; }
+}
+@media(max-height:340px) and (min-width:600px) {
+  #card.panel { top:calc(50% + 26px); max-height:calc(100vh - 64px); grid-template-columns:minmax(0,1fr) minmax(0,3fr); gap:2px 12px; padding-top:calc(3 * var(--dot)); padding-bottom:calc(4 * var(--dot)); }
+  #card .card-pic { height:160px; }
+  #card .home.n-button { min-height:68px; }
+  #card .option.n-button { min-height:64px; }
+  #card .homes, #card .options { margin-top:2px; gap:4px; }
+  #dex .dex-portrait { height:calc(50 * var(--dot)); }
+  #dex .dex-window { display:grid; }
+  #dex .dex-home { flex-direction:row; flex-wrap:wrap; align-content:start; }
+  #dex .dex-home .dex-label { width:100%; line-height:20px; }
+  #dex .dex-window { width:44%; flex:0 0 44%; height:34px; }
+  #dex .dex-home .dex-line { flex:1; line-height:22px; }
+  #dex .dex-spot { font-size:14px; line-height:18px; top:-2px; }
+  #dex .dex-eaters { flex-direction:row; flex-wrap:wrap; max-width:90px; justify-content:center; }
+  #dex .dex-label { line-height:20px; }
+  #dex .dex-right { grid-template-columns:minmax(0,92fr) minmax(0,70fr) minmax(0,230fr); grid-template-areas:'home home food' 'eco chain chain'; grid-template-rows:minmax(0,1.1fr) minmax(0,1fr); }
+  #dex .dex-home { flex-direction:column; flex-wrap:nowrap; }
+  #dex .dex-home .dex-label { width:auto; }
+  #dex .dex-window { width:100%; height:44px; flex:0 0 44px; display:flex; flex-direction:column; align-items:center; justify-content:center; }
+  #dex.fit-2 .dex-window { display:flex; }
+  #dex .dex-window .dex-spot { position:static; translate:none; order:-1; line-height:18px; }
+  #dex .dex-home .dex-line { flex:0 0 auto; font-size:14px; line-height:20px; word-break:keep-all; text-wrap:balance; }
+  #dex .dex-eaters { max-width:124px; flex-direction:row; flex-wrap:wrap; }
+  #dex .dex-links { gap:2px; }
+  #dex .dex-chain .eco-name, #dex .dex-food .eco-name { min-width:48px; max-width:84px; padding:2px 4px; font-size:14px; line-height:20px; }
+  #dex .dex-eco-pic { flex:none; }
+  #dex .dex-eco-pic canvas { margin:0; }
+  #dex .dex-eco .dex-line { line-height:22px; }
+  #dex .dex-part { overflow:visible; }
+}
+@media(min-width:600px) and (max-width:1500px) and (min-height:521px) and (max-height:820px) {
+  #card .card-pic { height:150px; }
+  #card .home.n-button { min-height:128px; }
+}
+@media(max-width:599px), (max-height:520px) {
+  #start h2, #map h2 { line-height:24px; }
+  #dex .dex-web { display:flex; flex-direction:column; gap:8px; }
+  #dex .web-banner { align-self:center; }
+  #dex .web-details { display:block; }
+  #dex .web-caption { display:block; min-height:48px; }
+  #dex .web-caption .web-name { display:inline-block; padding:0; font-size:16px; line-height:24px; }
+  #dex .web-name-ribbon > .n-frame, #dex .web-selected-pic, #dex .web-counts, #dex .web-legend { display:none; }
+  #dex .web-prompt { display:block; }
+  #dex.web-measure .dex-web { display:flex; }
+}
+/* The compact strip stays below the diagram on both phone orientations. */
+@media(max-height:520px) and (min-width:600px) {
+  #dex .web-banner { line-height:24px; }
+  #dex .web-caption { min-height:24px; }
+  #dex.dex-book { padding-top:calc(5 * var(--dot)); padding-bottom:calc(8 * var(--dot)); }
+  #end .end-next[data-notebook-frame='tag-paper'] { padding-top:calc(9 * var(--dot)); padding-bottom:calc(4 * var(--dot)); }
+  #end .review-lines { flex-basis:180px; }
+}
+
+/* 7b: physical notebook details use source pixels, never a rotated bitmap. */
+#pause .switch-track { width:calc(22 * var(--dot)); height:calc(12 * var(--dot)); background:#c2caba; box-shadow:inset 0 0 0 var(--dot) #243f40; }
+#pause .switch-track i { box-sizing:border-box; top:var(--dot); left:var(--dot); width:calc(10 * var(--dot)); height:calc(10 * var(--dot)); background:#fff4d8; border:var(--dot) solid #243f40; box-shadow:none; }
+#pause .pause-switch[aria-checked='true'] .switch-track { background:#9bad86; box-shadow:inset 0 0 0 var(--dot) #243f40; }
+#pause .pause-switch[aria-checked='true'] .switch-track i { left:calc(11 * var(--dot)); box-shadow:none; }
+#pause .pause-buttons .primary { color:#fff4d8; text-shadow:0 var(--dot) #243f40; font-size:24px; }
+#pause .pause-rings, #end .end-rings { position:absolute; left:calc(-4 * var(--dot)); width:calc(8 * var(--dot)); top:calc(8 * var(--dot)); bottom:calc(8 * var(--dot)); pointer-events:none; }
+#pause .pause-bookmark { position:absolute; top:calc(-6 * var(--dot)); left:calc(15 * var(--dot)); z-index:-1; }
+#end .end-rings, #end .end-bookmark { display:none; }
+#card .card-sticker { z-index:3; left:calc(-4 * var(--dot)); top:auto; bottom:calc(-4 * var(--dot)); font-size:24px; line-height:32px; padding:calc(4 * var(--dot)); white-space:nowrap; }
+#card .card-leaf, #card .card-bookmark, #card .card-loop { display:none; }
+#card .card-scroll { display:contents; }
+
+@media(min-width:1200px) and (min-height:700px) {
+  button.n-button[data-notebook-frame='tag-coral-lg'] { height:calc(30 * var(--dot)); min-height:calc(30 * var(--dot)); padding:0 calc(8 * var(--dot)) 0 calc(25 * var(--dot)); font-size:36px; line-height:48px; color:#243f40; text-shadow:none; }
+  /* 2026-11-14 마감 손질: 크림 글은 산호색 바탕에서 2.1:1이라 흐렸다. 작은 꼬리표 단추처럼 짙은 글(5.0:1). */
+  button.n-button[data-notebook-frame='badge-lg'] { width:calc(32 * var(--dot)); height:calc(32 * var(--dot)); min-width:calc(32 * var(--dot)); min-height:calc(32 * var(--dot)); padding:0; }
+  .title-card [data-act='play'].n-button { width:80%; max-width:80%; justify-self:center; }
+  .title-row { gap:16px; }
+  #start h2 { font-size:48px; line-height:56px; padding:calc(5 * var(--dot)) calc(13 * var(--dot)); }
+  #start > .primary { min-width:300px; }
+
+  /* Hanging slips: two-pixel cord at y=6 dots, four-pixel pendants. */
+  #hud { padding:0 8px; min-height:0; height:80px; align-items:start; gap:16px; }
+  #hud::before { content:''; position:absolute; left:0; top:calc(6 * var(--dot)); right:440px; height:calc(2 * var(--dot)); background:#88694a; }
+  #hud .tasks { position:relative; width:auto; max-width:calc(100vw - 460px); display:flex; flex:1; gap:16px; padding-top:0; align-items:start; }
+  #hud .task { position:relative; width:max-content; max-width:300px; min-width:0; height:calc(22 * var(--dot)); min-height:calc(22 * var(--dot)); flex:0 1 auto; grid-template-columns:40px minmax(0,1fr); gap:8px; padding:calc(9 * var(--dot)) calc(5 * var(--dot)) calc(4 * var(--dot)) calc(12 * var(--dot)); }
+  #hud .task::before { content:''; position:absolute; left:calc(12 * var(--dot)); top:calc(6 * var(--dot)); width:var(--dot); height:calc(4 * var(--dot)); background:#88694a; }
+  #hud .task:nth-child(2)::before { top:calc(4 * var(--dot)); }
+  #hud .task:nth-child(3)::before { top:calc(5 * var(--dot)); }
+  #hud .task:nth-child(2) { margin-top:calc(2 * var(--dot)); }
+  #hud .task:nth-child(3) { margin-top:var(--dot); }
+  #hud .task-pic { height:24px; }
+  #hud .task-info .clue { font-size:16px; line-height:24px; }
+  #hud .slots { margin-top:8px; height:calc(max(40px,12 * var(--dot)) + 6 * var(--dot)); padding:calc(3 * var(--dot)) calc(5 * var(--dot)); }
+  #hud .slot-progress { font-size:24px; line-height:32px; }
+  #hud .slot { padding:0; width:max(40px,calc(12 * var(--dot))); min-width:40px; height:max(40px,calc(12 * var(--dot))); min-height:40px; display:grid; place-items:center; }
+  #hud .tools { margin-top:8px; }
+  #hud .slot .slot-empty { max-width:none; }
+
+  /* End book: a real cream polaroid and a full right page. */
+
+  /* Vertical specimen book, centred even when the HUD is visible. */
+  /* 그림 보기는 그림 아래 남는 높이를 글 칸으로 쓴다(두 줄 이상). 단추 셋이 같은 높이로 늘어나므로 꺾이는 글이 있어도 그림 · 글 높이가 맞는다. */
+
+  /* Brown leather outside the single paper frame; the playfield stays visible. */
+  #dex.dex-book, #dex.dex-book.web-measure { width:min(1400px,86vw); height:min(700px,80vh); max-height:80vh; padding:calc(8 * var(--dot)) calc(6 * var(--dot)) calc(6 * var(--dot)); outline:var(--dot) solid #243f40; box-shadow:0 0 0 calc(4 * var(--dot)) #88694a,0 0 0 calc(5 * var(--dot)) #243f40 !important; grid-template-columns:minmax(0,1fr) auto; grid-template-rows:48px minmax(0,1fr) 40px; grid-template-areas:'tabs back' 'book book' 'dots dots'; row-gap:4px; }
+  #dex .dex-tabs { margin-top:calc(-12 * var(--dot)); }
+  #dex button.dex-tab { height:64px; min-height:64px; font-size:24px; line-height:32px; padding:calc(5 * var(--dot)) calc(8 * var(--dot)); }
+  #dex .dex-spread { grid-template-columns:minmax(0,40fr) calc(8 * var(--dot)) minmax(0,60fr); gap:8px; }
+  #dex .dex-left { justify-content:center; gap:8px; }
+  #dex .dex-photo { width:100%; padding:calc(4 * var(--dot)) calc(4 * var(--dot)) calc(7 * var(--dot)); }
+  #dex .dex-portrait { height:calc(68 * var(--dot)); }
+  #dex .dex-name { min-width:280px; padding:calc(6 * var(--dot)) calc(13 * var(--dot)); font-size:48px; line-height:64px; }
+  #dex .dex-record, #dex .dex-record b, #dex .dex-story, #dex .dex-clue { font-size:24px; line-height:32px; }
+  #dex .dex-right { grid-template-columns:minmax(0,43fr) minmax(0,57fr); grid-template-rows:minmax(0,1fr) minmax(0,1fr); }
+  #dex .dex-part { justify-content:center; padding:4px 8px; gap:4px; }
+  #dex .dex-label { position:relative; padding:calc(9 * var(--dot)) calc(5 * var(--dot)) calc(4 * var(--dot)) calc(13 * var(--dot)); font-size:24px; line-height:32px; white-space:nowrap; }
+  #dex .dex-line { font-size:24px; line-height:32px; }
+  #dex .dex-home .dex-line { font-size:16px; line-height:24px; }
+  #dex .dex-window { min-height:0; flex:1; overflow:hidden; width:100%; padding-top:32px; box-sizing:border-box; }
+  #dex .dex-window > canvas { position:absolute; top:32px !important; }
+  #dex .dex-spot { font-size:24px; line-height:32px; background:#fff4d8; }
+  #dex .dex-eco-pic { width:100%; min-height:0; flex:1; }
+  #dex .dex-eats { flex:none; min-height:170px; align-items:center; }
+  #dex .dex-eats li:first-child { align-self:flex-start; }
+  #dex .dex-eats li:last-child { align-self:flex-end; }
+  #dex .dex-eats li { justify-content:center; }
+  #dex .eco-label { font-size:16px; line-height:24px; }
+  #dex .dex-links { gap:4px; }
+  #dex .dex-turn { position:absolute; top:50%; translate:0 -50%; padding:0 8px; min-width:44px; min-height:64px; height:auto; }
+  #dex .dex-prev { left:calc(-12 * var(--dot)); }
+  #dex .dex-next { right:calc(-12 * var(--dot)); }
+  #dex .dex-dots { gap:0; flex-wrap:nowrap; }
+  #dex .dex-dots button { width:calc(7 * var(--dot)); min-width:0; height:40px; margin:0; }
+  #dex .dex-dots i { width:calc(4 * var(--dot)); height:calc(4 * var(--dot)); }
+  #dex.dex-book[data-tab='web'] { grid-template-rows:20px minmax(0,1fr); }
+  #dex .dex-web, #dex.web-measure .dex-web { grid-template-columns:minmax(0,calc(320 * var(--dot))) minmax(220px,1fr); grid-template-rows:auto minmax(0,1fr); gap:8px 20px; }
+  #dex .web-banner { font-size:36px; line-height:48px; padding:calc(5 * var(--dot)) calc(13 * var(--dot)); }
+  #dex .web-stage { justify-self:start; }
+  #dex .web-caption { font-size:24px; line-height:32px; }
+  #dex .web-caption .web-name { font-size:32px; line-height:40px; }
+}
+
+@media(min-width:1200px) and (max-width:1499px) and (min-height:700px) and (max-height:820px) {
+}
+
+@media(min-width:1200px) and (min-height:700px) {
+  #start h2 { line-height:64px; padding-top:calc(7 * var(--dot)); }
+  #dex .dex-name { padding-bottom:calc(7 * var(--dot)); }
+  #dex .dex-story { width:100%; padding:0 12px; box-sizing:border-box; }
+  #dex .dex-photo { padding-bottom:calc(8 * var(--dot)); }
+  #dex .dex-web, #dex.web-measure .dex-web { grid-template-columns:minmax(0,calc(320 * var(--dot))) minmax(0,1fr); }
+  #dex.dex-book.web-measure[data-tab='web'] { grid-template-areas:'tabs back' 'web web'; }
+  #hud .task { grid-template-columns:40px minmax(0,1fr); column-gap:12px; }
+ body.with-card #hud#hud .tasks { display:none; }
+  #dex button.dex-tab { min-height:calc(24 * var(--dot)); height:calc(24 * var(--dot)); }
+  #dex .web-caption .web-name { padding-top:calc(4 * var(--dot)); padding-bottom:calc(4 * var(--dot)); }
+  #dex .web-banner { padding-top:calc(7 * var(--dot)); }
+}
+
+@media(min-width:600px) and (max-height:340px) {
+  #dex.dex-book[data-tab='web'] .dex-web, #dex.web-measure .dex-web { display:grid; grid-template-columns:320px minmax(0,1fr); grid-template-rows:minmax(0,1fr); grid-template-areas:'stage detail'; gap:12px; align-items:center; }
+  #dex .dex-web .web-banner { display:none; }
+  #dex .dex-web .web-stage { justify-self:start; }
+  #dex .dex-web .web-details { grid-area:detail; display:block; align-self:center; }
+  #dex .dex-web .web-caption { display:grid; gap:8px; font-size:16px; line-height:24px; }
+  #dex.web-measure .dex-web .web-stage { justify-self:stretch; }
+}
+
+/* 7b final pass: source pixels share the paper's K everywhere. */
+#pause .pause-bookmark { width:calc(12 * var(--dot)); height:calc(22 * var(--dot)); z-index:2; }
+#pause .bookmark-leaf { position:absolute; left:calc(3 * var(--dot)); top:calc(6 * var(--dot)); }
+#pause .pause-switch .switch-name { font-size:24px; }
+#end .photo-window { width:var(--photo-w); height:calc(var(--photo-w) * .625); }
+#end .photo-canvas { position:absolute; left:50%; bottom:0; translate:-50% 0; }
+#end .end-photo { box-shadow:0 0 0 var(--dot) #d9d2b4,var(--dot) var(--dot) 0 var(--dot) #d3c9a6; }
+#card .card-bookmark { width:calc(12 * var(--dot)); height:calc(22 * var(--dot)); overflow:visible; }
+#card .card-bookmark > .n-sprite:first-child { margin:0; }
+#card .bookmark-fish { left:0; top:calc(4 * var(--dot)); }
+#dex .dex-plain { display:block; position:relative; z-index:1; color:#60735a; font-size:16px; line-height:24px; white-space:nowrap; background:#fff4d8; }
+.food-bubble { position:relative; display:grid; place-items:center; width:max-content; min-width:calc(26 * var(--dot)); height:calc(26 * var(--dot)); }
+.food-bubble .bubble-bg { position:absolute; left:50%; top:50%; translate:-50% -50%; }
+.food-bubble .eco-pic { position:relative; z-index:1; }
+.button-disc { position:relative; display:grid; place-items:center; width:72px; height:72px; flex:none; }
+
+@media(min-width:1200px) and (min-height:700px) {
+ #hud { height:calc(48 * var(--dot)); }
+ #hud::before { right:calc(188 * var(--dot)); }
+ #hud .tasks { max-width:none; gap:16px; }
+ #hud .task { display:flex; flex-direction:column; justify-content:center; gap:0; width:max-content; max-width:calc(128 * var(--dot)); height:calc(36 * var(--dot)); min-height:calc(36 * var(--dot)); margin-top:calc(10 * var(--dot)); padding:calc(2 * var(--dot)) calc(8 * var(--dot)); }
+ #hud .task:nth-child(2) { margin-top:calc(12 * var(--dot)); }
+ #hud .task:nth-child(3) { margin-top:calc(11 * var(--dot)); }
+ #hud .task::before,#hud .task::after,#hud .slots::before,#hud .slots::after { content:''; position:absolute; top:calc(-4 * var(--dot)); width:calc(2 * var(--dot)); height:calc(4 * var(--dot)); background:#88694a; z-index:3; }
+ #hud .hud-knot { position:absolute; top:0; width:calc(2 * var(--dot)); height:calc(2 * var(--dot)); background:#88694a; z-index:3; }
+ #hud .hud-knot.left { left:20%; } #hud .hud-knot.right { left:80%; }
+ #hud .hud-pocket-line { position:absolute; top:calc(-4 * var(--dot)); height:calc(2 * var(--dot)); left:calc(-4 * var(--dot)); right:0; background:#88694a; }
+ #hud .task::before,#hud .slots::before { left:20%; }
+ #hud .task::after,#hud .slots::after { left:80%; }
+ #hud .task:nth-child(2)::before,#hud .task:nth-child(2)::after { top:calc(-4 * var(--dot)); }
+ #hud .task:nth-child(3)::before,#hud .task:nth-child(3)::after { top:calc(-4 * var(--dot)); }
+ #hud .task .task-pic,#hud .task.current .task-pic { height:calc(21 * var(--dot)); width:100%; flex:none; overflow:hidden; display:grid; place-items:center; }
+ #hud .task-info { width:max-content; max-width:100%; }
+ #hud .task-info .clue { display:block; font-size:24px; line-height:28px; text-align:center; white-space:nowrap; overflow:visible; }
+ #hud .slots { position:relative; margin-top:calc(10 * var(--dot)); height:calc(20 * var(--dot)); gap:calc(2 * var(--dot)); padding:calc(3 * var(--dot)) calc(2 * var(--dot)); }
+ #hud .slot,#hud .slot.full { width:calc(20 * var(--dot)); min-width:calc(20 * var(--dot)); height:calc(14 * var(--dot)); min-height:calc(14 * var(--dot)); padding:0; }
+ #hud .slot-bg { position:absolute; inset:0; }
+ #hud .slot > :not(.slot-bg) { position:relative; }
+ #hud .tools { margin-top:calc(10 * var(--dot)); }
+ #hud .tools > .icon-btn { width:calc(22 * var(--dot)); min-width:calc(22 * var(--dot)); height:calc(22 * var(--dot)); min-height:calc(22 * var(--dot)); }
+ body.with-card #hud#hud .slots { position:absolute; left:8px; margin-left:0; }
+ body.with-card #hud#hud .tools { margin-left:auto; }
+ #dex .dex-right { grid-template-columns:minmax(0,40fr) minmax(0,60fr); }
+ #dex .dex-part { justify-content:flex-start; padding:0 8px; gap:0; }
+ #dex .dex-label { flex:none; margin:0; }
+ #dex .dex-window,#dex .dex-eats,#dex .dex-eco-pic,#dex .dex-links { position:relative; box-sizing:border-box; width:100%; height:150px; min-height:150px; flex:none; margin:0; overflow:hidden; border:0 solid #7f946b; background:#d8dfbd; }
+ #dex .dex-window { padding-top:48px; }
+ #dex .dex-window > canvas { top:48px !important; }
+ #dex .dex-spot { top:0; font-size:24px; line-height:32px; }
+ #dex .dex-plain { position:absolute; top:36px; left:50%; translate:-50% 0; line-height:24px; }
+ #dex .dex-eats { align-items:center; justify-content:space-around; gap:0; padding:4px; }
+ #dex .dex-eats li,#dex .dex-eats li:first-child,#dex .dex-eats li:last-child { align-self:center; }
+ #dex .dex-eco-pic { padding:0; }
+ #dex .dex-links { gap:calc(4 * var(--dot)); justify-content:center; }
+ #dex .dex-eaters { gap:4px; }
+ #dex .dex-eco .dex-line { margin:0; font-size:24px; line-height:32px; }
+ #dex .eco-label { font-size:16px; line-height:24px; }
+ #dex .dex-spread { grid-template-columns:minmax(0,46.5fr) calc(8 * var(--dot)) minmax(0,53.5fr); }
+ #dex .dex-portrait { height:calc(88 * var(--dot)); padding:calc(2 * var(--dot)) 0 calc(4 * var(--dot)); box-sizing:border-box; }
+ #dex .dex-portrait > canvas:not(.dex-water) { max-width:none; }
+ #dex .dex-window { padding-top:calc(64px + 2 * var(--dot)); padding-bottom:calc(2 * var(--dot)); }
+ #dex .dex-window > canvas { top:calc(64px + 2 * var(--dot)) !important; }
+ #dex .dex-spot { top:calc(2 * var(--dot)); }
+ #dex .dex-plain { top:calc(36px + 2 * var(--dot)); }
+ #dex .dex-part { justify-content:center; }
+ #dex .dex-eats { align-items:center; }
+ #dex .dex-eaters { flex-direction:column; }
+ #dex .chain-diagram { position:relative; display:block; width:calc(130 * var(--dot)); height:calc(50 * var(--dot)); flex:none; }
+ #dex .chain-diagram > * { position:absolute; }
+}
+@media(min-width:1800px) and (min-height:700px) {
+}
+@media(max-height:520px) and (min-width:600px) {
+ #pause .pause-switch { min-height:48px; }
+ #dex .dex-right { grid-template-rows:minmax(0,1.5fr) minmax(0,1fr); }
+ #dex .dex-window { position:relative; height:64px; flex:0 0 64px; padding-top:40px; overflow:hidden; display:block; }
+ #dex .dex-window > canvas { position:absolute; top:40px !important; }
+ #dex .dex-window .dex-spot { position:absolute; top:0; left:50%; translate:-50% 0; font-size:14px; line-height:18px; }
+ #dex .dex-plain { position:absolute; top:20px; left:50%; translate:-50% 0; font-size:16px; line-height:20px; }
+ #dex .dex-home .dex-line { line-height:22px; }
+ #dex .dex-eco-pic { width:100%; height:32px; position:relative; flex:none; overflow:hidden; }
+ #dex .dex-chain .eco-name { font-size:14px; line-height:18px; min-height:36px; min-width:48px; max-width:60px; padding:0 4px; }
+ #dex .food-bubble .eco-name { min-height:0; min-width:64px; max-width:80px; height:auto; padding:0 2px; font-size:14px; line-height:16px; }
+}
+@media(min-width:600px) and (max-height:340px) {
+ #dex .dex-home .dex-line { line-height:22px; }
+ #end.tight:has(.new-fish:nth-child(6)) .end-right { display:flex; flex-direction:column; gap:4px; }
+ #end.tight:has(.new-fish:nth-child(6)) .end-next { width:100%; align-self:stretch; }
+ #end:has(.new-fish:nth-child(6)) .review { flex-wrap:nowrap; }
+ #end:has(.new-fish:nth-child(6)) .review-lines { flex:1 1 auto; }
+ #end:has(.new-fish:nth-child(6)) .end-buttons { justify-content:flex-end; }
+ #end:has(.new-fish:nth-child(6)) .new-name small { display:none; }
+}
+#dex .dex-window > .n-frame { position:absolute; top:0 !important; left:0 !important; }
+@media(max-width:599px) {
+ #dex .dex-photo { padding-bottom:calc(12 * var(--dot)); }
+}
+
+/* Review 4: full K artwork is clipped by its window, never by a shrinking grid. */
+#hud .task-place, .button-label { display:none; }
+#dex .dex-eco-pic { position:relative; min-width:0; overflow:hidden; }
+#dex .dex-eco-pic > .eco-scene { position:absolute; left:50%; top:50%; translate:-50% -50%; max-width:none; }
+#dex .dex-dots button { width:max(44px,calc(7 * var(--dot))); min-width:44px; height:44px; min-height:44px; }
+#dex .dex-photo { width:min(100%,calc((var(--portrait-width,192) + 12) * var(--dot))); padding:calc(6 * var(--dot)) calc(6 * var(--dot)) calc(12 * var(--dot)); margin-bottom:4px; flex:none; }
+#dex .dex-portrait { width:100%; height:calc(var(--portrait-height,80) * var(--dot)); aspect-ratio:auto; padding:0; flex:none; }
+#dex .dex-portrait > .dex-water { inset:0; margin:auto; }
+#end .end-photo { align-self:start; }
+#end .end-left { display:grid; gap:8px; align-self:start; align-content:start; min-width:0; }
+#end.end-book .end-left > .end-next { position:relative; left:auto; bottom:auto; width:100%; }
+
+@media(min-width:1200px) and (min-height:700px) {
+ #hud .task-info .clue { line-height:32px; }
+}
+@media(max-width:1199px), (max-height:699px) {
+ #hud .task, #hud .task.current { display:flex; flex-direction:column; justify-content:center; align-items:center; gap:0; grid-column:auto; width:120px; max-width:120px; min-width:0; height:56px; min-height:56px; padding:calc(2 * var(--dot)) calc(4 * var(--dot)); }
+ #hud .task .task-pic, #hud .task.current .task-pic { width:100%; height:20px; flex:none; }
+ #hud .task .task-info, #hud .task.current .task-info { display:block; width:100%; }
+ #hud .task .clue, #hud .task.current .clue { display:none; }
+ #hud .task-place { display:block; color:var(--ink); font-size:14px; line-height:18px; text-align:center; white-space:nowrap; }
+}
+@media(max-width:599px) {
+ #hud .tasks { display:flex; width:auto; }
+ #hud .task:not(.current) { display:none; }
+ #dex .dex-photo { margin-bottom:8px; }
+ #dex .dex-spread[data-met='true'] .dex-part { padding:4px 6px; }
+ #dex .dex-window { padding-top:44px; height:80px; flex:none; position:relative; }
+ #dex .dex-window > canvas:not(.n-frame) { position:absolute; top:44px; }
+ #dex .dex-plain { position:absolute; top:24px; left:50%; translate:-50% 0; font-size:14px; line-height:20px; }
+ #dex .dex-eco-pic { width:100%; height:72px; flex:none; }
+ #dex.dex-book[data-tab='web'] { height:auto; align-self:start; top:16px; transform:translate(-50%,0); }
+ #dex.dex-book[data-tab='web'] .dex-tabs { margin-top:0; align-self:end; }
+ #dex.dex-book[data-tab='web'] .dex-tab[aria-selected='true'] { translate:none; }
+ #dex.dex-book[data-tab='web'] .dex-web { margin-top:10px; }
+ #dex .dex-web { justify-content:flex-start; align-content:start; align-self:start; margin-top:16px; gap:10px; }
+ #dex.web-measure .dex-web { align-self:stretch; }
+ #dex .web-stage, #dex .web-details { align-self:center; flex:none; }
+ #dex .web-details { margin-bottom:0; }
+}
+@media(max-height:520px) and (min-width:600px) {
+ #card.quiz { grid-template-rows:auto 0 auto; align-content:center; row-gap:6px; }
+ #dex .dex-photo { margin-bottom:8px; }
+ #hud .tasks { display:flex; width:248px; gap:4px; }
+ #hud .task, #hud .task.current { width:80px; flex:0 0 80px; }
+ #card.quiz .card-lines { height:0; min-height:0; margin:0; padding:0; }
+ #card.quiz .card-top { align-self:end; }
+ #card.quiz .card-act { align-self:start; }
+ #end.end-book { grid-template-columns:minmax(0,38fr) minmax(0,62fr); align-items:start; }
+ #end .end-photo, #end .photo-frame { width:100%; box-sizing:border-box; }
+ #end .photo-window { width:100% !important; }
+ #end .end-photo, #end .end-right { margin-top:0; }
+ #end .photo-window { max-width:100%; }
+ #end .end-new { position:static; }
+ #end.snug3 .end-title { display:block; }
+ #end.snug3 .sticker { display:block; }
+ #end .dex-web { align-content:start; }
+ #dex .dex-web .web-legend { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4px 10px; padding-top:6px; margin-top:8px; }
+ #dex .web-legend p { margin:0; font-size:14px; line-height:20px; }
+ #dex .web-legend i { width:16px; margin-right:4px; }
+}
+
+/* Review 5: preserve full specimens and habitat rows on the shared K grid. */
+@media(min-width:600px) {
+ #dex .dex-spread { grid-template-columns:minmax(calc(204 * var(--dot)),46.5fr) calc(8 * var(--dot)) minmax(0,53.5fr); }
+}
+#dex .dex-left { justify-content:center; }
+#dex .dex-portrait > canvas:not(.dex-water) { position:absolute; left:0; top:0; }
+#dex .dex-portrait > .dex-water { left:0 !important; top:0 !important; right:auto; bottom:auto; margin:0; }
+#dex .dex-home { gap:8px; }
+#dex .dex-window { display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:8px; height:auto; min-height:0; flex:none; padding:0; overflow:hidden; }
+#dex .dex-habitat { display:block; position:relative; width:100%; height:calc(var(--habitat-height,72) * var(--dot)); flex:none; overflow:hidden; }
+#dex .dex-habitat > canvas { position:absolute; top:0; }
+#dex .dex-habitat-labels { display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:8px; flex:none; }
+#dex .dex-window .dex-spot,#dex .dex-window .dex-plain { position:static; translate:none; order:0; margin:0; flex:none; }
+#dex .dex-window .dex-plain { font-size:16px; line-height:24px; }
+@media(min-width:1200px) and (min-height:700px) {
+ /* 두 줄 높이를 같게: 사는 곳이 길어져 생태계를 밀어내고 먹는 것 칸이 비던 것을 막는다. */
+ #dex .dex-right { grid-template-rows:minmax(0,1fr) minmax(0,1fr); }
+ /* 사는 곳 그림은 30점 높이에서 아래쪽(바닥 · 바위)을 보인다. 늘이지 않고 위만 자른다(설명 두 줄 자리를 남김). */
+ #dex .dex-habitat { height:calc(min(var(--habitat-height,72), 30) * var(--dot)); }
+ #dex .dex-habitat > canvas { top:auto; bottom:0; }
+ #dex .dex-window { padding:calc(2 * var(--dot)) 0; }
+ #dex .dex-part { justify-content:flex-start; }
+ #dex .dex-eco-pic,#dex .dex-links { height:auto; min-height:0; flex:1; }
+ #dex .dex-eats { height:auto; flex:1; }
+}
+@media(max-height:520px) and (min-width:600px) {
+ #dex.dex-book[data-tab='fish'] { grid-template-columns:auto minmax(0,1fr) auto; grid-template-areas:'tabs dots back' 'book book book'; }
+ #dex[data-tab='fish'] .dex-turn { position:absolute; top:50%; translate:0 -50%; }
+ #dex[data-tab='fish'] .dex-prev { left:-8px; }
+ #dex[data-tab='fish'] .dex-next { right:-8px; }
+ #dex .dex-spread { grid-template-columns:calc(204 * var(--dot)) calc(8 * var(--dot)) minmax(0,1fr); }
+ #dex .dex-right { grid-template-columns:minmax(180px,.8fr) minmax(0,1fr); grid-template-rows:minmax(0,1fr) minmax(0,.8fr) minmax(0,1fr); grid-template-areas:'home food' 'home eco' 'home chain'; }
+ #dex .dex-habitat-labels { flex-wrap:nowrap; }
+ #dex .dex-window .dex-plain { font-size:14px; line-height:20px; }
+ #dex .dex-home { justify-content:center; }
+ #dex .dex-home .dex-line { line-height:22px; }
+ #dex .dex-eco-pic { width:min(100%,calc(108 * var(--dot))); flex:1; height:auto; min-height:0; }
+ #dex .dex-eco .dex-line { line-height:22px; }
+ #dex .dex-eco .dex-label,#dex .dex-food .dex-label,#dex .dex-chain .dex-label { line-height:20px; }
+ #dex .dex-eats { margin:0; }
+ /* 폰 가로: 「먹는 것」 두 줄 이름이 칸 바닥 밖으로 4px 나가 잘렸다(780×290). 그림과 이름 사이 틈을 없앤다.
+    줄 간격은 18px 그대로(16px이면 두 줄 글자 상자가 겹친다). 이름 칸은 같은 너비로 둔다(글자 길이대로 나누면 이름 셋이 한 줄로 붙어 읽혔다). */
+ #dex .dex-eats li { gap:0; }
+ #dex .eco-label { line-height:18px; }
+ #dex .dex-links { flex:1; }
+ #dex .dex-eaters { flex-direction:row; flex-wrap:nowrap; max-width:none; }
+ #dex .dex-left { display:grid; grid-template-columns:auto minmax(0,1fr); align-content:center; justify-items:center; align-items:center; column-gap:2px; row-gap:2px; }
+ #dex .dex-photo { grid-column:1 / -1; margin-bottom:10px; }
+ #dex .dex-name { grid-column:1; padding:calc(3 * var(--dot)) calc(8 * var(--dot)); font-size:24px; line-height:32px; }
+ #dex .dex-record,#dex .dex-clue { grid-column:2; line-height:22px; gap:0 2px; }
+ #dex .dex-story { grid-column:1 / -1; line-height:22px; }
+ #dex .dex-left:has(.dex-clue) { grid-template-columns:minmax(0,1fr); }
+ #dex .dex-clue { grid-column:1; }
+}
+@media(max-width:599px) {
+ #dex .dex-right { grid-template-rows:auto minmax(0,1fr) minmax(0,1fr); }
+ #dex .dex-spread[data-met='true'] .dex-part { padding:4px 6px; }
+ #dex .dex-window .dex-spot { font-size:14px; line-height:18px; }
+ #dex .dex-window .dex-plain { font-size:14px; line-height:20px; }
+ #title .title-row .round-btn,#map .head-buttons .round-btn { width:72px; min-width:72px; height:max(64px,calc(20 * var(--dot) + 28px)); min-height:64px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:0; background:none; border:0; box-shadow:none; }
+ #title .title-row .button-disc,#map .head-buttons .button-disc { width:calc(20 * var(--dot)); height:calc(20 * var(--dot)); }
+ #title .title-row .button-label,#map .head-buttons .button-label { display:block; flex:none; box-sizing:content-box; position:relative; top:0; margin:0; padding:2px 6px; border:1px solid #bdc9a1; background:#fff4d8; color:#243f40; font-size:14px; line-height:18px; white-space:nowrap; text-shadow:none; }
+}
+@media(max-height:340px) and (min-width:600px) {
+ #dex .dex-left { margin-top:-18px; }
+ #dex .dex-right { margin-top:-24px; grid-template-columns:180px minmax(0,1fr); grid-template-rows:102px 50px minmax(0,1fr); }
+ #dex[data-tab='fish'] .dex-dots { align-self:start; margin-top:-8px; }
+ #dex .dex-links { gap:0; }
+ #dex .dex-chain { padding-left:0; padding-right:0; }
+ #dex .dex-eaters { display:grid; grid-template-columns:auto auto; grid-template-rows:auto auto; align-items:center; justify-items:center; gap:2px; flex:none; max-width:none; }
+ #dex .dex-eaters > :last-child { grid-column:2; grid-row:1 / 3; }
+ #dex .dex-eaters > :first-child:nth-last-child(2) { grid-row:1 / 3; }
+ #dex[data-tab='fish'] .dex-back,#dex[data-tab='fish'] .dex-dots { position:relative; z-index:3; }
+ #dex .dex-eco { display:grid; grid-template-columns:minmax(0,1fr) minmax(0,1fr); grid-template-rows:22px 22px; gap:2px; align-content:center; justify-items:center; }
+ #dex .dex-eco-pic { grid-column:1; grid-row:1 / 3; width:100%; height:100%; }
+ #dex .dex-eco .dex-label { grid-column:2; grid-row:1; padding:0 2px; }
+ #dex .dex-eco .dex-line { grid-column:2; grid-row:2; white-space:nowrap; }
+ #end:has(.new-fish:nth-child(6)) .new-name { font-size:14px; line-height:18px; }
+ #end:has(.new-fish:nth-child(6)) .end-new { gap:6px; }
+ #end:has(.new-fish:nth-child(6)) .end-right { gap:2px; }
+ #end:has(.new-fish:nth-child(6)) .end-title { padding-top:calc(4 * var(--dot)); padding-bottom:calc(4 * var(--dot)); }
+ #end .end-left:has(> .end-next) .photo-window { height:106px !important; }
+ #end.end-book .end-left .review { display:grid; grid-template-columns:minmax(0,1fr) auto; grid-template-areas:'title more' 'lines lines'; gap:0 4px; font-size:14px; line-height:20px; }
+ #end.end-book .end-left .review p, #end.end-book .end-left .review b, #end.end-book .end-left .review-more { font-size:14px; line-height:20px; }
+ #end.end-book .end-left .next-shadow { display:none; }
+ #end.end-book .end-left .next-text, #end.end-book .end-left .next-text span { font-size:14px; line-height:20px; }
+ #end.end-book .end-left .next-text b { font-size:14px; line-height:20px; }
+}
+/* 낮지 않은 작은 태블릿 가로(1024×768): 「먹는 것」 칸이 벌어져 「사는 곳」 칸이 82px로 눌리고 생태계 그림 폭이 0이 됐다. 낮은 가로와 같은 칸 나눔을 쓴다. */
+@media(min-width:900px) and (max-width:1199px) and (min-height:521px) {
+ #dex .dex-spread[data-met='true'] { grid-template-columns:minmax(0,52fr) calc(8 * var(--dot)) minmax(0,48fr); }
+ #dex .dex-spread[data-met='true'] .dex-right { grid-template-columns:minmax(0,92fr) minmax(0,70fr) minmax(0,230fr); grid-template-areas:'home home food' 'eco chain chain'; }
+ #dex .dex-eco-pic { width:100%; }
+}
+/* 폰 세로에 지도 머리 단추가 셋(대회 · 도감 · 돌아가기)이면 요약 글이 화면 밖으로 나갔다. 단추 아래 한 줄로 내린다. */
+@media(max-width:599px) {
+ #map .panel-head:has(.head-buttons > :nth-child(3)) { display:grid; grid-template-columns:min-content minmax(0,1fr); align-items:center; column-gap:6px; }
+ #map .panel-head:has(.head-buttons > :nth-child(3)) .map-summary { order:3; grid-column:1 / -1; max-width:none; margin-top:2px; text-align:center; font-size:14px; line-height:20px; }
+ #map .panel-head:has(.head-buttons > :nth-child(3)) .map-summary > span { display:inline; }
+}
+/* 좁고 낮은 폰 가로(사파리 750×280 · 667×260): 「먹는 것」 이름 글자는 큰 화면처럼 숨기고(누르면 이름표가 뜬다) 남는 높이를 「먹이 관계」에 준다.
+   두 줄 이름이 칸 바닥 밖으로 나가 잘리고(3 · 10px), 돌말 · 왜가리가 먹이 관계 칸 아래로 4~11px 나갔다. 780×290은 그대로 맞는다. */
+@media(max-height:340px) and (min-width:600px) and (max-width:760px) {
+ #dex .dex-right { grid-template-rows:auto 50px minmax(0,1fr); }
+ #dex .dex-food .eco-label { display:none; }
+}
+
+/* 돌아가기 한 꼴(인디 채점 2026-11-12 · 판 3 단계 0): 도감 · 지도 · 공방 모두 판 오른쪽 위에 둥근 집 그림 + 「돌아가기」 이름표.
+   이름표는 표지 단추 이름표와 같은 꼴이다. 폰 가로(높이 520 이하)는 이름표 자리가 없어 집 그림만 두고 이름은 aria-label로 남긴다.
+   지도 머리 단추(도감 · 돌아가기)는 모든 화면에서 이름표를 단다(1280에서 도감 단추가 그림뿐이었다). 단추 묶음은 머리 줄 오른쪽 끝.
+   이름표는 둥근 판 아래 테두리에 3점 겹친다: 위아래로 떼면 1280 지도 머리 줄이 12px 높아져 지도 배율이 한 단계(1205 → 960) 내려갔다. */
+.back-badge .button-label, #map .head-buttons .button-label { display:block; flex:none; box-sizing:content-box; position:relative; z-index:1; top:0; margin:calc(-3 * var(--dot)) 0 0; padding:1px 6px; border:1px solid #bdc9a1; background:#fff4d8; color:#243f40; font-size:16px; line-height:20px; white-space:nowrap; text-shadow:none; }
+#map .panel-head .head-buttons { order:3; }
+#map .head-buttons .round-btn { width:auto; min-width:72px; height:auto; min-height:64px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:0; padding:0; background:none; border:0; box-shadow:none; }
+#map .head-buttons .button-disc { width:calc(20 * var(--dot)); height:calc(20 * var(--dot)); }
+/* 폰(세로 · 낮은 가로) 지도 단추는 도감 · 공방과 같은 나무 판 29점(ui.mjs captionButtons가 틀을 단다). */
+@media (max-width:599px), (max-height:520px) and (min-width:600px) {
+  #map .head-buttons .button-disc { width:calc(29 * var(--dot)); height:calc(29 * var(--dot)); }
+  #map .head-buttons .button-disc .ico { width:calc(13 * var(--dot)); height:calc(13 * var(--dot)); }
+}
+@media (max-height:520px) and (min-width:600px) {
+  .back-badge .button-label, #map .head-buttons .button-label { display:none; }
+  #map .head-buttons .round-btn { min-width:44px; min-height:44px; }
+  /* 폰 가로 지도: 머리 칸을 지도 오른쪽으로 옮겨 단추 묶음을 판 오른쪽 위에 둔다(제목 · 요약은 그 아래). */
+  #map.map-panel .panel-head { order:2; }
+  #map .panel-head .head-buttons { order:-2; flex-direction:row; align-self:stretch; justify-content:flex-end; }
+  #map .panel-head .map-summary { order:0; }
+}
+#map .map-safety {position:absolute;z-index:30;left:50%;bottom:16px;transform:translateX(-50%);display:flex;align-items:center;gap:12px;box-sizing:border-box;width:max-content;max-width:calc(100% - 32px);padding:12px 16px;background:#f4edcf;border:4px solid #5f7153;color:#314330;box-shadow:4px 4px #314330;font-size:24px;line-height:1.5;}
+#map .map-safety p {margin:0;font-size:inherit!important;line-height:inherit!important;text-wrap:balance;}
+#map .map-safety .matto-face {flex:none;image-rendering:pixelated;}
+#map .map-safety button {flex:none;font:inherit;min-height:44px;padding:4px 8px;}
+@media(max-height:520px),(max-width:599px){#map .map-safety {font-size:18px;gap:8px;padding:8px;bottom:8px;}#map .map-safety button {font-size:16px;}}
+@media(max-width:599px){#map .map-safety {display:grid;grid-template-columns:auto minmax(0,1fr);width:calc(100% - 32px);}#map .map-safety .matto-face {grid-column:1;grid-row:1;}#map .map-safety p {grid-column:2;grid-row:1;}#map .map-safety button {grid-column:1/-1;justify-self:end;}}
+.slip-why .wrong-reason {display:block;margin-top:4px;}
+#card.info-card .slip-why>span {font-size:var(--info-font)!important;line-height:var(--info-line)!important;}
+#card.info-card .option.n-button>span {font-size:max(16px,var(--info-font))!important;line-height:var(--info-line)!important;}

@@ -1,0 +1,22 @@
+#menuSound { position:fixed; z-index:65; display:flex; gap:6px; left:max(8px,env(safe-area-inset-left)); bottom:max(8px,env(safe-area-inset-bottom)); }
+#menuSound[hidden] { display:none; }
+#map .panel-head {flex-wrap:wrap;}
+#map .map-audio-slot {order:2;flex:none;width:94px;height:44px;margin-left:auto;pointer-events:none;}
+#shop .shop-audio-slot {flex:none;width:94px;height:44px;pointer-events:none;}
+#menuSound[data-screen="dex"],#menuSound[data-screen="shop"] { left:auto; right:max(8px,env(safe-area-inset-right)); }
+#menuSound[data-screen="end"] { left:auto; bottom:auto; right:max(8px,env(safe-area-inset-right)); top:max(8px,env(safe-area-inset-top)); }
+/* 판 안 단추와 같은 꼴(hud-match.css #hud .tools · notebook.mjs paintSprite): 폰은 둥근 판 20점에 아이콘 12점, 큰 화면은 나무 판 29점. 누르는 칸은 44px 아래로 줄이지 않는다. */
+#menuSound button.icon-btn { width:44px; height:44px; min-width:44px; min-height:44px; padding:0; display:grid; place-items:center; }
+@media(min-width:1200px) and (min-height:700px) {
+ #map .map-audio-slot {width:calc(60 * var(--dot));height:calc(29 * var(--dot));}
+ #shop .shop-audio-slot {width:calc(60 * var(--dot));height:calc(29 * var(--dot));}
+ #menuSound { gap:calc(2 * var(--dot)); }
+ #menuSound button.icon-btn { width:calc(29 * var(--dot)); height:calc(29 * var(--dot)); filter:drop-shadow(0 calc(2 * var(--dot)) 0 rgba(17,41,26,.45)); }
+}
+@media(min-width:600px) and (max-height:520px){#map .map-audio-slot {order:-1;}}
+@media(max-width:600px),(max-height:420px){
+ #shop .shop-head {display:grid;grid-template-columns:minmax(0,1fr) 94px;gap:0 8px;padding-right:0;min-height:44px;}
+ #shop .shop-head h2 {grid-column:1;grid-row:1;justify-self:start;}
+ #shop .shop-head .shop-purse {grid-column:1;grid-row:2;margin-left:0;justify-self:start;}
+ #shop .shop-audio-slot {grid-column:2;grid-row:1/3;align-self:center;}
+}

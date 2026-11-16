@@ -1,0 +1,12 @@
+#bootNote { background-color:#f4eedb; background-image:repeating-linear-gradient(0deg,#e9e0c866 0 1px,transparent 1px 5px),repeating-linear-gradient(90deg,#fffdf640 0 1px,transparent 1px 7px); }
+#bootNote strong { font-size:clamp(20px,4vw,32px); }
+#bootProgress { appearance:none; width:min(280px,70vw); height:18px; border:3px solid #584e39; background:#e1d4b9; color:#466c58; }
+#bootProgress::-webkit-progress-bar { background:#e1d4b9; }
+#bootProgress::-webkit-progress-value { background:repeating-linear-gradient(0deg,#466c58 0 3px,#53775c 3px 5px); }
+#bootProgress::-moz-progress-bar { background:#466c58; }
+button:focus-visible,input:focus-visible,a:focus-visible { outline:3px solid #162e38 !important; outline-offset:3px !important; box-shadow:0 0 0 3px #fffdf6 !important; }
+#errorGuide { position:fixed; inset:0; z-index:120; display:grid; place-items:center; padding:16px; background:#26414d80; }
+.error-paper { width:min(440px,100%); padding:24px; border:4px solid #6f6048; background:#fff4d8; background-image:repeating-linear-gradient(0deg,transparent 0 4px,#baa88912 4px 5px); color:#26414d; text-align:center; box-shadow:6px 6px #394b4270; }
+.error-paper h2 { margin:0 0 20px; font:700 24px/1.5 Galmuri11,sans-serif; }
+.error-paper button { min-width:132px; min-height:48px; font:700 18px/1.5 Galmuri11,sans-serif; background:#dce7ca; border:3px solid #466350; color:#26414d; }
+.error-paper small { display:block; margin-top:20px; font:14px/1.5 monospace; white-space:pre-wrap; overflow-wrap:anywhere; user-select:text; }

@@ -1,0 +1,291 @@
+/* 공방: 마또 영감과 장비 쪽지. 그림 한 점은 수첩과 같은 --dot이다. */
+.workshop-art { display: block; flex: none; max-width: none; image-rendering: pixelated; }
+.shop-sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+#growthBar .gb-shells, .shop-shells { display: inline-flex; align-items: center; gap: 5px; }
+#shop.panel { position: fixed; inset: 0; margin: auto; transform: none; max-height: none; width: min(1440px, calc(100vw - 24px)); height: 88dvh; display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: 16px; padding: 16px; box-sizing: border-box; background: var(--paper-soft); border-radius: 6px; z-index: 40; color: var(--ink); word-break: keep-all; overflow-wrap: break-word; }
+#shop .shop-keeper { display: flex; flex-direction: column; gap: 10px; min-height: 0; }
+#shop .shop-keeper-pic { flex: 1; min-height: 0; margin: 0; display: flex; flex-direction: column; align-items: center; justify-content: flex-end; border-radius: 4px; background: linear-gradient(#d8e8de, #c3d8cb); }
+#shop .shop-keeper-pic figcaption { align-self: stretch; padding: 6px 0; text-align: center; background: #b3cbbd; color: var(--ink); font-size: 20px; line-height: 1.25; }
+#shop .shop-talk { margin: 0; padding: 10px 12px; background: var(--paper); border-radius: 4px; font-size: 20px; line-height: 1.5; text-wrap: balance; }
+#shop .shop-sheet { position: relative; display: flex; flex-direction: column; gap: 10px; min-width: 0; min-height: 0; padding: 14px 16px; background: var(--paper); border-radius: 4px; }
+#shop .shop-head { display: flex; align-items: center; justify-content: space-between; gap: 8px; }
+#shop .shop-head h2 { margin: 0; font-size: 32px; white-space: nowrap; }
+#shop .shop-purse { display: flex; align-items: center; gap: 10px; font-size: 20px; color: var(--coral-deep); white-space: nowrap; }
+#shop .shop-tabs { display: flex; gap: 6px; }
+#shop .shop-tabs button { position: relative; flex: 1; display: flex; align-items: center; justify-content: center; gap: 6px; min-height: 56px; padding: 4px; border: 0; border-radius: 4px 4px 0 0; background: var(--paper-soft); color: var(--ink-soft); font: inherit; font-size: 24px; cursor: pointer; }
+#shop .shop-tabs button.on { background: #f3e3c2; color: var(--ink); }
+#shop .shop-tabs button.on::after { content: ''; position: absolute; left: 18%; right: 18%; bottom: 3px; height: 3px; border-radius: 2px; background: var(--coral); }
+#shop .shop-tabs button:not(.on) { opacity: 0.72; }
+#title .shop-ico { width: 52%; height: 52%; }
+#shop .shop-item { flex: 1; min-height: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-bottom: 48px; padding: 12px 14px; background: #f3e3c2; border-radius: 0 0 4px 4px; }
+#shop .shop-item h3 { display: flex; flex: none; align-items: center; flex-wrap: wrap; gap: 4px 8px; margin: 0; font-size: 24px; line-height: 1.25; }
+#shop .shop-gear-names > span { white-space: nowrap; }
+#shop .shop-next-name { color: var(--sage-deep); }
+#shop .shop-art-pair { align-self: stretch; flex: 1; min-height: 0; display: flex; align-items: stretch; justify-content: center; gap: 12px; }
+#shop .shop-art-pair .shop-stand { flex: 1; min-width: 0; max-width: 45%; display: flex; align-items: center; justify-content: center; padding: 8px; border: 2px solid transparent; border-radius: 4px; background: #e8d4ae; }
+#shop .shop-art-pair .shop-stand-next { border-color: var(--coral); }
+#shop .shop-art-pair .shop-stand-max { border-color: #d9b45a; max-width: 65%; }
+#shop .shop-art-pair > span { align-self: center; color: var(--sage-deep); font-size: 24px; }
+#shop .shop-dots { display: flex; gap: 6px; }
+#shop .shop-dots i { width: 12px; height: 12px; border-radius: 50%; background: rgba(38,65,77,0.15); }
+#shop .shop-dots i.on { background: var(--sage); }
+#shop .shop-dots i.new { animation: shop-pop 0.5s ease-out; }
+@keyframes shop-pop { 0% { transform: scale(1.8); background: var(--gold); } 100% { transform: scale(1); } }
+#shop .shop-what { margin: 0; font-size: 20px; color: var(--ink-soft); }
+#shop .shop-effect { margin: 0; font-size: 24px; white-space: nowrap; }
+#shop .shop-effect .next { color: var(--sage-deep); }
+#shop .shop-item .primary { flex: none; margin-top: 0; min-height: 48px; padding: 0 18px; font-size: 24px; }
+#shop .shop-lock { flex: none; margin: 0; padding: 10px 14px; border-radius: 4px; background: rgba(38,65,77,0.08); color: var(--ink-soft); font-size: 20px; }
+@media (prefers-reduced-motion: reduce) { #shop .shop-dots i.new { animation: none; } }
+@media (max-width: 600px) {
+  #shop.panel { grid-template-columns: 1fr; grid-template-rows: calc(22dvh + 58px) minmax(0,1fr); height: calc(100dvh - 24px); padding: 10px; gap: 10px; }
+  #shop .shop-keeper { flex-direction: row; align-items: stretch; }
+  #shop .shop-keeper-pic { flex: 0 0 auto; width: calc((22dvh + 40px) * .65); }
+  #shop .shop-keeper-pic figcaption { padding: 3px 0; font-size: 12px; }
+  /* 14px은 격자에서 배율 2 · 3 모두 12px로 떨어진다(정확히 중간이면 작은 격자). 읽는 글은 16px. */
+  #shop .shop-talk { flex: 1; align-self: center; padding: 8px 10px; font-size: 16px; }
+  #shop .shop-sheet { padding: 8px; gap: 6px; }
+  #shop .shop-head h2 { font-size: 20px; }
+  #shop .shop-purse { font-size: 12px; gap: 6px; }
+  #shop .shop-tabs button { font-size: 16px; min-height: 40px; }
+  #shop .shop-item { gap: 4px; padding: 8px; }
+  #shop .shop-item h3 { font-size: 14px; gap: 4px; }
+  #shop .shop-art-pair { gap: 12px; }
+  #shop .shop-art-pair .shop-stand { padding: 4px; }
+  #shop .shop-what { font-size: 16px; }
+  #shop .shop-effect { font-size: 16px; }
+  #shop .shop-item .primary { padding: 0 12px; font-size: 14px; }
+}
+@media (max-height: 420px) {
+  #shop.panel { height: calc(100dvh - 12px); padding: 6px; gap: 8px; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+  /* 영감 말 · 물건 설명은 읽는 글이라 16px(배율 2는 18px), 칸이 좁으면 한 단계 줄이지 않고 줄을 바꾼다(data-text-wrap, 인디 채점 2026-11-12 「읽는 글 12px」). */
+  #shop .shop-talk { font-size: 16px; padding: 6px 8px; line-height: 1.3; }
+  #shop .shop-keeper-pic figcaption { font-size: 12px; padding: 3px 0; }
+  #shop .shop-sheet { padding: 4px 8px; gap: 2px; }
+  #shop .shop-head h2 { font-size: 16px; }
+  #shop .shop-head { padding-right: 90px; min-height: 40px; }
+  #shop .shop-purse { font-size: 12px; gap: 6px; }
+  #shop .shop-tabs button { min-height: 40px; font-size: 14px; }
+  #shop .shop-item { padding: 4px 8px; gap: 2px; margin-bottom: 0; }
+  #shop .shop-item h3 { font-size: 12px; gap: 4px; }
+  #shop .shop-art-pair { gap: 14px; }
+  #shop .shop-art-pair .shop-stand { padding: 2px; }
+  #shop .shop-dots i { width: 8px; height: 8px; }
+  #shop .shop-effect, #shop .shop-lock { font-size: 12px; line-height: 1.2; }
+  #shop .shop-what { font-size: 16px; line-height: 1.3; }
+  #shop .shop-lock { padding: 6px 8px; }
+  #shop .shop-item .primary { min-height: 40px; font-size: 12px; padding: 0 12px; }
+}
+/* 산호색 가격표의 끈이 첫 글자를 덮지 않게 기존 수첩과 같은 안쪽 여백을 둔다. */
+#shop .shop-item .primary[data-notebook-frame="tag-coral"] { padding-left: calc(14 * var(--dot)); padding-right: calc(6 * var(--dot)); }
+.growth-fx { position:fixed; z-index:45; pointer-events:none; color:var(--sage-deep); line-height:1; white-space:nowrap; }
+.growth-fx[hidden] { display:none; }
+.growth-fx-label { display:block; padding:2px 4px; background:var(--paper); border-radius:3px; }
+.growth-fx-label:empty { display:none; }
+.growth-fx[data-event="level"] { color:#b4583f; }
+.growth-fx[data-event="level"] .growth-fx-label { padding:4px 14px; border:2px solid #b4583f; box-shadow:0 3px 0 rgba(38,65,77,.35); }
+.growth-old { position:fixed; background-size:contain; background-repeat:no-repeat; background-position:center; image-rendering:pixelated; }
+.growth-old[hidden] { display:none; }
+.growth-fx[data-event="shells"], .growth-fx[data-event="short"] { color:var(--coral-deep); }
+.growth-fx[data-event="buy"], .growth-fx[data-event="max"] { color:var(--ink); }
+.growth-fx i { position:absolute; width:3px; height:3px; top:0; left:0; background:var(--sage); }
+.growth-fx i:nth-child(2n) { background:var(--coral); }
+#shop button.shop-lock { min-height:40px; border:0; font-family:inherit; cursor:pointer; }
+.shop-short-text { display:inline-block; }
+body.reduce #shop .shop-dots i.new { animation:none; }
+#title .title-growth { position:relative; margin:4px 0 0; padding:4px; background:var(--paper); color:var(--ink); text-align:center; word-break:keep-all; }
+#title .title-growth b, #title .title-growth span { display:block; line-height:1.6; }
+@media(max-width:599px){
+  #title [data-act="play"] { min-height:56px; }
+}
+@media(min-width:600px) and (min-height:421px){
+  #title .title-photo { padding-bottom:28px; }
+}
+@media(max-height:420px){
+  #title .title-growth b { display:none; }
+  #title .photo-tape { top:-14px; }
+}
+#growthBar.in-fight { visibility: hidden; }
+
+/* 공방 다섯 종이 탭. 장비 쪽의 세 탭은 그대로 그 아래에 둔다. */
+#shop .shop-categories { display:flex; flex:none; gap:4px; min-width:0; }
+#shop .shop-categories button { flex:1; min-width:44px; min-height:44px; padding:4px 8px; font-size:16px; white-space:nowrap; }
+#shop .shop-categories [aria-selected=true] { color:var(--ink); }
+#shop .shop-keeper-notes { flex:1; min-width:0; display:flex; flex-direction:column; justify-content:center; gap:8px; }
+#shop .shop-keeper-notes .shop-head { flex-direction:column; align-items:flex-start; }
+#shop .shop-keeper-notes .shop-talk { flex:none; align-self:stretch; }
+#shop .shop-tabs button { min-height:44px; }
+#shop.shop-catalog { width:min(1440px,calc(100vw - 24px)); grid-template-columns:minmax(0,1fr) minmax(0,2fr); }
+/* 돌아가기가 판 오른쪽 위로 올라가(2026-11-13) 목록 칸 아래에 비우던 52px(R4-04: 단추 밑에 칸이 깔려 공방을 나가던 것)을 돌려준다. */
+#shop .shop-catalog-body { flex:1; min-height:0; min-width:0; overflow:auto; overscroll-behavior:contain; scrollbar-gutter:stable; }
+/* 칸 목록은 아래 20px을 흐리게 해 아래에 칸이 더 있음을 보인다(터치 화면에는 스크롤 막대가 안 보인다). 끝까지 내리면 마지막 줄은 흐림 위에 온다. 자세히 보기(사기 단추)에는 쓰지 않는다. 2026-11-08 */
+#shop .shop-catalog-body:has(> .shop-grid) { padding-bottom:20px; -webkit-mask-image:linear-gradient(to bottom,#000 calc(100% - 20px),transparent); mask-image:linear-gradient(to bottom,#000 calc(100% - 20px),transparent); }
+#shop .shop-grid { display:grid; align-content:start; justify-content:space-evenly; gap:calc(8 * var(--dot)); padding:calc(8 * var(--dot)); --shop-plate:60; }
+#shop .shop-tile { display:flex; flex-direction:column; align-items:center; gap:calc(3 * var(--dot)); width:calc(var(--shop-plate) * var(--dot)); min-width:44px; min-height:44px; margin:0; padding:0; border:0; background:none; box-shadow:none; transform:none; color:#243f40; }
+#shop .shop-tile-face { position:relative; display:block; flex:none; width:100%; height:calc(64 * var(--dot)); isolation:isolate; }
+#shop[data-category=bait],#shop[data-category=restore] { --shop-tile:#dce7bf; }
+#shop[data-category=tool] { --shop-tile:#d5e8e5; }
+#shop[data-category=dress] { --shop-tile:#f0d8bf; }
+#shop .shop-tile-face::before { content:''; position:absolute; inset:calc(2 * var(--dot)); background:var(--shop-tile); z-index:0; }
+#shop .shop-tile-face::after { content:''; position:absolute; inset:calc(3 * var(--dot)); background:var(--shop-tile); z-index:1; pointer-events:none; }
+#shop .shop-plate { position:absolute; inset:0; width:100%; height:100%; image-rendering:pixelated; pointer-events:none; z-index:1; }
+#shop .shop-tile-picture { position:absolute; left:calc(4 * var(--dot)); right:calc(4 * var(--dot)); top:calc(4 * var(--dot)); height:calc(39 * var(--dot)); display:grid; place-items:center; z-index:2; }
+#shop .shop-art { display:block; max-width:none; max-height:none; image-rendering:pixelated; pointer-events:none; }
+#shop .shop-tile-name { position:absolute; top:calc(49 * var(--dot)); left:calc(6 * var(--dot)); right:calc(6 * var(--dot)); height:calc(var(--shop-name,14) * var(--dot)); display:flex; align-items:center; justify-content:center; font-size:16px; line-height:1; white-space:nowrap; background:var(--shop-tile); z-index:3; }
+/* 두 줄 이름: 한 줄 이름과 같은 자리 · 같은 폭, 띠 높이는 workshop-ui.mjs가 갈래마다 정한다(--shop-name). 위아래 1점은 글자가 띠 선에 붙지 않게. */
+#shop .shop-tile-name.two-lines { display:block; align-content:center; padding:calc(1 * var(--dot)) 0; white-space:pre-line; text-wrap:balance; }
+#shop .shop-tile-name.two-lines.wide { left:calc(3 * var(--dot)); right:calc(3 * var(--dot)); }
+#shop .shop-item-state { display:flex; justify-content:center; align-items:center; gap:4px; min-height:24px; font-size:16px; line-height:1.25; }
+#shop .shop-item-state .ico { width:16px; height:16px; }
+#shop .shop-price { display:inline-flex; align-items:center; justify-content:center; gap:5px; white-space:nowrap; }
+#shop .shop-price.short { opacity:.45; }
+#shop .shop-tile:focus-visible .shop-tile-face { outline:calc(1 * var(--dot)) solid #243f40; outline-offset:calc(1 * var(--dot)); }
+#shop .shop-detail { position:relative; display:flex; flex-direction:column; align-items:flex-start; gap:12px; min-height:100%; padding:16px; background:#f3e3c2; }
+#shop .shop-detail-back { align-self:flex-end; min-height:44px; font-size:16px; }
+#shop .shop-detail-picture { flex:1; align-self:stretch; min-height:120px; display:grid; place-items:center; }
+#shop .shop-detail h3 { margin:0; font-size:24px; }
+#shop .shop-detail-place { display:block; margin-bottom:4px; font-size:16px; color:var(--ink-soft); }
+#shop .shop-detail p { margin:0; font-size:20px; text-align:left; text-wrap:pretty; }
+#shop .shop-detail .shop-eaters { font-size:16px; color:var(--ink-soft); }
+#shop .shop-action { display:flex; flex:none; align-items:center; justify-content:center; gap:12px; min-height:48px; min-width:80px; }
+@media(max-width:600px) {
+  #shop.shop-catalog { grid-template-columns:1fr; }
+  #shop .shop-categories button { font-size:12px; padding:4px; }
+  #shop .shop-tile-name { font-size:12px; }
+  #shop .shop-item-state { font-size:12px; }
+  #shop .shop-detail { padding:10px; gap:10px; }
+  #shop .shop-detail h3 { font-size:20px; }
+  #shop .shop-detail p { font-size:16px; }
+}
+@media(max-height:420px) {
+  #shop .shop-keeper > .shop-head { padding:0; flex:none; min-height:40px; }
+  /* 단추 틀 그림(n-button)은 단추를 기준으로 붙는다. static이면 틀이 판 왼쪽 위로 떨어져 「낚시 공방」 제목을 덮고
+     단추는 틀 없이 글만 남았다(2026-11-08 Claude, 780×290). 흐름 자리는 그대로 두고 기준만 단추로. */
+  /* 장비 탭 말풍선은 영감 칸 맨 아래에 얹는다. 영감 칸 높이를 말풍선이 먹어 화면 전체 점 굵기가 2로 떨어지던 것. */
+  #shop .shop-keeper { position:relative; }
+  #shop .shop-keeper > .shop-talk { position:absolute; left:0; bottom:0; right:0; }
+  /* 받침은 그림을 감싼다(넓은 받침 가운데 작은 낚싯대가 뜨지 않게). */
+  #shop .shop-art-pair { align-items:center; }
+  #shop .shop-art-pair .shop-stand { flex:none; max-width:none; }
+  #shop .shop-categories button { padding:2px 6px; font-size:12px; }
+  #shop .shop-tabs button { min-height:44px; }
+  #shop .shop-item .primary,#shop .shop-item .shop-lock { min-height:44px; }
+  #shop .shop-catalog-body { margin-bottom:0; }
+  #shop .shop-tile-name,#shop .shop-item-state { font-size:12px; }
+  #shop .shop-detail { min-height:100%; display:grid; grid-template-columns:100px minmax(0,1fr) auto; grid-template-rows:auto 1fr auto; padding:8px; gap:8px; }
+  #shop .shop-detail-picture { grid-column:1; grid-row:1/4; min-height:80px; }
+  #shop .shop-detail h3 { grid-column:2; grid-row:1; font-size:16px; }
+  #shop .shop-detail-back { grid-column:3; grid-row:1; }
+  #shop .shop-detail p { grid-column:2/4; font-size:12px; }
+  #shop .shop-detail p.shop-description { font-size:16px; line-height:1.3; }
+  #shop .shop-detail .shop-item-state { grid-column:2; }
+  #shop .shop-detail .shop-action { grid-column:3; font-size:12px; min-height:44px; padding:4px 16px; }
+}
+/* 2026-11-08 Claude: 한 화면 한 점 굵기(틀 한 점 = 그림 한 점)로 맞춘 뒤의 공방 짜임.
+   칸 · 받침 · 자세히 보기 그림 칸은 그 굵기의 그림 크기에 맞춘다(큰 칸 가운데 작은 그림이 뜨지 않게).
+   칸 크기 값(--shop-plate · --shop-pic · --shop-face)은 workshop-ui.mjs fitShop이 갈래마다 가장 큰 그림으로 정한다. */
+#shop .shop-tile-face { height:calc(var(--shop-face,64) * var(--dot)); }
+#shop .shop-tile-picture { height:calc(var(--shop-pic,39) * var(--dot)); }
+#shop .shop-tile-name { top:calc((var(--shop-pic,39) + 6) * var(--dot)); }
+#shop[data-category='bait'] .shop-tile-name { left:calc(3 * var(--dot)); right:calc(3 * var(--dot)); }
+@media (min-height:421px) {
+  #shop .shop-art-pair { flex:none; align-items:center; }
+  #shop .shop-art-pair .shop-stand { flex:none; max-width:none; padding:calc(4 * var(--dot)); }
+  #shop .shop-item { flex:none; }
+  #shop .shop-detail-picture { flex:none; min-height:0; align-self:center; box-sizing:content-box; border:2px solid rgba(38,65,77,.18); border-radius:4px; background:#e8d4ae; }
+  /* 자세히 칸 밑 같은 갈래 칸(2026-11-14). 자세히 칸은 내용만 감싸고, 지금 보는 칸은 산호 테. */
+  #shop .shop-detail:has(+ .shop-grid) { min-height:0; margin-block:0; }
+  #shop .shop-detail + .shop-grid { margin-top:12px; flex:none; }
+  #shop .shop-tile[aria-current="true"] .shop-tile-face { outline:calc(2 * var(--dot)) solid var(--coral-deep); outline-offset:calc(1 * var(--dot)); }
+}
+@media (min-width:601px) and (min-height:421px) {
+  /* 영감 칸: 영감과 이름표만 칠하고 말풍선은 머리 위에. 남는 위쪽은 종이 그대로. */
+  #shop .shop-keeper { justify-content:flex-end; }
+  #shop .shop-keeper-pic { flex:none; }
+  #shop .shop-talk { order:-1; position:relative; margin:0 0 14px; padding:10px 12px; border:2px solid #243f40; border-radius:6px; background:var(--paper); line-height:1.5; }
+  #shop .shop-talk::after { content:''; position:absolute; left:50%; bottom:-8px; width:12px; height:12px; background:var(--paper); border-right:2px solid #243f40; border-bottom:2px solid #243f40; transform:translateX(-50%) rotate(45deg); }
+  /* 장비 쪽지는 내용만큼, 남는 높이는 위아래로 나눈다. */
+  #shop .shop-item { margin-block:auto; }
+  /* 자세히 보기: 그림은 왼쪽, 글과 단추는 오른쪽. 묶음을 가운데에. */
+  /* 자세히 보기도 장비 칸처럼 내용만 감싼 칸을 가운데에 둔다. 판 높이를 다 채운 빈 칸 안에 작은 내용이 뜨던 것(2026-11-08). */
+  #shop .shop-catalog-body:has(> .shop-detail) { display:flex; flex-direction:column; }
+  #shop .shop-detail { display:grid; grid-template-columns:auto minmax(0,1fr); column-gap:24px; row-gap:12px; align-content:center; align-items:start; justify-items:start; flex:none; min-height:0; margin-block:auto; padding:16px 72px 16px 16px; }
+  #shop .shop-detail > * { grid-column:2; }
+  #shop .shop-detail-back { position:absolute; top:16px; right:16px; }
+  #shop .shop-detail-picture { grid-column:1; grid-row:1 / span 6; align-self:start; }
+}
+/* 폰 세로 자세히 보기: 목록으로 단추는 그림 줄 오른쪽에 얹어 한 줄을 아낀다. 「사기」 단추가 첫 화면 아래로 밀려 넘겨야 보이던 것(2026-11-08, 390×664). */
+@media (max-width:600px) and (min-height:421px) {
+  #shop .shop-detail { gap:8px; }
+  #shop .shop-detail-back { position:absolute; top:10px; right:10px; }
+}
+/* Kenney UI Pack Pixel Adventure. 그림만 바꾸며 기존 여백 · 글 · 누르는 넓이를 따른다. */
+#shop[data-shop-skin=kenney] { background:transparent; color:#243f40; }
+#shop[data-shop-skin=kenney] .n-frame:not(.shop-ui-frame),
+#shop[data-shop-skin=kenney] .shop-plate { visibility:hidden; }
+#shop[data-shop-skin=kenney] .shop-ui-surface { isolation:isolate; background:none !important; border-radius:0; }
+/* 받침의 산호 · 금빛 선은 점 틀 바깥에 매끈한 선으로 비친다. 자리는 2px 그대로 두고 색만 지운다(다음 · 끝 단계는 frame 틀로 가름). */
+#shop[data-shop-skin=kenney] .shop-art-pair .shop-stand { border-color:transparent; }
+#shop[data-shop-skin=kenney] .shop-ui-frame { position:absolute; top:0; left:0; grid-area:auto !important; z-index:-1; pointer-events:none; image-rendering:pixelated; max-width:none; }
+#shop[data-shop-skin=kenney] .shop-keeper-pic,
+#shop[data-shop-skin=kenney] .shop-tile-name { background:transparent; }
+#shop[data-shop-skin=kenney] .shop-tile-face::before,
+#shop[data-shop-skin=kenney] .shop-tile-face::after,
+#shop[data-shop-skin=kenney] .shop-talk::after { display:none; }
+#shop[data-shop-skin=kenney] .shop-tabs button:not(.on),
+#shop[data-shop-skin=kenney] .shop-price.short { opacity:1; }
+#shop[data-shop-skin=kenney] .shop-price.short { text-decoration:underline dotted; text-underline-offset:3px; }
+#shop[data-shop-skin=kenney] .shop-categories button,
+#shop[data-shop-skin=kenney] .shop-tabs button,
+#shop[data-shop-skin=kenney] button.n-button,
+#shop[data-shop-skin=kenney] .shop-purse,
+#shop[data-shop-skin=kenney] .shop-lock { color:#243f40; }
+#shop[data-shop-skin=kenney] .shop-next-name,
+#shop[data-shop-skin=kenney] .shop-what,
+#shop[data-shop-skin=kenney] .shop-effect .next,
+#shop[data-shop-skin=kenney] .shop-detail-place,
+#shop[data-shop-skin=kenney] .shop-eaters { color:#41543f; }
+#shop[data-shop-skin=kenney] .shop-categories [aria-selected=true]::after { content:''; position:absolute; height:calc(1 * var(--shop-art-dot)); bottom:calc(2 * var(--shop-art-dot)); left:30%; right:30%; background:#243f40; pointer-events:none; }
+#shop[data-shop-skin=kenney] .shop-tile[data-state=locked] .shop-tile-face > .shop-ui-frame,
+#shop[data-shop-skin=kenney] button:disabled > .shop-ui-frame,
+#shop[data-shop-skin=kenney] .shop-lock > .shop-ui-frame { filter:grayscale(1); }
+
+/* 돌아가기 한 꼴(인디 채점 2026-11-12 · 판 3 단계 0): 도감 · 지도와 같이 판 오른쪽 위에 둥근 집 그림 + 「돌아가기」 이름표.
+   넓은 화면은 머리 줄 끝(조개 옆), 폰 세로는 판 모서리(영감 그림 오른쪽 위), 낮은 가로는 큰 탭 줄 끝에 얹고 이름표를 접는다.
+   둥근 판은 도감과 같은 나무 판(match-hud-badge-wood, 29점)이다. 공방은 수첩 틀(n-frame)을 감추니 이 단추만 다시 보인다. */
+#shop .back-badge { flex:none; display:flex; flex-direction:column; align-items:center; justify-content:flex-start; gap:0; width:auto; min-width:72px; min-height:44px; margin:0; padding:0; border:0; background:none; box-shadow:none; color:#243f40; cursor:pointer; }
+#shop .back-badge .button-disc { display:grid; place-items:center; width:calc(29 * var(--dot)); height:calc(29 * var(--dot)); }
+#shop .back-badge .ico { width:calc(13 * var(--dot)); height:calc(13 * var(--dot)); }
+#shop[data-shop-skin=kenney] .back-badge .button-disc > .n-frame { visibility:visible; }
+#shop .shop-sheet > .shop-head { justify-content:flex-start; }
+#shop .shop-sheet > .shop-head > .shop-purse { margin-left:auto; }
+#shop > .back-badge { position:absolute; top:10px; right:10px; z-index:5; }
+@media (max-height:420px) {
+  #shop > .back-badge { top:6px; right:14px; min-width:44px; }
+  #shop .shop-categories { margin-right:52px; }
+  /* 영감 칸 맨 아래 말풍선 줄: 옛 돌아가기 단추 줄(44px + 틈 10px)만큼 비워 영감 그림 칸 높이를 그대로 둔다.
+     비우지 않으면 말풍선이 「마또 영감」 이름표와 영감 그림을 덮었다(2026-11-13 shop-ui1 · workshop 780×290). */
+  #shop .shop-keeper:has(> .shop-talk) { padding-bottom:54px; }
+}
+.shop-colors{display:flex;flex-wrap:wrap;justify-content:center;gap:8px;grid-column:1/-1}
+.shop-colors button{display:flex;align-items:center;gap:6px;min-width:44px;min-height:44px;padding:4px 8px;color:var(--ink,#243f40);font:inherit}
+.shop-colors i{display:inline-block;width:16px;height:16px;border:2px solid #243f40}
+.shop-colors button[aria-pressed=true]{outline:3px solid #875338;outline-offset:1px}
+@media(max-height:420px){
+ #shop .shop-detail:has(.shop-colors){grid-template-rows:auto auto auto auto;align-content:start;row-gap:4px}
+ #shop .shop-detail:has(.shop-colors) .shop-detail-picture{grid-row:1/5}
+ #shop .shop-detail:has(.shop-colors) .shop-description{grid-row:2}
+ #shop .shop-detail .shop-colors{grid-column:2/4;grid-row:3;gap:4px;justify-content:flex-start}
+ #shop .shop-colors button{position:relative;padding:2px 4px;gap:0;min-height:44px}
+ #shop .shop-colors i{position:absolute;left:4px;right:4px;bottom:3px;width:auto;height:3px;border:0}
+ #shop .shop-detail:has(.shop-colors) .shop-item-state{grid-column:2;grid-row:4;align-self:center}
+ #shop .shop-detail:has(.shop-colors) .shop-action{grid-column:3;grid-row:4}
+}
+.shop-place-tag{display:block;font-size:16px;line-height:1.3;color:#405b55}
+/* 칸 이름은 긴 이름도 같은 크기로 읽고 두 줄로 맞춘다. */
+#shop .shop-now-name,#shop .shop-next-name { font-size:16px; }
+@media(max-height:420px){
+ #shop .shop-now-name,#shop .shop-next-name { font-size:12px; }
+ #shop[data-category=restore] .shop-keeper { gap:2px; }
+ #shop[data-category=restore] .shop-keeper > .shop-head { min-height:20px; }
+}

@@ -1,0 +1,108 @@
+/* 판 4 B: 읽는 문장, 메뉴 누름 자리와 영감의 한마디. */
+#start .start-pic{position:relative;overflow:visible}
+#start .start-tackle{position:absolute;right:0;bottom:0;display:grid;place-items:center;z-index:2}
+#start .start-tackle img{image-rendering:pixelated;width:calc(12 * var(--dot));height:calc(12 * var(--dot))}
+#dex .dex-tackle{margin:4px 0;font-size:16px;line-height:22px;word-break:keep-all;text-align:center;grid-column:1/-1}
+@media(min-width:1200px) and (min-height:700px){
+ #dex[data-tab='fish'] .dex-tackle{position:absolute;left:calc(25 * var(--dot));top:calc(10 * var(--dot));width:calc(205 * var(--dot));margin:0;line-height:24px}
+}
+.matto-note {display:flex;align-items:center;gap:8px;min-width:0;text-align:left;}
+.matto-note .matto-face {flex:none;image-rendering:pixelated;object-fit:contain;}
+.matto-note p {min-width:0;margin:0;font-size:20px;line-height:28px;word-break:keep-all;overflow-wrap:normal;}
+.start-matto-notes {display:grid;gap:6px;margin:8px 0;}
+#start .start-matto-notes p {font-size:20px;line-height:28px;}
+#start .start-matto-notes {grid-column:1/-1;}
+#bubble.elder-guide .bubble-text {overflow-wrap:normal;}
+#end .boss-after {margin:4px 0;}
+#end .end-cover {display:flex;align-items:center;justify-content:center;gap:8px;}
+#end .end-cover .ico {width:24px;height:24px;}
+
+/* 물고기 쪽과 먹이그물 쪽에서 같은 두 탭을 위 왼쪽에 둔다. */
+#dex[data-tab] .dex-tabs {position:absolute!important;right:auto!important;bottom:auto!important;display:flex!important;gap:4px;width:max-content!important;height:44px!important;min-height:44px;pointer-events:auto!important;z-index:9!important;translate:none!important;}
+#dex[data-tab] .dex-tabs button.dex-tab {position:relative!important;inset:auto!important;display:flex!important;align-items:center;gap:4px;width:auto!important;height:44px!important;min-width:44px!important;min-height:44px!important;padding:4px 8px!important;margin:0!important;overflow:visible!important;clip-path:none!important;white-space:nowrap;pointer-events:auto;}
+#dex[data-tab] .dex-tabs button.dex-tab > .ico,#dex[data-tab] .dex-tabs button.dex-tab > span {position:relative!important;inset:auto!important;width:auto!important;height:auto!important;min-width:0!important;min-height:0!important;margin:0!important;padding:0!important;clip-path:none!important;overflow:visible!important;}
+#dex[data-tab] .dex-tabs button.dex-tab > .ico {width:24px!important;height:24px!important;}
+#dex[data-tab] .dex-tabs .dex-tab-icon-match {position:static!important;width:24px!important;height:auto!important;max-height:24px!important;object-fit:contain;}
+#dex .web-fish-bookmark {display:none;}
+#dex[data-tab] .dex-tabs {margin:0!important;transform:none!important;}
+#dex[data-tab] .dex-tabs button.dex-tab {translate:none!important;transform:none!important;font-size:var(--dex-label-font,16px)!important;}
+#dex[data-tab] .dex-tabs button.dex-tab > span:not(.ico) {font-size:var(--dex-label-font,16px)!important;line-height:1.375!important;}
+#dex .dex-place-name {font-size:var(--dex-label-font,16px)!important;line-height:1.25!important;white-space:nowrap;}
+#dex button.dex-place {min-width:44px;min-height:44px;}
+#dex .dex-name.has-boss-name > span {display:block;font-size:var(--dex-label-font,16px)!important;line-height:1.375!important;top:0!important;white-space:normal;word-break:keep-all;}
+#dex .dex-name .boss-species,#dex .dex-name .boss-nickname {display:block;white-space:nowrap;}
+#dex .info-dex-scroll > .dex-reading-note {position:static;grid-column:1/-1;width:auto;margin:4px 0;text-align:left;}
+#dex .dex-back,#dex .dex-turn {min-width:44px!important;min-height:44px!important;}
+#dex .dex-place-scroll-cue {position:absolute;width:18px;display:grid;place-items:center;background:#fff4d8e8;color:#214b3d;font:700 24px/1 Galmuri11;pointer-events:none;z-index:8;}
+#dex .dex-place-scroll-cue[hidden] {display:none;}
+#dex .dex-place-scroll-cue .ico {width:18px;height:18px;}
+#dex .dex-place-scroll-cue[data-direction='next'] .ico {transform:rotate(180deg);}
+
+@media(max-width:599px),(max-height:520px) {
+ .matto-note p,#start .start-matto-notes p {font-size:16px;line-height:22px;}
+ #start .start-task p:not(.start-food),#start .start-task p:not(.start-food)>span {font-size:16px!important;line-height:22px;}
+ #start .contest-hello,#start .contest-again,#start .contest-line {font-size:16px!important;line-height:22px!important;white-space:normal;word-break:keep-all;}
+ #end .next-text>span,#end .next-text>span>span,#end .review-lines,#end .review-lines li,#end .end-lesson,#end .end-lesson p {font-size:16px!important;line-height:22px!important;}
+ #end .next-main[role='button'] {min-height:44px;box-sizing:border-box;}
+ #card.info-card .why-heading {font-size:16px!important;line-height:22px!important;}
+ #dex .web-legend p,#dex .web-legend p>span {font-size:16px!important;line-height:22px!important;}
+ #dex .dex-story,#dex .dex-boss-progress {font-size:16px!important;}
+ #pause .icon-toggle,#pause [data-act='quit'] {min-width:44px!important;min-height:44px!important;height:44px!important;}
+ #dex .web-node {min-width:44px;min-height:44px;}
+ #dex .dex-back {width:44px!important;height:44px!important;}
+}
+
+@media(max-width:599px) {
+ #dex[data-tab='fish'] .dex-name.has-boss-name {grid-column:1/-1!important;margin-left:0!important;}
+ #end .end-buttons {display:flex;gap:8px;}
+ #end.end-book .end-buttons button {flex:1 1 0;min-width:0!important;min-height:48px!important;height:48px!important;padding:4px 12px!important;}
+ #start.has-matto-notes {max-height:calc(100dvh - 16px);overflow-y:auto;}
+ #start .start-matto-notes {margin:6px 0;}
+}
+
+@media(min-width:600px) and (max-height:520px) {
+ #dex[data-tab='fish'] .dex-name.has-boss-name {grid-column:1/-1!important;margin-left:0!important;}
+ #bubble.elder-guide,#bubble.elder-guide.long,#bubble.elder-guide.big {width:max-content;max-width:calc(100vw - 48px);}
+ #bubble.elder-guide .bubble-text {max-width:600px;font-size:16px;line-height:22px;}
+ #start.has-matto-notes {width:calc(100vw - 24px);max-height:calc(100dvh - 16px);overflow-y:auto;grid-template-columns:minmax(0,1fr) minmax(240px,.8fr);gap:4px 12px;}
+ #start.has-matto-notes h2 {grid-column:1;grid-row:1;}
+ #start.has-matto-notes .sub {grid-column:1;grid-row:2;}
+ /* 첫 먹이 갈래 셋의 긴 실마리도 읽게 세 칸은 판 전체 폭을 쓴다. 영감 말은 제목·안내 옆에 둔다. */
+ #start.has-matto-notes .start-tasks {grid-column:1/-1;grid-row:3;}
+ #start.has-matto-notes .start-baits {grid-column:1;grid-row:4;}
+ #start.has-matto-notes .start-matto-notes {grid-column:2;grid-row:1/3;align-self:center;margin:0;}
+ #start.has-matto-notes > .primary {grid-column:2;grid-row:4;min-width:0;align-self:center;}
+ #start.has-matto-notes > .tip {grid-column:2;grid-row:auto;max-width:none;}
+ #start.has-matto-notes > .start-bait-tip {grid-column:1;grid-row:5;}
+ #start.has-matto-notes .matto-note {gap:6px;}
+ /* 갈무리 16px 글의 실제 획은 22px, 배율 2에서 맞춘 18px 글은 24px이다. 장갑 쪽지와 단추도 같은 24px 줄 안에 둔다. */
+ #card.info-card {--card-side:clamp(160px,23vw,200px);--info-font:16px!important;--info-line:24px!important;}
+ #card.info-card .info-scroll {display:flex!important;flex-direction:column!important;gap:0!important;}
+ #card.info-card .info-overview,#card.info-card .info-fields {display:contents!important;}
+ /* 이름 칸 54px는 「사는 곳」 「던진 곳」 폭과 같아 칸 사이 4px면 「사는 곳산골짜기」로 붙어 읽혔다. 이름과 값 사이만 8px(2026-11-14 마감 손질). */
+ #card.info-card .info-field {display:grid!important;grid-template-columns:18px 54px minmax(0,1fr);column-gap:4px;flex:none;}
+ #card.info-card .info-field-value,#card.info-card .card-lines .fact-text {margin-left:4px!important;}
+ #card.info-card .info-field-icon {grid-column:1;width:18px;height:20px;}
+ #card.info-card .info-field-label {grid-column:2;}
+ #card.info-card .info-field-value {grid-column:3!important;grid-row:auto!important;font-size:16px;line-height:20px;}
+ #card.info-card .info-food {order:0;}
+ #card.info-card .info-home {order:1;}
+ #card.info-card .info-size {order:2;}
+ /* 특징 줄도 위 줄들과 같은 세 칸(그림 18 · 이름 54 · 값). 두 칸(76 · 값)일 때 「특징」만 그림 칸 자리로 22px 나와 있었다(2026-11-14 마감 손질).
+    「알아낸 것★」은 이름 칸보다 길어 그 줄만 값이 조금 오른쪽에서 시작한다. */
+ #card.info-card .card-lines {order:3;display:grid!important;grid-template-columns:18px minmax(54px,max-content) minmax(0,1fr);flex:none;gap:4px;font-size:16px;line-height:20px;}
+ #card.info-card .card-lines .fact-text {grid-column:3!important;grid-row:auto!important;font-size:16px;line-height:20px;}
+ #card.info-card .card-lines .fact-label {grid-column:2!important;grid-row:1!important;}
+ #card.info-card .card-lines .fact-text {grid-row:1!important;}
+ #card.info-card .card-lines .fact-label-width {display:none;}
+ #card.info-card .card-lines .fact-name {font-size:16px!important;line-height:24px!important;}
+ #card.info-card .info-scroll-wrap[data-more='true']::before {display:none;}
+ #card.info-card .info-caught {order:4;}
+ #card.info-card .info-food .info-field-value {display:flex;flex-wrap:wrap;column-gap:6px;}
+ #card.info-card .info-field-icon,#card.info-card .info-field-label,#card.info-card .info-field-value {padding:1px 0;}
+ #card.info-card .info-card-body {column-gap:10px!important;row-gap:2px!important;}
+ #card.info-card .slip-why {padding:2px 6px!important;gap:0;}
+ #card.info-card .slip-why>span {font-size:16px;line-height:20px;}
+ #card.info-card .ask {margin:0;}
+ #card.info-card .option {min-height:44px!important;}
+}

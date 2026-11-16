@@ -1,0 +1,90 @@
+/* 사례판 「다」: 물가 위 수첩 한 장, 첫 판에서만 쓰는 천 꼬리표.
+   수첩은 시안에서 오린 그림(449×243점)이고 --bk가 한 점의 크기다(fitIntro). 칸 자리는 그림의 점 좌표다. */
+#intro.panel { position: fixed; inset: 0; width: 100%; height: 100%; max-height: none; padding: 0; margin: 0; transform: none; overflow: visible; z-index: 50; text-align: center; background: transparent; }
+.intro-sheet { --art: url(./art/ui/intro-book.06812a5450a0.webp); position: absolute; width: calc(449 * var(--bk)); height: calc(243 * var(--bk)); left: calc((100% - calc(449 * var(--bk))) * .9); top: calc((100% - calc(243 * var(--bk))) * .45); isolation: isolate; }
+.intro-sheet > .n-frame { display: none; }
+.intro-book { position: absolute; inset: 0; background: var(--art) 0 0 / 100% 100% no-repeat; image-rendering: pixelated; }
+.intro-head { position: absolute; left: calc(100 * var(--bk)); top: calc(16 * var(--bk)); width: calc(285 * var(--bk)); height: calc(44 * var(--bk)); display: grid; align-content: center; gap: 4px; }
+#intro h2 { margin: 0; font-size: 32px; line-height: 1.4; }
+#intro .sub { margin: 0; color: var(--ink-soft); font-size: 20px; line-height: 1.4; }
+.intro-cuts { position: absolute; inset: 0; }
+.intro-cut { display: contents; }
+.intro-cut figcaption { position: absolute; top: calc(198 * var(--bk)); width: calc(106 * var(--bk)); height: calc(30 * var(--bk)); display: grid; place-content: center; font-size: 20px; line-height: 1.3; }
+.intro-cut:nth-child(1) figcaption { left: calc(66 * var(--bk)); }
+.intro-cut:nth-child(2) figcaption { left: calc(174 * var(--bk)); }
+.intro-cut:nth-child(3) figcaption { left: calc(282 * var(--bk)); }
+.intro-pic { display: none; }
+.intro-pic[data-pic="dex"] { display: block; position: absolute; left: calc(34 * var(--bk)); top: calc(66 * var(--bk)); width: calc(158 * var(--bk)); height: calc(124 * var(--bk)); }
+.intro-fishes { position: absolute; left: calc(16 * var(--bk)); top: calc(9 * var(--bk)); width: calc(72 * var(--bk)); height: calc(103 * var(--bk)); display: grid; grid-template-rows: repeat(4, minmax(0, 1fr)); }
+.intro-fish { position: relative; min-width: 0; min-height: 0; display: grid; place-items: center; }
+/* 꼬리표 그림은 한쪽에 끈이 달렸다. 글자는 상자가 아니라 판 가운데에 놓는다(대표 2026-11-07 「버튼에 글자가 가운데 있지않고 한쪽으로 치우쳤지」). tag-coral은 왼쪽 7점, intro-tag-sage는 오른쪽 15점이 끈이다. */
+#intro .intro-skip, #guideSkip { position: fixed; right: 16px; top: 12px; width: 210px; min-height: 56px; padding: 12px 24px 12px calc(24px + 7 * var(--dot)); font-size: 20px; z-index: 51; }
+/* 꼬리표 그림은 높이가 정해져 있어 단추 가운데에 놓는다. */
+#intro .intro-skip > .n-frame, #guideSkip > .n-frame { top: 50% !important; transform: translateY(-50%); filter: brightness(1.16) saturate(1.25); }
+#intro .intro-go { position: fixed; right: 3%; bottom: 2%; width: 29%; min-height: 76px; padding: 16px calc(20px + 15 * var(--dot)) 16px 20px; font-size: 24px; }
+#guideSkip { top: var(--guide-top, 80px); z-index: 63; }
+#intro .intro-go, #intro .intro-skip, #guideSkip { color: #09251d; }
+/* body:has(#intro:not([hidden])) 꼴을 body 표시로 바꿨다(perf5, layout.mjs watchPanelFlags). 아이디를 두 번 쓴 것은 전과 같은 우선순위(2,1,1)를 지키려고. */
+body.with-intro #hud#hud, body.with-intro #bubble#bubble, body.with-intro #toast#toast, body.with-intro #fightBar#fightBar, body.with-intro #tapBtn#tapBtn, body.with-intro #pop#pop, body.with-intro #combo#combo, body.with-intro #lookBtn#lookBtn { visibility: hidden; }
+/* 첫 판 안내는 아래쪽 단추들 위 넓은 종이 띠로 뜬다. */
+#bubble.intro-guide { width: 62vw; max-width: calc(100vw - 24px); min-height: 80px; padding: 16px 28px; gap: 16px; }
+#bubble.intro-guide .bubble-text { font-size: 24px; line-height: 1.5; text-align: center; flex: 1; }
+#bubble.intro-guide .hud-bubble-tail { display: none; }
+/* 넓은 노트북은 수첩이 커서 글도 한 칸 키운다(갈무리 12px 격자). */
+@media (min-width: 1500px) and (min-height: 800px) {
+  #intro h2 { font-size: 40px; }
+  #intro .sub, .intro-cut figcaption, #intro .intro-skip, #guideSkip { font-size: 24px; }
+}
+@media (max-width: 1000px) {
+  #intro h2 { font-size: 24px; }
+  #intro .sub, .intro-cut figcaption { font-size: 16px; }
+  #intro .intro-go { min-height: 56px; width: 34%; font-size: 20px; }
+  #intro .intro-skip, #guideSkip { width: 156px; min-height: 48px; font-size: 16px; padding: 8px 16px 8px calc(16px + 7 * var(--dot)); }
+  #bubble.intro-guide { min-height: 56px; padding: 10px 18px; gap: 8px; }
+  #bubble.intro-guide .bubble-text { font-size: 16px; }
+}
+@media (max-height: 520px) and (min-width: 600px) {
+  .intro-sheet { left: max(8px, calc(100% - calc(449 * var(--bk)) - 200px)); top: calc((100% - calc(243 * var(--bk))) / 2); }
+  .intro-head { gap: 0; }
+  #intro h2 { font-size: 16px; line-height: 1.3; }
+  #intro .sub { font-size: 12px; line-height: 1.3; }
+  .intro-cut figcaption { font-size: 12px; line-height: 1.25; }
+  #intro .intro-go { min-height: 44px; width: 184px; right: 8px; bottom: 12px; padding: 6px calc(12px + 15 * var(--dot)) 6px 12px; font-size: 16px; }
+  #intro .intro-skip, #guideSkip { top: 12px; right: 12px; min-height: 44px; }
+  #guideSkip { top: var(--guide-top, 52px); }
+  #bubble.intro-guide { width: 62vw; min-height: 48px; padding: 6px 16px; }
+  /* 놀이 중 길잡이 말은 가장 긴 줄(글 24자, 약 320px)이 16px 한 줄에 드는 폭까지만. 484×48이면 낮은 화면에서 원을 비킬 자리가 없었다(q07). 글마다 폭을 맞추면 글이 바뀌는 장면에 폭이 늦게 늘어 원에 닿았다. 멈춤 안내는 여러 줄이라 그대로. */
+  #bubble.intro-guide:not([data-coach]) { width: 376px; min-height: 40px; padding: 4px 12px; }
+  #bubble.intro-guide .guide-face { width: 24px !important; height: 24px !important; }
+}
+/* 폰 세로는 수첩 그림이 너무 작아져서 종이 위에 세 칸을 그림에서 잘라 쌓는다. */
+@media (max-width: 599px) {
+  .intro-sheet { left: 2%; top: 9%; width: 96%; height: 79%; padding: 22px 18px 16px 26px; display: grid; grid-template-rows: auto minmax(0, 1fr); gap: 8px; }
+  .intro-sheet > .n-frame { display: block; }
+  .intro-book { display: none; }
+  .intro-head { position: static; width: auto; height: auto; }
+  #intro h2 { font-size: 20px; }
+  #intro .sub { font-size: 12px; }
+  .intro-cuts { position: static; display: grid; align-content: space-evenly; min-height: 0; padding: 4px; background: #fbeecf; }
+  .intro-cut { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 8px; margin: 0; }
+  .intro-cut figcaption, .intro-cut:nth-child(n) figcaption { position: static; width: auto; height: auto; display: block; font-size: 12px; line-height: 1.5; text-align: left; }
+  .intro-pic, .intro-pic[data-pic="dex"] { display: block; position: relative; left: 0; top: 0; background: var(--art) no-repeat; background-size: calc(449 * var(--bk)) calc(243 * var(--bk)); image-rendering: pixelated; }
+  .intro-pic[data-pic="dex"] { width: calc(158 * var(--bk)); height: calc(124 * var(--bk)); background-position: calc(-34 * var(--bk)) calc(-66 * var(--bk)); }
+  .intro-pic[data-pic="boss"] { width: calc(107 * var(--bk)); height: calc(77 * var(--bk)); background-position: calc(-196 * var(--bk)) calc(-66 * var(--bk)); }
+  .intro-pic[data-pic="next"] { width: calc(122 * var(--bk)); height: calc(129 * var(--bk)); background-position: calc(-304 * var(--bk)) calc(-66 * var(--bk)); }
+  #intro .intro-go { width: 72%; right: 3%; min-height: 56px; font-size: 20px; }
+  #intro .intro-skip { min-height: 44px; top: 8px; }
+  #guideSkip { top: var(--guide-top, 104px); min-height: 44px; }
+  #bubble.intro-guide { width: calc(100vw - 24px); min-height: 64px; }
+}
+
+/* 멈춤 안내: 대상만 밝게 두고 나머지를 가린다. 직접 눌러 보는 구간은 가리지 않고 테두리만 깜박인다. */
+#coach { position: fixed; inset: 0; z-index: 60; }
+#coach.pass { pointer-events: none; }
+#coach.dim-all { background: rgba(7, 26, 38, .58); }
+#coachHole { position: absolute; border-radius: 12px; box-shadow: 0 0 0 200vmax rgba(7, 26, 38, .58); outline: 4px solid #fdf0d5; animation: coach-blink 1s steps(2) infinite; }
+#coach.pass #coachHole { box-shadow: 0 0 0 4px #2a483b; }
+#bubble[data-coach] { z-index: 62; }
+#coachOk { position: fixed; z-index: 62; width: 210px; min-height: 56px; padding: 12px calc(24px + 15 * var(--dot)) 12px 24px; font-size: 20px; color: #09251d; }
+@keyframes coach-blink { 50% { outline-color: #f2c14e; } }
+@media (prefers-reduced-motion: reduce) { #coachHole { animation: none; } }

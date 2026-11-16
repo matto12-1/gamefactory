@@ -1,0 +1,312 @@
+/* End-only concept geometry. One logical point is the stage's device-pixel K. */
+/* 집으로 정리도 같은 수첩의 칸과 종이를 쓴다. */
+#end { --tag-outline:#9f4131; }
+#end .end-home { position:relative; }
+#end[data-auto-home='true'] .end-buttons {visibility:hidden;}
+#end.end-book .end-buttons .end-home { min-height:44px;padding:0 20px;line-height:1.2; }
+#end .visit-count { display:block;position:static;width:100%;font-size:16px;line-height:24px;color:#224235;word-break:keep-all;overflow-wrap:normal; }
+#end .visit-count > span { display:inline-block; }
+#end .visit-more { margin:0;text-align:center;font-size:16px;line-height:24px;color:#224235; }
+#end[data-visit='true'] .new-fish:not(.empty) .new-name { display:none; }
+#end[data-visit='true'] .new-fish > .perfect-label {top:max(6px,calc(var(--scene-h) - 32px));bottom:auto;right:6px;}
+#end[data-visit='true'] .end-rewards,#end[data-visit='true'] .end-lesson { display:none; }
+#end[data-visit='true'] .end-title { font-size:24px; }
+#end[data-visit='true'][data-empty='true'] .new-fish.empty { width:100%; }
+#end[data-visit='true'][data-empty='true'] .new-name { display:block;white-space:normal; }
+@media (min-width:1200px) and (min-height:700px) {
+ #end.end-book .end-buttons .end-home { position:absolute;left:calc(436 * var(--dot));top:calc(211 * var(--dot));width:calc(108 * var(--dot));height:calc(49 * var(--dot));min-width:0;min-height:0;padding:0; }
+ #end[data-visit='true'] .end-title { font-size:36px; }
+ #end[data-visit='true'] .end-next { left:calc(268 * var(--dot));width:calc(274 * var(--dot)); }
+ #end[data-visit='true'] .next-text { left:calc(8 * var(--dot))!important;width:calc(258 * var(--dot))!important; }
+ #end[data-visit='true'] .next-ico { display:none; }
+ #end[data-visit='true'][data-empty='true'] .end-new .new-fish.empty { left:0;top:0;height:calc(76 * var(--dot));display:grid;place-items:center; }
+ #end[data-visit='true'][data-empty='true'] .new-name { position:static;clip-path:none;font-size:24px;width:100%;height:auto; }
+}
+/* 새 정리 글은 기존 수첩의 작은 글 크기로, 바위 장식 앞에서 한 줄로 맞춘다. */
+#end[data-visit='true'] .next-text span {font-size:16px;letter-spacing:0!important;max-width:100%;}
+#end[data-visit='true'] .next-text {display:grid;gap:4px;}
+#end[data-visit='true'] .end-title {display:grid!important;}
+@media(max-height:520px){#end.end-book .end-buttons .end-home{padding:0 16px;min-width:88px;box-sizing:border-box;height:44px;max-height:44px;}}
+@media(max-height:340px) and (min-width:600px){#end[data-boss-ending='true'].tight .end-right{row-gap:0;}}
+@media(max-height:340px) and (min-width:600px){#end.tight .end-right{row-gap:2px;}}
+@media(max-height:520px) and (min-width:600px){
+ /* 붐비는 낮은 가로: 띄어쓰기 없는 긴 이름은 처음부터 작은 글로 한 줄에 둔다(「보름달물해파리」가 이웃 이름에 겹쳤다). 두 줄로 나누면 쪽지 칸까지 접힌다. */
+ #end:has(.new-fish:nth-child(4)) .new-fish[data-long-name] .new-name > span { font-size:12px; letter-spacing:-1px; margin-inline:-12px; }
+ /* 네 종 이상 낮은 가로 집 화면: 사진을 빼고 카드에 폭을 준다(이름이 「버들/치/1마/리」로 끊겼다, q04). */
+ #end.end-book[data-visit='true']:has(.new-fish:nth-child(4)) { grid-template-columns:minmax(0,1fr); }
+ #end[data-visit='true']:has(.new-fish:nth-child(4)) .end-left { display:none; }
+}
+/* 낮은 가로 · 폰 세로: 「완벽!」 · 「새로!」는 작게 카드 위 모서리에 걸어 물고기를 덮지 않는다(q04). */
+@media(max-height:520px) and (min-width:600px),(max-width:599px){
+ #end .end-new { margin-top:3px; }
+ #end .new-fish > .perfect-label, #end.end-book[data-visit='true'] .new-fish > .perfect-label { top:-5px;right:-3px;bottom:auto;padding:0 3px;border-width:1px;font-size:12px;line-height:14px; }
+ #end .new-fish > .sticker { top:-5px;left:-3px;padding:0 3px;font-size:12px;line-height:16px;z-index:9; }
+}
+#end .end-match-art, #end .end-again-icon, #end .end-fresh-art { display:none; }
+#end .end-rewards { position:relative; }
+@media (max-width:1199px), (max-height:699px) {
+ #end .end-title { color:#fdf5dc; text-shadow:calc(-1 * var(--dot)) 0 #2b3626,var(--dot) 0 #2b3626,0 calc(-1 * var(--dot)) #2b3626,0 var(--dot) #2b3626; }
+ #end .end-next, #end .reward b { color:#224235; }
+ #end .photo-frame { background:#fdefd3; }
+ #end .new-fish[data-match-frame] { padding:calc(5 * var(--dot)); }
+}
+@media (min-width:1200px) and (min-height:700px) {
+ #end.end-book {
+  left:calc(50% - 282.5 * var(--dot)); top:calc(50% - 125.5 * var(--dot));
+  width:calc(583 * var(--dot)); height:calc(269 * var(--dot)); min-width:0; min-height:0; max-width:none; max-height:none;
+  padding:0; margin:0; display:block; gap:0; overflow:visible; background:transparent; transform:none; text-align:center;
+  --end-ink:#224235;
+  --title-outline:#2b3626; --tag-outline:#9f4131;
+ }
+ #end.end-book[data-match-frame-large='none'] > .n-frame { display:none; }
+ #end .end-left, #end .end-right { position:absolute; inset:0; display:block; width:100%; height:100%; margin:0; padding:0; gap:0; }
+ #end .end-left { z-index:1; }
+ #end .end-right { z-index:2; }
+ #end .end-match-art { display:block; position:absolute; pointer-events:none; }
+ #end .end-cover-left { left:0; top:var(--dot); width:calc(239 * var(--dot)); height:calc(264 * var(--dot)); z-index:-3; }
+ #end .end-cover-right { left:calc(234 * var(--dot)); top:0; width:calc(349 * var(--dot)); height:calc(269 * var(--dot)); z-index:-3; }
+ #end .end-paper { left:calc(6 * var(--dot)); top:calc(6 * var(--dot)); width:calc(561 * var(--dot)); height:calc(253 * var(--dot)); z-index:-2; }
+ #end .end-photo {
+  position:absolute; left:calc(42 * var(--dot)); top:calc(32 * var(--dot)); width:calc(195 * var(--dot)); height:calc(201 * var(--dot));
+  padding:0; margin:0; display:block; gap:0; background:transparent; box-shadow:calc(2 * var(--dot)) calc(2 * var(--dot)) 0 #8a724e; align-self:start; overflow:visible;
+ }
+ #end .photo-frame { position:absolute; left:calc(11 * var(--dot)); top:calc(11 * var(--dot)); width:calc(174 * var(--dot)); height:calc(150 * var(--dot)); padding:0; margin:0; border:0; background:transparent; box-shadow:none; }
+ #end .end-photo.n-skin { box-shadow:calc(2 * var(--dot)) calc(2 * var(--dot)) 0 #ba9971 !important; }
+ #end .photo-window { width:calc(174 * var(--dot)) !important; height:calc(150 * var(--dot)) !important; margin:0; }
+ #end .photo-canvas { position:absolute; margin:0; translate:none; bottom:auto; }
+ #end[data-ready='true'] .photo-flash { display:none; }
+ #end .photo-caption { position:absolute; left:calc(5 * var(--dot)); top:calc(161 * var(--dot)); width:calc(185 * var(--dot)); height:calc(38 * var(--dot)); display:flex; align-items:center; justify-content:center; padding:0; margin:0; color:#293b2b; font-size:32px; line-height:calc(16 * var(--dot)); }
+ #end[data-end-type='desktop'] .photo-caption { font-size:36px; }
+ #end[data-end-type='compact'] .photo-caption { font-size:24px; }
+ #end .photo-caption span { font-size:inherit; line-height:inherit; }
+ #end .photo-caption time, #end .end-tape, #end .end-leaf, #end .end-bookmark, #end .end-rule, #end .end-lesson, #end .next-text b, #end .next-spot { display:none; }
+ #end .end-title {
+  position:absolute; left:calc(259 * var(--dot)); top:calc(10 * var(--dot)); width:calc(251 * var(--dot)); height:calc(38 * var(--dot));
+  min-width:0; padding:0; margin:0; display:grid; place-items:center; background:transparent; box-shadow:none;
+  font-size:64px; line-height:calc(32 * var(--dot)); color:#fdf5dc; letter-spacing:var(--dot);
+  text-shadow:calc(-2 * var(--dot)) calc(-2 * var(--dot)) 0 var(--title-outline),0 calc(-2 * var(--dot)) 0 var(--title-outline),calc(2 * var(--dot)) calc(-2 * var(--dot)) 0 var(--title-outline),calc(-2 * var(--dot)) 0 0 var(--title-outline),calc(2 * var(--dot)) 0 0 var(--title-outline),calc(-2 * var(--dot)) calc(2 * var(--dot)) 0 var(--title-outline),0 calc(2 * var(--dot)) 0 var(--title-outline),calc(2 * var(--dot)) calc(2 * var(--dot)) 0 var(--title-outline);
+ }
+ #end[data-end-type='desktop'] .end-title { font-size:72px; }
+ #end[data-end-type='compact'] .end-title { font-size:48px; }
+ #end .end-title span { font-size:inherit; line-height:inherit; }
+ #end .end-new { position:absolute; left:calc(241 * var(--dot)); top:calc(54 * var(--dot)); width:calc(313 * var(--dot)); height:calc(74 * var(--dot)); display:block; padding:0; margin:0; }
+ #end .new-fish {
+  position:absolute; width:calc(99 * var(--dot)); height:calc(74 * var(--dot)); padding:0; margin:0; display:block; gap:0; background:transparent; box-shadow:none;
+ }
+ #end .new-fish:nth-child(1) { left:0; top:0; }
+ #end .new-fish:nth-child(2) { left:calc(105 * var(--dot)); top:var(--dot); }
+ #end .new-fish:nth-child(3) { left:calc(211 * var(--dot)); top:calc(-1 * var(--dot)); }
+ #end .sticker-scene { position:absolute; left:calc(4 * var(--dot)); top:calc(4 * var(--dot)); width:calc(91 * var(--dot)); height:calc(66 * var(--dot)); overflow:hidden; clip-path:polygon(0% 17%,5% 17%,5% 8%,14% 8%,14% 3%,27% 3%,27% 0%,38% 0%,38% 4%,55% 4%,55% 1%,70% 1%,70% 6%,83% 6%,83% 10%,93% 10%,93% 20%,100% 20%,100% 78%,95% 78%,95% 90%,83% 90%,83% 95%,66% 95%,66% 100%,41% 100%,41% 97%,24% 97%,24% 92%,10% 92%,10% 84%,3% 84%,3% 70%,0% 70%); }
+ #end .end-sticker-border { left:0; top:0; z-index:2; }
+ /* 표는 그림 칸 위로 걸어 물고기와 8px 넘게 띄운다(q05, 도장 몸 가림 8~17%였다). 물고기 자리는 ending-ui.mjs sizeStickers가 표를 재서 정한다. */
+ #end .sticker { position:absolute; left:calc(4 * var(--dot)); top:calc(-8 * var(--dot)); width:calc(45 * var(--dot)); height:calc(33 * var(--dot)); padding:0; background:transparent; box-shadow:none; z-index:3; }
+ #end .end-fresh-name { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+ #end .end-fresh-art { display:block; position:absolute; left:0; top:0; }
+ /* 붐비는 판: 칸마다 왼쪽에 표 줄(22점)을 두고 그림 아래 이름 한 줄(q05). 표는 물고기와 안 겹친다. */
+ #end:has(.new-fish:nth-child(4)) .new-fish { width:calc(82 * var(--dot)); height:calc(34 * var(--dot)); }
+ #end:has(.new-fish:nth-child(4)) .new-fish:nth-child(3n+1) { left:calc(23 * var(--dot)); }
+ #end:has(.new-fish:nth-child(4)) .new-fish:nth-child(3n+2) { left:calc(127 * var(--dot)); }
+ #end:has(.new-fish:nth-child(4)) .new-fish:nth-child(3n) { left:calc(231 * var(--dot)); }
+ #end:has(.new-fish:nth-child(4)) .new-fish:nth-child(-n+3) { top:0; }
+ #end:has(.new-fish:nth-child(4)) .new-fish:nth-child(n+4) { top:calc(48 * var(--dot)); }
+ #end:has(.new-fish:nth-child(4)) .sticker-scene { left:calc(3 * var(--dot)); top:calc(3 * var(--dot)); width:calc(76 * var(--dot)); height:calc(28 * var(--dot)); }
+ /* 붐비는 판의 표는 작은 글 딱지(그림 표는 칸 폭을 먹어 물고기가 정수 분의 1로 줄었다). */
+ #end:has(.new-fish:nth-child(4)) .sticker { left:calc(-22 * var(--dot)); top:0; width:auto; height:auto; padding:2px 6px; background:#c65a4e; color:#fff4d8; font:700 16px/1.25 Galmuri11; box-shadow:0 0 0 2px #fff4d8; }
+ #end:has(.new-fish:nth-child(4)) .end-fresh-art { display:none; }
+ #end:has(.new-fish:nth-child(4)) .end-fresh-name { position:static; width:auto; height:auto; overflow:visible; clip-path:none; font:inherit; color:inherit; }
+ #end .end-rewards { position:absolute; left:calc(243 * var(--dot)); top:calc(146 * var(--dot)); width:calc(312 * var(--dot)); height:calc(32 * var(--dot)); box-sizing:border-box; padding:0 calc(5 * var(--dot)); margin:0; display:flex; flex-wrap:nowrap; align-items:stretch; gap:0; }
+ #end .reward { position:relative; flex:1 1 0; min-width:0; height:100%; padding:0; margin:0; border:0; gap:calc(4 * var(--dot)); display:flex; justify-content:center; align-items:center; color:var(--end-ink); }
+ #end .reward + .reward { border:0; }
+ #end .reward + .reward::before { content:''; position:absolute; left:0; top:calc(5 * var(--dot)); width:var(--dot); bottom:calc(5 * var(--dot)); background:repeating-linear-gradient(to bottom,#ae9672 0 calc(2 * var(--dot)),transparent calc(2 * var(--dot)) calc(4 * var(--dot))); }
+ #end .reward b { font-size:24px; line-height:calc(14 * var(--dot)); color:var(--end-ink); }
+ #end .reward .ico { min-width:0; margin:0; padding:0; }
+ #end .reward b small { font-size:16px; color:var(--end-ink); }
+ /* 숫자 아래 이름(인디 채점 2026-11-12). 그림 옆 한 칸에 두 줄로 두어 띠 높이 32점 안에 든다. */
+ #end .reward .reward-name { color:var(--end-ink); font-size:16px; } /* 큰 수첩: 숫자 24px 아래 이름은 한 단 크게(배율 2에서 18px, 배율 1은 격자에 맞춰 12px) */
+ #end:has(.reward:nth-child(7)) .reward { gap:calc(3 * var(--dot)); }
+ #end.end-book .reward[data-key='coins'] { gap:calc(5 * var(--dot)); }
+ #end.end-book .reward[data-key='trash'] { gap:calc(4 * var(--dot)); }
+ #end:has(.reward:nth-child(7)) .reward[data-key='coins'] { flex-grow:1.1; }
+ #end[data-end-type='laptop'] .reward b { font-size:24px; }
+ #end[data-end-type='compact'] .reward b { font-size:24px; }
+ #end .end-next { position:absolute; left:calc(286 * var(--dot)); top:calc(179 * var(--dot)); width:calc(234 * var(--dot)); height:calc(30 * var(--dot)); padding:0; margin:0; display:block; background:transparent; box-shadow:none; color:var(--end-ink); }
+ #end .next-main { position:absolute; inset:0; display:block; }
+ #end .next-shadow { position:absolute; left:calc(18 * var(--dot)); top:calc(7 * var(--dot)); margin:0; }
+ #end .next-ico { position:absolute; left:calc(20 * var(--dot)); top:calc(8 * var(--dot)); }
+ #end .next-text { position:absolute; left:calc(63 * var(--dot)); top:calc(3 * var(--dot)); width:calc(144 * var(--dot)); height:calc(25 * var(--dot)); display:flex; align-items:center; justify-content:center; padding:0; margin:0; line-height:calc(12 * var(--dot)); text-align:center; }
+ #end .next-text span { font-size:32px; line-height:calc(12 * var(--dot)); overflow-wrap:normal; word-break:keep-all; color:var(--end-ink); }
+ #end[data-end-type='desktop'] .next-text span { font-size:36px; }
+ #end[data-end-type='compact'] .next-text span { font-size:32px; line-height:calc(16 * var(--dot)); }
+  #end .end-buttons { position:absolute; inset:0; display:block; margin:0; padding:0; pointer-events:none; }
+  #end .end-buttons button { pointer-events:auto; }
+ #end.end-book .end-buttons button.primary { position:absolute; left:calc(250 * var(--dot)); top:calc(211 * var(--dot)); width:calc(177 * var(--dot)); height:calc(49 * var(--dot)); min-width:0; min-height:0; margin:0; padding:0 calc(7 * var(--dot)) 0 calc(65 * var(--dot)); display:grid; place-items:center; font-size:64px; line-height:calc(30 * var(--dot)); color:#fdf0d5; white-space:nowrap; letter-spacing:var(--dot); text-shadow:calc(-2 * var(--dot)) calc(-2 * var(--dot)) 0 var(--tag-outline),0 calc(-2 * var(--dot)) 0 var(--tag-outline),calc(2 * var(--dot)) calc(-2 * var(--dot)) 0 var(--tag-outline),calc(-2 * var(--dot)) 0 0 var(--tag-outline),calc(2 * var(--dot)) 0 0 var(--tag-outline),calc(-2 * var(--dot)) calc(2 * var(--dot)) 0 var(--tag-outline),0 calc(2 * var(--dot)) 0 var(--tag-outline),calc(2 * var(--dot)) calc(2 * var(--dot)) 0 var(--tag-outline); }
+ #end[data-end-type='desktop'].end-book .end-buttons button.primary { font-size:72px; }
+ #end[data-end-type='compact'].end-book .end-buttons button.primary { font-size:48px; }
+ #end .end-again-icon { display:block; position:absolute !important; left:calc(33 * var(--dot)); top:calc(11 * var(--dot)) !important; }
+ #end.end-book .end-buttons button.round-btn { position:absolute; width:calc(50 * var(--dot)); height:calc(50 * var(--dot)); min-width:0; min-height:0; padding:0; margin:0; }
+ #end .end-buttons [data-act='map'] { left:calc(436 * var(--dot)); top:calc(212 * var(--dot)); }
+ #end .end-buttons [data-act='dex'] { left:calc(494 * var(--dot)); top:calc(211 * var(--dot)); }
+ #end .round-btn .ico { display:none; }
+ #end .end-rings { display:block; position:absolute; left:calc(-9 * var(--dot)); top:calc(18 * var(--dot)); width:calc(34 * var(--dot)); height:calc(235 * var(--dot)); bottom:auto; z-index:4; pointer-events:none; }
+ #end .end-leaf-top { left:calc(31 * var(--dot)); top:calc(-6 * var(--dot)); z-index:4; }
+ #end .end-match-tape { left:calc(101 * var(--dot)); top:calc(22 * var(--dot)); z-index:4; }
+ #end .end-leaf-lower { left:calc(32 * var(--dot)); top:calc(191 * var(--dot)); z-index:4; }
+ #end .end-leaf-small { left:calc(211 * var(--dot)); top:calc(196 * var(--dot)); z-index:4; }
+ #end .end-leaf-stamp { left:calc(237 * var(--dot)); top:calc(39 * var(--dot)); z-index:0; }
+ #end .end-cord { left:calc(210 * var(--dot)); top:calc(226 * var(--dot)); z-index:5; }
+ #end .end-rocks { left:calc(484 * var(--dot)); top:calc(185 * var(--dot)); z-index:3; }
+ #end .end-match-bookmark { left:calc(567 * var(--dot)); top:calc(57 * var(--dot)); z-index:4; }
+ #end .end-loop { left:calc(567 * var(--dot)); top:calc(34 * var(--dot)); z-index:4; }
+ #end .end-fold { left:calc(538 * var(--dot)); top:calc(5 * var(--dot)); z-index:3; }
+ #end.end-folded .end-rings { left:0; }
+ #end.end-folded { left:calc(50% - 291.5 * var(--dot)); top:calc(50% - 134.5 * var(--dot)); }
+ #end.end-folded .end-match-bookmark, #end.end-folded .end-loop { left:calc(556 * var(--dot)); }
+}
+/* 정리에서는 이름과 마릿수에 별도 줄을 주어 완벽 도장을 덮지 않는다. */
+@media (min-width:1200px) and (min-height:700px) {
+ /* 그림 아래 이름 한 줄(q05: 큰 화면에서 숨어 있었다). 12점 글(태블릿 24px · 노트북 32px). 붐비는 판은 칸 폭 + 표 줄까지 쓴다. */
+ #end .new-fish > .new-name { position:absolute; left:0; top:calc(75 * var(--dot)); width:100%; height:calc(12 * var(--dot)); display:block; margin:0; padding:0; text-align:center; font-size:24px; line-height:calc(12 * var(--dot)); white-space:nowrap; color:var(--end-ink); }
+ #end[data-end-type='laptop'] .new-fish > .new-name { font-size:32px; }
+ #end[data-end-type='desktop'] .new-fish > .new-name { font-size:36px; }
+ #end .new-name > span { font-size:inherit; line-height:inherit; white-space:nowrap; }
+ #end .new-name small { display:none; }
+ #end:has(.new-fish:nth-child(4)) .new-fish > .new-name { left:calc(-11 * var(--dot)); top:calc(34 * var(--dot)); width:calc(104 * var(--dot)); }
+ #end .new-fish.empty { left:0; top:0; width:100%; height:calc(74 * var(--dot)); }
+ #end .new-fish.empty > .new-name { left:0; top:calc(30 * var(--dot)); width:100%; }
+ /* 완벽 표: 세 칸 이하는 카드 오른쪽 위, 붐비는 판은 왼쪽 표 줄 아래. */
+ #end .new-fish > .perfect-label, #end[data-visit='true'] .new-fish > .perfect-label { top:calc(-2 * var(--dot)); right:calc(3 * var(--dot)); bottom:auto; }
+ #end:has(.new-fish:nth-child(4)) .new-fish > .perfect-label, #end[data-visit='true']:has(.new-fish:nth-child(4)) .new-fish > .perfect-label { top:calc(17 * var(--dot)); left:calc(-22 * var(--dot)); right:auto; }
+ /* 붐비는 판은 줄이 둘이라 얻은 것 줄을 내린다. */
+ #end:not([data-visit='true']):has(.new-fish:nth-child(4)) .end-rewards { top:calc(149 * var(--dot)); height:calc(29 * var(--dot)); }
+ /* 다시 볼 것(틀린 사실 한 줄, q05: 큰 화면에서 숨어 있었다): 사진을 올려 사진 아래에 세 줄 자리를 낸다. */
+ #end:has(.review) .end-photo { top:calc(16 * var(--dot)); }
+ #end:has(.review) .end-match-tape { top:calc(6 * var(--dot)); }
+ #end:has(.review) .end-leaf-lower { display:none; }
+ #end .end-left > .review { position:absolute; left:calc(30 * var(--dot)); top:calc(220 * var(--dot)); width:calc(178 * var(--dot)); height:calc(40 * var(--dot)); display:grid; grid-template-columns:minmax(0,1fr) auto; grid-template-rows:calc(16 * var(--dot)) auto; grid-template-areas:"title more" "lines lines"; column-gap:calc(4 * var(--dot)); margin:0; padding:0; border:0; background:none; color:#2c6675; text-align:left; font-size:24px; line-height:max(calc(12 * var(--dot)),30px); }
+ #end[data-end-type='laptop'] .end-left > .review { font-size:32px; }
+ #end[data-end-type='desktop'] .end-left > .review { font-size:36px; }
+ #end .end-left > .review .review-title { display:flex; align-items:center; gap:calc(3 * var(--dot)); margin:0; font-size:inherit; line-height:inherit; }
+ #end .end-left > .review .review-title b { font-size:inherit; line-height:inherit; }
+ #end .end-left > .review .review-title .ico { width:calc(10 * var(--dot)); height:calc(10 * var(--dot)); flex:none; }
+ #end .end-left > .review .review-lines { display:block; min-width:0; }
+ #end .end-left > .review .review-line { margin:0; font-size:24px; line-height:inherit; word-break:keep-all; overflow-wrap:normal; text-wrap:balance; }
+ /* 책 꼴 「+n」은 글자만 두면 결과 숫자처럼 읽혀 누르는 곳인지 몰랐다(출시 점검 R4-01). 흰 바탕 · 한 점 테두리 · 아래 두 점 그늘의 작은 조각으로. */
+ #end .end-left > .review .review-more { align-self:center; padding:0 calc(4 * var(--dot)); background:#fffdf5; box-shadow:inset 0 0 0 var(--dot) #2c6675, inset 0 calc(-2 * var(--dot)) 0 #2c6675; font-size:24px; line-height:inherit; }
+ #end .end-left > .review.long { grid-template-rows:auto; grid-template-areas:"lines more"; }
+ #end .end-left > .review.long .review-title { display:none; }
+ #end .visit-more {position:absolute;left:calc(241 * var(--dot));top:calc(159 * var(--dot));width:calc(313 * var(--dot));font-size:24px;line-height:calc(14 * var(--dot));}
+ #end[data-edge-fold='true'] .visit-more {left:calc(211 * var(--dot));width:calc(282 * var(--dot));}
+ #end[data-visit='true'] .new-fish {height:calc(90 * var(--dot));}
+ #end[data-visit='true'] .visit-count {position:absolute;left:0;top:calc(74 * var(--dot));height:calc(14 * var(--dot));line-height:calc(12 * var(--dot));}
+ #end[data-visit='true']:has(.new-fish:nth-child(4)) .new-fish {height:calc(48 * var(--dot));}
+ #end[data-visit='true']:has(.new-fish:nth-child(4)) .new-fish:nth-child(n+4) {top:calc(55 * var(--dot));}
+ #end[data-visit='true']:has(.new-fish:nth-child(4)) .visit-count {top:calc(34 * var(--dot));}
+ #end[data-visit='true'] .next-text {display:flex;}
+ #end[data-visit='true'] .next-text span {font-size:24px;}
+}
+/* Both end actions use the same text at every breakpoint; pixel-text snaps both to the device grid. */
+#end { --end-button-font:24px; }
+@media (max-width:1199px), (max-height:759px) { #end { --end-button-font:18px; } }
+@media (max-height:520px) { #end { --end-button-font:16px; } }
+@media (min-width:1200px) and (min-height:700px) {
+ #end { --end-button-font:60px; }
+ #end[data-end-type='desktop'] { --end-button-font:64px; }
+ #end[data-end-type='compact'] { --end-button-font:48px; }
+}
+#end.end-book .end-buttons button.primary,
+#end.end-book .end-buttons button.end-home,
+#end.end-book[data-end-type] .end-buttons button.primary,
+#end.end-book[data-end-type] .end-buttons button.end-home {
+ font-family:Galmuri11; font-weight:700; font-size:var(--end-button-font); color:#fdf0d5;
+ letter-spacing:var(--dot); white-space:nowrap; line-height:1.2;
+ text-shadow:calc(-2 * var(--dot)) calc(-2 * var(--dot)) 0 var(--tag-outline),0 calc(-2 * var(--dot)) 0 var(--tag-outline),calc(2 * var(--dot)) calc(-2 * var(--dot)) 0 var(--tag-outline),calc(-2 * var(--dot)) 0 0 var(--tag-outline),calc(2 * var(--dot)) 0 0 var(--tag-outline),calc(-2 * var(--dot)) calc(2 * var(--dot)) 0 var(--tag-outline),0 calc(2 * var(--dot)) 0 var(--tag-outline),calc(2 * var(--dot)) calc(2 * var(--dot)) 0 var(--tag-outline);
+}
+/* Fold the wide paper margins inward at the tablet's native K. The photo,
+   specimen sprites, text and both action targets keep their original size. */
+@media (min-width:1200px) and (min-height:700px) {
+ #end.end-book[data-edge-fold='true'] {width:calc(508 * var(--dot));left:round(nearest,calc(50% - 254 * var(--dot)),var(--dot))!important;}
+ #end[data-edge-fold='true'] .end-photo {left:calc(14 * var(--dot));}
+ #end[data-edge-fold='true'] .end-cover-left {width:calc(212 * var(--dot));}
+ #end[data-edge-fold='true'] .end-cover-right {left:calc(207 * var(--dot));width:calc(301 * var(--dot));}
+ #end[data-edge-fold='true'] .end-paper {width:calc(496 * var(--dot));}
+ #end[data-edge-fold='true'] .end-title {left:calc(230 * var(--dot));}
+ #end[data-edge-fold='true'] .end-new {left:calc(211 * var(--dot));width:calc(282 * var(--dot));}
+ #end[data-edge-fold='true']:not(:has(.new-fish:nth-child(4))) .new-fish {width:calc(88 * var(--dot));}
+ #end[data-edge-fold='true']:not(:has(.new-fish:nth-child(4))) .new-fish:nth-child(2) {left:calc(92 * var(--dot));}
+ #end[data-edge-fold='true']:not(:has(.new-fish:nth-child(4))) .new-fish:nth-child(3) {left:calc(184 * var(--dot));}
+ #end[data-edge-fold='true']:not(:has(.new-fish:nth-child(4))) .new-fish.empty {width:100%;}
+ #end[data-edge-fold='true']:not(:has(.new-fish:nth-child(4))) .sticker-scene {width:calc(80 * var(--dot));}
+ #end[data-edge-fold='true']:has(.new-fish:nth-child(4)) .new-fish:nth-child(3n+1) {left:calc(6 * var(--dot));}
+ #end[data-edge-fold='true']:has(.new-fish:nth-child(4)) .new-fish:nth-child(3n+2) {left:calc(96 * var(--dot));}
+ #end[data-edge-fold='true']:has(.new-fish:nth-child(4)) .new-fish:nth-child(3n) {left:calc(186 * var(--dot));}
+ #end[data-edge-fold='true']:has(.new-fish:nth-child(4)) .sticker {left:calc(-6 * var(--dot));}
+ #end[data-edge-fold='true']:has(.new-fish:nth-child(4)) .new-fish > .new-name {left:calc(-4 * var(--dot));width:calc(90 * var(--dot));}
+ #end[data-edge-fold='true']:has(.new-fish:nth-child(4)) .new-fish > .perfect-label,#end[data-edge-fold='true'][data-visit='true']:has(.new-fish:nth-child(4)) .new-fish > .perfect-label {left:calc(-6 * var(--dot));}
+ #end[data-edge-fold='true']:not(:has(.new-fish:nth-child(4))) .new-fish:nth-child(3) > .perfect-label {right:calc(11 * var(--dot));}
+ #end[data-edge-fold='true'] .end-left > .review {left:calc(36 * var(--dot));width:calc(146 * var(--dot));}
+ #end[data-edge-fold='true'] .end-rewards {left:calc(211 * var(--dot));width:calc(282 * var(--dot));}
+ #end[data-edge-fold='true'] .end-next {left:calc(230 * var(--dot));}
+ #end[data-edge-fold='true'][data-visit='true'] .end-next {left:calc(215 * var(--dot));width:calc(274 * var(--dot));}
+ #end.end-book[data-edge-fold='true'] .end-buttons button.primary {left:calc(211 * var(--dot));}
+ #end.end-book[data-edge-fold='true'] .end-buttons .end-home {left:calc(397 * var(--dot));}
+ #end[data-edge-fold='true'] .end-leaf-top {left:calc(3 * var(--dot));}
+ #end[data-edge-fold='true'] .end-match-tape {left:calc(73 * var(--dot));}
+ #end[data-edge-fold='true'] .end-leaf-lower {left:calc(4 * var(--dot));}
+ #end[data-edge-fold='true'] .end-leaf-small {left:calc(183 * var(--dot));}
+ #end[data-edge-fold='true'] .end-leaf-stamp {left:calc(207 * var(--dot));}
+ #end[data-edge-fold='true'] .end-cord {left:calc(182 * var(--dot));}
+ #end[data-edge-fold='true'] .end-rocks {left:calc(455 * var(--dot));}
+ #end[data-edge-fold='true'] .end-match-bookmark,#end[data-edge-fold='true'] .end-loop {left:calc(481 * var(--dot));}
+ #end[data-edge-fold='true'] .end-fold {left:calc(463 * var(--dot));}
+}
+/* 가장 낮은 가로(667×260): 쪽지 머리말을 빼서 쪽지를 두 줄로 줄인다. 대회 끝은 접기 계산 뒤에 점수 줄이 붙어 배운 한 줄도 판 밖으로 나가 뺀다. */
+@media(max-height:270px) and (min-width:600px) {
+ #end .next-text b, #end[data-contest] .end-lesson { display:none; }
+}
+/* 낮은 가로 집 화면(750×280 · 667×260): 「그 밖 N종」 한 줄만큼 「지도로」가 판 밖으로 밀렸다. 단추 줄 왼쪽 빈자리로 옮긴다. */
+@media(max-height:285px) and (min-width:600px) {
+ #end[data-visit='true'] .visit-more { position:absolute; left:24px; bottom:12px; }
+}
+/* 낮은 폰 대회 쪽지 두 줄: 줄 높이 24px이면 쪽지 위아래가 1px뿐이었다(q06). 줄을 20px로 줄인 몫을 쪽지 안 여백으로 돌려 쪽지 높이는 그대로 둔다. */
+@media (max-height:400px) { #end[data-contest] .next-text, #end[data-contest] .next-text span { line-height:20px; } #end[data-contest] .next-main { padding-block:4px; box-sizing:border-box; } }
+/* 책 꼴 끝 화면: 오른쪽 쪽(층 2)의 빈 상자가 왼쪽 아래 「다시 볼 것 +n」 단추를 덮었다(11-12 출시 점검 R3-05).
+   빈 상자는 누름을 통과시키고, 안의 것(단추 · 스티커 · 보상)은 그대로 받는다. */
+#end.end-book .end-right,#end.end-book .end-right > .end-buttons {pointer-events:none;}
+#end.end-book .end-right > :not(.end-buttons),#end.end-book .end-right > .end-buttons > * {pointer-events:auto;}
+#end[data-contest='end'] .next-text {display:block;font-size:16px;line-height:22px;text-align:left;}
+#end[data-contest='end'] .next-text .contest-rank-line {display:block;font:inherit!important;letter-spacing:0;}
+#end[data-contest='end'] .contest-rank-line > b {display:inline;font:inherit;margin-right:4px;}
+#end[data-contest='end'] .contest-end-tie {display:block;position:static;margin-top:4px;font:inherit;text-align:left;white-space:normal;}
+#end[data-contest='end'] .contest-end-tie .contest-tie-part {font:inherit;white-space:nowrap;overflow-wrap:normal;}
+#end[data-contest='end'] .next-text,
+#end[data-contest='end'] .contest-rank-line,
+#end[data-contest='end'] .contest-rank-line *,
+#end[data-contest='end'] .contest-end-tie,
+#end[data-contest='end'] .contest-tie-part {font-size:var(--contest-note-font)!important;line-height:calc(var(--contest-note-font) * 1.3333333333)!important;}
+#end[data-contest='end'] .reward[data-key='score'] {height:auto;box-sizing:border-box;}
+#end[data-contest='end'] .reward[data-key='score'] .reward-val {padding-block:5px;}
+#end[data-contest='end'] .end-rocks {display:none;}
+@media(max-height:340px) and (min-width:600px){
+ #end[data-contest='end'] .end-lesson {display:none;}
+ #end[data-contest='end'] .end-next:has(.contest-end-tie) {padding-block:4px!important;}
+ #end[data-contest='end'] .end-next:has(.contest-end-tie) .next-main {padding-block:0!important;}
+ #end[data-contest='end'] .end-buttons {margin-top:9px;}
+ #end[data-contest='end'] .end-right {row-gap:4px;}
+}
+@media(min-width:1200px) and (min-height:700px){
+ #end[data-contest='end'] .end-photo {top:calc(16 * var(--dot));}
+ #end[data-contest='end'] .end-match-tape {top:calc(6 * var(--dot));}
+ #end[data-contest='end'] .end-new {height:calc(87 * var(--dot));}
+ #end[data-contest='end']:has(.new-fish:nth-child(4)) .end-new {height:calc(94 * var(--dot));}
+ #end[data-contest='end'] .visit-more {left:calc(241 * var(--dot));top:calc(148 * var(--dot) + 6px);width:calc(313 * var(--dot));}
+ #end[data-contest='end'][data-edge-fold='true'] .visit-more {left:calc(211 * var(--dot));width:calc(282 * var(--dot));}
+ #end.end-book[data-contest='end']:has(.visit-more) .end-rewards {top:calc(168 * var(--dot));}
+ #end[data-contest='end'] .end-next {left:calc(241 * var(--dot));top:calc(181 * var(--dot));width:calc(313 * var(--dot));height:calc(79 * var(--dot));}
+ #end[data-contest='end'][data-edge-fold='true'] .end-next {left:calc(211 * var(--dot));width:calc(282 * var(--dot));}
+ #end[data-contest='end']:has(.visit-more) .end-next {top:calc(202 * var(--dot));height:calc(56 * var(--dot));}
+ #end[data-contest='end'] .next-main {display:flex;align-items:center;gap:8px;padding:4px 8px;box-sizing:border-box;}
+ #end[data-contest='end'] .next-ico {position:static;flex:none;}
+ #end[data-contest='end'] .next-text {position:static;width:auto;height:auto;font-size:24px;line-height:32px;}
+ #end.end-book[data-contest='end'] .end-buttons button.end-home {left:calc(42 * var(--dot));top:calc(225 * var(--dot));width:calc(177 * var(--dot));height:calc(35 * var(--dot));padding:0;}
+ #end.end-book[data-contest='end'][data-edge-fold='true'] .end-buttons button.end-home {left:calc(14 * var(--dot));}
+}
