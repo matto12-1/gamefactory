@@ -1,0 +1,81 @@
+/* The pause concept uses one world dot everywhere. Fixed sprites include their
+   own lower shadow; the interactive rectangle measures only the solid body. */
+#pause.pause-note { color:var(--ink); }
+#pause.pause-note {translate:0 -14px;}
+#pause .sound-credits {position:absolute;top:100%;left:50%;transform:translateX(-50%);width:max-content;max-width:calc(100vw - 24px);margin:8px 0 0;padding:2px 6px;box-sizing:border-box;background:#fff4d8;color:#264b40;font:12px/18px Galmuri11,sans-serif;text-align:center;word-break:keep-all;overflow-wrap:normal;}
+#pause .sound-credits a {color:inherit;text-decoration:underline;}
+#pause .pause-title { background:none; box-shadow:none; color:var(--ink); padding:0; }
+#pause .pause-title > .n-frame { display:none; }
+#pause .pause-name,#pause .switch-name { color:var(--ink); }
+#pause .icon-toggle .ico { opacity:1 !important; }
+#pause .pause-slash { position:absolute; left:calc(10 * var(--dot)); top:calc(3 * var(--dot)); width:calc(13 * var(--dot)); height:calc(16 * var(--dot)); pointer-events:none; }
+#pause .icon-toggle .ico { position:absolute; left:calc(8 * var(--dot)); top:calc(6 * var(--dot)); width:calc(12 * var(--dot)); height:calc(12 * var(--dot)); }
+#pause .icon-toggle .pause-icon-off { top:calc(3 * var(--dot)); width:calc(15 * var(--dot)); height:calc(18 * var(--dot)); }
+#pause .pause-play { position:absolute; left:calc(25 * var(--dot)); top:calc(10 * var(--dot)); width:calc(8 * var(--dot)); height:calc(11 * var(--dot)); }
+#pause .pause-buttons .primary .n-button-icon { display:none; }
+#pause .pause-switch .switch-track:has(.pause-switch-on) { background:none; box-shadow:none; }
+#pause .switch-track:has(.pause-switch-on) > i { display:none; }
+#pause .pause-switch-on,#pause .pause-switch-off { position:absolute; left:0; top:0; }
+#pause .pause-switch[aria-checked='true'] .pause-switch-off,#pause .pause-switch[aria-checked='false'] .pause-switch-on { display:none; }
+#pause .pause-cover-flap,#pause .pause-curl-top,#pause .pause-curl-bottom,#pause .pause-hang-tag,#pause .pause-ornament-left,#pause .pause-ornament-right { position:absolute; pointer-events:none; }
+#pause .pause-cover-flap { left:calc(103 * var(--dot)); top:calc(-7 * var(--dot)); z-index:-2; }
+#pause .pause-curl-top { left:calc(174 * var(--dot)); top:calc(-1 * var(--dot)); }
+#pause .pause-curl-bottom { left:calc(175 * var(--dot)); top:calc(139 * var(--dot)); }
+#pause .pause-hang-tag { left:calc(189 * var(--dot)); top:calc(25 * var(--dot)); }
+#pause .pause-ornament-left { left:calc(35 * var(--dot)); top:calc(19 * var(--dot)); }
+#pause .pause-ornament-right { left:calc(146 * var(--dot)); top:calc(19 * var(--dot)); }
+#pause .pause-bookmark { left:calc(21 * var(--dot)); top:calc(-13 * var(--dot)); width:calc(18 * var(--dot)); height:calc(17 * var(--dot)); z-index:2; }
+#pause .pause-rings { left:calc(-4 * var(--dot)); top:calc(11 * var(--dot)); bottom:auto; width:calc(16 * var(--dot)); height:calc(137 * var(--dot)); z-index:3; }
+#pause .pause-buttons .primary { color:#fcf9ef; text-shadow:0 var(--dot) 0 #8d2820; }
+#pause .switch-track { width:calc(25 * var(--dot)); height:calc(14 * var(--dot)); }
+#pause .round-btn .ico { width:calc(13 * var(--dot)); height:calc(13 * var(--dot)); }
+@media(min-width:1200px) and (min-height:700px) {
+ #pause.pause-note { display:block; position:fixed; left:round(nearest,calc(50% - 97 * var(--dot)),var(--dot)); top:round(nearest,calc(50% - 89 * var(--dot)),var(--dot)); transform:none; translate:none; width:calc(198 * var(--dot)); height:calc(164 * var(--dot)); max-width:none; max-height:none; padding:0; gap:0; overflow:visible; }
+ #pause .pause-title { position:absolute; left:calc(45 * var(--dot)); top:calc(15 * var(--dot)); width:calc(108 * var(--dot)); margin:0; height:calc(16 * var(--dot)); font-size:calc(12 * var(--dot)); line-height:calc(16 * var(--dot)); white-space:nowrap; }
+ #pause .pause-sets { position:absolute; display:grid; left:calc(15 * var(--dot)); top:calc(40 * var(--dot)); width:calc(165 * var(--dot)); height:calc(34 * var(--dot)); grid-template-columns:repeat(4,calc(39 * var(--dot))); column-gap:calc(3 * var(--dot)); }
+ #pause .pause-set { position:relative; display:block; width:calc(39 * var(--dot)); height:calc(34 * var(--dot)); }
+ #pause button.icon-toggle { position:absolute; left:0; top:0; width:calc(39 * var(--dot)); height:calc(23 * var(--dot)); min-width:0; min-height:0; padding:0; }
+ #pause .pause-name { position:absolute; left:0; top:calc(27 * var(--dot)); width:100%; height:calc(8 * var(--dot)); line-height:calc(8 * var(--dot)); font-size:24px; white-space:nowrap; }
+ #pause .pause-switch { position:absolute; display:block; left:calc(22 * var(--dot)); top:calc(82 * var(--dot)); width:calc(155 * var(--dot)); height:calc(23 * var(--dot)); min-height:0; margin:0; padding:0; }
+ #pause .pause-switch > .ico { position:absolute; left:calc(10 * var(--dot)); top:calc(7 * var(--dot)); width:calc(15 * var(--dot)); height:calc(10 * var(--dot)); }
+ #pause .pause-switch .switch-name { position:absolute; left:calc(33 * var(--dot)); top:calc(7 * var(--dot)); font-size:24px; line-height:calc(10 * var(--dot)); white-space:nowrap; }
+ #pause .pause-switch .switch-track { position:absolute; left:calc(119 * var(--dot)); top:calc(5 * var(--dot)); width:calc(25 * var(--dot)); height:calc(14 * var(--dot)); }
+ #pause .pause-buttons { position:absolute; display:block; left:0; top:0; width:100%; height:0; margin:0; padding:0; }
+ #pause .pause-buttons button.primary { position:absolute; display:block; left:calc(26 * var(--dot)); top:calc(113 * var(--dot)); width:calc(114 * var(--dot)); max-width:none; height:calc(33 * var(--dot)); min-height:0; padding:0; font-size:calc(12 * var(--dot)); line-height:calc(13 * var(--dot)); }
+ #pause .pause-resume-label { position:absolute; left:calc(43 * var(--dot)); top:calc(9 * var(--dot)); white-space:nowrap; }
+ #pause .pause-buttons button.round-btn { position:absolute; left:calc(147 * var(--dot)); top:calc(115 * var(--dot)); width:calc(29 * var(--dot)); height:calc(29 * var(--dot)); min-height:0; padding:0; }
+ #pause .pause-buttons .round-btn .ico { position:absolute; left:calc(8 * var(--dot)); top:calc(6 * var(--dot)); width:calc(13 * var(--dot)); height:calc(13 * var(--dot)); }
+}
+/* The two added school sizes use a 2px dot. Their smaller text step preserves
+   the same proportions; the 2.667px laptop keeps the mandated 24px labels. */
+@media(min-width:1200px) and (max-width:1599px) and (min-height:700px) and (max-resolution:1.24dppx) {
+ #pause .pause-name,#pause .pause-switch .switch-name { font-size:16px; }
+}
+@media(max-width:1199px),(max-height:699px) {
+ #pause.pause-note { padding-top:calc(12 * var(--dot)); padding-bottom:calc(12 * var(--dot)); }
+ #pause .pause-title { font-size:24px; line-height:32px; }
+ #pause .pause-name { color:var(--ink); font-size:16px; line-height:24px; }
+ #pause button.icon-toggle { width:calc(39 * var(--dot)); height:max(40px,calc(23 * var(--dot))); }
+ #pause .icon-toggle > .n-frame { top:calc((100% - 23 * var(--dot)) / 2) !important; }
+ #pause .icon-toggle .ico { top:calc((100% - 12 * var(--dot)) / 2); }
+ #pause .icon-toggle .pause-icon-off { top:calc((100% - 18 * var(--dot)) / 2); }
+ #pause .pause-slash { top:calc((100% - 18 * var(--dot)) / 2); }
+ #pause .pause-buttons button.primary { min-height:44px; height:calc(33 * var(--dot)); max-width:none; font-size:24px; padding:0 calc(8 * var(--dot)) 0 calc(22 * var(--dot)); }
+ #pause .pause-play { left:calc(10 * var(--dot)); top:calc((100% - 11 * var(--dot)) / 2); }
+ #pause .pause-buttons button.round-btn { width:max(40px,calc(29 * var(--dot))); height:max(40px,calc(29 * var(--dot))); }
+ #pause .pause-switch { min-height:44px; padding:calc(4 * var(--dot)) calc(8 * var(--dot)); }
+ #pause .pause-switch .switch-name { font-size:24px; }
+ #pause .pause-ornament-left,#pause .pause-ornament-right,#pause .pause-hang-tag,#pause .pause-curl-top,#pause .pause-curl-bottom,#pause .pause-cover-flap { display:none; }
+ #pause .pause-rings { height:calc(100% - 22 * var(--dot)); }
+}
+@media(max-width:599px) {
+ #pause.pause-note { width:calc(100vw - 20px); row-gap:12px; }
+ #pause .pause-sets { column-gap:calc(6 * var(--dot)); }
+}
+@media(max-height:520px) and (min-width:600px) {
+ #pause.pause-note { grid-template-columns:auto minmax(220px,auto); column-gap:calc(12 * var(--dot)); row-gap:8px; }
+ #pause .pause-title { font-size:24px; }
+ #pause .pause-sets { column-gap:calc(3 * var(--dot)); }
+ #pause .pause-switch .switch-name { font-size:24px; }
+ #pause .pause-buttons { gap:calc(7 * var(--dot)); }
+}

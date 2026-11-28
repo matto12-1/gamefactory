@@ -1,0 +1,2 @@
+- 2026-11-22 · Codex 내장 image_gen 1회, 48×48 한 색 도트로 축소 후 윤곽과 불을 손으로 수정 · `finale/seal-soundmap.png` (생성 원본: `finale/src/soundmap-gen1.png`, 그림 지시문: `_auto/1122-minyo-soundmap/prompt.txt`).
+- 2026-11-27 · Codex 내장 image_gen, 첫머리 이야기 민화 채색 컷 · `story/*.webp` 12장(컷 대표 그림, image_gen 13회 + 다시 3회)과 `story/<컷>/*.webp` 층 30장(사람 지운 배경은 image_gen 편집, 인물 층은 원본과 배경의 차이로 오림, 새 자세 2장 · image_gen 16회). 원본 png · 프롬프트 · 검사 사진: `docs/games/minyo/이야기-컷/`(SOURCES.md · layers/SOURCES.md).

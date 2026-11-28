@@ -1,0 +1,204 @@
+/* 끝 화면 1안 「사진 + 한 줄 보상」(DECISIONS 10-28 오후, docs/2026-10-28-fishing-ui-look/concepts/end-1.png).
+   링 수첩 한 쪽: 왼쪽 기념사진, 오른쪽 제목 띠 → 만난 물고기 스티커 → 얻은 것 한 줄 → 다음 할 일 쪽지 → 배운 한 줄 → 단추 줄.
+   여기 모양(띠 · 스티커 · 쪽지 · 점선)은 새 수첩 그림이 오기 전의 대신 모양이다. 그림이 오면 notebook.mjs가 .n-skin 틀을 깔고
+   .n-skin이 이 바탕 · 테두리 · 그림자를 지운다. 글 크기는 갈무리 격자(16 · 32, 주 단추만 18 · 24). */
+#end {
+  --ending-scale: 1.25; --scene-h: 90px; --sticker-cols: 3; --photo-w: 300px;
+  width: min(1560px, calc(100vw - 28px));
+  max-height: calc(100vh - 24px);
+  padding: 18px;
+  display: grid;
+  grid-template-columns: max-content minmax(0, 1fr);
+  column-gap: 32px;
+  row-gap: 12px;
+  align-items: center;
+  text-align: center;
+  overflow: visible;
+  background: #f9f5e6;
+  color: #344f43;
+  font-size: 16px;
+}
+/* 왼쪽 기념사진(지금 사진 그리기 그대로) */
+#end .end-photo { width: calc(var(--photo-w) + 30px); display: grid; justify-items: center; align-content: start; gap: 8px; margin: 0; min-width: 0; }
+#end .photo-frame { width: max-content; padding: 12px; background: #fffbe9; }
+#end .photo-window { position: relative; overflow: hidden; }
+#end .ending-pixels { display: block; flex: none; image-rendering: auto; }
+#end .photo-flash { position: absolute; inset: 0; background: white; pointer-events: none; }
+#end .photo-caption { width: 100%; display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; column-gap: 12px; row-gap: 0; font-size: 16px; line-height: 24px; }
+#end .photo-caption time { font-size: 16px; color: #7f8b70; white-space: nowrap; }
+
+/* 오른쪽 */
+#end .end-right { display: flex; flex-direction: column; align-items: stretch; gap: 14px; min-width: 0; }
+#end .end-title { align-self: center; position: relative; margin: 0; padding: 4px 44px; background: #c9d6b0; color: #2f4a3a; font-size: 32px; font-weight: 700; line-height: 48px; box-shadow: 0 3px 0 #9fb38a; }
+/* 만난 물고기 스티커: 자리 그림 위 물고기, 처음 만난 것에 「새로!」 */
+#end .end-new { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--sticker-cols), minmax(0, 1fr)); gap: 14px; }
+#end .new-fish { position: relative; display: grid; grid-template-rows: var(--scene-h) auto; gap: 4px; min-width: 0; margin: 0; padding: 6px; background: #fffdf2; box-shadow: 0 0 0 2px #d9d2b4, 3px 4px 0 2px #d3c9a6; }
+#end .new-fish.empty { grid-template-rows: auto; padding: 16px 6px; }
+/* 자리 그림 · 물고기는 ending-ui.mjs가 기기 화소에 맞춘 정수 자리(left · top)에 놓는다(가운데 맞춤 변환은 점을 흐린다) */
+#end .sticker-scene { position: relative; min-width: 0; overflow: hidden; }
+#end .sticker-scene > canvas { position: absolute; left: 0; top: 0; }
+#end .sticker { position: absolute; left: 0; top: 0; padding: 0 8px; background: #d9826c; color: #fffaf0; font-size: 16px; line-height: 24px; }
+#end .new-name { display: flex; flex-wrap: wrap; justify-content: center; align-items: baseline; gap: 0 8px; margin: 0; font-size: 16px; line-height: 24px; }
+#end .new-name > * { white-space: nowrap; }
+#end .new-name > span { white-space: normal; word-break: keep-all; }
+#end .new-name small { font-size: 16px; color: #7f8b70; }
+/* 얻은 것 한 줄: 칸 상자 없이 아이콘 + 숫자, 점선으로만 나눈다(위아래 줄은 rule-dots 그림 자리) */
+#end .end-rule { position: relative; display: block; height: calc(2 * var(--dot)); border-top: 2px dotted #c3c9ab; box-sizing: border-box; }
+#end .end-rewards { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; row-gap: 4px; margin: -6px 0 0; }
+#end .reward { display: inline-flex; align-items: center; gap: 8px; padding: 4px 18px; font-size: 16px; line-height: 40px; transform-origin: center; }
+#end .reward + .reward { border-left: 2px dotted #c3c9ab; }
+#end .reward b { font-size: 32px; line-height: 40px; font-weight: 700; white-space: nowrap; }
+#end .reward b small { font-size: 16px; color: #7f8b70; }
+#end .reward .ico { width: auto; height: auto; display: grid; place-items: center; min-width: 24px; }
+#end .reward svg.ico { width: 24px; height: 24px; color: #60735a; }
+/* 숫자 아래 늘 보이는 이름(인디 채점 2026-11-12: 이름이 마우스 title에만 있어 태블릿에서 못 읽었다). 그림 옆 한 칸에 숫자 · 이름 두 줄. */
+#end .reward .reward-val { display: inline-flex; flex-direction: column; align-items: center; }
+/* 숫자 · 이름 줄 높이는 갈무리 글 상자(글자 크기의 1.33배)를 거의 다 담는다. 줄을 붙이면 두 글 상자가 4px 넘게 겹쳤다(end-1 겹침 잣대) */
+#end .reward .reward-val > b { line-height: 1.5; } /* 숫자 글 상자(글자의 1.375배)도 칸 안에 위아래 1px 여유(보상 숫자 칸 밖 검사는 0.05px까지 본다) */
+/* 가장 낮은 가로(667×260)에서 「다시 볼 것」을 빼기 전에 이름을 먼저 접는다(맞춤 단계 bare-rewards) */
+#end.bare-rewards .reward .reward-name { display: none; }
+#end.bare-rewards .reward .reward-val > b { line-height: 24px; }
+#end .reward .reward-name { display: block; font-style: normal; font-size: 12px; line-height: 1.34; font-weight: 400; color: #5b6b52; white-space: nowrap; }
+/* 다음 할 일 쪽지: 못 만난 물고기 그림자 + 실마리 + 자리, 「다시 볼 것」이 있으면 그 아래 */
+#end .end-next { position: relative; align-self: center; display: grid; gap: 4px; width: min(100%, 620px); box-sizing: border-box; padding: 10px 22px; background: #fff8e3; box-shadow: 3px 4px 0 #d3c9a6; text-align: left; }
+#end .next-main { display: flex; align-items: center; gap: 14px; min-width: 0; }
+#end .next-main[data-act]::after { content: ''; position: absolute; inset: 0; }
+#end .next-text { display: grid; margin: 0; min-width: 0; line-height: 24px; }
+#end .next-text b { color: #aa624d; font-size: 16px; }
+#end .next-text span { font-size: 16px; overflow-wrap: anywhere; word-break: keep-all; }
+#end .next-spot { margin-left: auto; display: inline-flex; align-items: center; gap: 6px; flex: none; color: #60735a; font-size: 16px; line-height: 24px; white-space: nowrap; }
+#end .next-spot .ico, #end .next-ico { width: auto; height: auto; flex: none; }
+#end svg.next-ico { width: 24px; height: 24px; color: #aa624d; }
+#end .review { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "title more" "lines lines"; column-gap: 8px; margin: 0; padding-top: 4px; border-top: 2px dashed #e1d8b8; color: #2c6675; font-size: 16px; line-height: 24px; text-align: left; }
+#end .review-title { grid-area: title; display: flex; align-items: center; gap: 6px; margin: 0; }
+#end .review-title .ico { width: 18px; height: 18px; flex: none; }
+#end .review-lines { grid-area: lines; display: grid; min-width: 0; }
+#end .review-line { margin: 0; }
+#end .review-more { grid-area: more; position: relative; z-index: 3; padding: 0 8px; background: #fff; color: #2c6675; font-size: 16px; line-height: 24px; }
+#end .review-more-n { font: inherit; }
+/* 「+n」 위의 투명 누름 단추(취향 15: 44px). 보이는 칸 크기는 옛 글자 칸 그대로라 끝 화면 맞춤이 바뀌지 않는다.
+   z 3: 큰 화면 책 꼴은 오른쪽 쪽 상자가 왼쪽 아래까지 덮는다(end-match.css에서 빈 상자는 누름 통과). */
+#end .review-more-hit { position: absolute; left: 50%; top: 50%; width: max(44px, 100%); height: max(44px, 100%); min-width: 0; min-height: 0; margin: 0; padding: 0; border: 0; background: transparent; transform: translate(-50%, -50%); cursor: pointer; }
+#end .review-more:has(.review-more-hit:focus-visible) { outline: 3px solid #e07a5f; outline-offset: 2px; }
+/* 다시 볼 것 전부(R3-05). 창은 맨 위 층에 뜨고 Esc · 닫기 · 바깥 누름으로 닫힌다. */
+#end .review-sheet { box-sizing: border-box; width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 32px); overflow: auto; margin: auto; padding: 20px 24px 16px; border: 0; background: #fff8e6; color: #2c6675; font-size: 18px; line-height: 28px; box-shadow: 0 0 0 4px #2f4a3a, 0 10px 0 4px rgba(20, 30, 25, .35); }
+#end .review-sheet::backdrop { background: rgba(16, 28, 24, .5); }
+#end .review-sheet-title { display: flex; align-items: center; gap: 8px; margin: 0 0 8px; color: #2f4a3a; font-size: 24px; line-height: 32px; }
+#end .review-sheet-title .ico { width: 24px; height: 24px; flex: none; }
+#end .review-sheet-lines { display: grid; gap: 8px; margin: 0 0 16px; padding: 0; list-style: none; }
+#end .review-sheet-lines li { margin: 0; padding-top: 8px; border-top: 2px dashed #e1d8b8; text-align: left; }
+#end .review-sheet-close { display: flex; width: max-content; margin: 0 auto; }
+@media (max-height: 520px) {
+  #end .review-sheet { padding: 8px 16px; font-size: 16px; line-height: 24px; }
+  #end .review-sheet-title { margin-bottom: 4px; font-size: 18px; line-height: 24px; }
+  #end .review-sheet-lines { gap: 4px; margin-bottom: 8px; }
+  #end .review-sheet-lines li { padding-top: 4px; }
+}
+/* 오늘 배운 한 줄(작게) */
+#end .end-lesson { margin: 0; color: #5b6b52; font-size: 16px; line-height: 24px; } /* 종이 위 4.5:1 넘게(#7f8b70은 폰에서 3.29:1) */
+/* 높이 340 이하: 배운 한 줄을 사진 아래 빈 자리로 옮긴다(오른쪽은 얻은 것 이름 줄만큼 자리가 모자라다) */
+#end .end-left > .end-lesson { width: 100%; text-align: center; }
+/* 단추 줄: 주 단추 「한 판 더」 하나 + 둥근 아이콘 단추(지도 · 도감) */
+#end .end-buttons { display: flex; justify-content: center; align-items: center; gap: 16px; margin: 0; }
+#end.end-book .end-buttons button.primary { min-width: 240px; min-height: 64px; padding: 0 32px; font-size: 24px; line-height: 32px; }
+#end.end-book .end-buttons button.round-btn { flex: none; width: 64px; height: 64px; min-width: 0; min-height: 0; padding: 0; display: grid; place-items: center; }
+#end .round-btn .ico { width: auto; height: auto; }
+#end .end-buttons:not(.ready) button { box-shadow: none; }
+/* 새 수첩 그림이 깔리면(notebook.mjs가 data-notebook-frame을 단다) 글을 그림의 아홉 칸 안쪽에 둔다.
+   자리는 그림 목록의 slice(점): banner [9,4,9,4] · tag-paper [12,9,4,4] · tag-coral [13,4,4,4](왼쪽 끈 고리) · sticker [3,3,3,3]. */
+#end .end-title[data-notebook-frame="banner"] { padding: calc(4 * var(--dot)) calc(12 * var(--dot)); box-shadow: none; }
+#end .end-next[data-notebook-frame="tag-paper"] { padding: calc(9 * var(--dot)) calc(6 * var(--dot)) calc(5 * var(--dot)) calc(13 * var(--dot)); }
+#end.end-book .end-buttons button.primary[data-notebook-frame="tag-coral"] { padding-left: calc(14 * var(--dot)); padding-right: calc(6 * var(--dot)); }
+#end .sticker[data-notebook-frame="sticker"] { padding: calc(3 * var(--dot)) calc(4 * var(--dot)); }
+/* 화면보다 길 때(ending-ui.mjs resize가 붙인다) */
+#end.tight .end-right { gap: 8px; }
+#end.snug .new-name small { display: none; }
+#end.snug2 .end-lesson { display: none; }
+#end.snug3 .end-title { display: none; }
+/* 마지막 접기(q02): 「다음 할 일」 머리말을 빼고 아이콘 + 글만(큰 화면 끝 화면과 같은 꼴). */
+#end.snug4 .next-text b { display: none; }
+/* 가장 낮은 가로(667×260)에서 쪽지를 사진 칸으로 옮긴 뒤에도 넘칠 때만(q02b): 큰 수첩처럼 사진 날짜를 빼고, 그래도 넘치면 「다시 볼 것」을 뺀다. */
+#end.snug5 .photo-caption time { display: none; }
+#end.snug6 .review, #end.end-book.snug6 .end-left .review, #end.snug6 .end-next:not(:has(.next-main)) { display: none; }
+/* 가장 낮은 가로에서 「다시 볼 것」을 단추 줄 왼쪽 빈 자리로 옮긴 꼴(2026-11-11): 제목과 첫 줄 하나, 나머지는 +수. */
+#end.review-row .end-buttons > .review { flex: 1 1 auto; min-width: 0; margin: 0 auto 0 0; align-self: center; text-align: left; }
+/* 단추 줄 안 「다시 볼 것」: 제목을 글 앞에 붙여 이어 쓰고 줄을 바꾼다. 한 줄 「…」은 16px 글에서 「작아요」를 잘랐다(2026-11-13).
+   두 줄로도 넘치면 끝 화면이 다음 단계(bare-rewards · snug6)로 간다. 접힌 줄([hidden])은 그대로 숨긴다. */
+#end.review-row .end-buttons > .review { display: block; }
+#end.review-row .end-buttons > .review :is(.review-title, .review-lines) { display: inline; }
+#end.review-row .end-buttons > .review .review-line:not([hidden]) { display: inline; }
+#end.review-row .end-buttons > .review .review-line:not([hidden]) ~ .review-line:not([hidden])::before { content: " · "; }
+#end.review-row .end-buttons > .review .review-title { margin-right: .4em; }
+#end.review-row .end-buttons > .review .review-title .ico { vertical-align: middle; }
+#end.review-row .end-buttons > .review .review-title b { margin-left: 4px; }
+#end.review-row .end-buttons > .review .review-more:not([hidden]) { display: inline-block; margin-left: .4em; }
+/* 가장 붐빌 때(낮은 가로에 여섯 마리) 「새로!」 띠가 작은 자리 그림을 덮어서, 띠 대신 산호색 테와 이름으로 보인다 */
+#end.snug3 .sticker { display: none; }
+/* 낮은 가로는 ui-redesign.css가 띠를 다시 켠다. 네 마리 이상이 한 줄로 작아지면 「완벽!」과 겹쳐 물고기를 덮어서 여기서도 뺀다(q02). */
+#end.snug3:has(.new-fish:nth-child(4)) .sticker { display: none; }
+#end.snug3:has(.new-fish:nth-child(4)) .sticker-scene > .perfect-label { right: 2px; bottom: 2px; padding: 0 3px; border-width: 1px; font-size: 12px; line-height: 16px; }
+#end.snug3 .new-fish.fresh { box-shadow: 0 0 0 2px #d9826c, 2px 3px 0 2px #d3c9a6; }
+#end.snug3 .new-fish.fresh .new-name span { color: #b4583f; }
+#end.scroll { overflow-y: auto; }
+
+/* 큰 화면이 아니면(노트북 1366 · 낮은 창) 제목 · 숫자 · 단추를 한 단 작게 */
+@media (max-width: 1199px), (max-height: 759px) {
+  #end .end-title { padding: 2px 32px; font-size: 16px; line-height: 32px; box-shadow: 0 2px 0 #9fb38a; }
+  #end .reward { padding: 0 12px; gap: 6px; line-height: 24px; }
+  #end .reward b { font-size: 16px; line-height: 24px; }
+  #end.end-book .end-buttons button.primary { min-width: 180px; min-height: 52px; padding: 0 24px; font-size: 18px; line-height: 24px; }
+  #end.end-book .end-buttons button.round-btn { width: 52px; height: 52px; }
+  #end .end-buttons { gap: 12px; }
+}
+/* 폰 세로: 사진 위, 내용 아래 */
+@media (max-width: 899px) and (min-height: 521px) {
+  #end { width: calc(100vw - 16px); grid-template-columns: minmax(0, 1fr); row-gap: 10px; padding: 12px; }
+  #end .end-photo { justify-self: center; width: 100%; gap: 4px; }
+  #end .end-right { gap: 10px; }
+  #end .end-new { gap: 10px; }
+  #end .new-fish { padding: 4px; }
+  #end .reward { padding: 0 6px; }
+  #end .end-next { width: 100%; padding: 8px 12px; }
+  #end .next-main { gap: 10px; }
+  #end .end-buttons { gap: 10px; }
+  #end.end-book .end-buttons button.primary { flex: 1 1 auto; min-width: 0; }
+}
+/* 낮은 가로(844x390 · 780x290): 사진 왼쪽, 내용 오른쪽을 빽빽하게 */
+@media (max-height: 520px) and (min-width: 600px) {
+  #end { width: calc(100vw - 16px); max-height: calc(100vh - 12px); padding: 6px 8px; column-gap: 14px; }
+  #end .end-photo { gap: 2px; }
+  #end .photo-caption { line-height: 20px; }
+  #end .end-right { gap: 6px; }
+  #end .end-title { padding: 0 24px; line-height: 24px; }
+  #end .end-new { gap: 8px; }
+  #end .new-fish { padding: 3px; gap: 2px; box-shadow: 0 0 0 1px #d9d2b4, 2px 3px 0 1px #d3c9a6; }
+  /* 실마리 글에 자리가 이미 들어 있어 낮은 가로에선 자리 쪽지를 뺀다(쪽지 폭이 좁다) */
+  #end .next-spot { display: none; }
+  #end .end-rewards { margin: -3px 0 0; } /* 아래는 얻은 것 이름이 띠 끝까지 와서 겹치지 않게 둔다 */
+  #end .reward { padding: 0 8px; gap: 4px; }
+  #end .end-next { padding: 4px 10px; box-shadow: 2px 3px 0 #d3c9a6; }
+  #end .next-main { gap: 8px; }
+  /* 「다음 할 일」과 실마리를 한 흐름으로(두 줄 칸이면 글 상자끼리 겹쳤다) */
+  #end .next-text { display: block; line-height: 24px; }
+  #end .next-text b { margin-right: 6px; }
+  #end .end-lesson { line-height: 20px; }
+  #end .end-buttons { gap: 8px; }
+  #end.end-book .end-buttons button.primary { min-width: 0; min-height: 44px; padding: 0 16px; font-size: 16px; line-height: 24px; }
+  #end.end-book .end-buttons button.round-btn { width: 44px; height: 44px; }
+  /* 「다시 볼 것」은 제목 · 글 · 「+n」을 한 흐름으로(글은 줄을 바꿔 다 보인다. 말줄임은 글이 잘려 보였다) */
+  #end .review { display: flex; flex-wrap: wrap; align-items: baseline; column-gap: 6px; padding-top: 2px; }
+  #end .review-title { flex: none; }
+  #end .review-title .ico { width: 16px; height: 16px; align-self: center; }
+  #end .review-lines { flex: 1 1 120px; }
+  #end .review-more { flex: none; }
+  /* 넘치면 점선 줄을 빼고 다음 할 일 쪽지와 단추 줄을 한 줄에(배운 한 줄은 맨 뒤로) */
+  #end.tight .end-right { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 8px; row-gap: 4px; }
+  #end.tight .end-right > * { grid-column: 1 / -1; }
+  #end.tight .end-right > .end-title { justify-self: center; }
+  #end.tight .end-rule { display: none; }
+  #end.tight .end-right > .end-next { grid-column: 1; width: auto; align-self: center; }
+  #end.tight .end-right > .end-buttons { grid-column: 2; align-self: center; }
+  #end.tight .end-right > .end-lesson { order: 1; }
+}
+/* 읽는 문장은 줄이지 않고 줄을 바꾼다(2026-11-13 DECISIONS). 마지막 줄에 한 낱말만 남지 않게 고르게 나눈다(「계곡의 주인을 잡아 / 봐요」). */
+#end#end :is(.next-text span, .review-line, .end-lesson), #end#end.review-row .end-buttons > .review { text-wrap: balance; word-break: keep-all; }

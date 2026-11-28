@@ -1,0 +1,466 @@
+/* Card 2: the native art dot is shared with the stage at every size. */
+#card .fact-large, #card .card-rule-sprout, #card .question-left, #card .question-right, #card .card-bookmark-bottom { display:none; }
+#card .card-sticker { position:relative; grid-column:1; grid-row:1; align-self:end; justify-self:start; left:calc(-4 * var(--dot)); top:calc(4 * var(--dot)); bottom:auto; width:calc(45 * var(--dot)); height:calc(33 * var(--dot)); padding:0; background:none; }
+#card .card-sticker > span { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+#card .card-sticker > .n-sprite { position:absolute; top:0; left:0; }
+#card .card-loop { transform:none; }
+#card .card-lines p > span:last-child { min-width:0; overflow-wrap:anywhere; }
+#card .card-top { min-height:calc(33 * var(--dot)); }
+#card .home.n-button { padding-top:calc(4 * var(--dot)); padding-bottom:calc(9 * var(--dot)); }
+#card .option.n-button { padding:calc(5 * var(--dot)) calc(5 * var(--dot)) calc(9 * var(--dot)); }
+#card .slip-why { text-align:center; }
+#card .home:is([data-spot="slip"],[data-spot="release"]) { grid-column:1 / -1; min-height:44px; align-content:center; padding:4px; }
+#card .home.glow { box-shadow:none; }
+#card .card-act > .answer.right { color:#b4583f; font-size:24px; line-height:28px; margin:0; }
+#card .card-act > .ask {word-break:keep-all;overflow-wrap:normal;text-wrap:balance;}
+@media (min-width:600px) and (max-height:520px) {
+ #card .card-act > .ask {font-size:20px;line-height:28px;}
+}
+@media (min-width:600px) and (max-height:520px) and (min-width:800px) {
+ #card .card-act > .ask {font-size:24px;line-height:32px;}
+}
+@media (max-width:599px) {
+ #card.quiz .options {grid-template-columns:minmax(0,1fr);gap:6px;}
+ #card.quiz .option.n-button {display:grid;grid-template-columns:70px minmax(0,1fr);align-items:center;justify-items:start;gap:8px;min-height:64px;padding:4px 10px;}
+ #card.quiz .option.n-button > span {text-align:left;word-break:keep-all;overflow-wrap:normal;}
+ #card.quiz .option.n-button .opt-pic {justify-self:center;}
+}
+#card .home.glow::after { content:""; position:absolute; inset:calc(1 * var(--dot)); border:calc(1 * var(--dot)) solid #cba34f; border-radius:calc(2 * var(--dot)); pointer-events:none; }
+
+@media (min-width:1200px) and (min-height:700px) {
+  #card.panel {
+    --card-height:296;
+    left:calc(50% - 111 * var(--dot)); right:auto;
+    top:calc(50% - 148 * var(--dot)); bottom:auto; transform:none;
+    width:calc(222 * var(--dot)); height:calc(296 * var(--dot));
+    min-height:0; max-height:none; min-width:0; max-width:none;
+    display:block; padding:0; gap:0; overflow:visible;
+    border:0; background:none; box-shadow:none; text-align:center;
+  }
+  #card .card-rings { left:calc(-3 * var(--dot)); top:calc(20 * var(--dot)); bottom:auto; width:calc(19 * var(--dot)); height:calc((var(--card-height) - 48) * var(--dot)); }
+  #card .card-leaf { display:block; position:absolute; left:calc(10 * var(--dot)); top:calc(-10 * var(--dot)); z-index:2; }
+  #card .card-bookmark { display:block; position:absolute; left:calc(168 * var(--dot)); right:auto; top:calc(-5 * var(--dot)); width:calc(34 * var(--dot)); height:calc(32 * var(--dot)); overflow:visible; z-index:2; }
+  #card .card-bookmark-bottom { display:block; position:absolute; left:calc(186 * var(--dot)); top:calc((var(--card-height) - 6) * var(--dot)); z-index:-2; }
+  #card .card-pic { position:absolute; left:calc(25 * var(--dot)); top:calc(23 * var(--dot)); width:calc(176 * var(--dot)); height:calc(103 * var(--dot)); min-height:0; aspect-ratio:auto; padding:0; background:none; }
+  #card .card-pic .card-fish { max-width:none; max-height:none; }
+  #card .photo-tape { position:absolute; left:calc(65 * var(--dot)); top:calc(-5 * var(--dot)); right:auto; margin:0; transform:none; z-index:2; }
+  #card .card-sticker { position:absolute; left:calc(24 * var(--dot)); top:calc(113 * var(--dot)); bottom:auto; z-index:5; margin:0; }
+  #card .card-top { position:absolute; left:calc(33 * var(--dot)); top:calc(118 * var(--dot)); width:calc(167 * var(--dot)); height:calc(33 * var(--dot)); min-height:0; padding:0; display:flex; align-items:center; justify-content:center; gap:0; z-index:2; }
+  #card .card-top h2 { position:absolute; left:calc(12 * var(--dot)); top:calc(8 * var(--dot)); width:calc(140 * var(--dot)); height:calc(17 * var(--dot)); display:flex; align-items:center; justify-content:center; gap:calc(3 * var(--dot)); white-space:nowrap; }
+  #card .card-top h2, #card .card-top .size { font-size:36px; line-height:calc(17 * var(--dot)); color:#224235; margin:0; }
+  #card .card-top .badge:not(.card-sticker), #card .record, #card .big-stamp { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+  #card .card-top .badge:not(.card-sticker) > span { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
+  #card .card-loop { display:block; position:absolute; left:calc(185 * var(--dot)); right:auto; top:calc(130 * var(--dot)); width:calc(30 * var(--dot)); height:calc(29 * var(--dot)); transform:none; z-index:3; }
+  #card .card-lines { position:absolute; left:calc(34 * var(--dot)); top:calc(151 * var(--dot)); width:calc(170 * var(--dot)); height:calc(48 * var(--dot)); padding:0; }
+  #card .card-lines p { position:absolute; left:0; top:0; width:100%; height:calc(24 * var(--dot)); margin:0; padding:0; display:flex; align-items:center; gap:calc(4 * var(--dot)); font-size:24px; line-height:calc(12 * var(--dot)); color:#2a483b; }
+  #card .card-lines p:nth-child(2) { top:calc(24 * var(--dot)); height:calc(18 * var(--dot)); }
+  #card .fact-pic { position:absolute; left:0; top:0; width:calc(36 * var(--dot)); height:calc(19 * var(--dot)); min-width:0; min-height:0; flex:none; overflow:visible; }
+  #card .fact-small { display:none; }
+  #card .fact-large { display:block; position:absolute; left:0; top:calc(5 * var(--dot)); }
+  #card .card-lines p:nth-child(2) .fact-large { left:calc(3 * var(--dot)); top:0; }
+  #card .card-lines p > span:last-child { position:relative; margin-left:calc(40 * var(--dot)); width:calc(130 * var(--dot)); min-width:0; flex:none; text-align:center; overflow-wrap:normal; word-break:keep-all; }
+  /* 문제를 틀린 카드: 까닭은 그림 칸 없이 크게, 단추는 넓게(2026-11-01). */
+  #card .card-lines p.slip-why { height:calc(48 * var(--dot)); justify-content:center; line-height:calc(16 * var(--dot)); }
+  #card .card-lines p.slip-why > span:last-child { margin-left:0; width:100%; white-space:normal; }
+  #card .home.n-button[data-spot="slip"] { width:calc(184 * var(--dot)); height:calc(30 * var(--dot)); }
+  #card .home[data-spot="slip"] > span { top:calc(8 * var(--dot)); left:0; width:100%; }
+  #card .card-phrase-break { display:initial; }
+  #card .card-act { position:absolute; left:0; top:0; width:100%; height:100%; padding:0; }
+  #card .card-rule { position:absolute; left:calc(26 * var(--dot)); top:calc(200 * var(--dot)); width:calc(178 * var(--dot)); height:calc(1 * var(--dot)); margin:0; }
+  #card .card-rule-sprout { position:absolute; display:block; left:calc(107 * var(--dot)); top:calc(197 * var(--dot)); width:calc(9 * var(--dot)); height:calc(6 * var(--dot)); background:#fff4d8; }
+  #card .card-act > .ask { position:absolute; left:calc(35 * var(--dot)); top:calc(207 * var(--dot)); width:calc(160 * var(--dot)); height:calc(11 * var(--dot)); padding:0; margin:0; display:flex; justify-content:center; align-items:center; font-size:24px; line-height:calc(12 * var(--dot)); white-space:nowrap; }
+  #card .question-left, #card .question-right { display:block; position:absolute; top:0; }
+  #card .question-left { left:calc(5 * var(--dot)); }
+  #card .question-right { right:calc(10 * var(--dot)); }
+  #card .homes, #card .options { position:absolute; left:calc(21 * var(--dot)); top:calc(223 * var(--dot)); width:calc(184 * var(--dot)); display:grid; grid-template-columns:repeat(3,calc(58 * var(--dot))); gap:calc(5 * var(--dot)); margin:0; }
+  #card .home.n-button, #card .option.n-button { position:relative; width:calc(58 * var(--dot)); min-width:0; height:calc(59 * var(--dot)); min-height:0; display:block; padding:0; font-size:24px; line-height:calc(11 * var(--dot)); overflow:visible; background:none; border:0; box-shadow:none; }
+  #card .home .tank-pic { position:absolute; left:calc(11 * var(--dot)); top:calc(6 * var(--dot)); margin:0; }
+  #card .home > span { position:absolute; left:calc(2 * var(--dot)); top:calc(40 * var(--dot)); width:calc(54 * var(--dot)); height:calc(12 * var(--dot)); display:flex; align-items:center; justify-content:center; text-align:center; }
+  /* 문제를 맞힌 뒤: 맞았다는 글과 받은 조개를 규칙 줄 아래 빈자리에(q04. 1px로 숨겨 정답 순간 보이는 반응이 없었다). 단추는 틀린 카드와 같은 넓은 꼴. */
+  #card .card-act > .answer.right { position:absolute; left:calc(18 * var(--dot)); top:calc(204 * var(--dot)); width:calc(190 * var(--dot)); height:calc(20 * var(--dot)); margin:0; display:flex; align-items:center; justify-content:center; gap:calc(4 * var(--dot)); font-size:36px; line-height:calc(18 * var(--dot)); color:#b4583f; }
+  #card .card-act > .answer ~ .ask { top:calc(226 * var(--dot)); }
+  #card .card-act > .answer ~ .homes { top:calc(240 * var(--dot)); }
+  #card .home.n-button[data-spot="release"] { width:calc(184 * var(--dot)); height:calc(30 * var(--dot)); }
+  #card .home[data-spot="release"] > span { top:calc(8 * var(--dot)); left:0; width:100%; }
+  #card.quiz .card-rule { top:calc(160 * var(--dot)); }
+  #card.quiz .card-rule-sprout { top:calc(157 * var(--dot)); }
+  #card.quiz .card-act > .ask { top:calc(168 * var(--dot)); left:calc(18 * var(--dot)); width:calc(190 * var(--dot)); font-size:24px; white-space:normal; }
+  #card.quiz .question-left, #card.quiz .question-right { display:none; }
+  #card.quiz .options { top:calc(187 * var(--dot)); }
+  #card.quiz .option.n-button { height:calc(80 * var(--dot)); padding:calc(4 * var(--dot)) calc(4 * var(--dot)) calc(7 * var(--dot)); display:flex; flex-direction:column; justify-content:flex-start; align-items:center; gap:calc(1 * var(--dot)); }
+  #card.quiz .option.n-button > span { position:relative; min-height:0; width:100%; flex:1; display:flex; align-items:center; justify-content:center; line-height:calc(12 * var(--dot)); text-align:center; text-wrap:balance; word-break:keep-all; }
+  #card.quiz .option.n-button .opt-pic { position:relative; margin:0; flex:none; }
+  html[data-notebook-dpr="1.5"] #card .card-top h2, html[data-notebook-dpr="1.5"] #card .card-top .size { font-size:32px; }
+  html[data-notebook-dpr="1.5"] #card .card-lines p:nth-child(2) { height:calc(24 * var(--dot)); }
+  html[data-notebook-compact="true"] #card .card-top h2,
+  html[data-notebook-compact="true"] #card .card-top .size { font-size:24px; }
+  html[data-notebook-compact="true"] #card .card-lines p,
+  html[data-notebook-compact="true"] #card .card-act > .ask,
+  html[data-notebook-compact="true"] #card .home.n-button,
+  html[data-notebook-compact="true"] #card .option.n-button { font-size:16px; }
+  html[data-notebook-compact="true"] #card .card-lines p.slip-why,
+  html[data-notebook-compact="true"] #card.slip .card-act > .ask,
+  html[data-notebook-compact="true"] #card .home.n-button[data-spot="slip"] { font-size:24px; }
+  /* 정보 카드 문제 글은 사실 줄(--info-font)보다 작지 않게: 1280 작은 수첩에서 16px(→18px)로 카드에서 가장 작았다(인디 채점 2026-11-12) */
+  html[data-notebook-compact="true"] #card.info-card .card-act > .ask { font-size:var(--info-font); }
+
+  /* When the live camera's K makes the vertical page taller than the screen,
+     fold the same native-point pieces into the existing two-column pattern. */
+  #card.panel[data-match-layout="intermediate"] {
+    width:calc(388 * var(--dot)); height:calc(190 * var(--dot));
+    left:calc(50% - 194 * var(--dot)); top:calc(50% - 95 * var(--dot));
+  }
+  #card[data-match-layout="intermediate"] .card-rings,
+  #card[data-match-layout="intermediate"] .card-leaf,
+  #card[data-match-layout="intermediate"] .card-bookmark,
+  #card[data-match-layout="intermediate"] .card-bookmark-bottom,
+  #card[data-match-layout="intermediate"] .card-loop { display:none; }
+  #card[data-match-layout="intermediate"] .card-pic {
+    left:calc(14 * var(--dot)); top:calc(18 * var(--dot));
+  }
+  #card[data-match-layout="intermediate"] .card-top {
+    left:calc(14 * var(--dot)); top:calc(121 * var(--dot));
+  }
+  #card[data-match-layout="intermediate"] .card-sticker {
+    left:calc(13 * var(--dot)); top:calc(108 * var(--dot));
+  }
+  #card[data-match-layout="intermediate"] .card-lines {
+    left:calc(210 * var(--dot)); top:calc(24 * var(--dot));
+  }
+  #card[data-match-layout="intermediate"] .card-rule {
+    left:calc(201 * var(--dot)); top:calc(76 * var(--dot));
+  }
+  #card[data-match-layout="intermediate"] .card-rule-sprout {
+    left:calc(282 * var(--dot)); top:calc(73 * var(--dot));
+  }
+  #card[data-match-layout="intermediate"] .card-act > .ask {
+    left:calc(196 * var(--dot)); top:calc(87 * var(--dot));
+    width:calc(184 * var(--dot));
+  }
+  #card[data-match-layout="intermediate"] .homes {
+    left:calc(196 * var(--dot)); top:calc(110 * var(--dot));
+  }
+  #card.quiz[data-match-layout="intermediate"] .card-rule { top:calc(70 * var(--dot)); }
+  #card.quiz[data-match-layout="intermediate"] .card-rule-sprout { top:calc(67 * var(--dot)); }
+  #card.quiz[data-match-layout="intermediate"] .card-act > .ask {
+    top:calc(82 * var(--dot)); height:calc(11 * var(--dot));
+  }
+  /* 문제를 맞힌 뒤: 세로 카드의 204 · 226 · 240점 자리가 이겨 글과 「잘 가!」가 카드 밖, 화면 밖으로 나갔다(바깥 검수 2026-11-06). */
+  #card[data-match-layout="intermediate"] .card-act > .answer.right {
+    left:calc(196 * var(--dot)); top:calc(82 * var(--dot)); width:calc(184 * var(--dot));
+  }
+  #card[data-match-layout="intermediate"] .card-act > .answer ~ .ask { top:calc(105 * var(--dot)); }
+  #card[data-match-layout="intermediate"] .card-act > .answer ~ .homes { top:calc(120 * var(--dot)); }
+  #card.quiz[data-match-layout="intermediate"] .options {
+    left:calc(196 * var(--dot)); top:calc(96 * var(--dot));
+  }
+}
+
+@media (max-height:520px) {
+  #card .card-leaf, #card .card-bookmark-bottom, #card .card-loop { display:none; }
+  #card .card-sticker { grid-row:1 / 4; }
+}
+/* 좁은 폰: 「새 기록!」이 있으면 「또 만났어요」를 내준다(새 기록이 이미 그 뜻이다). 긴 이름에서 띠 끝 장식에 닿았다(q06). */
+@media (max-width:480px) { #card .card-top:has(.record) .badge:not(.card-sticker) { display:none; } }
+/* 보기 글: 낱말 가운데서 끊지 않고 줄 길이를 맞춘다. 폰 가로 기본은 20px: 한 줄에 안 들면 한 단계 줄어 16px이 된다(기본이 16px이면 12px까지 내려갔다). */
+#card .option.n-button > span { word-break:keep-all; text-wrap:balance; }
+@media (max-height:340px) and (min-width:760px) {
+  html[data-notebook-compact="true"] #card .option.n-button, #card .option.n-button { font-size:20px; line-height:22px; }
+}
+
+/* 정보 1: 나안. 본문은 시안의 24px / 작은 화면 18px를 바닥으로 한다. */
+#card.info-card {
+ --info-font:24px; --info-line:32px;
+ position:fixed; left:auto; right:24px; top:calc(49 * var(--dot)); bottom:auto; transform:none;
+ width:min(1100px,calc(100vw - 180px)); height:auto; min-height:0; max-height:none; max-width:none;
+ display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr);
+ grid-template-rows:auto auto auto auto; gap:8px 24px; padding:28px 36px 32px max(36px,calc(22 * var(--dot)));
+ border:0; background:none; box-shadow:none; overflow:visible; color:#243f40;
+}
+#card.info-card .card-pic {position:relative;left:auto;top:auto;grid-column:1;grid-row:1;width:100%;height:206px;min-height:0;aspect-ratio:auto;padding:18px 12px 38px;display:flex;align-items:center;justify-content:center;}
+#card.info-card .card-pic:has(>.perfect-label) {padding-left:calc(10 * var(--dot) + 88px);}
+#card.info-card .card-top {position:relative;left:auto;top:auto;grid-column:1;grid-row:2;width:100%;height:auto;min-height:48px;display:flex;flex-direction:column;align-items:center;gap:0;padding:6px 12px;}
+#card.info-card .card-top h2 {position:static;width:auto;height:auto;display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 10px;white-space:normal;}
+#card.info-card .card-top h2,#card.info-card .card-top .size {font-size:var(--info-font)!important;line-height:var(--info-line)!important;}
+#card.info-card .card-top h2>[data-text-fit-chunk] {font-size:inherit!important;line-height:inherit!important;}
+#card.info-card .card-top .size {display:none;}
+#card.info-card .card-top .badge:not(.card-sticker),#card.info-card .record,#card.info-card .big-stamp {position:static;width:auto;height:auto;clip-path:none;overflow:visible;font-size:var(--info-font);line-height:var(--info-line);white-space:nowrap;}
+#card.info-card .card-top .badge>span {position:static;width:auto;height:auto;clip-path:none;overflow:visible;}
+#card.info-card .card-top .badge {margin:0;}
+#card.info-card .card-rings {left:calc(-3 * var(--dot));top:24px;bottom:24px;width:calc(19 * var(--dot));height:auto;}
+#card.info-card .card-leaf {top:0;}
+#card.info-card .card-loop,#card.info-card .card-bookmark-bottom {display:none;}
+#card.info-card .card-sticker {position:absolute;left:20px;top:170px;bottom:auto;grid-area:auto;z-index:5;}
+#card.info-card .photo-tape {left:50%;top:calc(-12 * var(--dot));right:auto;margin:0;transform:translateX(-50%);}
+#card.info-card .info-fields {grid-column:2;grid-row:1/3;display:flex;flex-direction:column;gap:6px;align-self:start;min-width:0;}
+#card.info-card .info-field {display:grid;grid-template-columns:44px 96px minmax(0,1fr);column-gap:10px;align-items:start;border-bottom:2px dotted #b3b59a;padding:4px 0;min-width:0;text-align:left;}
+#card.info-card .info-field-icon {width:44px;height:32px;display:flex;align-items:center;justify-content:center;overflow:visible;}
+#card.info-card .info-field-icon canvas {position:static;max-width:none;max-height:none;}
+#card.info-card .info-field-label,#card.info-card .info-field-value,#card.info-card .info-field-value>* {font-size:var(--info-font)!important;line-height:var(--info-line)!important;word-break:keep-all;overflow-wrap:normal;}
+#card.info-card .info-field-label {white-space:nowrap;}
+#card.info-card .info-field-value {min-width:0;}
+#card.info-card .info-field-value>span {text-wrap:pretty;}
+#card.info-card .info-field-value>* {display:block;}
+#card.info-card .card-lines {position:static;grid-column:1/-1;grid-row:3;width:auto;height:auto;min-width:0;padding:0;display:flex;flex-direction:column;gap:6px;align-self:stretch;}
+#card.info-card .card-lines p {position:static;display:flex;width:auto;height:auto;min-height:0;margin:0;padding:0;align-items:start;gap:8px;font-size:var(--info-font);line-height:var(--info-line);color:#243f40;}
+#card.info-card .card-lines p>span:last-child {position:static;flex:1;min-width:0;width:auto;margin:0;text-align:left;word-break:keep-all;overflow-wrap:normal;}
+#card.info-card .info-card-fact {border-top:2px dotted #a4ad91;padding-top:6px!important;}
+#card .fact-opened .fact-text {position:relative;animation:fact-discovery .5s steps(1,end) both;}
+@keyframes fact-discovery {
+  0% {translate:0 calc(2 * var(--dot));background:#f8e8b4;}
+  40% {translate:0 calc(-1 * var(--dot));background:#f8e8b4;}
+  75% {translate:0 0;background:#fff4d8;}
+  100% {translate:0 0;background:transparent;}
+}
+@media(prefers-reduced-motion:reduce) {#card .fact-opened .fact-text {animation:none;}}
+#card.info-card .fact-label {position:relative;display:inline-flex;align-items:center;justify-content:center;min-height:max(var(--info-line),calc(22 * var(--dot)));padding:0 10px;white-space:nowrap;font-size:var(--info-font)!important;line-height:var(--info-line)!important;}
+#card.info-card .fact-text {font-size:var(--info-font)!important;line-height:var(--info-line)!important;text-wrap:balance;}
+#card.info-card .fact-star {color:#c98a3c;}
+#card.info-card .slip-why {border-top:2px dotted #b3b59a;padding-top:6px!important;}
+#card.info-card .gloves-note {align-items:center!important;justify-content:center;}
+#card.info-card .gloves-note img {width:calc(12 * var(--dot))!important;height:calc(12 * var(--dot))!important;object-fit:contain;image-rendering:pixelated;}
+#card.info-card .card-act {position:static;grid-column:1/-1;grid-row:4;width:auto;height:auto;display:flex;flex-direction:column;align-items:stretch;gap:6px;padding:0;min-width:0;}
+#card.info-card .card-rule,#card.info-card .card-rule-sprout,#card.info-card .question-left,#card.info-card .question-right {display:none;}
+#card.info-card .card-act>.ask,#card.info-card .card-act>.answer.right {position:static;display:block;width:auto;height:auto;min-height:0;margin:0;padding:0;text-align:center;font-size:var(--info-font);line-height:var(--info-line);white-space:normal;word-break:keep-all;overflow-wrap:normal;text-wrap:balance;}
+#card.info-card .ask:has(>span:empty) {display:none;}
+#card.info-card .homes,#card.info-card .options {position:static;display:flex;width:100%;max-width:100%;gap:8px;margin:0;align-self:center;justify-content:center;}
+#card.info-card .home.n-button,#card.info-card .option.n-button {position:relative;left:auto;top:auto;display:flex;flex:1;flex-direction:column;justify-content:center;align-items:center;width:auto;height:auto;min-height:52px;min-width:44px;padding:8px 12px;gap:4px;font-size:var(--info-font);line-height:var(--info-line);}
+/* 단추 위아래 여백은 그려진 틀 두께(위 4점 · 아래 7점)와 같게: 8px로 두면 1695×902@1.5(1점 2.67px)에서 아래 틀이 「잘 가!」 글을 10px 덮었다. 작은 화면은 아래 @media 값이 이긴다. */
+#card.info-card .home.n-button {flex:0 1 480px;padding-top:calc(4 * var(--dot));padding-bottom:calc(7 * var(--dot));}
+#card.info-card .home>span,#card.info-card .option>span {position:static;width:auto;height:auto;min-height:0;flex:none;text-align:center;font-size:var(--info-font);line-height:var(--info-line);word-break:keep-all;overflow-wrap:normal;}
+#card.info-card .option .opt-pic {position:static;flex:none;margin:0;}
+#card.info-card .bait-stamp {position:absolute;right:8px;bottom:6px;z-index:6;max-width:calc(100% - 16px);display:flex;align-items:center;justify-content:center;gap:8px;padding:4px 6px;border:2px solid #a2563e;background:#fff4d8;color:#8a3a2c;}
+#card.info-card .bait-stamp>span {flex:none;min-width:max-content;font-size:var(--info-font)!important;line-height:var(--info-line)!important;letter-spacing:0;text-align:center;word-break:keep-all;overflow-wrap:normal;}
+/* notebookSprite returns a canvas; keep its box in the same flow as the label. */
+#card.info-card .bait-stamp .food-check-picture {position:static;flex:none;width:24px!important;height:24px!important;object-fit:contain;image-rendering:pixelated;}
+#card.info-card .perfect-label {left:calc(10 * var(--dot));right:auto;top:calc(10 * var(--dot));bottom:auto;}
+@media(min-width:1600px) and (min-height:700px) {#card.info-card {width:min(1100px,calc(100vw - 240px));}}
+@media(min-width:1600px) and (min-height:700px) {#card.info-card .card-top h2 {font-size:var(--info-title-font)!important;line-height:var(--info-title-line)!important;}}
+@media(min-width:600px) and (max-width:1199px) and (min-height:521px) {#card.info-card {width:calc(100vw - 48px);right:24px;}}
+@media(min-width:600px) and (min-height:521px) {#card.info-card .card-pic:has(>.bait-stamp) {padding-bottom:50px;}}
+@media(max-width:599px) {
+ #card.info-card .card-top .badge:not(.card-sticker) {display:flex!important;flex:none;}
+ #card.info-card .card-top {flex-wrap:wrap;}
+ #card.info-card {--info-font:18px;--info-line:24px;left:8px;right:8px;top:60px;width:calc(100vw - 16px);grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto auto auto auto;gap:4px;padding:12px 20px 16px;}
+ #card.info-card .card-pic {grid-column:1;grid-row:1;height:120px;padding:18px 12px 38px;}
+ #card.info-card .card-top {grid-column:1;grid-row:2;min-height:30px;padding:2px 8px;flex-direction:row;justify-content:center;gap:6px;}
+ #card.info-card .card-top h2 {font-size:var(--info-font);line-height:var(--info-line);gap:4px;}
+ #card.info-card .card-top .badge,#card.info-card .record,#card.info-card .big-stamp {font-size:12px!important;line-height:24px!important;}
+ #card.info-card .card-sticker {top:92px;left:8px;}
+ #card.info-card .info-fields {grid-column:1;grid-row:3;gap:2px;}
+ #card.info-card .info-field {grid-template-columns:28px 76px minmax(0,1fr);column-gap:4px;padding:2px 0;border-bottom-width:1px;}
+ #card.info-card .info-field-icon {width:28px;height:24px;}
+ #card.info-card .info-food .info-field-value>span {display:block;}
+ #card.info-card .info-home .info-field-value {display:contents;}
+ #card.info-card .info-home .info-field-value>b {grid-column:3;grid-row:1;}
+ #card.info-card .info-home .info-field-value>span {grid-column:2/-1;}
+ #card.info-card .info-food-note .info-field-value {grid-column:2/-1;grid-row:2;}
+ #card.info-card .slip-why>span:last-child {text-wrap:balance;}
+ #card.info-card .card-lines {grid-column:1;grid-row:4;gap:4px;}
+ #card.info-card .info-card-fact {border-top-width:1px;padding-top:4px!important;flex-wrap:wrap;gap:0 6px;}
+ #card.info-card .info-card-fact .fact-text {flex-basis:100%;}
+ #card.info-card .card-act {grid-column:1;grid-row:5;gap:4px;}
+ #card.info-card .options {display:flex;flex-direction:column;gap:4px;}
+ #card.info-card .home.n-button,#card.info-card .option.n-button {display:flex;min-height:48px;padding:6px 8px;}
+ #card.info-card .option.n-button {padding:4px 6px;flex-direction:row;min-height:48px;}
+ #card.info-card .card-bookmark,#card.info-card .card-leaf,#card.info-card .card-rings {display:none;}
+ #card.info-card .bait-stamp {bottom:2px;right:2px;padding:1px 4px;}
+ #card.info-card .bait-stamp>span {font-size:12px!important;line-height:18px!important;}
+}
+@media(max-width:599px) and (max-height:680px) {#card.info-card .card-pic {height:88px;}#card.info-card .card-sticker {top:60px;}}
+@media(min-width:600px) and (max-height:520px) {
+ #card.info-card {--info-font:18px;--info-line:24px;left:8px;right:8px;top:48px;width:calc(100vw - 16px);grid-template-columns:200px minmax(0,1fr);gap:2px 12px;padding:10px 20px 12px;}
+ #card.info-card .card-pic {grid-column:1;grid-row:1/4;height:124px;padding:18px 8px 38px;}
+ #card.info-card .card-top {grid-column:1;grid-row:4;min-height:30px;padding:2px 4px;}
+ #card.info-card .card-top h2 {font-size:var(--info-font);line-height:var(--info-line);}
+ #card.info-card .badge,#card.info-card .record,#card.info-card .big-stamp {font-size:12px!important;line-height:18px!important;}
+ #card.info-card .card-sticker {top:94px;left:10px;}
+ #card.info-card .info-fields {grid-column:2;grid-row:1;gap:0;}
+ #card.info-card .info-field {grid-template-columns:28px 80px minmax(0,1fr);column-gap:4px;padding:0;border-bottom-width:1px;}
+ #card.info-card .info-field-icon {width:28px;height:24px;}
+ #card.info-card .info-food .info-field-value>span {display:inline;}
+ #card.info-card .info-home .info-field-value>* {display:block;margin-right:0;text-wrap:balance;}
+ #card.info-card .slip-why>span:last-child {text-wrap:balance;}
+ #card.info-card .card-lines {grid-column:2;grid-row:2;gap:2px;}
+ #card.info-card .info-card-fact {padding-top:2px!important;border-top-width:1px;}
+ #card.info-card .card-act {grid-column:2;grid-row:3/5;gap:2px;}
+ #card.info-card .card-act>.ask {font-size:20px;line-height:24px;}
+ #card.info-card .home.n-button,#card.info-card .option.n-button {min-height:48px;padding:4px 6px;}
+ #card.info-card .option.n-button {flex-direction:column;}
+ #card.info-card .option.n-button>span {flex:none;align-self:stretch;min-width:0;font-size:16px!important;line-height:22px;}
+ #card.info-card .card-rings,#card.info-card .card-bookmark,#card.info-card .card-leaf {display:none;}
+ #card.info-card .bait-stamp {right:2px;bottom:2px;padding:1px 2px;}
+ #card.info-card .bait-stamp>span {font-size:12px!important;line-height:18px!important;}
+}
+@media(min-width:800px) and (min-height:341px) and (max-height:520px) {
+ #card.info-card .card-act>.ask {font-size:24px;line-height:32px;}
+}
+
+/* Wrappers have no box while the original page fits. Only information scrolls. */
+body:has(#card.info-card:not([hidden]):not([data-prebuild])) #growthBar:not([hidden]) {display:flex;}
+#card.info-card .info-card-body,#card.info-card .info-scroll-wrap,#card.info-card .info-scroll {display:contents;}
+/* 두 칸의 옛 190점 고정 높이보다 사실·정답·단추 세 줄이 길 수 있다. 내용과 아래 둘레까지 카드에 넣는다. */
+#card.info-card[data-match-layout='intermediate'] {height:auto;}
+#card.info-card[data-info-scroll='true'] {
+ top:var(--info-card-top);height:var(--info-card-height);max-height:var(--info-card-height);
+ grid-template-columns:200px minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto;
+}
+#card.info-card[data-info-scroll='true'] .card-pic {grid-column:1;grid-row:1;height:124px;max-height:100%;align-self:start;}
+#card.info-card[data-info-scroll='true'] .card-top {grid-column:1;grid-row:2;}
+#card.info-card[data-info-scroll='true'] .info-card-body {grid-column:2;grid-row:1/-1;display:flex;flex-direction:column;min-height:0;gap:4px;}
+#card.info-card[data-info-scroll='true'] .info-scroll-wrap {position:relative;display:flex;flex:1 1 auto;min-height:0;}
+#card.info-card[data-info-scroll='true'] .info-scroll {display:flex;flex-direction:column;gap:4px;flex:1 1 auto;min-height:0;overflow-y:auto;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#243f40 #fff4d8;}
+#card.info-card[data-info-scroll='true'] .info-fields,#card.info-card[data-info-scroll='true'] .card-lines {flex:none;}
+#card.info-card[data-info-scroll='true'] .card-act {flex:none;align-self:stretch;width:100%;}
+#card.info-card .info-scroll-wrap[data-more='true']::before {content:'';position:absolute;left:0;right:0;bottom:0;height:16px;background:linear-gradient(transparent,#fff4d8);pointer-events:none;z-index:8;}
+#card.info-card .info-scroll-wrap[data-more='true']::after {content:'';position:absolute;right:4px;bottom:4px;width:12px;height:12px;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' fill='none' stroke='%23243f40' stroke-width='2'%3E%3Cpath d='m2 4 4 4 4-4'/%3E%3C/svg%3E") center/12px 12px no-repeat;pointer-events:none;z-index:9;}
+/* 이름 띠의 양 끝 그림과 그림자(최소 33점)도 다음 줄 앞의 자리를 차지한다. */
+#card.info-card .card-top {min-height:max(48px,calc(33 * var(--dot)));}
+@media(max-width:599px) {
+ #card.info-card[data-info-scroll='true'] {display:flex;flex-direction:column;gap:4px;}
+ #card.info-card[data-info-scroll='true'] .card-pic {order:0;flex:none;height:88px;width:100%;}
+ #card.info-card[data-info-scroll='true'] .card-top {order:1;flex:none;}
+ #card.info-card[data-info-scroll='true'] .info-card-body {order:2;flex:1 1 auto;}
+ #card.info-card .info-card-fact:has(.fact-label) .fact-text {flex:1 0 100%!important;}
+}
+
+/* 2026-11-09: one overview grid and a full-width reading area, including when scrolling. */
+#card.info-card,#card.info-card[data-info-scroll='true'] {display:flex;flex-direction:column;gap:4px;}
+#card.info-card .info-card-body,#card.info-card[data-info-scroll='true'] .info-card-body {display:flex;flex-direction:column;min-height:0;gap:4px;width:100%;}
+#card.info-card .info-scroll-wrap {display:block;min-height:0;}
+#card.info-card .info-scroll {display:flex;flex-direction:column;gap:4px;min-width:0;}
+#card.info-card .info-overview {display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.2fr);grid-template-rows:auto auto;gap:4px max(12px,calc(4 * var(--dot)));align-items:start;}
+#card.info-card .card-pic,#card.info-card[data-info-scroll='true'] .card-pic {grid-column:1;grid-row:1;height:206px;width:100%;}
+#card.info-card .card-top,#card.info-card[data-info-scroll='true'] .card-top {grid-column:1;grid-row:2;}
+#card.info-card .card-top {flex-direction:row;justify-content:center;gap:8px;width:calc(100% - 4 * var(--dot));justify-self:start;height:calc(33 * var(--dot))!important;min-height:calc(33 * var(--dot))!important;padding:0 12px!important;}
+#card.info-card .card-top h2 {margin:0;}
+#card.info-card .card-bookmark {left:calc(12 * var(--dot));right:auto;top:calc(-10 * var(--dot));}
+#card.info-card .info-fields {grid-column:2;grid-row:1/3;display:grid;grid-template-columns:32px max-content minmax(0,1fr);column-gap:.5em;row-gap:0;align-self:start;align-items:baseline;width:100%;font-size:var(--info-font);}
+#card.info-card[data-quiz-open='true'] .info-field:not(.info-size),#card.info-card[data-quiz-open='true'] .info-card-fact,#card.info-card[data-quiz-open='true'] .slip-why {visibility:hidden!important;pointer-events:none;}
+#card.info-card .info-field {display:contents;}
+#card.info-card .info-field-icon,#card.info-card .info-field-label,#card.info-card .info-field-value {padding:2px 0;border-bottom:1px dotted #b3b59a;align-self:start;text-align:left;}
+#card.info-card .info-field-icon {grid-column:1;width:32px;height:var(--info-line);justify-content:flex-start;overflow:hidden;}
+#card.info-card .info-field-label {grid-column:2;}
+#card.info-card .info-field-icon canvas {max-width:100%;max-height:100%;object-fit:contain;}
+#card.info-card .info-field-value,#card.info-card .info-home .info-field-value,#card.info-card .info-food-note .info-field-value {display:block;grid-column:3;grid-row:auto;min-width:0;}
+#card.info-card .info-field-value,#card.info-card .info-field-value>* {word-break:keep-all;overflow-wrap:break-word;text-wrap:balance;text-align:left;}
+#card.info-card .info-food .info-field-value>.food-name {display:block;white-space:nowrap;}
+#card.info-card .card-lines {display:grid;grid-template-columns:max-content minmax(0,1fr);gap:2px .5em;width:100%;font-size:var(--info-font);text-align:left;}
+#card.info-card .card-lines .info-card-fact {display:contents;}
+#card.info-card .card-lines .fact-label,#card.info-card .card-lines .fact-text {border-top:1px dotted #a4ad91;padding-top:2px!important;align-self:start;}
+#card.info-card .fact-label {display:grid;gap:0;justify-content:start;min-height:0;padding:0;border:0;}
+#card.info-card .fact-label-width,#card.info-card .fact-name {grid-area:1/1;white-space:nowrap;font-size:var(--info-font)!important;line-height:var(--info-line)!important;}
+#card.info-card .fact-label-width {visibility:hidden;display:flex;gap:4px;}
+#card.info-card .fact-name {display:flex;gap:4px;align-items:baseline;}
+#card.info-card .fact-label:not([data-match-frame]) {background:none;}
+#card.info-card .card-lines .fact-text {grid-column:2;flex:none!important;min-width:0;word-break:keep-all;overflow-wrap:break-word;text-wrap:balance;}
+#card.info-card .slip-why {display:flex;flex:none;flex-direction:column;grid-column:1/-1;gap:4px;margin:0;padding:calc(3 * var(--dot)) calc(4 * var(--dot))!important;border:var(--dot) solid #b7a77b;background:#f2e5c2;text-align:left;font-size:var(--info-font);line-height:var(--info-line);}
+#card.info-card.read-first .slip-why {justify-content:start;text-align:left;}
+#card.info-card .slip-why>span,#card.info-card .why-heading {display:block;width:100%;margin:0;word-break:keep-all;overflow-wrap:break-word;text-wrap:balance;text-align:left;font-size:var(--info-font);line-height:var(--info-line);}
+#card.info-card .why-heading:empty {display:none;}
+#card.info-card .why-heading {font-size:max(12px,calc(.75 * var(--info-font)))!important;line-height:1.333333!important;color:#684530;}
+#card.info-card .card-top .badge:not(.card-sticker),#card.info-card .card-top .badge>span {color:#813d32;}
+#card.info-card[data-info-scroll='true'] .info-card-body {flex:1 1 auto;}
+#card.info-card[data-info-scroll='true'] .info-scroll-wrap {display:flex;flex:1 1 auto;}
+#card.info-card[data-info-scroll='true'] .info-scroll {display:flex;flex:1 1 auto;overflow-y:auto;}
+#card.info-card[data-info-scroll='true'] .info-overview,#card.info-card[data-info-scroll='true'] .card-lines {flex:none;}
+#card.info-card .card-act {flex:none;width:100%;}
+#card.info-card .gloves-note {grid-column:1/-1;}
+#card.info-card .info-card-body > .card-top {flex:none;order:-1;}
+@media(max-width:599px) {
+ #card.info-card .card-pic,#card.info-card[data-info-scroll='true'] .card-pic {height:88px;}
+}
+@media(min-width:600px) and (max-height:520px) {
+ #card.info-card .card-pic,#card.info-card[data-info-scroll='true'] .card-pic {height:88px;}
+}
+/* A single three-column grid sizes every label in the stacked reading area. */
+@media(max-width:599px),(max-height:520px) {
+ #card.info-card .card-lines,#card.info-card .card-lines .info-card-fact,#card.info-card .gloves-note {align-self:start;height:max-content;min-height:max-content;}
+ #card.info-card .info-scroll {display:grid!important;grid-template-columns:24px max-content minmax(0,1fr);column-gap:.5em;row-gap:2px;align-content:start;font-size:var(--info-font);}
+ #card.info-card .info-overview,#card.info-card .info-fields,#card.info-card .card-lines {display:contents;}
+ #card.info-card .card-lines {display:grid;grid-column:1/-1;grid-row:auto;grid-template-columns:subgrid;column-gap:inherit;}
+ #card.info-card .card-pic,#card.info-card[data-info-scroll='true'] .card-pic {grid-column:1/-1;grid-row:1;max-height:none;}
+ #card.info-card .card-top,#card.info-card[data-info-scroll='true'] .card-top {grid-column:1/-1;grid-row:2;margin-bottom:calc(2 * var(--dot));}
+ #card.info-card .info-field-label,#card.info-card .card-lines .fact-label {grid-column:2;}
+ #card.info-card .info-field-value,#card.info-card .card-lines .fact-text {grid-column:3;}
+ #card.info-card .info-field-icon {width:24px;}
+}
+
+/* 긴 먹이 이름·보기는 자기 칸 안에서 낱말 사이로 내려 쓴다. flex:none과 nowrap은 문장을 칸 밖까지 밀었다. */
+#card.info-card .info-food .info-field-value>.food-name {white-space:normal;max-width:100%;}
+#card.info-card .option.n-button>span {flex:0 1 auto;min-width:0;max-width:100%;width:100%;box-sizing:border-box;}
+/* 폰 세로(2026-11-14 시험 빚 검수, Claude).
+   ① 보기는 위아래로 쌓인다. flex:1(밑동 0)에 최소 52px가 붙어 두 줄 보기도 52px로 눌려 글이 단추 위아래 테에 닿았다. 제 글 높이만큼 둔다.
+   ② 글 칸이 단추 폭을 다 쓰면서 옛 왼쪽 맞춤(#card.quiz 줄)이 드러났다. 전처럼 가운데.
+   ③ 넘김이 켜진 카드의 이름과 값 사이는 4px(넘김 칸 gap)인데 안 켜진 카드는 10px라, 「하루살이 애벌레」가 값 칸 148px에서 꺾여
+      카드가 넘김으로 바뀌고 넘김 뒤 160px에서 다시 펴져 67px 빈 띠가 남았다(꺽지 장갑 360×780). 둘 다 4px. */
+@media(max-width:599px) {
+ #card.info-card .options>.option.n-button {flex:none;}
+ #card.info-card .option.n-button>span {text-align:center;}
+ #card.info-card .info-scroll {column-gap:4px;}
+}
+/* 주인 이름과 별명은 두 줄. 주인 딱지는 사진에, 기록은 크기 값 옆에 두어 이름 리본을 나눠 쓰지 않는다. */
+#card.info-card.has-boss-name .card-top {height:max(calc(33 * var(--dot)),calc(2 * var(--info-line) + 8px))!important;min-height:max(calc(33 * var(--dot)),calc(2 * var(--info-line) + 8px))!important;}
+#card.info-card.has-boss-name .card-top h2 {width:100%;min-width:0;font-size:var(--info-font)!important;line-height:var(--info-line)!important;}
+#card.info-card .boss-species,#card.info-card .boss-nickname {display:block;white-space:nowrap;}
+#card.info-card.has-boss-name .card-pic>.badge {position:absolute;top:calc(8 * var(--dot));right:calc(8 * var(--dot));left:auto;z-index:9;margin:0;padding:2px 6px;border:2px solid #a79364;background:#fffae3;color:#813d32;font-weight:700;white-space:nowrap;}
+#card.info-card.has-boss-name .card-pic:has(>.badge) {padding-top:calc(10 * var(--dot) + 30px);min-height:calc(10 * var(--dot) + 30px + 38px + 48px);}
+#card.info-card.has-boss-name .info-size .info-field-value {display:flex;flex-wrap:wrap;align-items:baseline;column-gap:8px;}
+#card.info-card.has-boss-name .info-size .record,#card.info-card.has-boss-name .info-size .big-stamp {position:static;margin:0;width:auto;height:auto;clip-path:none;}
+
+/* 2026-11-09 Claude: 점선은 줄마다 하나로, 아이콘 · 줄머리 · 값을 끊김 없이 가로지른다.
+   칸마다 밑줄을 그으면 칸 높이가 달라 계단이 지고 칸 사이 틈에서 끊겼다. 줄 하나를 부모 격자의 칸을 그대로 쓰는 격자(subgrid)로 묶는다. */
+#card.info-card .info-field,#card.info-card .card-lines .info-card-fact {display:grid;grid-column:1/-1;grid-template-columns:subgrid;column-gap:inherit;align-items:start;}
+#card.info-card .info-field {border-bottom:1px dotted #b3b59a;}
+#card.info-card .card-lines .info-card-fact {border-top:1px dotted #a4ad91;}
+#card.info-card .info-field-icon,#card.info-card .info-field-label,#card.info-card .info-field-value {border-bottom:0;}
+#card.info-card .card-lines .fact-label,#card.info-card .card-lines .fact-text {border-top:0;}
+/* 쌓인 꼴(폰 · 낮은 화면)에서는 정보 마지막 줄의 밑줄이 곧 특징 첫 줄의 윗줄이라 겹으로 긋지 않는다. */
+@media(max-width:599px),(max-height:520px) {#card.info-card .card-lines>.info-card-fact:first-child {border-top:0;}}
+@media(max-width:599px) {
+ #card.info-card .info-home .info-field-value,
+ #card.info-card .card-lines .fact-text {grid-column:2/-1;grid-row:2;}
+}
+
+/* 미리 그린 카드는 보이는 때에만 움직인다. 글 · 그림을 다시 맞추지 않는다. */
+@keyframes fishing-card-enter {
+ from {transform:translateY(6px) scale(.92);opacity:0;}
+ to {transform:translateY(0) scale(1);opacity:1;}
+}
+#card.card-enter {animation:fishing-card-enter .22s cubic-bezier(.2,.7,.25,1) both;}
+body.reduce #card.card-enter {animation:none;}
+@media(prefers-reduced-motion:reduce) {#card.card-enter {animation:none;}}
+
+/* 2026-11-13 Claude 폰 가로(너비 600 이상 · 높이 520 이하): 정보 시안 나안 그대로 사진 왼쪽, 오른쪽에 크기 · 잡은 곳 · 사는 곳 · 먹이 · 특징 줄과 단추.
+   한 줄로 쌓으면 780×290에서 이름 띠 · 88px 사진 · 단추만 보이고 정보 줄은 모두 스크롤 아래에 숨었다(인디 채점 2026-11-12).
+   사진과 이름 띠는 fitInfoCard(pinCardName)가 스크롤 칸 밖 .info-card-body로 옮긴다. 사진 위 테이프(12점 위로 나옴)가 카드 틀에 닿지 않게 위를 12점 띄운다. */
+@media(min-width:600px) and (max-height:520px) {
+ #card.info-card {--card-side:clamp(180px,25vw,260px);}
+ /* 줄 사이를 점선 하나로만 가른다(780×290에서 먹이 · 특징 줄까지 첫 화면에 들게). */
+ #card.info-card .info-scroll {row-gap:0!important;}
+ #card.info-card .info-field-icon,#card.info-card .info-field-label,#card.info-card .info-field-value {padding:1px 0;}
+ #card.info-card .info-card-body,#card.info-card[data-info-scroll='true'] .info-card-body {display:grid;grid-template-columns:var(--card-side) minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto auto auto;gap:4px 16px;}
+ #card.info-card .info-card-body > .card-pic {grid-column:1;grid-row:1/4;width:auto;height:auto;min-height:96px;max-height:none;align-self:stretch;margin-top:calc(12 * var(--dot));}
+ #card.info-card .info-card-body > .card-top {grid-column:1;grid-row:4;align-self:end;margin:0;}
+ #card.info-card .info-card-body > .info-scroll-wrap {grid-column:2;grid-row:1;}
+ #card.info-card .info-card-body > .slip-why {grid-column:2;grid-row:2;}
+ #card.info-card .info-card-body > .card-act {grid-column:2;grid-row:3/5;align-self:end;}
+ /* 단추 하나짜리 카드는 글을 왼쪽, 단추를 오른쪽에 둬 세로 한 줄을 아낀다. 문제 카드는 보기 셋이 글 아래 한 줄. */
+ #card.info-card:not(.quiz) .card-act {display:grid;grid-template-columns:minmax(0,1fr) minmax(160px,240px);column-gap:12px;row-gap:0;align-items:center;}
+ #card.info-card:not(.quiz) .card-act > * {grid-column:1;}
+ #card.info-card:not(.quiz) .card-act > .homes {grid-column:2;grid-row:1/span 2;width:100%;}
+ /* 사진 칸: 「완벽!」은 왼쪽 위, 「새로!」 딱지는 오른쪽 위 모서리, 물고기는 그 아래 넓게.
+    왼쪽 88px을 비우던 큰 화면 규칙은 이 좁은 칸에서 물고기를 86px 너비로 줄였다. 아래 30px은 미끼 도장 자리. */
+ #card.info-card .info-card-body > .card-pic {padding:18px 8px 30px;}
+ #card.info-card .info-card-body > .card-pic:has(>.perfect-label),#card.info-card .info-card-body > .card-pic:has(>.badge),#card.info-card:has(>.card-sticker) .info-card-body > .card-pic {padding-left:8px;padding-top:calc(10 * var(--dot) + 30px);}
+ #card.info-card .card-sticker {top:calc(10px + 4 * var(--dot));left:calc(20px + var(--card-side) - 45 * var(--dot));}
+ /* 리본에서 옮겨 온 「또 만났어요」 · 「계곡의 주인!」 딱지(pinCardName): 「완벽!」과 같은 높이 오른쪽 위, 리본 색(바탕 · 테 · 글). */
+ #card.info-card .card-pic > .badge {position:absolute;top:calc(10 * var(--dot));right:calc(10 * var(--dot));left:auto;z-index:9;margin:0;padding:2px 6px;border:2px solid #a79364;background:#fffae3;color:#813d32;font-weight:700;white-space:nowrap;}
+ #card.info-card .card-pic > .badge > span {color:inherit;}
+ /* 크기 줄로 옮겨 온 「새 기록!」 · 「큰 놈」은 값(20cm)과 한 줄(글 맞춤 칸 둘이 블록이라 위아래로 쌓였다). */
+ #card.info-card .info-size .info-field-value {display:flex;flex-wrap:wrap;align-items:baseline;column-gap:8px;}
+ #card.info-card .info-size .info-field-value > .record,#card.info-card .info-size .info-field-value > .big-stamp {margin-left:0;}
+ /* 먹이 이름은 한 줄에 쉼표로 잇는다(이름마다 한 줄이면 세 줄을 차지했다). 이름 하나는 끊지 않는다. */
+ #card.info-card .info-food .info-field-value {display:flex;flex-wrap:wrap;column-gap:.5em;}
+ #card.info-card .info-food .info-field-value>.food-name:not(:last-child)::after {content:',';}
+}

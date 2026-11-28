@@ -1,0 +1,320 @@
+/* 머리와 넘김은 고정하고, 긴 설명만 내려 읽는다. */
+body.bookOpen #startScreen{visibility:hidden}
+#songbookBox{--s:.38;width:min(1480px,calc(100vw - 24px));height:fit-content;max-height:min(860px,calc(100dvh - 16px));padding:72px 78px 56px;gap:12px;overflow:hidden;font:400 20px/1.5 "Minyo Hahmlet"}
+#songbookBox .scrollClose{top:12px;right:78px;width:100px;min-width:100px;height:48px;font-size:16px;line-height:1.3;z-index:2;white-space:nowrap}
+@media(min-width:1024px) and (max-width:1400px){#songbookBox .scrollClose{right:132px}}
+@media(min-width:1024px) and (max-width:1400px) and (min-height:521px){#songbookBox .bookSeal{right:166px}}
+.bookHead{position:relative;flex:none;display:grid;grid-template-columns:minmax(0,1fr) auto;align-items:baseline;gap:0 16px;border-bottom:1px solid var(--rule);padding-bottom:8px}
+.bookSong{font-size:18px;font-weight:700;color:var(--inkSoft);grid-column:1/-1;padding-right:64px}
+.bookHead h2{font-size:32px;line-height:1.35;font-weight:700}
+.bookCount{font-size:18px;white-space:nowrap;color:var(--inkSoft)}
+.bookSeal{position:absolute;right:112px;top:-54px;width:48px;height:48px;image-rendering:pixelated}
+.bookBody{min-height:0;flex:0 1 auto;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain;scrollbar-width:thin;scrollbar-color:#9a7a50 #e4d6b9;padding:2px 0 0;touch-action:pan-y;overflow-wrap:break-word;word-break:keep-all}
+.bookBody:focus-visible,.bookExplanation:focus-visible,.bookFacts:focus-visible,.bookDemoLines:focus-visible{outline:2px solid var(--cinnabar);outline-offset:-2px}
+.bookBody::-webkit-scrollbar,.bookExplanation::-webkit-scrollbar,.bookFacts::-webkit-scrollbar,.bookDemoLines::-webkit-scrollbar{width:6px}
+.bookBody::-webkit-scrollbar-thumb,.bookExplanation::-webkit-scrollbar-thumb,.bookFacts::-webkit-scrollbar-thumb,.bookDemoLines::-webkit-scrollbar-thumb{background:#9a7a50;border-radius:3px}
+.bookMore{position:absolute;height:22px;line-height:22px;text-align:center;font-size:16px;color:#6b4933;background:linear-gradient(transparent,#f3ead7 85%);z-index:1;pointer-events:none}
+.bookMore::after{content:'아래로 내려 읽어요'}
+.bookScene{display:block;box-sizing:content-box;width:calc(100% - 4px);height:auto;aspect-ratio:var(--ar,2.1333);object-fit:contain;object-position:center;image-rendering:pixelated;border:2px solid #6c5036;border-radius:4px;background:#ded3b7}
+#songbookBox[data-song=kwaeji] .bookScene{aspect-ratio:320/90}
+#songbookBox[data-page="1"] .bookBody{display:grid;grid-template-columns:minmax(520px,1fr) minmax(0,1fr);gap:24px;align-items:center}
+.bookFacts{display:grid;gap:10px;align-content:start}
+.bookFacts>div{display:grid;grid-template-columns:110px minmax(0,1fr);gap:12px}
+.bookFacts dt{font-size:18px;font-weight:700;color:#745b40}
+.bookFacts dd{margin:0;text-wrap:balance}
+.bookTail{white-space:nowrap}
+/* 판 21(2026-11-20): 1장 이름표 넷은 크게, 녹음 출처는 그림 아래 작게 */
+.bookPic{margin:0;min-width:0}
+#songbookBox .bookCredit{margin:6px 0 0;font-size:16px;line-height:22px;color:#745b40;text-wrap:balance}
+#songbookBox .bookAbout{gap:14px}
+.bookAbout>div{grid-template-columns:64px minmax(0,1fr);gap:18px;align-items:baseline}
+.bookAbout dd{font-size:22px;line-height:30px}
+/* 2장: 받는 소리 · 첫 메김 줄은 큰 글, 낱말은 칸, 나머지는 접어 둔다 */
+#songbookBox .bookLabel{margin:0 0 2px;font-size:18px;font-weight:700;color:#745b40}
+#songbookBox .bookBig{margin:0;font-size:30px;font-weight:700;line-height:1.4;text-wrap:balance}
+.bookBig u{color:var(--cinnabar);text-decoration:underline dotted 3px;text-underline-offset:7px}
+#songbookBox .bookNote{margin:2px 0 0;font-size:18px;line-height:26px;color:#5f4a36}
+.bookFirst{margin-top:18px}
+#songbookBox .bookChips{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 0;padding:0;list-style:none}
+.bookChips li{font-size:20px;line-height:1.4;padding:5px 14px;border:2px solid transparent;border-image:var(--notePaperS)}
+.bookChips b{color:var(--cinnabar);margin-right:8px}
+.bookAll{margin-top:12px}
+.bookAll>summary{display:inline-flex;align-items:center;min-height:44px;font-size:18px;font-weight:700;color:#6b4933;text-decoration:underline;text-underline-offset:4px;cursor:pointer;list-style:none}
+.bookAll>summary::-webkit-details-marker{display:none}
+.bookAll>summary:focus-visible{outline:2px solid var(--cinnabar);outline-offset:2px}
+.bookAll>.bookFacts{margin:4px 0 0}
+/* 3장 역할 한 문장 · 4장 장단 이름 큰 글 */
+#songbookBox .bookRole{font-size:22px;line-height:32px;text-align:center;text-wrap:balance}
+#songbookBox .bookOrder{margin-top:2px;font-size:18px;line-height:26px;color:#5f4a36;text-align:center;text-wrap:balance}
+#songbookBox .bookMeter{margin:0;font-size:34px;font-weight:700;line-height:44px}
+#songbookBox .bookMeterSub{margin:2px 0 8px;font-size:20px;line-height:28px;color:#5f4a36;text-wrap:balance}
+#songbookBox .bookExplanation>.bookNote{margin-top:6px}
+/* .scroll :is(h2,p,dl,dd){margin:0}보다 앞서야 해서 #songbookBox를 붙인다 */
+#songbookBox .bookScrollable{margin-bottom:22px}
+#songbookBox .bookDemoLines.bookScrollable{margin-bottom:0;padding-bottom:22px!important}
+.bookFacts dd:has(>.bookQuote:first-child){padding-left:.5em}
+.bookFacts dd>.bookQuote:first-child{margin-left:-.5em}
+.bookQuote{display:inline-block;width:.5em;height:1em;vertical-align:-.1em;fill:none;stroke:currentColor;stroke-width:1.2}
+.bookLyrics{border-top:1px solid var(--rule);margin-top:12px;padding-top:8px}
+.bookBody h3{font-size:20px;font-weight:700;margin:0 0 8px}
+.bookVerse{margin:0 0 8px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);column-gap:24px;align-items:start}
+.bookVerse>p:first-child{grid-row:1/span 9}
+.bookVerse>.bookGloss{grid-column:2;padding-top:0}
+.bookVerse p{text-wrap:balance}
+.bookVerse u{text-decoration-color:var(--cinnabar);text-underline-offset:5px;text-decoration-thickness:1px}
+.bookGloss{font-size:18px;color:#6b4933;padding-top:4px}
+#songbookBox:is([data-page="3"],[data-page="4"]) .bookBody{display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto auto;gap:12px;overflow:hidden;font-size:18px;line-height:1.5}
+#songbookBox[data-page="3"] .bookBody{gap:8px}
+.bookExplanation{min-height:0;overflow-y:auto;overscroll-behavior:contain;padding-bottom:2px}
+.bookActivity{height:297px;min-height:0;min-width:0;outline-offset:2px;text-align:center;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:133px 52px 56px 32px;justify-items:center;gap:8px}
+.bookCore{width:100%;min-height:0}
+.bookLeader{display:inline-block;vertical-align:middle;width:150px;height:150px;image-rendering:pixelated;margin:0 24px 0 0;object-fit:contain}
+.bookDemoLines{display:inline-block;vertical-align:middle;text-align:left;padding:24px 0 8px;max-width:calc(100% - 180px);max-height:260px;overflow-y:auto;scrollbar-width:thin}
+.bookDemoLine{color:#7a6d5a;line-height:2;font-size:30px;font-weight:400}
+.bookDemoLine.response{font-weight:700}
+.bookDemoLine.active{color:#352617;font-weight:700}
+.bookDemoLine span{position:relative;display:inline-block;min-width:.8em;text-align:center;padding-top:2px}
+.bookDemoLine .noteIcon{display:inline-block;width:.75em;height:1em;vertical-align:-.05em;fill:currentColor}
+.bookDemoLine span.target::after{content:'';position:absolute;width:10px;height:10px;border:1px solid #8c6a48;border-radius:50%;left:50%;bottom:0;transform:translateX(-50%)}
+.bookDemoLine span.hit::after{background:#903d2b;border-color:#903d2b}
+.bookDemoLine span.landed::before{content:'';position:absolute;top:calc(50% - .5em - 27px);left:50%;transform:translate(-50%,calc(var(--fall,0) * -56px));opacity:calc(1 - var(--fall,0) * .45);width:30px;height:30px;background:url(art/kwaeji/bead-best.png) center/contain no-repeat;image-rendering:pixelated}
+:where(#songbookBox[data-page="3"]) .bookActivity{height:344px;grid-template-rows:180px 52px 56px 32px}
+:where(#songbookBox[data-page="3"]) .bookCore{height:100%;display:grid;grid-template-columns:150px minmax(0,max-content);grid-template-rows:minmax(0,1fr) 24px;column-gap:24px;align-items:center;justify-content:center}
+:where(#songbookBox[data-page="3"]) .bookLeader{grid-column:1;grid-row:1;display:block;margin:0}
+:where(#songbookBox[data-page="3"]) .bookDemoLines{grid-column:2;grid-row:1;display:block;min-height:0;height:100%;max-height:100%;max-width:100%;box-sizing:border-box}
+:where(#songbookBox[data-page="3"]) .bookMarks{grid-column:1/-1;grid-row:2;height:24px}
+.bookHint{font-size:18px;text-align:center;text-wrap:balance}
+.bookBody h3.bookHint{margin:0}
+.bookControls{display:flex;justify-content:center;gap:8px;width:100%;min-width:0}
+.bookListen,.bookTap{margin:0;min-height:56px;font-size:20px}
+.bookListen{width:240px;min-width:240px}
+.bookTap{min-width:140px;flex-direction:column}
+.bookTap.bookTapHit{flex-direction:row;gap:6px}
+.bookTap.bookTapHit::before{content:'';width:10px;height:10px;border:1px solid currentColor;border-radius:50%}
+#bookSkipAudio{min-width:0;width:auto;max-width:240px;flex:1;white-space:normal;font-size:16px;line-height:22px;order:-1}
+.bookControls:has(#bookSkipAudio:not([hidden])) .bookTap{display:none}
+.bookStatus{height:52px;min-height:52px;width:100%;font-size:18px;line-height:26px;color:#6b3828;text-align:center;text-wrap:balance}
+.bookResultCount{white-space:nowrap}
+.bookMarks{min-height:24px;line-height:24px;font-size:16px;white-space:nowrap}
+.bookResult{display:inline-flex;gap:3px;align-items:center;margin-right:5px}
+.bookResultDot{width:7px;height:7px;border:1px solid #8c6a48;border-radius:50%;display:inline-block}
+.bookResultDot.hit{background:#903d2b;border-color:#903d2b}
+.bookProgress{width:100%;max-width:400px;min-height:32px;display:grid;grid-template-columns:1fr auto;grid-template-rows:20px 7px;gap:4px 12px;font-size:16px;line-height:20px;text-align:left}
+.bookTime{grid-column:1}
+.bookScore{grid-column:2;grid-row:1;font-size:16px;line-height:20px;white-space:nowrap}
+.bookTrack{grid-column:1/-1;height:7px;background:rgba(74,58,40,.12);box-shadow:inset 0 0 0 1px rgba(74,58,40,.55);overflow:hidden}
+.bookTrack i{height:100%;display:block;background:#903d2b;width:0}
+#songbookBox[data-listen-required=true] .bookStatus{font-weight:700;color:#7a3a1a}
+#songbookBox[data-song=ganggang][data-listen-required=true] .bookListen{outline:2px solid #b8322a;outline-offset:2px;animation:bookListenCue 1s ease-in-out infinite alternate}
+@keyframes bookListenCue{to{outline-color:#c18d76}}
+.bookBeatGrid{display:grid;grid-template-columns:repeat(var(--beats),minmax(0,1fr));gap:10px;margin:8px 0 0}
+.bookBeat{position:relative;padding:14px 0 26px;text-align:center;border-top:2px solid #c0ab85;border-bottom:2px solid #c0ab85;transition:background-color .1s}
+.bookBeat b{display:block;font-size:36px;font-weight:400}
+.bookBeat span{font-size:18px;white-space:nowrap}
+/* 손뼉 · 무릎 그림(판 21 덧붙임): 원본 32×32 도트를 정수 배로만. 칸이 높아지지 않게 숫자 옆에 두고, 글자는 아랫줄 */
+.bookBeat:has(.bookHandPic) b{display:inline-block;vertical-align:middle}
+.bookHandPic{display:inline-block;vertical-align:middle;width:32px;height:32px;margin-left:8px;background:center/100% 100% no-repeat;image-rendering:pixelated}
+.bookHandPic+span{display:block} /* 글자는 아랫줄. 꾸밈 글 줄 바꿈은 글꼴 화면 시험이 못 읽어서 블록으로(11-21) */
+@media(min-height:760px){.bookHandPic{width:64px;height:64px}}
+.bookHandPic[data-hand=clap]{background-image:url(art/ui/beat-clap.png)}
+.bookHandPic[data-hand=knee]{background-image:url(art/ui/beat-knee.png)}
+.bookBeat.on{background:#ead7a3;border-color:#8c4d29}
+.bookBeat.tapped{animation:bookTap .75s ease-out}
+.bookBeat.hit{box-shadow:inset 0 -4px 0 #903d2b}
+.bookHit{position:absolute;bottom:3px;left:0;width:100%;font-size:16px;line-height:20px;font-style:normal;color:#903d2b}
+.bookHit::before{content:'';display:inline-block;width:10px;height:10px;margin-right:4px;border:1px solid currentColor;border-radius:50%}
+@keyframes bookTap{0%,75%{box-shadow:inset 0 0 0 4px #a65132;background:#f5deb0}100%{box-shadow:inset 0 -4px 0 #903d2b}}
+/* 4장 큰박 칸 아래 받는 소리 칠 글자 줄: 치는 글자는 진하게 + 점, 치지 않는 글자는 흐리게 */
+.bookStrikes{margin:6px 0 0}
+#songbookBox .bookStrikesTitle{font-size:16px;line-height:20px;font-weight:700;color:var(--inkSoft);text-align:center}
+.bookStrikeLine{display:flex;justify-content:center;align-items:flex-start}
+.bookStrikeLine.cells{display:grid;grid-template-columns:repeat(var(--beats),minmax(0,1fr));gap:10px}
+.bookStrikeLine span{display:flex;flex-direction:column;align-items:center;min-width:.9em;font-size:28px;line-height:32px;color:#a3907a}
+.bookStrikeLine span.on{color:var(--ink);font-weight:700}
+.bookStrikeLine span.on::after{content:'';width:8px;height:8px;margin-top:2px;border-radius:50%;background:var(--cinnabar)}
+.bookStrikeLine .lead{font-size:18px;justify-content:center}
+.bookStrikeLine .gap{min-width:.35em}
+#songbookBox[data-page="4"] .bookActivity{height:365px;grid-template-rows:201px 52px 56px 32px}
+.bookNav{display:grid;grid-template-columns:1fr auto 1fr;gap:16px;align-items:center;flex:none;margin-top:12px}
+.bookNav button{min-height:56px;font-size:20px}
+#bookNext{background-image:var(--redArt);color:#fff7e8;text-shadow:0 1px 0 rgba(70,10,0,.45)}
+.bookDots{display:flex;gap:9px;padding:0 4px}
+.bookDots i{width:10px;height:10px;border:1px solid #9a7954;border-radius:50%;background:#e4d8be}
+.bookDots .on{background:#903d2b;border-color:#903d2b}
+.bookActions{display:flex;gap:12px;flex:none}
+.bookActions .btnRed{flex:1;min-height:56px;font-size:20px}
+.bookActions .btnPaper{min-height:56px;font-size:20px}
+#songbookBox button:disabled{cursor:default;filter:grayscale(.8);opacity:.45;translate:none}
+@media(min-width:1500px) and (min-height:700px){
+ #songbookBox[data-page="1"] .bookBody{grid-template-columns:620px minmax(540px,1fr)}
+}
+
+@media(max-height:520px) and (min-width:601px){
+ #songbookBox{--s:.22;width:calc(100vw - 24px);height:calc(100dvh - 12px);max-height:calc(100dvh - 12px);padding:0 32px 18px;gap:4px;font-size:16px;line-height:1.3}
+ #songbookBox .scrollClose{top:0;right:124px;width:100px;height:48px;font-size:16px}
+ .bookHead{margin:0 92px;min-height:40px;height:40px;grid-template-columns:auto auto auto;align-content:center;padding:14px 112px 0 0;gap:0 8px;border:0}
+ .bookSong{grid-column:auto;font-size:16px;line-height:20px;padding:0;white-space:nowrap}
+ .bookHead h2{font-size:20px;line-height:24px;white-space:nowrap}
+ .bookCount{font-size:16px;line-height:24px}
+ .bookSeal{width:32px;height:32px;right:112px;top:0}
+ #songbookBox[data-page="1"] .bookHead{height:66px;min-height:66px;grid-template-columns:1fr auto;padding-right:152px}
+ #songbookBox[data-page="1"] .bookSong{grid-column:1/-1}
+ #songbookBox[data-page="1"] .bookCount{margin-right:12px}
+ .bookBody{flex:1;padding:0}
+ #songbookBox[data-page="2"] .bookBody{padding-top:28px}
+ #songbookBox[data-page="1"] .bookBody{grid-template-columns:294px minmax(0,1fr);gap:16px;overflow:hidden;align-items:start}
+ #songbookBox[data-page="1"] .bookFacts{height:100%;overflow-y:auto;padding-bottom:0}
+ .bookFacts{gap:6px}
+ .bookFacts>div{grid-template-columns:98px minmax(0,1fr);gap:10px}
+ .bookFacts dt,.bookGloss,.bookHint,.bookStatus{font-size:16px}
+ .bookLyrics{column-gap:24px}
+ .bookBody h3{font-size:18px}
+ .bookNav{margin-top:0;gap:12px;height:48px}
+ .bookNav button{min-height:48px;font-size:18px}
+ .bookActions{position:absolute;right:32px;bottom:18px;width:calc(66% - 32px);gap:8px;height:48px}
+ .bookActions .btnRed,.bookActions .btnPaper{min-height:48px;font-size:18px;padding:0 8px}
+ #songbookBox[data-page="4"] .bookNav{width:calc(34% - 12px);grid-template-columns:1fr auto}
+ /* 3 · 4장 설명 · 활동 배치는 아래 「좁은 3 · 4장」 묶음이 세로 521~644 노트북 창과 함께 쓴다. 여기에는 사이트 구석 단추를 피하는 여백만 둔다 */
+ .bookExplanation{padding-top:28px}
+ #songbookBox[data-page="1"] .bookFacts.bookScrollable{height:calc(100% - 22px)}
+ #songbookBox[data-page="4"] .bookCore{padding-top:28px}
+ #songbookBox[data-page="4"] .bookCore:has(.bookStrikes){padding-top:2px}
+ /* 칠 글자 줄이 있는 4장은 칸이 위로 붙어 사이트 「소리 켬」 단추(창 오른쪽 끝에서 103px, 위에서 68px까지) 밑에 넷째 칸 그림이 들어간다. 칸과 글자 줄을 함께 오른쪽 32px 비워 글자가 칸 아래 그대로 맞게 둔다(판 21 덧붙임) */
+ #songbookBox[data-page="4"] .bookCore:has(.bookStrikes)>:is(.bookBeatGrid,.bookStrikes){width:auto;margin-right:32px}
+ .bookAbout>div{grid-template-columns:52px minmax(0,1fr);gap:10px}
+ .bookAbout dd{font-size:18px;line-height:24px}
+ #songbookBox .bookCredit{flex:none;margin-top:2px;line-height:20px} /* 780×290 1장 출처 줄이 92%만 보이던 것(그래프 검수 R2-02) */
+ #songbookBox[data-page="1"] .bookBody{grid-template-rows:minmax(0,1fr)}
+ #songbookBox[data-page="1"] .bookPic{height:100%;min-height:0;display:flex;flex-direction:column}
+ #songbookBox[data-page="1"] .bookScene{flex:0 1 auto;min-height:0;aspect-ratio:auto;object-fit:cover;object-position:50% 100%}
+ #songbookBox .bookLabel,#songbookBox .bookNote{font-size:16px}
+ #songbookBox .bookBig{font-size:22px;line-height:30px}
+ .bookFirst{margin-top:10px}
+ #songbookBox .bookChips{gap:6px;margin-top:6px}
+ .bookChips li{font-size:16px;padding:2px 10px}
+ .bookAll{margin-top:6px}
+ #songbookBox .bookLabel,#songbookBox .bookNote{line-height:22px}
+}
+@media(min-height:521px){
+ #songbookBox .scrollClose{min-height:56px}
+ #songbookBox:is([data-page="3"],[data-page="4"]){gap:8px}
+ #songbookBox:is([data-page="3"],[data-page="4"]) .bookNav{margin-top:0}
+ .bookActivity{height:297px;grid-template-rows:133px 52px 56px 32px}
+ #songbookBox[data-page="3"] .bookActivity{height:344px;grid-template-rows:180px 52px 56px 32px}
+ #songbookBox[data-page="4"] .bookActivity{height:365px;grid-template-rows:201px 52px 56px 32px}
+ .bookCore{grid-row:1}
+ .bookCore,.bookControls,.bookStatus,.bookProgress{grid-column:1}
+ .bookControls{grid-row:3}
+ .bookStatus{grid-row:2}
+ .bookProgress{grid-row:4;min-height:32px}
+ /* 4장 제목은 한 줄에 놓아 설명에 27px을 돌려준다. 단추 크기는 유지한다. */
+ #songbookBox[data-page="4"] .bookHead{grid-template-columns:auto minmax(0,1fr) auto}
+ #songbookBox[data-page="4"] .bookSong{grid-column:auto;padding-right:0}
+}
+/* 4장은 낮은 화면처럼 설명과 따라 치기를 나란히 둔다. 큰박 칸 아래 칠 글자 줄이 설명 칸을 밀어내지 않게(2026-11-20) */
+@media(min-height:521px) and (min-width:900px){
+ #songbookBox[data-page="4"] .bookBody{grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);grid-template-rows:auto minmax(0,1fr);gap:4px 32px}
+ #songbookBox[data-page="4"] .bookExplanation{grid-column:1;grid-row:1/-1;padding-top:6px}
+ #songbookBox[data-page="4"] .bookExplanation .bookFacts>div{grid-template-columns:1fr;gap:0}
+ #songbookBox[data-page="4"] .bookBody>.bookHint{grid-column:2;grid-row:1}
+ #songbookBox[data-page="4"] .bookActivity{grid-column:2;grid-row:2;height:auto;grid-template-rows:auto 52px 56px 32px;align-content:start}
+}
+/* 판 21 덧붙임: 세로 521~759 창(1366×657 · 1280×720 노트북)은 세로 자리가 모자라 4장 안내 글이 칠 글자 줄 위에 겹치고, 3장 설명 칸이 2~14px로 줄었다.
+   낮은 화면 배치를 따른다: 3장도 설명과 활동을 나란히 두고, 활동 안내는 왼쪽 아래, 4장의 이전 줄과 시작 줄은 한 줄로 */
+@media(min-height:521px) and (max-height:759px) and (min-width:900px){
+ #songbookBox:is([data-page="3"],[data-page="4"]) .bookBody{grid-template-columns:minmax(0,1fr) minmax(0,1.6fr);grid-template-rows:minmax(0,1fr) auto;gap:4px 32px}
+ #songbookBox:is([data-page="3"],[data-page="4"]) .bookExplanation{grid-column:1;grid-row:1;padding-top:6px}
+ #songbookBox:is([data-page="3"],[data-page="4"]) .bookBody>.bookHint{grid-column:1;grid-row:2;text-align:left}
+ #songbookBox:is([data-page="3"],[data-page="4"]) .bookActivity{grid-column:2;grid-row:1/-1}
+ #songbookBox[data-page="3"] :is(.bookRole,.bookOrder){text-align:left}
+ #songbookBox[data-page="4"] .bookNav{width:calc(34% - 8px);grid-template-columns:1fr auto}
+ #songbookBox[data-page="4"] .bookActions{margin:-64px 0 0 34%}
+}
+/* 좁은 3 · 4장(폰 가로 ≤520과 세로 521~644 노트북 창이 함께 쓴다, 판 21 덧붙임): 설명은 왼쪽, 활동은 오른쪽 488px.
+   톡 · 듣기 · 안내를 한 줄에 놓고 진행 막대는 듣기 단추 밑에 붙인다. 1280×600에서 4장 안내 글이 칠 글자 위에 겹치던 것을 고친다 */
+@media(max-height:520px) and (min-width:601px),(min-height:521px) and (max-height:644px) and (min-width:900px){
+ #songbookBox:is([data-page="3"],[data-page="4"]) .bookBody{grid-template-columns:minmax(0,1fr) 488px;grid-template-rows:minmax(0,1fr) auto;gap:0 16px;font-size:16px;line-height:22px;align-items:stretch}
+ .bookExplanation{grid-column:1;grid-row:1;display:flex;flex-direction:column;overflow:hidden auto}
+ .bookBody>.bookHint{grid-column:1;grid-row:2}
+ .bookExplanation>.bookFacts{flex:none;padding-bottom:0}
+ .bookExplanation .bookFacts>div{grid-template-columns:1fr;gap:0}
+ .bookActivity{grid-column:2;grid-row:1/-1;position:relative;height:100%;grid-template-columns:92px 180px minmax(0,1fr);grid-template-rows:minmax(0,1fr) 52px;gap:6px 8px;align-items:start}
+ #songbookBox[data-page="3"] .bookActivity{height:100%;grid-template-rows:minmax(0,1fr) 52px}
+ .bookCore{position:relative;grid-column:1/-1;grid-row:1;height:100%;min-height:0;display:flex;align-items:flex-start;gap:8px;text-align:left}
+ .bookLeader{width:64px;height:64px;margin:10px 0 0;flex:none}
+ .bookDemoLines{display:block;flex:1;width:345px;max-width:345px;padding:14px 0 0;height:86px;max-height:calc(100% - 20px);box-sizing:border-box}
+ .bookDemoLine{font-size:20px;line-height:1.5}
+ .bookDemoLine:not(:last-child){margin-bottom:3px}
+ .bookDemoLine span.landed::before{width:24px;height:24px;top:calc(50% - .5em - 20px);transform:translate(-50%,calc(var(--fall,0) * -28px))}
+ .bookMarks{position:absolute;left:0;bottom:2px;width:225px;font-size:16px;height:20px;min-height:20px;line-height:20px}
+ .bookResult{margin-right:1px;gap:1px}
+ .bookStatus{position:relative;top:-4px;grid-column:3;grid-row:2;font-size:16px;line-height:22px;height:52px;min-height:52px}
+ .bookControls{display:contents}
+ .bookListen,.bookTap{min-height:52px;height:52px;font-size:18px;line-height:22px;padding:0 4px}
+ #bookListen{grid-column:2;grid-row:2;width:180px;min-width:180px;justify-content:flex-start;align-items:center;line-height:26px;padding:0 4px 8px}
+ #bookTap{grid-column:1;grid-row:2;width:92px;min-width:92px}
+ #bookSkipAudio{grid-column:1;grid-row:2;width:92px;max-width:92px;min-width:0;min-height:52px;font-size:16px;line-height:22px;padding:0 4px}
+ .bookProgress{position:absolute;left:100px;right:auto;top:auto;bottom:0;width:180px;max-width:180px;height:52px;min-height:52px;display:block;font-size:16px;line-height:24px;pointer-events:none}
+ .bookTime{position:absolute;top:10px;right:4px;width:auto;text-align:right;white-space:nowrap;line-height:24px}
+ .bookTimePrefix{display:none}
+ .bookTrack{position:absolute;left:0;bottom:0;width:100%;height:7px}
+ .bookScore{position:absolute;left:140px;top:-28px;font-size:16px;line-height:20px}
+ .bookHint{padding:8px 0 2px;line-height:22px;text-align:left}
+ #songbookBox[data-page="4"] .bookCore{display:block}
+ #songbookBox[data-page="4"] .bookBeatGrid{width:100%;margin:0}
+ .bookBeatGrid{gap:6px}
+ .bookBeat{padding:0;line-height:1}
+ .bookBeat b{font-size:20px;line-height:24px}
+ .bookBeat span{font-size:16px;line-height:20px}
+ .bookHandPic{margin-left:6px}
+ .bookHit{position:static;display:inline-flex;align-items:center;width:auto;margin-left:4px;font-size:16px;line-height:20px}
+ .bookStrikes{margin:0}
+ .bookStrikeLine.cells{gap:6px}
+ .bookStrikeLine span{font-size:20px;line-height:22px}
+ .bookStrikeLine span.on::after{width:6px;height:6px;margin-top:1px}
+ .bookStrikeLine .lead{font-size:16px}
+ #songbookBox[data-page="4"] .bookActivity{height:100%;grid-template-rows:minmax(0,1fr) 52px}
+ #songbookBox[data-playing=true] .bookMany .bookDemoLine:not(.active):not(.soon){display:none}
+ #songbookBox .bookRole{font-size:18px;line-height:24px;text-align:left}
+ #songbookBox .bookOrder{font-size:16px;line-height:22px;text-align:left}
+ #songbookBox .bookMeter{font-size:24px;line-height:32px}
+ #songbookBox .bookMeterSub{line-height:22px}
+ #songbookBox .bookMeterSub{font-size:16px;margin-bottom:4px}
+}
+/* 세로 521~644 노트북 창의 3장: 좁은 배치는 상자 높이가 정해져 있다고 보고 짜여 있어, 내용 높이 상자에서는 노랫말 칸이 한 줄로 눌렸다(1024×560).
+   상자를 창 높이에 맞추고, 노랫말 줄은 86px 창에 가두지 않는다. 4장은 내용 높이 그대로가 알맞다 */
+@media(min-height:521px) and (max-height:644px) and (min-width:900px){
+ #songbookBox[data-page="3"]{height:calc(100dvh - 16px)}
+ #songbookBox[data-page="3"] .bookBody{flex:1 1 auto}
+ #songbookBox[data-page="3"] .bookCore{align-items:center;justify-content:center}
+ #songbookBox[data-page="3"] .bookLeader{width:120px;height:120px;margin:0}
+ #songbookBox[data-page="3"] .bookDemoLines{height:auto;flex:0 1 auto;width:auto;max-width:420px}
+ #songbookBox[data-page="3"] .bookDemoLine{font-size:26px;line-height:1.6}
+}
+
+/* 판 21: 가로 601~1000 창의 1장은 그림 · 글을 반씩 나눈다 */
+@media(min-height:521px) and (min-width:601px) and (max-width:1000px){
+ #songbookBox[data-page="1"] .bookBody{grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:20px}
+ .bookAbout>div{grid-template-columns:56px minmax(0,1fr);gap:12px}
+ .bookAbout dd{font-size:20px;line-height:28px}
+}
+
+/* 가로 900 아래 · 세로 836 아래 창은 나란히 둘 너비도, 쌓을 높이도 없어서 칠 글자 줄을 빼고 예전 4장 그대로 둔다 */
+@media(min-height:521px) and (max-height:835px) and (max-width:899px){
+ .bookStrikes{display:none}
+ #songbookBox[data-page="4"] .bookActivity{height:297px;grid-template-rows:133px 52px 56px 32px}
+}
+
+/* 작은 박 점 셋(그래프 검수 9회차 R4-01): 칸 높이는 그대로, 아래 여백 자리에 둔다. 낮은 화면은 칸 오른쪽 위에 작게 */
+.bookSub{display:flex;justify-content:center;align-items:center;gap:6px;height:10px;margin-top:6px}
+.bookSub i{width:8px;height:8px;border-radius:50%;background:#c9b48a}
+.bookSub i:first-child{width:10px;height:10px}
+.bookSub i.on{background:#8a2a1a}
+.bookBeat:has(.bookSub){padding-bottom:10px}
+@media(max-height:520px) and (min-width:601px),(min-height:521px) and (max-height:644px) and (min-width:900px){
+ .bookBeat:has(.bookSub){padding-bottom:0}
+ .bookSub{position:absolute;top:4px;right:6px;margin:0;gap:3px;height:6px}
+ .bookSub i{width:5px;height:5px}
+ .bookSub i:first-child{width:6px;height:6px}
+}
+@media(prefers-reduced-motion:reduce){.bookBeat.tapped{animation:none}.bookBeat{transition:none}#songbookBox[data-song=ganggang][data-listen-required=true] .bookListen{animation:none}}

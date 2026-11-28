@@ -1,0 +1,132 @@
+/* The green cloth web notebook has its own concept, apart from the leather fish book. */
+/* 제목 띠는 누르는 곳이 아니다. 큰 화면에서 하늘의 새 그림 위에 깔려 새 가운데를 누르면 제목이 받았다(11-12 출시 점검). */
+#dex .web-banner,#dex .web-banner * {pointer-events:none;}
+#dex .web-legend p {position:relative;text-align:left;padding-left:max(20px,calc(7 * var(--dot) + 8px));}
+#dex .web-legend i {position:absolute;left:0;top:.5em;margin:0;width:calc(7 * var(--dot));} /* 앞 여백(점 7개 + 8px)과 같은 폭. ui-redesign의 24px가 남으면 세로 태블릿에서 글 첫 글자에 겹쳤다(11-12). */
+@media(min-width:1200px) and (min-height:700px) {
+ #dex.dex-book[data-tab='web'],#dex.dex-book.web-measure[data-tab='web'] {
+  position:fixed;left:clamp(var(--dot),calc(50% - 220.5 * var(--dot)),calc(100% - 499 * var(--dot)));top:calc(50% - 130.5 * var(--dot));
+  width:calc(481 * var(--dot));height:calc(267 * var(--dot));min-width:0;min-height:0;
+  max-width:none;max-height:none;margin:0;padding:0;display:block;overflow:visible;
+  translate:none;transform:none;border:0;outline:0;box-shadow:none;background:none;
+ }
+ #dex[data-tab='web'] .dex-web,#dex.web-measure[data-tab='web'] .dex-web {
+  position:absolute;inset:0;display:block;width:100%;height:100%;margin:0;padding:0;min-height:0;gap:0;
+ }
+ #dex[data-tab='web'] .web-stage,#dex.web-measure[data-tab='web'] .web-stage {
+  position:absolute;left:calc(28 * var(--dot));top:calc(12 * var(--dot));
+  width:calc(434 * var(--dot));height:calc(244 * var(--dot));min-width:0;min-height:0;
+  max-width:none;max-height:none;justify-self:auto;align-self:auto;margin:0;z-index:1;
+ }
+ #dex[data-tab='web'] .web-banner {
+  position:absolute;left:calc(47 * var(--dot));top:calc(14 * var(--dot));
+  width:calc(428 * var(--dot));height:calc(28 * var(--dot));min-height:0;
+  margin:0;padding:0;display:block;background:none;box-shadow:none;color:#1e311e;
+  font-size:72px;line-height:1;font-weight:700;text-align:center;z-index:3;
+ }
+ #dex[data-tab='web'] .web-banner>span {position:relative;z-index:2;}
+ #dex[data-tab='web'] .web-title-left,#dex[data-tab='web'] .web-title-right,
+ #dex[data-tab='web'] .web-title-underline {position:absolute;pointer-events:none;z-index:1;}
+ #dex[data-tab='web'] .web-title-left {left:calc(93 * var(--dot));top:calc(2 * var(--dot));}
+ #dex[data-tab='web'] .web-title-right {left:calc(309 * var(--dot));top:calc(3 * var(--dot));}
+ #dex[data-tab='web'] .web-title-underline {left:calc(110 * var(--dot));top:calc(30 * var(--dot));}
+ #dex[data-tab='web'] .dex-tabs {position:absolute;inset:0;display:block;pointer-events:none;z-index:5;margin:0;translate:none;}
+ #dex[data-tab='web'] button.dex-tab[data-tab='fish'] {
+  position:absolute;left:calc(473 * var(--dot));top:calc(34 * var(--dot));
+  width:calc(25 * var(--dot));height:calc(82 * var(--dot));min-height:40px;min-width:40px;
+  margin:0;padding:0;display:block;pointer-events:auto;box-shadow:none;background:none;border:0;
+ }
+ #dex[data-tab='web'] [data-tab='fish']>.ico,#dex[data-tab='web'] [data-tab='fish']>span,
+ #dex[data-tab='web'] button.dex-tab[data-tab='web'] {
+  position:absolute!important;width:1px!important;height:1px!important;min-width:0!important;min-height:0!important;
+  padding:0!important;margin:-1px!important;overflow:hidden!important;clip-path:inset(50%);white-space:nowrap;
+ }
+ #dex[data-tab='web'] .web-fish-bookmark {position:absolute;left:0;top:0;pointer-events:none;}
+ #dex[data-tab='web'] button.dex-back {
+  position:absolute;left:calc(452 * var(--dot));top:calc(-30 * var(--dot));
+  width:calc(29 * var(--dot));height:calc(29 * var(--dot));min-width:40px;min-height:40px;padding:0;z-index:6;
+ }
+ #dex[data-tab='web'] .web-match-ring,#dex[data-tab='web'] .web-match-leaf,
+ #dex[data-tab='web'] .web-match-fold {position:absolute;pointer-events:none;z-index:4;}
+ #dex[data-tab='web'] .web-match-ring {left:calc(-5 * var(--dot));}
+ #dex[data-tab='web'] .web-match-leaf {left:calc(21 * var(--dot));top:calc(-6 * var(--dot));}
+ #dex[data-tab='web'] .web-match-fold {left:calc(442 * var(--dot));top:calc(237 * var(--dot));z-index:0;}
+ #dex[data-tab='web'] .web-details {
+  position:absolute;left:calc(28 * var(--dot));top:calc(271 * var(--dot));
+  width:calc(434 * var(--dot));height:calc(30 * var(--dot));min-width:0;min-height:0;
+  padding:calc(3 * var(--dot)) calc(6 * var(--dot));margin:0;box-sizing:border-box;
+  display:flex;align-items:center;justify-content:center;gap:calc(5 * var(--dot));color:#344f43;
+ }
+ #dex[data-tab='web'] .web-details .web-caption {display:flex;align-items:center;justify-content:center;gap:calc(6 * var(--dot));width:auto;min-height:0;margin:0;font-size:24px;line-height:32px;white-space:nowrap;}
+ #dex[data-tab='web'] .web-prompt,#dex[data-tab='web'] .web-note,#dex[data-tab='web'] .web-line {font-size:24px;line-height:32px;}
+ /* 쪽지와 「생물을 눌러 봐요」가 같은 색으로 붙어 한 문장처럼 읽혔다(인디 채점 2026-11-12). 안내는 바다색, 사이는 넓게. */
+ #dex[data-tab='web'] .web-caption .web-prompt {color:#2c6675;margin-left:calc(8 * var(--dot));}
+ #dex[data-tab='web']:not(.web-picked) .web-selected-pic,#dex[data-tab='web']:not(.web-picked) .web-legend {display:none;}
+ #dex[data-tab='web'].web-picked .web-details {display:grid;grid-template-columns:calc(60 * var(--dot)) minmax(0,1fr);grid-template-rows:48px 24px;column-gap:calc(4 * var(--dot));row-gap:0;padding:4px calc(5 * var(--dot));}
+ #dex[data-tab='web'].web-picked .web-selected-pic {grid-column:1;grid-row:1;display:grid;place-items:center;max-height:calc(20 * var(--dot));overflow:hidden;}
+ #dex[data-tab='web'].web-picked .web-selected-pic .eco-pic {height:auto;}
+ #dex[data-tab='web'].web-picked .web-caption {grid-column:2;grid-row:1;justify-content:flex-start;gap:calc(4 * var(--dot));font-size:24px;line-height:32px;min-width:0;}
+ #dex[data-tab='web'] .web-caption .web-name {font-size:32px;line-height:44px;padding:0 calc(9 * var(--dot));height:48px;min-height:0;display:grid;place-items:center;flex:none;box-sizing:border-box;}
+ #dex[data-tab='web'].web-picked .web-counts {grid-column:1 / -1;grid-row:2;align-self:center;justify-self:start;display:flex;gap:calc(3 * var(--dot));margin:0;font-size:16px;line-height:24px;}
+ #dex[data-tab='web'].web-picked .web-legend {grid-column:1 / -1;grid-row:2;justify-self:end;display:flex;width:max-content;max-width:none;gap:calc(3 * var(--dot));border:0;padding:0;margin:0;}
+ #dex[data-tab='web'] .web-legend p {font-size:16px;line-height:24px;margin:0;white-space:nowrap;}
+ #dex[data-tab='web'] .web-legend i {width:calc(7 * var(--dot));margin-right:calc(2 * var(--dot));}
+}
+@media(min-width:1200px) and (min-height:700px) and (max-width:1799px) {
+ #dex[data-tab='web'] .web-banner {font-size:64px;}
+}
+@media(min-width:1200px) and (min-height:700px) {
+ html[data-notebook-compact='true'] #dex[data-tab='web'] .web-banner {font-size:48px;}
+ html[data-notebook-compact='true'] #dex[data-tab='web'].web-picked .web-details {height:80px;width:calc(481 * var(--dot));left:0;}
+}
+/* Keep the existing portrait layout, and put the note beside the diagram on low/wide phones. */
+@media(min-width:600px) and (max-height:520px) {
+ #dex[data-tab='web'] .dex-web,#dex.web-measure[data-tab='web'] .dex-web {display:grid;grid-template-columns:320px minmax(0,1fr);grid-template-rows:auto minmax(0,1fr);grid-template-areas:'banner detail' 'stage detail';align-items:center;gap:8px 12px;}
+ #dex[data-tab='web'] .web-stage {grid-area:stage;}
+ #dex[data-tab='web'] .web-details {grid-area:detail;display:block;align-self:center;margin:0;}
+ #dex[data-tab='web'] .web-banner {grid-area:banner;}
+}
+@media(min-width:600px) and (max-height:340px) {
+ #dex[data-tab='web'] .dex-web,#dex.web-measure[data-tab='web'] .dex-web {grid-template-rows:minmax(0,1fr);grid-template-areas:'stage detail';}
+ #dex[data-tab='web'] .web-banner {display:none;}
+}
+@media(max-width:1199px),(max-height:699px) {
+ #dex.dex-book[data-tab='web'],#dex.dex-book.web-measure[data-tab='web'] {height:calc(100vh - 24px);max-height:calc(100vh - 24px);top:12px;transform:translate(-50%,0);grid-template-rows:40px minmax(0,1fr);grid-template-areas:'tabs back' 'web web';}
+ #dex[data-tab='web'] .dex-web,#dex.web-measure[data-tab='web'] .dex-web {align-self:stretch;width:100%;height:100%;min-height:0;margin:0;display:grid;grid-template-columns:minmax(0,1fr);grid-template-rows:32px minmax(0,1fr) auto;grid-template-areas:'banner' 'stage' 'detail';gap:8px;}
+ #dex[data-tab='web'] .web-stage {grid-area:stage;justify-self:center;align-self:center;min-width:0;min-height:0;max-width:100%;max-height:100%;margin:0;}
+ #dex.web-measure[data-tab='web'] .web-stage {width:100%!important;height:100%!important;justify-self:stretch;align-self:stretch;}
+ #dex[data-tab='web'] .web-details {position:relative;grid-area:detail;min-width:0;margin:0;padding:8px 12px;width:100%;box-sizing:border-box;}
+ #dex[data-tab='web'] .web-caption,#dex[data-tab='web'] .web-caption .web-name,#dex[data-tab='web'] .web-line,#dex[data-tab='web'] .web-note,#dex[data-tab='web'] .web-prompt {font-size:24px;line-height:32px;}
+}
+/* 한 줄로 쌓인 꼴(폰 세로 · 세로 태블릿): 그림은 제목 띠 바로 밑, 글은 그림 바로 밑, 남는 높이는 맨 아래로(2026-11-14 마감 손질:
+   폰 세로에서 그림 위아래로 빈 띠가 졌다). 재기 모드는 남은 높이를 다 재야 하니 그대로 둔다. */
+@media(max-width:599px),(min-width:600px) and (max-width:1199px) and (min-height:700px) {
+ #dex.dex-book[data-tab='web']:not(.web-measure) .dex-web {grid-template-rows:32px auto minmax(0,1fr);}
+ /* 폰 세로는 설명 칸을 아래 물 이름 줄 위로 64px 끌어올렸다(dex-match.css). 그림 바로 밑에 두면 그 끌어올림이 그림을 덮는다. */
+ #dex.dex-book[data-tab='web']:not(.web-measure) .web-details {align-self:start;translate:none;}
+}
+/* 세로 태블릿: 물고기 쪽 책(dex-match.css, 1080 높이 가운데)과 같은 높이 · 자리. 위에 붙여 두면 800×1280에서 물고기 쪽
+   자리를 따라오는 책갈피 줄(책 위 100px)이 먹이그물 제목 띠를 덮었다(11-12 출시 점검 R3-03). */
+@media(min-width:600px) and (max-width:1199px) and (min-height:521px) and (orientation:portrait) {
+ #dex.dex-book[data-tab='web'],#dex.dex-book.web-measure[data-tab='web'] {height:min(1080px,calc(100vh - 24px));max-height:min(1080px,calc(100vh - 24px));top:max(12px,calc(50vh - 540px));}
+}
+@media(min-width:600px) and (max-height:699px) {
+ #dex[data-tab='web'] .dex-web,#dex.web-measure[data-tab='web'] .dex-web {grid-template-columns:minmax(0,1fr) minmax(220px,.75fr);grid-template-rows:32px minmax(0,1fr);grid-template-areas:'banner detail' 'stage detail';gap:4px 12px;}
+ #dex[data-tab='web'] .web-banner {font-size:24px;}
+}
+@media(min-width:600px) and (max-height:340px) {
+ #dex[data-tab='web'] .dex-web,#dex.web-measure[data-tab='web'] .dex-web {grid-template-rows:minmax(0,1fr);grid-template-areas:'stage detail';}
+}
+/* On the shortest narrow landscape screen the long note gets one text step;
+   its legend uses four complete lines beside the unchanged diagram. */
+@media(min-width:600px) and (max-width:700px) and (max-height:280px) {
+ #dex[data-tab='web'] .web-details {padding:4px 8px;}
+ #dex[data-tab='web'] .web-caption {gap:0;min-height:0;}
+ #dex[data-tab='web'] .web-note,#dex[data-tab='web'] .web-prompt {font-size:20px;line-height:28px;}
+ #dex[data-tab='web'] .web-legend {grid-template-columns:minmax(0,1fr);gap:0;padding-top:0;margin-top:0;}
+}
+
+/* 세로 태블릿은 물 이름 여덟을 둘째 줄에 둔다. 제목만 옮기면 단면 아래로 숨어 버리므로 제목·단면·풀이의 자리 전체를 함께 비운다. */
+#dex.dex-book[data-tab='web'][data-stacked-bookmarks='true'] .dex-web {margin-top:var(--dex-extra-header);height:calc(100% - var(--dex-extra-header));}
+#dex.dex-book[data-tab='web'][data-stacked-bookmarks='true']:not(.web-measure) .dex-web {grid-template-rows:48px auto minmax(0,1fr);}
+#dex.dex-book.web-measure[data-tab='web'][data-stacked-bookmarks='true'] .dex-web {grid-template-rows:48px minmax(0,1fr) auto;}

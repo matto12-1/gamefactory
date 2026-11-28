@@ -1,0 +1,57 @@
+/* HUD-1: every large-screen coordinate is a world dot. Phone layouts stay in
+   their existing stylesheets; these cutouts have independent asset names. */
+.hud-decoration { pointer-events:none !important; }
+.hud-look-leaf { display:none; }
+@media(min-width:1200px) and (min-height:700px) {
+ #hud { height:calc(50 * var(--dot)); min-height:0; display:block; padding:0; background:none; gap:0; }
+ #hud::before,#hud .task::before,#hud .task::after,#hud .slots::before,#hud .slots::after { content:none; }
+ #hud .hud-knot,#hud .hud-pocket-line { display:none; }
+ /* --tag-w: 표 폭(점). 넓은 화면은 88, 좁은 큰 화면은 낚은 수 줄과 한 줄에 들도록 ui.mjs가 줄인다(2026-11-02). */
+ #hud .tasks { position:absolute; left:0; top:0; width:calc((3 * var(--tag-w,88) + 58) * var(--dot)); max-width:none; height:calc(44 * var(--dot)); display:block; padding:0; margin:0; flex:none; gap:0; }
+ #hud .task,#hud .task.current { position:absolute; left:calc(18 * var(--dot)); top:calc(8 * var(--dot)); width:calc(var(--tag-w,88) * var(--dot)); min-width:0; max-width:none; height:calc(33 * var(--dot)); min-height:0; margin:0; padding:0; display:block; overflow:visible; box-shadow:none; border:0; background:none; filter:drop-shadow(0 calc(2 * var(--dot)) 0 rgba(17,41,26,.45)); }
+ #hud .task:nth-child(2) { left:calc((32 + var(--tag-w,88)) * var(--dot)); margin:0; }
+ #hud .task:nth-child(3) { left:calc((46 + 2 * var(--tag-w,88)) * var(--dot)); margin:0; }
+ #hud .task .task-pic,#hud .task.current .task-pic { position:absolute; left:calc((var(--tag-w,88) - 46) / 2 * var(--dot)); top:calc(4 * var(--dot)); width:calc(46 * var(--dot)); height:calc(13 * var(--dot)); display:grid; place-items:end center; overflow:visible; max-width:none !important; }
+ #hud .task .task-pic { grid-template-rows:minmax(0,1fr); }
+ #hud .task .task-info,#hud .task.current .task-info { position:absolute; left:calc(2 * var(--dot)); top:calc(17 * var(--dot)); width:calc((var(--tag-w,88) - 4) * var(--dot)); max-width:none; display:block; }
+ #hud .task .clue,#hud .task .spot-chip { display:none; }
+ #hud .task-place { display:block; font-size:24px; line-height:32px; letter-spacing:2px; color:#2a483b; white-space:nowrap; text-align:center; }
+ #hud .hud-fringe { position:absolute; left:calc(-18 * var(--dot)); top:calc(3 * var(--dot)); z-index:-1; }
+ #hud .task:nth-child(2) .hud-fringe { left:calc(-15 * var(--dot)); }
+ #hud .task:nth-child(3) .hud-fringe { left:calc(-15 * var(--dot)); }
+ #hud .hud-rope { position:absolute; top:calc(-10 * var(--dot)); z-index:3; }
+ #hud .hud-rope-left { left:calc(1 * var(--dot)); }
+ #hud .hud-rope-right { right:calc(7 * var(--dot)); }
+ #hud .task:nth-child(2) .hud-rope-left { left:calc(1 * var(--dot)); }
+ #hud .task:nth-child(2) .hud-rope-right { right:calc(6 * var(--dot)); }
+ /* 낚은 수는 표와 같은 윗줄 오른쪽(2026-11-01 대표 나 안). 표 높이는 33점, 폭은 위 --tag-w. */
+ #hud .slots { position:absolute; right:calc(76 * var(--dot)); top:calc(19 * var(--dot)); margin:0; padding:0; width:calc(133 * var(--dot)); height:calc(23 * var(--dot)); min-height:0; display:block; gap:0; background:none; border:0; box-shadow:none; filter:drop-shadow(0 calc(2 * var(--dot)) 0 rgba(17,41,26,.45)); }
+ #hud .slot-progress { display:none; }
+ #hud .slot,#hud .slot.full { position:absolute; left:calc((3 + 25 * var(--slot-i)) * var(--dot)); top:0; width:calc(26 * var(--dot)); min-width:0; height:calc(23 * var(--dot)); min-height:0; margin:0; padding:0; display:grid; place-items:center; overflow:visible; background:none; border:0; box-shadow:none; }
+ #hud .slot-bg { position:absolute; inset:0; z-index:0; }
+ #hud .slot > :not(.slot-bg) { position:relative; z-index:1; max-width:none; }
+ #hud .hud-pocket-rope { position:absolute; left:calc(126 * var(--dot)); top:calc(-20 * var(--dot)); z-index:2; }
+ #hud .hud-pocket-braid { position:absolute; left:calc(-3 * var(--dot)); top:calc(19 * var(--dot)); z-index:2; }
+ #hud .hud-pocket-leaf-left { position:absolute; left:calc(-16 * var(--dot)); top:calc(5 * var(--dot)); z-index:3; }
+ #hud[data-hud-tight='true'] .hud-pocket-leaf-left { display:none; }
+ #hud .hud-pocket-leaf-right { position:absolute; right:calc(-10 * var(--dot)); top:calc(-1 * var(--dot)); z-index:3; }
+ #hud .tools { position:absolute; right:calc(6 * var(--dot)); top:calc(16 * var(--dot)); height:calc(29 * var(--dot)); margin:0; padding:0; display:flex; align-items:center; gap:calc(2 * var(--dot)); }
+ #hud .tools > .icon-btn { width:calc(29 * var(--dot)); min-width:40px; height:calc(29 * var(--dot)); min-height:40px; padding:0; display:grid; place-items:center; filter:drop-shadow(0 calc(2 * var(--dot)) 0 rgba(17,41,26,.45)); }
+ #hud .hud-tool-leaf { position:absolute; left:calc(24 * var(--dot)); top:calc(19 * var(--dot)); }
+ #lookBtn.n-button { width:calc(36 * var(--dot)); height:calc(36 * var(--dot)); min-width:40px; min-height:40px; padding:0; border:0; background:none; box-shadow:none; }
+ #lookBtn .hud-look-leaf { display:block; position:absolute; left:calc(-6 * var(--dot)); top:calc(13 * var(--dot)); }
+ #bubble,#bubble.long,#bubble.big { box-sizing:border-box; width:calc(var(--hud-bubble-width,143) * var(--dot)); min-width:0; max-width:calc(100vw - 16px); height:auto; min-height:calc(38 * var(--dot)); padding:calc(5 * var(--dot)) calc(4 * var(--dot)); gap:calc(4 * var(--dot)); white-space:normal; border:0; background:none; box-shadow:none; }
+ #bubble,#bubble[data-hud-compact='true'] { padding-left:calc(5 * var(--dot)); padding-right:calc(5 * var(--dot)); gap:calc(4 * var(--dot)); }
+ #bubble .bubble-text { min-width:0; font-size:24px; line-height:32px; color:#2a483b; white-space:pre-line; overflow-wrap:anywhere; }
+ #bubble .guide-face { flex:none; width:calc(25 * var(--dot)); height:calc(25 * var(--dot)); }
+ #bubble .note-tape { position:absolute; left:calc(-5 * var(--dot)); top:calc(-1 * var(--dot)); }
+ #bubble::after { content:none; }
+ #bubble .hud-bubble-tail { position:absolute; left:calc(12 * var(--dot)); bottom:calc(-8 * var(--dot)); }
+ #bubble .hud-bubble-leaf { position:absolute; right:calc(3 * var(--dot)); bottom:calc(3 * var(--dot)); }
+ #hud .hud-bonus { position:absolute; display:block; width:calc(43 * var(--dot)); height:calc(32 * var(--dot)); }
+ #hud .hud-bonus-sparkle { position:absolute; left:calc(43 * var(--dot)); top:calc(-2 * var(--dot)); }
+ #toast .hud-bonus-accessible { position:absolute; width:1px; height:1px; overflow:hidden; clip-path:inset(50%); padding:0; }
+ #toast,#toast.long,#toast.task { font-size:24px;line-height:32px;min-height:calc(30 * var(--dot));padding:calc(5 * var(--dot)) calc(8 * var(--dot));color:#224235;border:0;background:none;box-shadow:none; }
+ /* 관찰 알림은 찢은 종이 가장자리에서 글을 띄운다(설명 줄이 종이 끝까지 닿았다, 2026-11-02). */
+ #toast.observe { padding:calc(7 * var(--dot)) calc(12 * var(--dot)); }
+}

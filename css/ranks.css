@@ -1,0 +1,84 @@
+.ranks-wall { --rows:7; grid-template-areas:"T T T T T T T T"; grid-auto-flow:row dense; grid-auto-rows:var(--row); }
+.ranks-head { grid-area:T; display:flex; align-items:center; gap:1rem; padding:.6rem 1rem; }
+.ranks-head h2 { margin:0; font-size:1.375rem; flex:none; }
+.ranks-head p { margin:0; font-size:.75rem; color:var(--sub); font-weight:700; }
+.rk { grid-column:span 2; grid-row:span 3; display:flex; flex-direction:column; min-height:0; }
+.rk.chal { background:var(--site-panel); }
+.rank-strip { position:relative; min-height:4.5rem; flex:1; }
+.rank-strip .badge { position:absolute; left:8px; top:8px; padding:.2rem .55rem; border-radius:999px; background:var(--coral); color:var(--site-on-accent); font-size:.75rem; font-weight:900; }
+.rank-strip .cover, .rank-strip img { width:100%; height:100%; object-fit:cover; }
+.rank-strip .cover { position:absolute; inset:0; aspect-ratio:auto; }
+.rank-strip h2 { font-size:.8125rem; margin:0; }
+.rank-modes { display:flex; flex-wrap:wrap; gap:3px; padding:.4rem .5rem 0; font-size:.6875rem; font-weight:800; }
+.rank-modes button { min-width:0; min-height:32px; padding:.1rem .4rem; border:0; border-radius:6px; font:inherit; background:var(--chip); }
+.rank-modes button[aria-pressed="true"] { background:var(--ink); color:var(--site-panel); }
+/* 다섯 줄이 오기 전(불러오는 중 한 줄)에도 높이를 다섯 줄로 잡아 둔다. 4칸 · 폰 가로처럼 칸 높이가 내용을 따르면 줄이 올 때 아래 카드가 밀려 ?g= 로 맞춘 스크롤이 어긋났다(2026-11-27) */
+.rank-lines { flex:none; min-height:calc(5 * 1.35rem + 4px + .3rem); margin:0; padding:.3rem .65rem 0; list-style:none; display:grid; align-content:start; gap:1px; }
+.rank-lines li:not(.note) { display:grid; grid-template-columns:1.8rem 2.6rem minmax(0,1fr) auto; gap:.2rem; align-items:center; min-height:1.35rem; font-size:.75rem; font-weight:800; }
+.rank-lines li.empty { grid-template-columns:1.8rem 1fr; color:var(--faint); }
+.rank-lines li.empty .rank-n { color:inherit; }
+.rank-lines li.empty > :last-child { text-align:right; }
+.rank-lines .ini { font-size:.875rem; }
+.rank-score { text-align:right; white-space:nowrap; }
+.rank-lines small { text-align:right; font-size:.5625rem; color:var(--coral-ink); white-space:nowrap; }
+.foot-row { display:flex; align-items:center; justify-content:space-between; gap:.35rem; padding:.35rem .6rem .55rem .65rem; font-size:.6875rem; color:var(--sub); font-weight:700; }
+.foot-row .btn-play { flex:none; height:1.9rem; padding:0 .7rem; min-width:0; font-size:.75rem; }
+.ranks-wall .note { color:var(--sub); font-size:.75rem; line-height:1.5; }
+.rank-info, .rank-pop { grid-column:span 2; grid-row:span 3; padding:.65rem .8rem; }
+.rank-pop { grid-column:span 4; }
+.rank-info h2, .rank-pop h2 { font-size:.9375rem; margin:0 0 .5rem; }
+.unranked-list { list-style:none; margin:0 0 .5rem; padding:0; display:grid; gap:.25rem; }
+.unranked-game { display:grid; grid-template-columns:3rem 1fr; align-items:center; gap:.45rem; width:100%; min-height:0; min-width:0; padding:0; text-align:left; border:0; background:none; font:inherit; font-weight:800; font-size:.75rem; }
+.unranked-game img { width:3rem; aspect-ratio:16/9; object-fit:cover; border-radius:6px; }
+.unranked-game small { display:block; font-weight:700; color:var(--sub); font-size:.6875rem; }
+.rank-info dl { display:grid; grid-template-columns:auto 1fr; gap:.3rem .5rem; margin:0; font-size:.6875rem; line-height:1.35; }
+.rank-info dt { font-weight:900; white-space:nowrap; }
+.rank-info dd { margin:0; color:var(--sub); }
+.rank-pop h2 { display:flex; align-items:baseline; justify-content:space-between; }
+.rank-pop h2 small { font-size:.6875rem; color:var(--sub); }
+.rank-pop ol { list-style:none; padding:0; margin:0; }
+.rank-pop button { display:grid; grid-template-columns:1rem 2.6rem minmax(6rem,1.4fr) minmax(0,1fr) 3.4rem; align-items:center; width:100%; gap:.5rem; min-width:0; min-height:0; padding:.18rem 0; background:none; border:0; font:inherit; font-weight:800; font-size:.75rem; text-align:left; }
+.rank-pop img { width:2.6rem; aspect-ratio:16/9; object-fit:cover; border-radius:4px; }
+.rank-pop .nm { white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.rank-pop em { font-style:normal; text-align:right; white-space:nowrap; font-size:.6875rem; color:var(--sub); }
+.rank-pop .bar { height:.4rem; border-radius:999px; background:var(--chip); overflow:hidden; }
+.rank-pop .bar i { display:block; height:100%; background:var(--coral); border-radius:inherit; }
+.rk.highlight { outline:3px solid var(--coral); outline-offset:-3px; }
+@media (min-width:1500px) { .ranks-wall { grid-template-areas:"T T T T T T T T T T"; } .rank-pop { grid-column:span 6; } .rank-info { grid-column:span 4; } }
+.rank-info { word-break:keep-all; }
+.ranks-wall { grid-auto-rows:minmax(var(--row),auto); }
+.rank-info, .rank-pop { min-height:min-content; }
+.rank-modes, .rank-lines small, .foot-row, .unranked-game small, .rank-info dl, .rank-pop h2 small, .rank-pop em { font-size:max(12px,.75rem); }
+.rank-modes button, .unranked-game, .rank-pop button, .foot-row .btn-play { min-height:40px; }
+.rank-pop button { grid-template-columns:1rem 2.6rem minmax(0,1.4fr) minmax(0,1fr) 3.4rem; }
+/* 4칸(폰 · 세로 태블릿)은 칸 높이를 내용에 맞춘다. 줄 수로 높이를 정하면 칸 아래가 크게 빈다(2026-11-26 2차 검사).
+   로고 줄만 높이를 정한다(로고 칸은 container-type:size라 높이가 정해져 있어야 한다). */
+@media (max-width:699px), (orientation:portrait) and (max-width:1100px) {
+  .ranks-wall { --row:max(60px,calc(var(--col) * .5625 - 2px)); grid-template-areas:"T T T T"; grid-template-rows:auto; grid-auto-rows:auto; }
+  .rk { grid-column:span 4; grid-row:auto; }
+  .rank-strip { flex:none; height:clamp(6.5rem, 30vw, 9rem); }
+  .rank-info,.rank-pop { grid-column:span 4; grid-row:auto; }
+  .rank-modes button { min-height:40px; }
+  .rank-modes, .rank-lines small { font-size:.75rem; }
+}
+@media (max-width:699px) { .ranks-head h2 { font-size:1.125rem; } .ranks-head p { display:none; } }
+/* 세로 태블릿은 카드 두 장씩. 카드 수가 홀수면 마지막 카드 옆 빈칸을 순위 안내 칸이 채운다(row dense) */
+@media (orientation:portrait) and (min-width:700px) and (max-width:1100px) {
+  .rk { grid-column:span 2; }
+  .ranks-wall:has(> .rk:nth-child(odd):nth-last-child(3)) .rank-info { grid-column:span 2; }
+}
+/* 폰 가로: 6칸 벽(wall.css). 로고 칸은 세 칸(단추 넷이 40px로 한 줄에 든다), 카드는 세 장씩, 칸 높이는 내용에 맞춘다.
+   옛 블록은 카드 높이를 줄 수로 정하고 글자를 10px까지 줄였다. 읽는 글 12px · 누르는 칸 40px(2026-11-27, 폰 가로 시험 기준) */
+@media (orientation:landscape) and (max-height:520px) and (min-width:700px) {
+  .ranks-wall { grid-template-areas:"T T T T T T"; grid-template-rows:minmax(var(--row), auto); grid-auto-rows:auto; }
+  .ranks-head p { display:none; }
+  .rk, .rank-info, .rank-pop { grid-row:auto; }
+  .rank-strip { flex:none; height:5.5rem; }
+  .rank-modes, .rank-lines small, .foot-row, .unranked-game small, .rank-info dl, .rank-pop h2 small, .rank-pop em { font-size:.75rem; }
+  .rank-modes button, .unranked-game, .rank-pop button { min-height:40px; }
+  .foot-row .btn-play { height:2.5rem; }
+}
+/* 아주 낮은 폰 가로(700px 아래 너비): 위에 붙은 띠 56px만큼 카드가 내려와도 모드 단추가 첫 화면에 들게 그림 칸을 낮춘다(2026-11-27). */
+@media (orientation:landscape) and (max-height:520px) and (max-width:699px) {
+  .rank-strip { flex:none; height:4.5rem; }
+}

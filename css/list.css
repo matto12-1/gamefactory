@@ -1,0 +1,29 @@
+.list-wall { grid-template-areas:"T T T T T T T T"; grid-template-rows:auto; grid-auto-flow:row dense; }
+@media (max-width:699px), (orientation:portrait) and (max-width:1100px) { .list-wall,.privacy-wall { --row:max(60px,calc(var(--col) * .5625 - 2px)); } }
+.list-head { grid-area:T; display:flex; align-items:center; gap:1rem; padding:.6rem 1rem; }
+.list-head h2 { margin:0; font-size:1.375rem; }
+.list-head p { margin:0; color:var(--sub); font-size:.875rem; font-weight:700; }
+.list-head { flex-wrap:wrap; min-height:min-content; }
+.list-head .sort-chips { margin:0; margin-left:auto; }
+@media (max-width:699px) { .list-head .sort-chips { flex-basis:100%; margin-left:0; } }
+.list-tiles { display:contents; }
+.list-tiles > .game { grid-column:span 2; grid-row:span 2; }
+.list-tiles .cover,.list-tiles img { width:100%; height:100%; object-fit:cover; }
+/* 글 칸 줄은 내용 높이. 4칸에서 글 칸이 둘째 줄(암묵 줄 = 칸 높이 고정)로 가면 글이 바닥글 위로 넘쳐 겹쳤다(2026-11-27 폰 가로 F) */
+.privacy-wall { grid-template-areas:"P P P P P P P P"; grid-template-rows:auto; grid-auto-rows:auto; align-items:start; }
+.privacy-wall > .logo { height:var(--row); }
+.privacy-wall > .privacy { grid-area:P; padding:1.5rem 2rem; overflow:visible; }
+.privacy { word-break:keep-all; }
+.privacy h1 { font-size:1.5rem; margin:0 0 1rem; }
+.privacy h2 { font-size:1.125rem; margin:1.4rem 0 .6rem; }
+.privacy p,.privacy td,.privacy th { font-size:.875rem; line-height:1.8; overflow-wrap:anywhere; }
+.privacy table { width:100%; border-collapse:collapse; }
+.privacy td,.privacy th { border:1px solid var(--edge); padding:.6rem; text-align:left; vertical-align:top; }
+.privacy th { background:var(--soft); }
+.privacy-back { margin-top:2rem; }
+.privacy-back a { display:inline-flex; align-items:center; min-height:40px; }
+@media (min-width:1500px) { .list-wall { grid-template-areas:"T T T T T T T T T T"; } .privacy-wall { grid-template-areas:"P P P P P P P P P P"; } }
+@media (max-width:699px), (orientation:portrait) and (max-width:1100px) { .list-wall { grid-template-areas:"T T T T"; } .privacy-wall { grid-template-areas:"P P P P"; } }
+/* 폰 가로: 6칸 벽(wall.css). 목록은 로고 칸 세 칸 · 활동 칸 세 장씩, 개인정보는 로고 줄 아래 글 칸을 가로 전체로(2026-11-27) */
+@media (orientation:landscape) and (max-height:520px) and (min-width:700px) { .list-wall { grid-template-areas:"T T T T T T"; grid-template-rows:minmax(var(--row), auto); } .privacy-wall { grid-template-areas:"P P P P P P"; } }
+@media (max-width:699px) { .list-head h2 { font-size:1.125rem; } .privacy-wall > .privacy { padding:1rem; } .privacy h1 { font-size:1.25rem; } .privacy td,.privacy th { padding:.35rem; font-size:.75rem; } }

@@ -1,0 +1,198 @@
+.crown-art { display:block; flex:none; max-width:none; image-rendering:pixelated; }
+.crown-scraps { position:relative; }
+.crown-scraps > .title-photo,.crown-scraps > .title-stickers { visibility:hidden; }
+#title .crown-atlas { position:absolute; inset:0; display:flex; flex-direction:column; gap:3px; padding:6px 10px; border:2px solid #a3ae8a; color:var(--ink); background:var(--paper); pointer-events:auto; word-break:keep-all; overflow-wrap:break-word; box-sizing:border-box; }
+.crown-atlas-head { display:flex; align-items:center; justify-content:space-between; gap:6px; flex:none; min-height:16px; }
+.crown-total,.crown-short-goal { white-space:nowrap; font-size:12px; }
+/* 새 물 주인 도장(e06): 왕관 다섯과 따로, 머리 줄 가운데에 작게. 크기는 crown-ui가 정수 배로 정한다. */
+.crown-extras { display:flex; align-items:center; gap:4px; flex:0 1 auto; min-width:0; overflow:hidden; }
+.crown-extra { display:inline-flex; align-items:center; gap:2px; flex:none; white-space:nowrap; }
+.crown-extra .crown-extra-seal { opacity:.9; }
+/* 고리와 왕관을 한 칸에 겹친다(가운데 맞춤). */
+.crown-extra-mark { display:grid; place-items:center; flex:none; }
+.crown-extra-mark > .crown-art { grid-area:1/1; }
+.crown-extra-name { font-size:16px; line-height:1.2; }
+/* 폰은 머리 띠(왕관 수 · 목표) 글이 12px이라 도장 이름도 같은 크기로 둔다. */
+@media (max-width:599px), (max-height:420px) { .crown-extra-name { font-size:12px; } }
+.crown-replay { position:relative; z-index:3; flex:none; min-width:64px; width:max-content; box-sizing:border-box; min-height:44px; padding:0 6px; font:inherit; font-size:12px; color:var(--ink); background:var(--paper); border:1px solid #a1b1a0; cursor:pointer; }
+.crown-mark { position:relative; display:grid; place-items:center; }
+.crown-count { display:inline-flex; align-items:center; gap:6px; flex:none; }
+.crown-count[data-earned=false] .crown-icon { filter:brightness(0) opacity(.2); }
+.crown-seal,.crown-drop { position:absolute; }
+.crown-seal { opacity:0; }
+.crown-icon { position:relative; }
+.crown-atlas-foot { flex:none; display:flex; align-items:center; justify-content:space-between; gap:4px; min-height:40px; }
+.crown-atlas-foot span { font-size:12px; line-height:1.4; }
+.crown-dust { position:absolute; left:50%; top:40%; pointer-events:none; }
+.crown-dust i { position:absolute; width:3px; height:3px; background:#d7ad52; opacity:0; }
+.crown-dust i:nth-child(3n) { background:#f7e5b0; }
+.crown-dust i:nth-child(3n + 1) { background:#9ab9a2; }
+/* Names stay inside the same hit target as the existing round title icons. */
+#title { --title-disc-dots:20; }
+#title .crown-atlas .title-row { flex:1 1 auto; min-height:0; width:100%; display:flex; align-items:center; justify-content:space-evenly; gap:8px; }
+#title .title-row .round-btn { width:max(72px,calc(var(--title-disc-dots) * var(--dot))); min-width:72px; height:max(68px,calc(var(--title-disc-dots) * var(--dot) + 28px)); min-height:68px; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; padding:0; background:none; border:0; box-shadow:none; }
+#title .title-row .button-disc { width:max(40px,calc(var(--title-disc-dots) * var(--dot))); height:max(40px,calc(var(--title-disc-dots) * var(--dot))); }
+#title .title-row .shop-ico { width:calc(12 * var(--dot)); height:calc(13 * var(--dot)); }
+#title .title-row .button-label { display:block; flex:none; box-sizing:content-box; position:relative; top:0; margin:0; padding:2px 6px; border:1px solid #bdc9a1; background:#fff4d8; color:#243f40; font-size:14px; line-height:18px; white-space:nowrap; text-shadow:none; }
+#coronation { position:fixed; inset:0; z-index:60; isolation:isolate; padding:12px 12px calc(var(--crown-button-height,54px) + 28px); box-sizing:border-box; background:#cbb798; color:var(--ink); word-break:keep-all; overflow-wrap:break-word; }
+#coronation::before { content:''; position:absolute; inset:0; z-index:-1; background-image:var(--crown-scene); background-position:center; background-size:cover; image-rendering:auto; opacity:.55; }
+.coronation-room { position:relative; width:100%; height:100%; }
+.coronation-heading { display:none; }
+.coronation-stage { position:absolute; overflow:hidden; }
+.coronation-picture { position:absolute; left:0; width:100%; }
+.coronation-backdrop { position:absolute; top:0; left:0; }
+.coronation-actors { position:absolute; inset:0; z-index:2; }
+.coronation-keeper,.coronation-angler,.coronation-friend { width:0; height:0; position:absolute; }
+.coronation-actors img { position:absolute; bottom:0; }
+.coronation-keeper img,.coronation-angler img,.coronation-friend img { left:0; translate:-50% 0; }
+.coronation-angler .angler-normal { scale:-1 1; }
+.coronation-counter { position:absolute; z-index:3; pointer-events:none; image-rendering:pixelated; }
+.coronation-flying-crown { z-index:4; }
+.coronation-caption { position:absolute; left:50%; transform:translateX(-50%); width:max-content; max-width:100%; box-sizing:border-box; margin:0; padding:10px 14px; background:var(--paper); font-size:var(--crown-caption-size,24px); line-height:1.5; text-align:center; word-break:keep-all; text-wrap:balance; }
+/* 칭호 장면 말 이름표(판 3 단계 3): 누가 말하는지 이름을 먼저, 글 색만 다르게 */
+.coronation-who { font-weight:inherit; color:#876623; }
+.coronation-book { position:absolute; left:8%; right:8%; top:50%; height:94%; transform:translateY(-50%); z-index:6; padding:32px; background:var(--paper); box-sizing:border-box; }
+.coronation-book-crowns { position:absolute; left:4%; right:4%; top:50%; transform:translateY(-50%); display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); align-items:start; gap:8px; }
+/* 왕관 줄의 높이(50% → 32%)는 crown-ui.mjs가 쌓기에 맞춰 옮긴다. */
+.coronation-book-site { display:flex; flex-direction:column; align-items:center; gap:10px; font-size:16px; white-space:nowrap; }
+.coronation-book-site img { filter:grayscale(1); opacity:.18; }
+.coronation-book-site.filled img { filter:none; opacity:1; }
+/* 왕관이 찍힐 때 그 물 주인 이름과 가장 큰 기록이 함께 나온다. 자리는 미리 잡아 둔다. */
+.coronation-book-site:not(.filled) .site-boss,.coronation-book-site:not(.filled) .site-cm { visibility:hidden; }
+.coronation-book-site .site-cm { color:#876623; }
+.coronation-title { position:absolute; left:0; right:0; bottom:10%; margin:0; display:flex; flex-direction:column; align-items:center; gap:12px; font-size:24px; line-height:1.5; }
+.coronation-title span { white-space:nowrap; }
+.coronation-title strong { font-size:var(--crown-title-size,48px); color:#876623; }
+.coronation-title-dust { z-index:7; }
+.coronation-title-dust i { width:var(--dust-size,3px); height:var(--dust-size,3px); }
+#coronation .coronation-skip,#coronation .coronation-next { position:absolute; bottom:12px; height:var(--crown-button-height,44px); min-height:44px; width:max(120px,calc(72 * var(--dot)),calc(7 * var(--crown-button-size,16px))); font:inherit; font-size:var(--crown-button-size,16px); border:0; padding:0; color:var(--ink); cursor:pointer; background:var(--paper); }
+#coronation .coronation-skip > .n-frame,#coronation .coronation-next > .n-frame { top:50%!important; transform:translateY(-50%); }
+#coronation .coronation-skip > span,#coronation .coronation-next > span { position:absolute; top:0; bottom:0; display:flex; align-items:center; justify-content:center; white-space:nowrap; }
+#coronation .coronation-skip > span { left:0; right:calc(15 * var(--dot)); }
+#coronation .coronation-next > span { left:0; right:calc(15 * var(--dot)); }
+#coronation .coronation-skip { left:24px; right:auto; }
+#coronation .coronation-next { right:24px; left:auto; }
+@media(max-width:599px) {
+  #title .crown-atlas { padding:2px 4px; gap:0; }
+  .crown-atlas-foot { gap:0; }
+  .crown-atlas-foot span { line-height:14px; }
+  .coronation-caption { padding:8px 10px; }
+  .coronation-book { left:0; right:0; padding:20px 10px; }
+  .coronation-book-crowns { gap:2px; }
+  .coronation-book-site { font-size:12px; }
+  .coronation-title { font-size:16px; }
+  #coronation .coronation-skip { left:12px; }
+  #coronation .coronation-next { right:12px; }
+}
+@media(max-width:599px) and (min-height:421px) {
+  #title .crown-scraps { min-height:140px; }
+}
+@media(max-height:420px) {
+  #title .title-row .round-btn { flex-direction:row; width:max(92px,calc(20 * var(--dot) + 48px)); min-width:92px; height:max(40px,calc(20 * var(--dot))); min-height:40px; }
+  #title .crown-atlas { padding:0 6px; gap:0; }
+  .crown-atlas-head { min-height:14px; }
+  .crown-atlas-foot { position:fixed; left:49%; right:4%; bottom:4px; padding:0 6px; background:var(--paper); }
+  #title .title-actions .crown-atlas-foot span { line-height:max(20px,1.4em)!important; }
+  #coronation { padding:4px 20px 50px; }
+  .coronation-heading { display:none; }
+  .coronation-caption { padding:2px 10px; }
+  .coronation-book { left:12%; right:12%; height:90%; padding:12px 24px; }
+  .coronation-book-site { font-size:12px; gap:2px; }
+  .coronation-title { font-size:16px; gap:0; }
+  #coronation .coronation-skip,#coronation .coronation-next { bottom:4px; height:40px; min-height:40px; font-size:12px; }
+}
+
+@media(min-width:600px) and (min-height:421px) {
+  #title .sub { visibility:hidden; }
+  #title .crown-atlas { top:-44px; }
+}
+@media(min-width:1200px) and (min-height:700px) {
+  #title { --title-disc-dots:32; }
+  #title .crown-atlas .title-row .round-btn { height:calc(var(--title-disc-dots) * var(--dot) + 40px); }
+  #title .title-row .button-label { font-size:24px; line-height:28px; }
+  .crown-total,.crown-short-goal,.crown-atlas-foot span { font-size:24px; line-height:32px; }
+}
+/* 단추가 수첩 안으로 들어가 아래가 비었다. 수첩과 주 단추를 조금 내려 화면 가운데에 가깝게 둔다. */
+@media(min-width:600px) and (min-height:600px) { .title-card { top:10vh; } }
+/* 다시 보기 단추가 없으면 아래 줄은 글 한 줄 높이면 된다. */
+.crown-atlas:not(.has-king) .crown-atlas-foot { min-height:24px; }
+@media(max-height:420px) { #title .crown-atlas .title-row .round-btn { height:48px; min-height:48px; } }
+/* ===== 표지 칸 「나」: 파스텔 판 단추와 왕관 · 목표 · 레벨 띠 (대표 2026-11-07 고름, 「너무 촘촘하다」로 간격 넓힘) =====
+   시안 docs/games/fishing-dex/refs/cover3/b-tile2(inject.css · inject.mjs)를 옮김. 부품 크기는 모두 게임 점(--dot)의 정수 배.
+   판 너비 --cover-button-dots(72 · 68 · 60점) · 옆 둘레 --cover-pad(12 · 8점)는 crown-ui.mjs가 칸 너비를 재서 고른다. */
+#title[data-cover] .crown-atlas { padding:4px 6px; gap:2px; background:#fff4d8; border:2px solid #a3ae8a; overflow:visible; display:flex; flex-direction:column; }
+#title[data-cover] .crown-atlas-head { height:calc(16 * var(--dot)); min-height:calc(16 * var(--dot)); gap:0; align-items:center; justify-content:space-between; }
+#title[data-cover] .crown-count { position:relative; width:calc(104 * var(--dot)); height:calc(16 * var(--dot)); justify-content:center; gap:calc(2 * var(--dot)); background:none; }
+#title[data-cover] .crown-short-goal { position:relative; width:calc(100 * var(--dot)); height:calc(16 * var(--dot)); display:flex; align-items:center; justify-content:center; }
+#title[data-cover] .cover-backing { position:absolute; left:0; top:0; z-index:-1; pointer-events:none; }
+#title[data-cover] .crown-count,#title[data-cover] .crown-short-goal,#title[data-cover] .cover-level { isolation:isolate; }
+#title[data-cover] .crown-total,#title[data-cover] .crown-short-goal,#title[data-cover] .crown-atlas-foot span { color:#243f40!important; font-family:inherit; font-size:24px!important; line-height:1!important; white-space:nowrap; }
+/* 「왕관 N/5」는 칸 높이(16점)를 줄 높이로: 글자 상자(24px 글에 32px)가 줄 높이 24px를 넘어 잘린 글로 잡혔다. 보이는 자리는 같다. */
+#title[data-cover] .crown-count .crown-total { line-height:calc(16 * var(--dot))!important; }
+#title[data-cover] .crown-mark { flex:none; }
+#title[data-cover] .crown-atlas .title-row { position:relative; top:0; bottom:auto; width:100%; flex:1 0 calc(64 * var(--dot)); min-height:calc(64 * var(--dot)); gap:0; align-items:center; justify-content:space-evenly; flex-wrap:nowrap; margin:0; padding:0; isolation:isolate; }
+#title[data-cover] .crown-atlas .title-row .round-btn { position:relative; flex:0 0 calc(var(--cover-button-dots,72) * var(--dot)); width:calc(var(--cover-button-dots,72) * var(--dot)); min-width:calc(var(--cover-button-dots,72) * var(--dot)); height:calc(64 * var(--dot)); min-height:calc(64 * var(--dot)); max-height:none; padding:0; display:block; overflow:visible; background:none; border:0; box-shadow:none; transform:none; color:#243f40; cursor:pointer; transition:none; }
+#title[data-cover] .cover-part { position:absolute; display:block; max-width:none; max-height:none; image-rendering:pixelated; pointer-events:none; }
+#title[data-cover] .crown-atlas-head .cover-backing,#title[data-cover] .cover-level .cover-backing { filter:sepia(.2) hue-rotate(28deg) saturate(.65); }
+#title[data-cover] .cover-label { position:absolute; left:0; right:0; top:calc(49 * var(--dot)); height:calc(14 * var(--dot)); display:flex; align-items:center; justify-content:center; font:inherit; font-size:24px!important; line-height:1!important; color:#243f40; white-space:nowrap; z-index:5; text-shadow:none; }
+#title[data-cover] .crown-atlas .round-btn:active,#title[data-cover] .crown-atlas .round-btn[data-pressed] { transform:translateY(calc(2 * var(--dot))); }
+#title[data-cover] .crown-atlas .round-btn:focus-visible { outline:calc(1 * var(--dot)) solid #243f40; outline-offset:calc(2 * var(--dot)); }
+#title[data-cover] .crown-atlas-foot { position:relative; left:auto; right:auto; bottom:auto; width:100%; height:calc(16 * var(--dot)); min-height:calc(16 * var(--dot)); display:flex; justify-content:space-between; align-items:center; gap:4px; margin:0; padding:0; background:none; }
+/* 누르는 칸만 44px로 넓힌다. 늘어난 둘레를 여백에서 빼 세 큰 단추의 자리를 지킨다. */
+#title[data-cover] .crown-atlas.has-king .crown-atlas-foot { height:max(calc(16 * var(--dot)),44px); min-height:max(calc(16 * var(--dot)),44px); margin-block:calc((max(calc(16 * var(--dot)),40px) - max(calc(16 * var(--dot)),44px)) / 2); }
+#title[data-cover] .cover-stats { display:flex; align-items:center; gap:calc(10 * var(--dot)); height:100%; }
+#title[data-cover] .cover-level { position:relative; display:flex; width:calc(48 * var(--dot)); height:calc(16 * var(--dot)); align-items:center; justify-content:center; }
+#title[data-cover] .cover-shell { position:relative; display:flex; align-items:center; gap:calc(3 * var(--dot)); height:calc(16 * var(--dot)); }
+#title[data-cover] .cover-shell img { position:static!important; }
+#title[data-cover] .crown-replay { min-height:44px; height:44px; min-width:112px; padding:0 8px; font-size:24px!important; color:#243f40; background:#f8e8be; border:2px solid #ac9870; box-shadow:0 2px #ac9870; }
+#title[data-cover] .round-btn::before { content:''; position:absolute; inset:calc(2 * var(--dot)); background:var(--tile); z-index:0; }
+#title[data-cover] [data-act=dex] { --tile:#dce7bf; }
+#title[data-cover] [data-act=map] { --tile:#d5e8e5; }
+#title[data-cover] [data-act=shop] { --tile:#f0d8bf; }
+#title[data-cover] .cover-plate { left:0; top:0; z-index:1; }
+#title[data-cover] .round-btn::after { content:''; position:absolute; inset:calc(3 * var(--dot)); background:var(--tile); z-index:1; pointer-events:none; }
+#title[data-cover] .cover-icon { left:calc(var(--cover-icon-left,10) * var(--dot)); top:calc(5 * var(--dot)); z-index:2; }
+#title[data-cover] .cover-label { background:var(--tile); left:calc(6 * var(--dot)); right:calc(6 * var(--dot)); }
+@media(min-width:1600px) and (min-height:700px) { #title[data-cover] .crown-atlas { bottom:-12px; } }
+@media(max-width:599px),(max-height:420px) {
+  #title[data-cover] .crown-total,#title[data-cover] .crown-short-goal,#title[data-cover] .crown-atlas-foot span,#title[data-cover] .cover-label { font-size:12px!important; line-height:1!important; }
+  #title[data-cover] .crown-atlas-foot { height:20px; min-height:20px; }
+  #title[data-cover] .crown-atlas .title-row .round-btn { flex-direction:column; }
+  #title[data-cover] .crown-replay { font-size:12px!important; min-width:64px; min-height:44px; height:44px; }
+}
+@media(max-height:420px) { #title[data-cover] .title-actions { min-height:68px; align-content:start; } }
+/* 간격: 수첩 너비를 680px에 묶지 않고 점 크기에 맞춘다. 점은 화면 높이를 따라 커지는데 수첩은 680px · 47vw에 멈춰 큰 화면 · 16:10 화면일수록 칸이 빽빽했다.
+   보통은 47vw까지, 그래도 판 셋(60점) + 사이 12점 + 둘레 12점이 안 들어가면 54vw까지. 낚싯대 끝과 닿으면 crown-ui.mjs가 줄인다. */
+@media(min-width:600px) and (min-height:421px) { #title[data-cover] .title-card { width:max(min(680px,47vw),min(47vw,calc(280 * var(--dot) + 80px)),min(54vw,calc(228 * var(--dot) + 84px))); } }
+/* 칸 안 간격: 위아래 둘레 8점 · 옆 둘레 12점(좁으면 8점), 줄 사이 8점. 머리 · 단추 · 아래 줄의 양 끝을 맞춘다. */
+#title[data-cover] .crown-atlas { padding:calc(8 * var(--dot)) calc(var(--cover-pad,12) * var(--dot)); gap:calc(8 * var(--dot)); }
+#title[data-cover] .crown-atlas .title-row { justify-content:space-between; }
+/* 칸 높이: 둘레 8+8, 머리 16, 단추 64, 아래 16, 줄 사이 8+8 = 128점 */
+@media(min-width:600px) and (min-height:421px) { #title[data-cover] .crown-scraps { min-height:calc(128 * var(--dot) + 4px - 44px); } }
+@media(min-width:1600px) and (min-height:700px) { #title[data-cover] .crown-scraps { min-height:calc(128 * var(--dot) + 4px - 56px); } }
+/* 폰 세로: 칸 높이를 점에 맞추고(140px에 묶이면 점이 큰 폰에서 넘친다) 옆 둘레는 8점. */
+@media(max-width:599px) { #title[data-cover] .crown-atlas { padding:calc(8 * var(--dot)) calc(8 * var(--dot)); } }
+@media(max-width:599px) and (min-height:421px) { #title[data-cover] .crown-scraps { min-height:max(140px,calc(128 * var(--dot) + 4px)); } }
+/* 세 줄 머리(cover-title-stack): 좁은 폰과 세로 태블릿. 새 물 도장 줄이 끼면 머리가 그만큼 길어지고, 넘친 만큼 crown-ui.mjs가 수첩을 늘린다. */
+@media(min-height:421px) {
+  #title[data-cover].cover-title-stack .crown-atlas-head { height:auto; min-height:calc(40 * var(--dot)); flex-direction:column; align-items:center; justify-content:space-between; }
+  #title[data-cover].cover-title-stack .crown-count,#title[data-cover].cover-title-stack .crown-short-goal,#title[data-cover].cover-title-stack .crown-extras { flex:none; }
+}
+@media(max-width:599px) and (min-height:421px) { #title[data-cover].cover-title-stack .crown-scraps { min-height:max(140px,calc(152 * var(--dot) + 4px)); } }
+/* 새 물 도장이 두 띠 사이에 다 안 들어가면 띠 아래 가운데 둘째 줄로(crown-ui.mjs가 고른다). */
+#title[data-cover].cover-stamp-row .crown-atlas-head { height:auto; flex-wrap:wrap; row-gap:calc(4 * var(--dot)); }
+#title[data-cover].cover-stamp-row .crown-extras { order:3; flex:1 0 100%; justify-content:center; }
+#title[data-cover].cover-stamp-row.cover-tight .crown-atlas-head { row-gap:calc(2 * var(--dot)); }
+#title[data-cover].cover-tight .crown-atlas { padding-top:calc(4 * var(--dot)); padding-bottom:calc(4 * var(--dot)); gap:calc(4 * var(--dot)); }
+@media(min-width:600px) and (min-height:421px) { #title[data-cover].cover-king .crown-scraps { min-height:calc(112 * var(--dot) + max(calc(16 * var(--dot)),40px) + 4px - 44px); } }
+@media(min-width:1600px) and (min-height:700px) { #title[data-cover].cover-king .crown-scraps { min-height:calc(112 * var(--dot) + max(calc(16 * var(--dot)),40px) + 4px - 56px); } }
+@media(max-width:599px) and (min-height:421px) { #title[data-cover].cover-king .crown-scraps { min-height:max(140px,calc(112 * var(--dot) + max(calc(16 * var(--dot)),40px) + 4px)); } }
+@media(max-width:599px) and (min-height:421px) { #title[data-cover].cover-title-stack.cover-king .crown-scraps { min-height:max(140px,calc(136 * var(--dot) + max(calc(16 * var(--dot)),40px) + 4px)); } }
+/* 낮은 폰 가로(높이 420px 이하): 크림 칸 높이는 수첩이 정한다. 배율 3 폰(780×290)은 점이 1.33px라 칸(128px)에 머리 줄 · 단추 · 아래 줄(171px)이 안 들어갔다.
+   crown-ui.mjs가 들어갈 때까지 차례로 바꾼다: ① 아래 줄(레벨 · 조개 · 다시 보기)을 「낚시하러 가기」 옆 같은 줄로(cover-foot-out) ② 그래도 넘치면 위아래 둘레 · 줄 사이 4점(cover-tight, 규칙은 위 새 물 도장 줄 옆). */
+@media(max-height:420px) {
+  #title[data-cover].cover-foot-out .title-actions { display:flex; align-items:stretch; gap:8px; min-height:0; }
+  #title[data-cover].cover-foot-out .title-actions > [data-act=play] { flex:1 1 0; min-width:0; width:auto; max-width:none; }
+  #title[data-cover].cover-foot-out .title-actions > .crown-atlas-foot { flex:none; width:auto; height:auto; min-height:0; gap:calc(4 * var(--dot)); padding:0 calc(4 * var(--dot)); background:#fff4d8; border:2px solid #a3ae8a; box-sizing:border-box; }
+  #title[data-cover].cover-foot-out .title-actions > .crown-atlas-foot .cover-stats { gap:calc(4 * var(--dot)); }
+}

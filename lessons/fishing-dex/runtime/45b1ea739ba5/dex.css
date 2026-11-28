@@ -1,0 +1,210 @@
+/* 낚시 도감 물고기 쪽 2안 「펼친 책」(DECISIONS 10-28 오후, concepts/dex-2.png, 계획서 과제 5).
+   판(#dex)은 지금 수첩 쪽(page 틀, 왼쪽 링). 위 꼬리표 탭 + 둥근 돌아가기, 가운데 펼친 책(왼쪽 쪽 · 링 · 오른쪽 쪽), 양옆 넘김, 아래 쪽 점.
+   왼쪽 쪽: 사진 틀 속 큰 그림 · 이름 리본 · 기록(또는 실마리) · 한 줄 이야기. 오른쪽 쪽: 네 칸(사는 곳 · 먹는 것 / 생태계 · 먹이 관계).
+   글 크기는 갈무리 격자(16 · 32, 이름만 낮은 가로에서 24). 오른쪽 네 칸은 상자 없이 점선으로만 나눈다.
+   여기 바탕 · 테두리는 새 그림이 오기 전의 대신 모양이다. 그림이 오면 notebook.mjs가 .n-skin 틀을 깔고 .n-skin이 바탕을 지운다.
+   fit-1 ~ fit-3은 dex-ui.mjs가 화면보다 길 때 차례로 붙인다(굴리지 않고 한눈에). */
+#dex.dex-book {
+  --gap: 12px; --tab-h: 52px; --turn-w: 56px; --turn-h: 104px; --round: 60px; --portrait-h: 84; --window-h: 36; --lh: 24px;
+  width: calc(100vw - 24px); max-width: none;
+  max-height: calc(100vh - 24px);
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  grid-template-areas: "tabs tabs back" "prev book next" "dots dots dots";
+  align-items: center;
+  column-gap: var(--gap); row-gap: 8px;
+  color: #344f43; font-size: 16px; line-height: var(--lh);
+}
+#dex .dex-tabs { grid-area: tabs; justify-self: start; display: flex; gap: 8px; }
+/* 낚시터 책갈피(DECISIONS 10-30 ③): 탭 줄 오른쪽 끝. 크기마다 자리 · 천 그림은 dex-match.css가 맞춘다. */
+#dex .dex-places { grid-area: tabs; justify-self: end; display: flex; gap: 8px; }
+#dex button.dex-place { position: relative; min-height: var(--tab-h); min-width: 40px; padding: 0 calc(4 * var(--dot)); font-size: 16px; line-height: 24px; }
+#dex .dex-place[aria-selected="true"] > .dex-place-name { box-shadow: inset 0 calc(-1 * var(--dot)) 0 #d9826c; }
+#dex .dex-place[aria-disabled="true"] { opacity: .55; cursor: default; }
+#dex .dex-place-now, #dex .dex-place-lock { position: absolute; top: 2px; right: 2px; width: 6px; height: 6px; background: #d9826c; }
+#dex .dex-place-lock { background: #344f43; }
+#dex button.dex-tab { display: inline-flex; align-items: center; gap: 8px; min-height: var(--tab-h); padding: 0 calc(8 * var(--dot)); font-size: 16px; line-height: 24px; }
+#dex button.dex-tab[data-notebook-frame="tag-coral"] { padding-left: calc(15 * var(--dot)); padding-right: calc(6 * var(--dot)); }
+/* 그림이 없을 때 고른 탭은 글 아래 산호 줄로 */
+#dex .dex-tab[aria-selected="true"]:not([data-notebook-frame="tag-coral"]) > span { box-shadow: inset 0 calc(-1 * var(--dot)) 0 #d9826c; }
+#dex .dex-tab .ico { flex: none; }
+#dex .dex-tab svg.ico { width: 24px; height: 24px; }
+#dex button.round-btn { grid-area: back; justify-self: end; flex: none; width: var(--round); height: var(--round); min-width: 0; min-height: 0; padding: 0; display: grid; place-items: center; }
+
+/* 넘김: 꼬리표 그림이 곧 단추(data-plain). 그림이 없으면 종이 단추 + 꺾쇠. */
+#dex .dex-turn { width: var(--turn-w); height: var(--turn-h); min-width: 40px; min-height: 40px; padding: 0; display: grid; place-items: center; }
+#dex .dex-prev { grid-area: prev; } #dex .dex-next { grid-area: next; }
+#dex .dex-turn[data-plain] { background: transparent; border: 0; box-shadow: none; }
+#dex .dex-turn svg.ico { width: 24px; height: 24px; }
+#dex .turn-pic { position: relative; display: block; width: calc(12 * var(--dot)); height: calc(20 * var(--dot)); }
+#dex .turn-pic canvas { position: absolute; }
+#dex .turn-pic .turn-tab { left: 0; top: 0; }
+#dex .turn-pic .turn-mark { left: calc(3 * var(--dot)); top: calc(6 * var(--dot)); }
+#dex .dex-prev .turn-pic { transform: scaleX(-1); }
+
+/* 펼친 책: 왼쪽 쪽 · 가운데 링 · 오른쪽 쪽 */
+/* 왼쪽 : 오른쪽 = 5.1 : 8. 1695x902에서 큰 초상(192점)이 줄지 않고, 먹이 관계(꺽지 쪽 475px)가 칸 안에 드는 비율 */
+#dex .dex-spread { grid-area: book; display: grid; grid-template-columns: minmax(0, 5.1fr) calc(8 * var(--dot)) minmax(0, 8fr); column-gap: var(--gap); align-items: stretch; min-width: 0; min-height: 0; }
+#dex .dex-left { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-width: 0; min-height: 0; text-align: center; }
+#dex .dex-photo { position: relative; width: 100%; box-sizing: border-box; padding: calc(6 * var(--dot)) calc(6 * var(--dot)) calc(12 * var(--dot)); background: #fffbe9; box-shadow: 0 0 0 2px #d9d2b4; }
+#dex .dex-photo.n-skin { box-shadow: none; }
+#dex .dex-photo .dex-tape { position: absolute; left: 50%; top: calc(-4 * var(--dot)); margin-left: calc(-14 * var(--dot)); }
+#dex .dex-portrait { height: calc(var(--portrait-h) * var(--dot)); min-width: 0; overflow: hidden; display: flex; align-items: center; justify-content: center; }
+#dex .dex-name { position: relative; margin: 0; padding: calc(3 * var(--dot)) calc(14 * var(--dot)); font-size: 32px; line-height: 40px; font-weight: 700; color: #2f4a3a; background: #fbeed4; box-shadow: 0 3px 0 #d9826c; white-space: nowrap; }
+#dex .dex-name.n-skin { box-shadow: none; }
+#dex .dex-record, #dex .dex-clue, #dex .dex-story { margin: 0; font-size: 16px; line-height: var(--lh); }
+#dex .dex-record b { font-size: 16px; }
+#dex .dex-stars { color: #c98a3c; letter-spacing: 2px; }
+#dex .dex-crown { padding: 0 8px; background: #f7d98b; color: #6b4b1c; }
+#dex .dex-clue { color: #60735a; word-break: keep-all; }
+#dex .dex-story { max-width: 100%; color: #4c5d48; word-break: keep-all; }
+#dex .dex-rings { position: relative; align-self: stretch; width: calc(8 * var(--dot)); background: repeating-linear-gradient(to bottom, transparent 0 calc(5 * var(--dot)), #8a6b55 0 calc(11 * var(--dot)), transparent 0 calc(16 * var(--dot))); }
+#dex .dex-rings.n-skin { background: none !important; }
+
+/* 오른쪽 쪽: 네 칸(위 사는 곳 · 먹는 것, 아래 생태계 · 먹이 관계) */
+/* 두 번째 기둥(먹는 것 · 먹이 관계)은 그림 줄 폭(min-content)만큼은 늘 받는다. 모자라면 첫 기둥(글이 접히는 칸)이 내준다. */
+#dex .dex-right { display: grid; grid-template-columns: minmax(0, 2fr) minmax(min-content, 3fr); grid-template-rows: auto auto; grid-template-areas: "home food" "eco chain"; min-width: 0; min-height: 0; }
+#dex .dex-part { position: relative; display: flex; flex-direction: column; align-items: center; gap: 8px; min-width: 0; min-height: 0; padding: 10px 14px; text-align: center; }
+#dex .dex-home { grid-area: home; } #dex .dex-food { grid-area: food; } #dex .dex-eco { grid-area: eco; } #dex .dex-chain { grid-area: chain; }
+/* 점선(바탕 점 단위): 세로는 왼쪽 칸 오른쪽에, 가로는 위 칸 아래에 */
+#dex .dex-home::after, #dex .dex-eco::after { content: ''; position: absolute; top: 8px; bottom: 8px; right: 0; width: var(--dot); background: repeating-linear-gradient(to bottom, #c9c4a2 0 calc(2 * var(--dot)), transparent 0 calc(4 * var(--dot))); }
+#dex .dex-home::before, #dex .dex-food::before { content: ''; position: absolute; left: 8px; right: 8px; bottom: 0; height: var(--dot); background: repeating-linear-gradient(to right, #c9c4a2 0 calc(2 * var(--dot)), transparent 0 calc(4 * var(--dot))); }
+#dex .dex-label { align-self: center; margin: 0; padding: 0 12px; font-size: 16px; line-height: 32px; font-weight: 700; color: #5d4a3a; background: #f6ead0; box-shadow: var(--dot) var(--dot) 0 #d8cca8; }
+#dex .dex-line { margin: 0; font-size: 16px; line-height: var(--lh); word-break: keep-all; overflow-wrap: break-word; }
+#dex .dex-line b { color: #2c6675; }
+/* 먹이 자료가 없어 접은 칸(q05). 글은 fillFoldedFood가 3줄 안으로 넣는다. */
+#dex .dex-more { display: grid; justify-items: center; gap: 2px; width: 100%; }
+#dex .dex-more .dex-line { text-wrap: balance; }
+#dex .dex-unknown { margin: auto 0; color: #8b9586; font-size: 16px; line-height: var(--lh); }
+#dex .dex-window { position: relative; align-self: stretch; flex: 1 1 auto; min-height: calc(var(--window-h) * var(--dot)); overflow: hidden; }
+#dex .dex-window > canvas { position: absolute; }
+#dex .dex-window.plain { display: grid; place-items: center; }
+#dex .dex-window.plain svg.ico { width: 40px; height: 40px; color: #60735a; }
+#dex .dex-eco-pic { display: grid; place-items: center; flex: 1 1 auto; }
+#dex .dex-eats { list-style: none; margin: 0; padding: 0; display: flex; justify-content: space-around; align-items: flex-end; gap: 8px 12px; width: 100%; flex: 1 1 auto; }
+#dex .dex-eats li { display: flex; flex-direction: column; align-items: center; justify-content: flex-end; gap: 4px; min-width: 0; flex: 1 1 0; }
+#dex .eco-label { font-size: 16px; line-height: 20px; word-break: keep-all; }
+#dex .eco-pic { display: inline-grid; place-items: center; flex: none; }
+#dex .eco-pic.eco-name { min-width: 56px; min-height: 40px; padding: 2px 8px; box-sizing: border-box; background: #f1ecd6; box-shadow: inset 0 0 0 var(--dot) #c9c4a2; font-size: 16px; line-height: 20px; word-break: keep-all; color: #4c5d48; }
+#dex .eco-pic.eco-name[data-shadow] { background: #dfe2d6; color: #6f7b6a; }
+#dex .dex-links { display: flex; align-items: center; justify-content: center; gap: 8px; flex: 1 1 auto; max-width: 100%; }
+#dex .dex-eaters { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+#dex .dex-arrow { display: grid; place-items: center; flex: none; }
+
+/* 쪽 점: 누르는 곳은 40, 보이는 점은 4점 네모. 만난 쪽은 초록, 지금 쪽은 산호. */
+#dex .dex-dots { grid-area: dots; display: flex; flex-wrap: wrap; justify-content: center; gap: 0; }
+#dex .dex-dots button { flex: none; width: 40px; height: 40px; min-width: 0; min-height: 0; padding: 0; display: grid; place-items: center; background: transparent; border: 0; box-shadow: none; }
+#dex .dex-dots i { display: block; width: calc(4 * var(--dot)); height: calc(4 * var(--dot)); background: #d6d0b4; }
+#dex .dex-dots .met i { background: #8fa477; }
+#dex .dex-dots [aria-current="page"] i { background: #d9826c; box-shadow: 0 0 0 var(--dot) #a8574a; }
+
+/* 먹이그물 쪽 1안 「계곡 단면」(과제 6, concepts/web-1.png). 위 줄은 물고기 쪽과 같은 자리(탭 왼쪽 · 돌아가기 오른쪽),
+   아래는 제목 띠 · 단면 · 한 줄 띠. 단면 캔버스 크기는 dex-ui.mjs renderWeb이 정수 배로 정하고, 단추는 그 위에 투명하게 얹는다. */
+#dex.dex-book[data-tab="web"] { grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "tabs back" "web web"; grid-template-rows: auto minmax(0, 1fr); }
+#dex .dex-web { grid-area: web; align-self: stretch; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 8px; min-width: 0; min-height: 0; }
+#dex .web-banner { position: relative; margin: 0; padding: 4px 36px; font-size: 32px; line-height: 40px; font-weight: 700; color: #2f4a3a; background: #c9d6b0; box-shadow: 0 3px 0 #9fb38a; white-space: nowrap; }
+#dex .web-banner[data-notebook-frame="banner"] { padding: calc(4 * var(--dot)) calc(12 * var(--dot)); box-shadow: none; }
+#dex .web-stage { position: relative; flex: none; line-height: 0; }
+#dex .web-canvas { display: block; image-rendering: pixelated; }
+/* 누를 곳: 그림이 곧 단추라 바탕 · 테두리 없이(data-plain). 키보드 초점만 산호 테두리. */
+#dex button.web-node { position: absolute; margin: 0; padding: 0; min-width: 40px; min-height: 40px; display: grid; place-items: center; background: transparent; border: 0; border-radius: 0; box-shadow: none; line-height: 0; }
+#dex button.web-node:active { transform: none; box-shadow: none; }
+#dex button.web-node:focus-visible { outline: calc(var(--dot)) solid #d9826c; outline-offset: 0; }
+#dex .web-node .eco-name { min-width: 0; min-height: 0; padding: 0 6px; line-height: 24px; white-space: nowrap; }
+#dex .web-caption { margin: 0; min-height: 24px; max-width: 100%; font-size: 16px; line-height: 24px; text-align: center; color: #344f43; word-break: keep-all; }
+#dex .web-caption .web-name { color: #2c6675; margin-right: 8px; }
+#dex .web-caption .web-note { color: #4c5d48; }
+/* 재기: 판을 화면 높이(max-height)까지 늘리고 단면 칸을 남은 자리만큼 편다. dex-ui.mjs가 잠깐 붙였다 바로 뗀다. */
+#dex.web-measure { height: 100vh; }
+#dex.web-measure .web-stage { flex: 1 1 0; align-self: stretch; min-height: 0; }
+#dex.web-measure .web-stage > * { display: none; }
+
+/* 지도 머리의 둥근 도감 단추 */
+#map .head-buttons { display: flex; align-items: center; gap: 10px; }
+#map button.round-btn { flex: none; width: 52px; height: 52px; min-width: 0; min-height: 0; padding: 0; display: grid; place-items: center; }
+
+/* 큰 화면(노트북 1695x902 · 1920x1080): 탭 · 단추를 키운다 */
+@media (min-width: 1200px) and (min-height: 760px) {
+  #dex.dex-book { --tab-h: 60px; --round: 64px; --gap: 16px; }
+  #dex .dex-part { padding: 14px 16px; }
+  #map button.round-btn { width: 60px; height: 60px; }
+}
+/* 폰 세로: 판은 화면 폭 그대로(좌우 여백 없이), 왼쪽 쪽 위 · 오른쪽 쪽 아래, 넘김은 큰 그림 양옆에 */
+@media (max-width: 599px) {
+  #dex.dex-book { --gap: 8px; --turn-w: 44px; --turn-h: 72px; --round: 48px; --tab-h: 48px; --window-h: 30;
+    width: 100vw; max-height: calc(100vh - 16px); padding-right: calc(6 * var(--dot));
+    grid-template-columns: minmax(0, 1fr) auto; grid-template-areas: "tabs back" "book book" "dots dots"; row-gap: 6px; }
+  #dex .dex-spread { grid-template-columns: minmax(0, 1fr); row-gap: 6px; }
+  #dex .dex-rings { display: none; }
+  #dex .dex-left { gap: 4px; }
+  #dex .dex-photo { width: calc(100% - 2 * var(--turn-w) - 8px); }
+  #dex .dex-turn { grid-area: book; align-self: start; margin-top: calc(51 * var(--dot) - var(--turn-h) / 2); z-index: 1; }
+  #dex .dex-prev { justify-self: start; } #dex .dex-next { justify-self: end; }
+  #dex .dex-right { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); grid-template-areas: "home eco" "food food" "chain chain"; }
+  #dex .dex-home::after { display: block; } #dex .dex-eco::after { display: none; }
+  #dex .dex-eco::before { content: ''; position: absolute; left: 8px; right: 8px; bottom: 0; height: var(--dot); background: repeating-linear-gradient(to right, #c9c4a2 0 calc(2 * var(--dot)), transparent 0 calc(4 * var(--dot))); }
+  #dex .dex-part { padding: 6px 6px; gap: 4px; }
+  #dex .dex-tab { padding: 0 calc(6 * var(--dot)); }
+  #dex button.dex-tab[data-notebook-frame="tag-coral"] { padding-left: calc(14 * var(--dot)); padding-right: calc(5 * var(--dot)); }
+  #map .head-buttons { gap: 6px; }
+  #map button.round-btn { width: 44px; height: 44px; }
+}
+/* 낮은 가로(844x390 · 780x290): 옆으로 펼친 꼴 그대로. 쪽 점은 탭 줄로 올려 책에 높이를 준다 */
+@media (max-height: 520px) and (min-width: 600px) {
+  #dex.dex-book { --gap: 6px; --turn-w: 40px; --turn-h: 64px; --round: 44px; --tab-h: 40px; --portrait-h: 64; --window-h: 24;
+    width: calc(100vw - 16px); max-height: calc(100vh - 12px); row-gap: 4px;
+    grid-template-columns: auto auto minmax(0, 1fr) auto auto; grid-template-areas: "tabs tabs dots back back" "prev book book book next"; }
+  #dex .dex-dots { justify-self: center; flex-wrap: nowrap; }
+  #dex .dex-spread { grid-template-columns: minmax(0, 4fr) calc(8 * var(--dot)) minmax(0, 7fr); }
+  #dex .dex-name { font-size: 24px; line-height: 32px; padding: calc(2 * var(--dot)) calc(12 * var(--dot)); }
+  #dex .dex-left { gap: 4px; }
+  #dex .dex-part { padding: 4px 8px; gap: 2px; }
+  #dex .dex-label { line-height: 24px; padding: 0 8px; }
+  #dex .dex-tab { padding: 0 calc(5 * var(--dot)); gap: 6px; }
+  #map .head-buttons { flex-direction: column; align-items: flex-start; gap: 6px; }
+  #map button.round-btn { width: 44px; height: 44px; }
+}
+/* 아주 낮은 가로(780x290): 판 위아래 여백을 줄이고 사는 곳 사진 창은 접는다(자리 이름과 글은 남는다).
+   왼쪽 쪽을 넓혀 이야기를 두 줄로, 오른쪽 쪽은 세 기둥(92 : 70 : 230)으로 나눠 먹이 관계(아래 기둥 2 + 3, 먹는 쪽은 옆으로)에 폭을 몰아 준다.
+   위 줄: 사는 곳(기둥 1 + 2) · 먹는 것(기둥 3), 아래 줄: 생태계(기둥 1) · 먹이 관계(기둥 2 + 3). */
+@media (max-height: 340px) and (min-width: 600px) {
+  #dex.dex-book { --portrait-h: 48; padding-top: calc(6 * var(--dot)); padding-bottom: calc(6 * var(--dot)); }
+  #dex .dex-spread { grid-template-columns: minmax(0, 1fr) calc(8 * var(--dot)) minmax(0, 1.8fr); }
+  #dex .dex-right { grid-template-columns: minmax(0, 92fr) minmax(0, 70fr) minmax(0, 230fr); grid-template-areas: "home home food" "eco chain chain"; }
+  #dex .dex-home::after { display: block; }
+  #dex .dex-window { display: none; }
+  #dex .dex-stars { letter-spacing: 0; }
+  #dex .dex-crown { padding: 0 4px; }
+  #dex .dex-links { gap: 4px; }
+  #dex .dex-eaters { flex-direction: row; gap: 4px; align-items: flex-end; }
+  #dex .dex-eats { gap: 4px; }
+  #dex .dex-part { padding: 2px 6px; }
+}
+/* 먹이그물 쪽: 폰 세로는 제목을 줄이고 이름 띠에 두 줄 자리를 둔다(긴 글이 접혀도 단면이 움직이지 않게). */
+@media (max-width: 599px) {
+  #dex .web-banner { padding: 0 24px; font-size: 16px; line-height: 32px; }
+  #dex .web-banner[data-notebook-frame="banner"] { padding: calc(3 * var(--dot)) calc(10 * var(--dot)); }
+  #dex .web-caption { min-height: 48px; }
+}
+/* 먹이그물 쪽 낮은 가로: 단면 옆에 제목 띠 · 이름 띠를 세운다(옆 펼침). 잴 때는 옆 칸 폭 220을 남기고 단면 칸을 편다. */
+@media (max-height: 520px) and (min-width: 600px) {
+  /* 옆 칸의 제목 띠는 가운데 줄 바로 위, 이름 띠는 바로 아래(둘이 한 덩이로 단면 가운데 높이에 온다) */
+  #dex .dex-web { display: grid; grid-template-columns: auto minmax(0, 1fr); grid-template-rows: 1fr 1fr; grid-template-areas: "stage banner" "stage caption"; justify-content: center; justify-items: center; column-gap: 12px; row-gap: 12px; }
+  #dex .web-stage { grid-area: stage; align-self: center; }
+  #dex .web-banner { grid-area: banner; align-self: end; padding: 0 24px; font-size: 16px; line-height: 32px; }
+  #dex .web-banner[data-notebook-frame="banner"] { padding: calc(3 * var(--dot)) calc(10 * var(--dot)); }
+  #dex .web-caption { grid-area: caption; align-self: start; }
+  #dex.web-measure .dex-web { grid-template-columns: minmax(0, 1fr) 220px; justify-content: stretch; }
+  #dex.web-measure .web-stage { align-self: stretch; justify-self: stretch; }
+}
+/* 접기 1: 큰 그림 높이를 줄인다(글줄 높이는 24 그대로: 20으로 줄이면 두 줄로 접힌 글 상자끼리 겹친다) */
+#dex.fit-1 { --portrait-h: 40; }
+/* 접기 2: 사는 곳 사진 창을 접고 칸 이름표의 상자를 뺀다 */
+#dex.fit-2 .dex-window { display: none; }
+#dex.fit-2 .dex-label { box-shadow: none; background: none; padding: 0; text-decoration: underline dotted #c9c4a2; }
+/* 접기 3: 칸 · 왼쪽 쪽 사이를 붙인다 */
+#dex.fit-3 .dex-part { padding-top: 0; padding-bottom: 0; gap: 0; }
+#dex.fit-3 .dex-left { gap: 0; }
+/* 그래도 길면(아주 작은 폰 등) 숨기지 않고 판을 굴린다 */
+#dex.fit-scroll { overflow-y: auto; }

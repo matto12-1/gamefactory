@@ -1,0 +1,508 @@
+<!doctype html>
+<html lang="ko">
+<head><meta name="gf-version" content="4c5e743d5d"><script data-gf-move>if(location.hash.startsWith('#move='))document.write("\u003cscript data-gf-move src=\"../../kit/domain-move.js?v=4c5e743d5d\">\u003c/script>");</script><script src="../../kit/privacy-reset.js?v=4c5e743d5d"></script>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>팔도 장단</title>
+<link rel="preload" href="fonts/hahmlet-400.a53ae3b93c4f.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/hahmlet-700.42d2b195fed9.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/hahmlet-800.c217d81e5538.woff2" as="font" type="font/woff2" crossorigin>
+<style>
+@font-face{font-family:"Minyo Hahmlet";src:url(fonts/hahmlet-400.a53ae3b93c4f.woff2) format("woff2");font-weight:400;font-display:block}
+@font-face{font-family:"Minyo Hahmlet";src:url(fonts/hahmlet-700.42d2b195fed9.woff2) format("woff2");font-weight:700;font-display:block}
+@font-face{font-family:"Minyo Hahmlet";src:url(fonts/hahmlet-800.c217d81e5538.woff2) format("woff2");font-weight:800;font-display:block}
+html{font-synthesis:none}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;overscroll-behavior:none;background:#ccdcdc;color:#2f2a24;font-family:"Minyo Hahmlet";word-break:keep-all;-webkit-user-select:none;user-select:none;-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent}
+[hidden]{display:none!important}
+#cv{position:fixed;inset:0;width:100%;height:100%;display:block;touch-action:none}
+/* 팔도 잔치: 마을 사이에 찍어 둔 화면이 왼쪽으로 흘러가고, 마을 띠가 위에 1.8초 */
+#feastShot{position:fixed;inset:0;width:100%;height:100%;display:block;image-rendering:pixelated;pointer-events:none}
+#feastShot[hidden]{display:none}
+#feastWords{position:fixed;inset:0;pointer-events:none;z-index:1}
+body.feastGap>.cheerText{visibility:hidden}
+body.feastGap #lyricMe,body.feastGap #lyricBa,body.feastGap #topMsg,body.feastGap #fbMsg,body.feastGap #holdCue{visibility:hidden}
+#feastBand{position:fixed;z-index:9;left:50%;top:10px;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 22px;pointer-events:none;text-align:center;white-space:nowrap;max-width:calc(100vw - 24px)}
+#feastBand[hidden],#feastRetry[hidden]{display:none}
+#feastRetry{pointer-events:auto;margin-top:6px;min-height:44px;padding:0 22px;font-size:17px}
+#feastBand span{font-size:16px;font-weight:400;color:#8a6a48}
+#feastBand b{font-size:clamp(18px,2.4vw,28px);font-weight:700;color:#3a2a1c}
+#feastBand small{font-size:16px;color:#6d5a46;white-space:normal;text-wrap:balance}
+.screen{position:fixed;inset:0}
+button{font:inherit;font-weight:700;color:inherit;cursor:pointer;touch-action:manipulation}
+/* 지도 */
+#mapScreen{background:#ccdcdc}
+#mapArt,#mapArt svg{position:absolute;inset:0;width:100%;height:100%;display:block}
+path.reg{fill:transparent;stroke:rgba(60,48,36,.26);stroke-width:1.6;cursor:pointer;transition:fill .12s}
+@media (hover:hover){path.reg:hover{fill:rgba(255,255,255,.28)}}
+path.reg.open{fill:rgba(205,112,52,.16)}
+path.reg.on{fill:rgba(205,112,52,.3);stroke:#7f431b;stroke-width:2.4}
+.tag{cursor:pointer}.tag rect{fill:transparent}
+.tag text{font-family:"Minyo Hahmlet";font-weight:700;fill:#2a241d;paint-order:stroke;stroke:#fbf9f2;stroke-linejoin:round;text-anchor:middle;dominant-baseline:central;pointer-events:none}
+.tag.later text{fill:#6e665a}.tag.open text,.tag.on text{fill:#7f2f10}
+path.reg.lock{fill:rgba(34,28,22,.58)}@media (hover:hover){path.reg.lock:hover{fill:rgba(34,28,22,.5)}}
+.tag.lock text{fill:#8d8072;stroke:#2c241d}
+path.reg.fresh{stroke:#eab06a;stroke-width:3.5;filter:drop-shadow(0 0 8px rgba(255,200,120,.9));animation:regFresh 1.1s ease-in-out 4}
+@keyframes regFresh{50%{fill:rgba(255,226,170,.5)}}
+path.reg.nudge{stroke:#c9b79c;stroke-width:3;stroke-dasharray:10 8;animation:regNudge .45s ease-in-out 2}
+@keyframes regNudge{50%{fill:rgba(34,28,22,.38)}}
+#mapNote{position:absolute;left:28%;top:22px;z-index:6;transform:translate(-50%,-8px);padding:12px 30px;max-width:min(560px,90vw);font:700 22px/1.35 "Minyo Hahmlet";color:#584333;text-align:center;word-break:keep-all;background:var(--paperArt) center/100% 100% no-repeat;filter:drop-shadow(0 4px 10px rgba(0,0,0,.25));opacity:0;pointer-events:none;transition:opacity .25s,transform .25s}
+#mapNote.on{opacity:1;transform:translate(-50%,0)}
+@media (max-height:420px){#mapNote{top:8px;font-size:17px;padding:8px 20px;left:30%}}
+#songPanel .song.locked{filter:brightness(.62) saturate(.35);cursor:default}#songPanel .song.locked .ds{font-weight:700}
+.regionHeading .newChip{display:inline-block;margin-left:8px;padding:1px 10px;background:var(--redArt) center/100% 100% no-repeat;color:#fff4e0;font-size:13px;font-weight:700;vertical-align:2px}
+@media (prefers-reduced-motion:reduce){path.reg.fresh,path.reg.nudge{animation:none}}
+#soundCover{position:fixed;inset:0;z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:16px;background:rgba(30,24,18,.62);font-family:"Minyo Hahmlet";color:#fff7e8;text-align:center;cursor:pointer}
+#soundCover h1{margin:4px 0 0;font-size:clamp(30px,4vw,44px);font-weight:700}
+#soundCover p{margin:0;font-size:clamp(17px,1.8vw,22px);color:#eadcc6;word-break:keep-all}
+#soundCover .btnRed{margin-top:18px;min-width:220px}
+@media (max-height:420px){#soundCover svg{width:64px;height:56px}#soundCover .btnRed{margin-top:8px;min-height:52px}}
+line.lead-line{stroke:rgba(50,40,30,.45);stroke-width:2;pointer-events:none}
+/* 지역 확대 */
+svg.zoomed path.reg,svg.zoomed .tag,svg.zoomed .lead-line{display:none}
+.zoomImg{opacity:0;transition:opacity .25s}
+.zoomImg.loaded{opacity:1}
+#mapPeople{position:absolute;inset:0;pointer-events:none;overflow:hidden}
+#mapPeople i{position:absolute;left:0;top:0;background:url(art/zoom/tiny-pungmul.png) 0 0 no-repeat;image-rendering:pixelated}
+#mapPeople .yardGo{position:absolute;pointer-events:auto;background:none;border:0;padding:0;cursor:pointer}
+/* 고장 지도: 땅 위에는 작은 판에 곡 이름(나무 = 열림, 한지 = 만드는 중), 고른 곡은 오른쪽 쪽지에 */
+#zoneArt,#zoneTags{position:absolute;inset:0;overflow:hidden}
+#zoneArt{opacity:0;transition:opacity .25s;background:#ccdcdc} /* 뒤의 마을 확대 그림을 가린다 */
+#zoneArt.on{opacity:1}
+#zoneArt img{position:absolute;max-width:none;display:block}
+#zoneArt div{position:absolute;top:0;overflow:hidden}
+@media (prefers-reduced-motion:reduce){#zoneArt{transition:none}}
+#zoneTags{pointer-events:none;--zt:clamp(16px,1.45vw,23px);--zh:clamp(22px,2vw,32px);--zb:clamp(16px,1.2vw,18px);--pb:30px;--pg:clamp(8px,1.4vh,14px);--pt:clamp(24px,2.4vw,36px);--pl:clamp(16px,1.25vw,19px);--pc:16px;--pgo:clamp(54px,7.5vh,72px);--pgf:clamp(20px,2vw,28px);--pw:6px;--ch:var(--chip,48px)}
+
+@media (max-height:399px){#zoneTags{--zt:16px;--zh:16px;--zb:16px;--pb:14px;--pg:4px;--pt:17px;--pl:16px;--pc:16px;--pgo:44px;--pgf:16px;--pw:2px;--ch:var(--chipS,24px)}}
+.zl{position:absolute;z-index:1;margin:0;padding:0;pointer-events:auto;white-space:nowrap;text-align:center;background:none;font:700 var(--zt)/1.15 "Minyo Hahmlet"}
+.zl::before{content:'';position:absolute;left:-6px;right:-6px;top:50%;height:44px;transform:translateY(-50%)} /* 누르는 칸은 44px */
+.zl.open{border-style:solid;border-width:7px 11px;border-image:url(art/ui/btn-wood.webp) 32 40 fill / 7px 11px stretch;color:#4a2412;font-weight:700}
+.zl.shut{border-style:solid;border-width:6px 9px;border-image:url(art/ui/plate-slip.webp) 46 fill / 6px 9px stretch;color:#5f5442}
+.zl.on{outline:2px solid #8f2f1c;outline-offset:1px;border-radius:3px}
+#zoneTags.slim .zl{border-width:3px 6px;border-image-width:3px 6px} /* 낮은 화면: 글 16px는 두고 테두리만 줄인다 */
+button.zl:hover{filter:brightness(1.04)}
+.zp{position:absolute;z-index:2;box-sizing:border-box;display:flex;flex-direction:column;align-items:stretch;gap:var(--pg);margin:0;padding:0;pointer-events:auto;text-align:left;color:#3a2c1c;background:none;border-style:solid;border-width:var(--pb);border-image:url(art/ui/plate-slip.webp) 46 fill / var(--pb) stretch}
+.zp .pic{display:block;width:100%;flex:none;border:1px solid #b89f79;border-radius:3px;background-repeat:no-repeat}
+.zp .ttl{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4em}
+.zp .ttl b{font:700 var(--pt)/1.15 "Minyo Hahmlet"}
+.zp .lv{font-weight:400;font-size:var(--pl);line-height:1.3;color:#59703f}
+.zp .ln{font-weight:400;font-size:var(--pl);line-height:1.35;color:#5f5442}
+.zp .st{display:flex;gap:12px;align-items:flex-end}
+.zp .got{font-size:var(--pc);line-height:1.3}
+.zp .got img{width:var(--ch);height:var(--ch)}
+.zp .go{display:flex;align-items:center;justify-content:center;margin-top:auto;min-height:var(--pgo);box-sizing:border-box;border-style:solid;border-width:12px 14px;border-image:url(art/ui/btn-wood.webp) 32 40 fill / 12px 14px stretch;color:#4a2412;font-weight:700;font-size:var(--pgf);line-height:1}
+button.zp:hover .go{filter:brightness(1.04)}
+button.zp:active .go{filter:brightness(.94)}
+.zp .wait{margin-top:auto;font-weight:700;font-size:var(--pl);line-height:1.2;color:#7a6d58;text-align:center;border:1px dashed #b89f79;border-radius:4px;padding:var(--pw) 0}
+.zoneHud{position:absolute;left:18px;bottom:16px;z-index:2;display:flex;align-items:center;gap:10px;pointer-events:auto}
+.zoneHud h2{margin:0;padding:4px 12px;font:700 var(--zh)/1.1 "Minyo Hahmlet";color:#3a2c1c;border-style:solid;border-width:10px 14px;border-image:url(art/ui/plate-slip.webp) 46 fill / 10px 14px stretch}
+.zoneHud button{min-height:44px;padding:0 4px;border-style:solid;border-width:10px 14px;border-image:url(art/ui/btn-wood.webp) 32 40 fill / 10px 14px stretch;background:none;color:#4a2412;font-size:var(--zb);font-weight:700;line-height:1.3}
+
+@media (max-height:399px){.zoneHud{left:auto;right:8px;bottom:4px}}
+/* 낮은 화면: 도장은 「들어가기」 옆 한 줄에 둬서 쪽지 아래 지역 판 자리를 남긴다 */
+@media (max-height:399px){.zp{flex-direction:row;flex-wrap:wrap;align-content:flex-start;align-items:flex-end}.zp :is(.ttl,.ln,.wait){flex:1 1 100%}.zp .go{flex:1 1 0;margin-top:0}}
+/* 곡 목록 · 시작 창 · 끝 화면 판: 한지 쪽지 */
+.plate{border-style:solid;border-width:30px;border-image:url(art/ui/plate-slip.webp) 46 fill / 30px stretch}
+.endTop,.endBottom{border-width:18px;border-image-width:18px}
+
+#songPanel{position:absolute;right:3%;top:50%;transform:translateY(-50%);width:min(44%,600px);max-height:calc(100% - 24px);overflow-y:auto;padding:clamp(14px,3vw,38px) clamp(16px,3vw,38px)}
+#songPanel .panelHead{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:0 0 .4em}
+#songPanel .panelHead h2{margin:0}
+#songPanel .panelBack{flex:none;min-height:44px;padding:0 4px;border-style:solid;border-width:10px 14px;border-image:url(art/ui/btn-wood.webp) 32 40 fill / 10px 14px stretch;background:none;color:#4a2412;font:700 16px/1 "Minyo Hahmlet";cursor:pointer}
+.songMore{position:absolute;right:3%;bottom:12px;width:24px;height:20px;pointer-events:none}
+.songMore::after{content:'';display:block;width:24px;height:15px;background:#7f431b;clip-path:polygon(0 0,100% 0,50% 100%);animation:moreBob 1.2s ease-in-out infinite}
+@keyframes moreBob{50%{transform:translateY(3px)}}
+@media (prefers-reduced-motion:reduce){.songMore::after{animation:none}}
+@media (max-height:420px){.songMore{display:none}} /* 낮은 화면은 잘린 카드가 「더 있음」을 보여 준다 */
+ /* 잠긴 잔치 줄은 글만: 첫 곡이 쪽지 안에 보이게 */
+#songPanel h2{margin:0 0 .4em;font-family:"Minyo Hahmlet";font-size:clamp(20px,3.2vw,42px);line-height:1.2;width:fit-content;max-width:100%} /* 제목 상자를 글 폭으로: 빈 오른쪽이 구석 단추와 겹쳐 재지지 않게(그래프 검수 3회차 R1-04 · R2-01) */
+/* 세로 화면: 한반도를 크게, 곡 목록은 아래로 */
+
+.song{display:block;width:100%;text-align:left;background:none;border:0;border-top:1px solid #cfc6b3;padding:clamp(6px,1.4vw,18px) 4px;min-height:44px}
+button.song:hover{background:#f6eed8}
+.song .nm{font-weight:700;font-size:clamp(16px,2.2vw,28px);display:flex;flex-wrap:wrap;align-items:baseline;gap:.5em}
+.song .ds{font-weight:400;color:#6f6556;font-size:clamp(16px,1.5vw,19px);line-height:1.35;text-wrap:pretty}
+.song .listMeta{font-weight:400}
+.song .lv{font-weight:400;color:#59703f;background:#e8efdc;border-radius:5px;padding:0 .45em;font-size:max(14px,.68em)}
+.song.shut .nm,.song.shut .ds{opacity:.5}
+/* 놀 수 있는 곡은 나무 단추로: 목록 글이 아니라 누를 곳으로 보이게 */
+.song.open{display:flex;align-items:center;gap:clamp(8px,1.4vw,16px);min-height:72px;padding:2px 4px;margin-top:.3em;border-style:solid;border-width:14px 16px;border-image:url(art/ui/btn-wood.webp) 32 40 fill / 14px 16px stretch}
+button.song.open:hover{background:none;filter:brightness(1.04)}
+.song .txt{flex:1 1 auto;min-width:min(100%,clamp(160px,18vw,260px))}
+.song.open{flex-wrap:wrap}
+ /* 좁은 폰: 글이 줄을 바꾸고 재생 세모는 같은 줄에 남는다 */
+.song .nm,.song .ds{text-wrap:balance}
+.song .side{display:flex;align-items:center;gap:clamp(6px,1vw,12px);flex:none}
+.got{display:flex;flex-direction:column;align-items:center;font-family:"Minyo Hahmlet";font-weight:700;color:#8f2f1c;font-size:clamp(16px,1.2vw,18px);line-height:1.15;white-space:nowrap}
+.got img{width:var(--chip,48px);height:var(--chip,48px);image-rendering:pixelated;display:block}
+.got.gold img{box-shadow:0 0 0 2px #d9ab3f}
+.got.none{color:#8d806c;font-weight:400}
+.got.none img{opacity:.22;box-shadow:none}
+.song .play{width:clamp(14px,1.6vw,20px);height:clamp(18px,2vw,26px);background:#7f431b;clip-path:polygon(0 0,100% 50%,0 100%)}
+.note{margin:.6em 0 0;color:#6f6556;font-size:clamp(12px,1.4vw,17px)}
+/* 낮은 폰에서는 판 둘레를 줄여 같은 글이 세 줄로 잘게 꺾이지 않게 한다. */
+@media (max-height:399px){
+  #songPanel{padding:0 6px;border-width:14px;border-image-width:14px}
+  .song.open{border-width:9px 10px;border-image-width:9px 10px;gap:8px}
+  .song .nm{font-size:16px}
+  .song .ds{font-size:16px}
+}
+/* 시작 창 · 끝 화면 */
+.over{display:flex;align-items:center;justify-content:center;background:rgba(40,34,26,.28);padding:12px}
+.card{max-width:min(94vw,780px);max-height:100%;overflow:hidden;text-align:center;padding:2px clamp(6px,1.6vw,20px)}
+.card h2{margin:0;font-family:"Minyo Hahmlet";font-size:clamp(24px,3.5vw,46px);line-height:1.2}
+.card p{margin:.3em 0}
+.about{font-size:clamp(15px,2.1vw,26px);margin:.5em 0 .9em!important}
+.row{display:flex;justify-content:center;gap:12px;flex-wrap:wrap;margin-top:clamp(8px,1.6vw,18px)}
+.go{min-height:52px;padding:0 .5em;font-size:clamp(17px,2.4vw,28px);font-weight:700;color:#4a2412;white-space:nowrap;background:none;border-style:solid;border-width:14px 16px;border-image:url(art/ui/btn-wood.webp) 32 40 fill / 14px 16px stretch}
+.go.sub{font-weight:700;color:#4a3a28}
+#endOn:not([hidden]){display:inline-flex;align-items:center;justify-content:center;gap:.4em} /* 도장을 받은 뒤 아직 도장 없는 다음 고장 곡으로 바로 간다 */
+#endOn .endOnPlay{flex:none;width:.6em;height:.75em;background:#7f431b;clip-path:polygon(0 0,100% 50%,0 100%)}
+.go.small{min-height:44px;font-size:clamp(14px,1.8vw,20px);border-width:11px 13px;border-image-width:11px 13px}
+.go:active{transform:translateY(1px)}
+#edgeBand{position:fixed;inset:0;pointer-events:none;opacity:0;box-shadow:inset 0 0 15vmin 2vmin rgba(176,92,74,.36)}
+/* 놀이 판의 글 칸 */
+#cv{image-rendering:pixelated}
+/* 노랫말 말풍선: 글 띠 없이 부르는 사람 머리 위. 부른 글자까지 진하게 */
+.lyric{position:fixed;transform:translate(-22%,-100%);width:max-content;white-space:nowrap;padding:.12em .6em .16em;background:#fbf6e6;border:2px solid #4a3a28;border-radius:.5em;pointer-events:none;font-weight:700;font-size:clamp(17px,2.7vw,30px);line-height:1.25;--p:0%}
+.lyric::after{content:"";position:absolute;left:22%;bottom:-.42em;width:.6em;height:.6em;background:inherit;border-right:2px solid #4a3a28;border-bottom:2px solid #4a3a28;transform:translateX(-50%) rotate(45deg)}
+.lyric span{background:linear-gradient(90deg,#2a1f17 var(--p),#7b5c42 var(--p));-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.lyric .noteIcon{display:inline-block;width:.75em;height:1em;vertical-align:-.05em;fill:currentColor}
+.lyric:not(.marked) .noteIcon{color:#3d3328}
+#lyricBa{transform:translate(-50%,-100%);font-size:clamp(20px,3.3vw,38px);background:#fff3d6}
+body.wideView #lyricBa{font-size:clamp(17px,2.6vw,30px)}
+#lyricBa.kwaejiLive:not(.big){font-size:clamp(20px,2.6vw,30px)}
+@media(max-height:420px){#lyricBa.kwaejiLive:not(.big){font-size:20px;padding-left:.5em;padding-right:.5em}}
+body.ringSong.wideView #lyricBa:not(.big){font-size:clamp(20px,3.3vw,38px)} /* 강강술래는 멀리 볼 때(빠른 대목)도 칠 글자와 구슬을 줄이지 않는다 */
+#lyricBa.big,body.wideView #lyricBa.big{font-size:clamp(34px,5.6vw,60px);min-width:2.5em;text-align:center;box-sizing:border-box}
+@media (max-height:420px){#lyricBa.big,body.wideView #lyricBa.big{font-size:32px}}
+#lyricBa::after{left:50%}
+#lyricBa span{background-image:linear-gradient(90deg,#401408 var(--p),#7b5c42 var(--p))}
+#lyricBa.marked{padding-bottom:calc(var(--rb,12px) + 3px)}
+#lyricBa.marked span{background:none;color:#7b5c42;-webkit-text-fill-color:currentColor;word-spacing:.18em}
+#lyricBa i{position:relative;display:inline-block;font-style:normal;transition:transform .07s}
+#lyricBa i.hit{color:#2a1f17}
+#lyricBa i.hit::after{content:"";position:absolute;left:50%;bottom:-.12em;width:.2em;height:.2em;margin-left:-.1em;border-radius:50%;background:currentColor}
+#lyricBa i.next{color:#2a1f17}
+#lyricBa i.on{color:#b02a14}
+#lyricBa i.now{transform:translateY(-.05em) scale(1.16)}
+/* 글자 아래 결과: 끝 화면 구슬과 같은 그림. 맞으면 빛나고 놓치면 빈 구슬 */
+#lyricBa i.hit[data-res]::after{top:100%;bottom:auto;width:var(--rb,12px);height:var(--rb,12px);margin-left:calc(var(--rb,12px) / -2);border-radius:0;background:none center/100% 100% no-repeat;image-rendering:pixelated;animation:beadPop .14s ease-out}
+#lyricBa i.hit[data-res=ok]::after{background-image:url(art/onghe/bead-on.png)}
+#lyricBa i.hit[data-res=best]::after{background-image:url(art/kwaeji/bead-best.png)}
+#lyricBa i.hit[data-res=off]::after{background-image:url(art/onghe/bead-off.png)}
+@keyframes beadPop{from{transform:scale(1.7)}to{transform:scale(1)}}
+#lyricBa i.hit[data-side=L]{color:#2f6fb3}#lyricBa i.hit[data-side=R]{color:#c2412d}#lyricBa i.hit[data-side].on{opacity:.6}
+#lyricBa .ball[data-side=L]{filter:hue-rotate(175deg) saturate(1.3) drop-shadow(0 0 1px #1d3f66)}#lyricBa .ball[data-side=R]{filter:hue-rotate(-35deg) saturate(1.6) drop-shadow(0 0 1px #6a1f12)}
+.handPad{position:fixed;bottom:0;width:28%;padding:6px 0 calc(6px + env(safe-area-inset-bottom));text-align:center;font-weight:700;font-size:16px;color:#fff;pointer-events:none;z-index:8;text-shadow:0 1px 0 #0006;opacity:.85}
+.handPad[data-side=L]{left:0;background:#2f6fb3b0;border-top-right-radius:10px}.handPad[data-side=R]{right:0;background:#c2412db0;border-top-left-radius:10px}
+.handPad.hit{animation:padHit .16s ease-out}@keyframes padHit{from{filter:brightness(1.8)}to{filter:none}}
+.handPad{transform-origin:bottom center}.handPad.want{animation:padWant .7s ease-out}@keyframes padWant{0%,40%,80%{transform:scale(1.25);filter:brightness(1.7);opacity:1}20%,60%{transform:scale(1.15);filter:brightness(1.2)}100%{transform:none;filter:none}}
+@media (prefers-reduced-motion:reduce){.handPad.hit,.handPad.want{animation:none}.handPad.want{filter:brightness(1.5);opacity:1}}
+@media (max-height:420px){.handPad{width:18%;font-size:12px;padding:2px 0 calc(2px + env(safe-area-inset-bottom));opacity:.7}}
+#lyricBa .ball{position:absolute;left:0;top:0;background:url(art/kwaeji/bead-best.png) center/100% 100% no-repeat;image-rendering:pixelated;filter:drop-shadow(0 0 1px #4a3a28)}
+#lyricBa .combo{position:absolute;right:.3em;bottom:-.62em;font-size:clamp(13px,1.5vw,18px);font-weight:700;line-height:1.3;color:#4a2412;border:2px solid;background:none;border-color:transparent;border-image:var(--notePaper);padding:0 .45em;white-space:nowrap;-webkit-text-fill-color:currentColor}
+#lyricBa.kwaejiLive .combo{font-size:clamp(16px,1.5vw,18px)}
+#lyricBa.short:not(.big) .combo{right:auto;left:calc(50% + 1.3em)}
+#lyricBa.big .combo{right:auto;left:calc(100% + 4px);bottom:.4em}
+/* 강강술래: 연속 수는 말풍선 오른쪽 바깥 8px(화면 끝이 모자라면 왼쪽)라 「래」 아래 결과 구슬을 가리지 않는다 */
+body.ringSong #lyricBa:not(.big) .combo{left:calc(100% + 10px);right:auto;bottom:0;transform-origin:0 50%} /* 테두리 2px 바깥으로 8px */
+body.ringSong #lyricBa.comboL:not(.big) .combo{left:auto;right:calc(100% + 10px);transform-origin:100% 50%}
+body.ringSong #lyricBa.comboUp:not(.big) .combo{left:auto;right:0;bottom:calc(100% + 8px);transform-origin:100% 100%} /* 좁은 화면: 양옆에 안 들어가면 말풍선 위 8px */
+@media (prefers-reduced-motion:reduce){#lyricBa i{transition:none}#lyricBa i.now{transform:none}#lyricBa i.hit[data-res]::after{animation:none}}
+.msg{position:fixed;left:50%;transform:translateX(-50%);width:max-content;max-width:86vw;text-align:center;font-weight:700;color:#3d3328;border:2px solid;background:none;border-color:transparent;border-image:var(--notePaper);padding:.25em .8em;pointer-events:none;white-space:pre-line}
+#topMsg{top:max(10px,env(safe-area-inset-top));font-size:clamp(16px,2.6vw,30px)}
+#fbMsg{top:calc(max(10px,env(safe-area-inset-top)) + clamp(40px,8vh,70px));font-size:clamp(18px,3vw,34px)}
+.cheerText{position:fixed;z-index:8;pointer-events:none;display:flex;align-items:center;justify-content:center;white-space:nowrap;font:700 20px/1 "Minyo Hahmlet";color:#6f4a33}
+/* 강강술래 빨라짐 안내: 받는 말풍선 옆에 왼쪽 위 끝을 놓는다(scene.js placeBaNotice). 낮은 화면의 아래 자리보다 앞선다 */
+#topMsg.byBa{bottom:auto;transform:none}
+/* 강강술래: 안내 글은 손가락 옆 모래 위라 한 단계 작게 */
+@media (min-height:421px){body.ringSong #topMsg,body.ringSong #fbMsg{font-size:clamp(18px,1.9vw,26px)}}
+/* 끝 화면: 공용 결과 판을 쓰지 않는다. 달밤 마당을 크게 두고 위에 작은 쪽지, 아래에 장단 띠만 올린다 */
+#endScreen{pointer-events:none;display:flex;flex-direction:column;justify-content:space-between;padding:max(8px,env(safe-area-inset-top)) 12px max(8px,env(safe-area-inset-bottom));align-items:center}
+#endScreen>*{pointer-events:auto}
+.endTop{display:flex;align-items:center;gap:clamp(10px,2vw,26px);padding:0 clamp(8px,1.2vw,16px);max-width:94vw;border-width:20px;border-image-width:20px;animation:noteDrop .28s ease-out}
+@keyframes noteDrop{from{transform:translateY(-120%)}to{transform:none}}
+@keyframes bandUp{from{transform:translateY(120%)}to{transform:none}}
+/* 도장 자리는 찍히기 전에도 비워 두어 쪽지 폭이 출렁이지 않는다 */
+#endSeal{display:flex;flex-direction:column;align-items:center}
+#endSeal[hidden]{display:flex!important;visibility:hidden}
+#endSeal:not([hidden]){animation:sealIn .16s ease-out}
+#endSeal img{width:var(--seal);height:var(--seal);image-rendering:pixelated;display:block}
+#endSeal.top img{width:var(--sealTop);height:var(--sealTop)}
+.endTop.rewardNote #endSeal img{width:max(var(--rewardSeal,96px),var(--seal));height:max(var(--rewardSeal,96px),var(--seal));flex-shrink:0}
+.endTop.rewardNote #endSeal.top img{width:max(var(--rewardSeal,96px),var(--sealTop));height:max(var(--rewardSeal,96px),var(--sealTop))}
+.endTop.rewardNote .endInfo{min-width:0}
+.endTop.rewardNote~.endBottom{margin-top:auto}
+@media (max-height:420px){
+  #endScreen .endTop.rewardNote{display:grid;grid-template-columns:var(--rewardSeal,96px) minmax(0,1fr);gap:2px 8px;padding:0}
+  #endScreen .endTop.rewardNote .endInfo{display:contents}
+  #endScreen .endTop.rewardNote #endSeal{grid-column:1;grid-row:1 / 3}
+  #endScreen .endTop.rewardNote #endSay{grid-column:2;grid-row:1}
+  #endScreen .endTop.rewardNote #endNext{grid-column:2;grid-row:2}
+  #endScreen .endTop.rewardNote #endCount{grid-column:1 / -1;grid-row:3;display:block;margin:0}
+  #endScreen .endTop.rewardNote #endTip{grid-column:1 / -1;grid-row:4;display:block}
+}
+#endStamp{font-family:"Minyo Hahmlet";font-weight:700;font-size:clamp(16px,1.6vw,22px);color:#8f2f1c}
+@keyframes sealIn{from{transform:scale(1.6)}to{transform:scale(1)}}
+@media (prefers-reduced-motion:reduce){#endSeal:not([hidden]),.endTop,.endBottom{animation:none}}
+.endInfo{padding-right:clamp(10px,1.6vw,22px)}
+.endInfo p{margin:.1em 0;text-wrap:balance}
+#endSay{font-family:"Minyo Hahmlet";font-weight:400;font-size:clamp(18px,2.2vw,28px);text-wrap:balance}
+#endCount,#endTip{font-size:clamp(16px,1.4vw,18px);color:#5f5442}
+#endNext{font-size:clamp(16px,1.4vw,18px);font-weight:400;color:#8a4a1f}
+/* 끝에서 고장 · 하는 일 되짚기(2026-11-20 판 20 B1, 승인 시안 docs/games/minyo/refs/고칠거리/b1-end-recap.png): 아래 띠 왼쪽에 고장 · 하는 일 · 노래 알기를 위아래로,
+   오른쪽은 위에 구슬, 아래에 단추. 쪽지는 손대지 않는다(2026-11-06 끝 화면 A: 쪽지 높이는 도장 칸이 정함). 낮은 화면 · 좁은 폭은 자리가 없어 뺀다 */
+.endRecapRow{display:flex;flex-direction:column;align-items:flex-start;justify-content:center;gap:6px}
+#endRecap{margin:0;font-size:clamp(16px,1.4vw,18px);line-height:1.25;color:#5f5442;white-space:nowrap}
+#endRecap b,#endRecap span{display:block}
+#endRecap b{font-size:clamp(17px,1.5vw,20px);font-weight:700;color:#4a3a28} /* 시안처럼 고장 이름을 하는 일보다 한 단계 크게 */
+#endScreen #endBook{flex:none;min-height:44px;padding:0 .6em;font-size:clamp(16px,1.4vw,18px)}
+@media (min-height:421px) and (min-width:601px){
+  .endBottom:has(>.endRecapRow:not([hidden])){display:grid;grid-template-columns:auto auto;align-items:center;justify-items:center;column-gap:clamp(14px,2.4vw,34px);row-gap:6px}
+  .endBottom .endRecapRow{grid-row:1/3;justify-self:start}
+  .endBottom:has(>.endRecapRow:not([hidden])) #endBeads{grid-column:2;grid-row:1}
+  .endBottom:has(>.endRecapRow:not([hidden])) .row{grid-column:2;grid-row:2}
+}
+@media (max-height:420px),(max-width:600px){#endScreen .endRecapRow{display:none}}
+ /* 16px로 키운 만큼 좁은 폰 쪽지가 길어지지 않게 */
+body.ringSong #endCount,body.ringSong #endNext,body.ringSong #endTip{font-size:clamp(16px,1.4vw,18px)} /* 다음에 무엇을 고칠지 읽을 글이라 16px 아래로 안 간다 */
+body.ringSong #endSeal #endStamp{font-size:clamp(16px,1.6vw,22px)}
+@media (max-height:420px) and (orientation:landscape){
+  body.wolSong #endScreen .endTop.rewardNote{box-sizing:border-box;width:348px;max-width:calc(100vw - 24px);grid-template-columns:96px minmax(0,1fr);grid-template-rows:repeat(4,auto);gap:0 8px;border-width:16px;padding:0;align-items:center}
+  body.wolSong #endScreen .endTop.rewardNote #endSeal{grid-column:1;grid-row:1 / 5}
+  body.wolSong #endScreen .endTop.rewardNote #endSay{grid-column:2;grid-row:1;font-size:16px;line-height:1.15}
+  body.wolSong #endScreen .endTop.rewardNote #endCount{grid-column:2;grid-row:2;font-size:16px;line-height:1.15}
+  body.wolSong #endScreen .endTop.rewardNote #endNext{grid-column:2;grid-row:3;font-size:16px;line-height:1.15}
+  body.wolSong #endScreen .endTop.rewardNote #endTip{grid-column:2;grid-row:4;font-size:16px;line-height:1.15}
+  body.wolSong #endScreen .endTop.rewardNote .endInfo{padding:0}
+  body.wolSong #endScreen .endTop.rewardNote #endSeal img{width:96px;height:96px}
+  body.wolSong #endScreen .endTop.rewardNote #endStamp{line-height:20px;margin:0}
+}
+#endSeal.gold img{box-shadow:0 0 0 3px #d9ab3f}
+#endSeal.gold #endStamp{color:#a8761a;margin-top:5px} /* 금색 테는 칸을 차지하지 않아 글자를 내린다 */
+#endSeal.empty img{opacity:.4}
+#endSeal.empty #endStamp{visibility:hidden} /* 맞힘 0: 이름 칸 자리는 남겨 쪽지 크기가 그대로 */
+.endBottom{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:clamp(6px,1.4vw,18px);padding:0 clamp(10px,2vw,22px);max-width:96vw;border-width:14px;border-image-width:14px;animation:bandUp .28s ease-out}
+#endBeads{display:flex;flex-wrap:wrap;justify-content:center;gap:2px;--bead:12px}
+#endBeads i{width:var(--bead);height:var(--bead);background:url(art/onghe/bead-off.png) center/100% 100% no-repeat;image-rendering:pixelated;visibility:hidden}
+#endBeads i.shown{visibility:visible}
+#endBeads i.on{background-image:url(art/onghe/bead-on.png)}
+#endBeads i.best{background-image:url(art/kwaeji/bead-best.png)}
+.endBottom .row{margin-top:0;flex-wrap:nowrap}
+@media (max-height:420px){
+  .plate{border-width:16px;border-image-width:16px}
+  /* 낮은 화면: 위쪽은 노랫말 자리라 곡 안내는 왼쪽 아래 땅으로 */
+  #topMsg{top:auto;bottom:max(4px,env(safe-area-inset-bottom));left:max(6px,env(safe-area-inset-left));transform:none;font-size:16px}
+  #fbMsg{left:max(6px,env(safe-area-inset-left));top:max(6px,env(safe-area-inset-top));transform:none;font-size:18px}
+  #endScreen{padding-top:max(3px,env(safe-area-inset-top));padding-bottom:max(3px,env(safe-area-inset-bottom))}
+  .endBottom{flex-wrap:nowrap}
+  .endBottom{padding:0 6px;outline:0;border-width:8px;border-image-width:8px}
+  .endBottom .go{min-width:80px;min-height:44px;padding:0 .4em;font-size:18px;border-width:10px 12px;border-image-width:10px 12px}
+  #endSeal{flex-direction:row;gap:8px}
+  .endTop{padding:0 10px;border-width:9px;border-image-width:9px}
+  #endStamp,#endSeal.gold #endStamp{font-size:16px;white-space:nowrap;margin-top:0}
+  #endSay{font-size:17px}
+  #endTip{display:none}
+  #endTip.warn{display:block;font-size:16px} /* 저장 실패 경고는 낮은 화면 · 모든 곡에서 남긴다 */
+  /* 도장이 있는 곡 줄은 좁으니 곡 설명을 뺀다 */
+  .song.open:has(.got) .ds{display:none}
+  body.inFrame .endTop{max-width:calc(100vw - 264px)} /* 사이트 모서리 단추를 피한다 */
+  /* 맞힌 수와 다음 목표를 한 줄로 잇는다. 좁으면 다음 목표가 통째로 아랫줄로 간다 */
+  #endCount,#endNext{display:inline-block;font-size:16px;line-height:1.15}
+  #endCount{margin-right:10px}
+  /* 쪽지 맞힌 수 두 조각을 줄 높이 상자로. 함렛은 글자 칸이 약 1.56em이라 inline 조각 상자가 줄 높이(1.15 ~ 1.2)보다 커서
+     위아래 줄 상자에 3 ~ 6px 걸쳐 잡혔다(글자 점은 안 닿음, 그래프 검수 7회차 E1 · 8회차 앞 재기). 자리와 줄 바꿈은 그대로 */
+  #endCount>span{display:inline-block}
+  /* 강강술래 낮은 화면: 다음에 무엇을 고칠지 알려 주는 조언까지 남기고, 읽을 글은 16px */
+  body.ringSong #endCount,body.ringSong #endNext,body.ringSong #endTip{display:inline-block;font-size:16px}
+  body.ringSong #endNext{margin-right:10px}
+  /* 도장 이름을 그림 아래로 쌓아 글 칸을 넓히고 줄 사이를 좁혀, 쪽지가 담 위 구경꾼을 덜 가린다 */
+  body.ringSong #endSeal{flex-direction:column;gap:0}
+  body.ringSong #endSeal #endStamp{font-size:16px;line-height:1.15}
+  body.ringSong .endTop{gap:8px;padding:0 4px}
+  body.ringSong .endInfo{padding-right:4px;line-height:1.15} /* 맞힌 수 · 다음 목표 · 조언이 한 줄에 놓일 때 줄 높이가 부모 글꼴만큼 벌어지지 않게 */
+  body.ringSong .endInfo p{margin:0;line-height:1.15}
+}
+@media(max-width:600px) and (orientation:landscape){
+  .endBottom{flex-wrap:wrap;width:96vw}
+  .endBottom .row{width:100%}
+  .endBottom .go{flex:1 1 0;min-width:0;min-height:48px;padding:0 .1em;border-width:10px 12px;border-image-width:10px 12px;white-space:nowrap}
+  .endBottom .row:has(#endOn:not([hidden])){flex-wrap:wrap}
+  .endBottom #endOn{order:9;flex:1 1 100%} /* 좁은 폰: 다음 곡은 다시 · 지도 · 박 맞추기 아랫줄에 폭 전체로 */ /* 곡 이름이 길어(「멸치 후리는 소리」) 다른 단추의 세 배 */
+}
+/* 박 맞추기 */
+#calibDots{display:flex;justify-content:center;gap:8px;margin:.6em 0}
+#calibDots i{width:24px;height:24px;background:url(art/onghe/bead-off.png) center/100% 100% no-repeat;image-rendering:pixelated}
+#calibDots i.on{background-image:url(art/onghe/bead-on.png)}
+#calibTap{width:220px;min-height:64px;margin:0 auto 8px;font-size:18px}
+#calibScreen .about{font-size:clamp(16px,2.1vw,26px)}
+@media(max-height:420px) and (min-width:601px){
+ #calibScreen .card{display:grid;grid-template-columns:240px minmax(0,1fr);gap:6px 16px;width:690px;align-items:center}
+ #calibScreen h2{grid-column:1;grid-row:1;font-size:28px}
+ #calibScreen .about{grid-column:1;grid-row:2;font-size:16px;line-height:24px;margin:0!important}
+ #calibDots{grid-column:2;grid-row:1;margin:0}
+ #calibTap{grid-column:2;grid-row:2}
+ #calibScreen .row{grid-column:2;grid-row:3}
+}
+/* 시작: 어두운 막 없이 무대 위에서 바로 시작한다. 제목은 위 판, 단추는 아래 띠, 누가 무엇을 부르는지는 말풍선이 보여 준다 */
+#startScreen{display:flex;flex-direction:column;align-items:center;pointer-events:none;padding:max(8px,env(safe-area-inset-top)) 12px max(8px,env(safe-area-inset-bottom))}
+.startHead,.startFoot{pointer-events:auto;text-align:center;max-width:96vw;border-width:20px;border-image-width:20px}
+.startHead{padding:0 1.4em}
+.startHead p{margin:.1em 0}
+#startPlace{color:#6f6556;font-size:clamp(16px,1.3vw,17px)}
+#startTitle{margin:0;font-family:"Minyo Hahmlet";font-size:clamp(22px,2.6vw,36px);line-height:1.2}
+#startAbout{font-size:clamp(16px,1.4vw,18px)}
+#startWork{display:none}
+.startFoot{margin-top:auto;padding:0 .6em}
+.startFoot .row{margin:0;align-items:center;flex-wrap:nowrap}
+#startGo{min-width:180px;min-height:64px;font-size:clamp(22px,2.4vw,30px)}
+#startCredit{font-size:14px;margin:.4em 0 0}
+#startScreen.feastStart #startCredit{font-size:16px}
+#startScreen.feastStart #startAbout,#startScreen.feastStart #startWork{white-space:pre-line}
+.modes{display:flex;justify-content:center;gap:6px;margin:0 0 .3em}
+.modes button{min-height:44px;padding:0 .3em;font-size:clamp(16px,1.5vw,19px);font-weight:700;color:#4a3a28;white-space:nowrap;background:none;border-style:solid;border-width:11px 13px;border-image:url(art/ui/btn-wood.webp) 32 40 fill / 11px 13px stretch;opacity:.55}
+.modes button.on{opacity:1;font-weight:700;color:#8f2f1c}
+body.onStart #lyricMe::before,body.onStart #lyricBa::before{position:absolute;left:.5em;bottom:calc(100% + 4px);font-size:clamp(16px,1.4vw,18px);line-height:1.5;font-weight:700;color:#fff3d6;background:#4a3a28;padding:0 .5em;border-radius:.3em;white-space:nowrap;-webkit-text-fill-color:currentColor}
+body.onStart #lyricMe::before{content:"앞사람이 부르면"}
+body.onStart.ringSong #lyricMe::before{content:"앞소리꾼이 메기면"}
+body.onStart #lyricBa::before{content:"내가 받아요"}
+body.onStart .roleFit::before{font-size:clamp(16px,1.4vw,18px)!important}
+@media(max-width:600px) and (min-height:421px) and (orientation:landscape){
+  body.inFrame #startScreen{padding-top:80px}
+  .startFoot{width:96vw}
+  .startFoot .row{flex-wrap:wrap;gap:6px}
+  #startGo{flex:0 0 100%}
+  #startPractice,#startCalib,#startBack{flex:1 1 0;min-width:0;padding:0}
+  #startCredit{padding:0 .4em}
+  body.inFrame #endScreen{padding-top:52px}
+}
+@media (max-height:420px){
+  /* 낮은 화면은 받는 말풍선이 곧 곡 이름이라 제목 판을 뺀다. 알릴 말이 있을 때만 그 글을 띄운다 */
+  .startHead:not(.alert){display:none}
+  .startHead.workTitle:not(.alert){display:block;position:absolute;left:16px;top:clamp(64px,26vh,80px);box-sizing:border-box;width:192px;height:64px;padding:0}
+  .startHead.workTitle:not(.alert) #startPlace,.startHead.workTitle:not(.alert) #startAbout{display:none}
+  .startHead.workTitle:not(.alert) #startTitle{font-size:18px;line-height:22px;white-space:nowrap}
+  .startHead.workTitle:not(.alert) #startWork{display:block;font-size:16px;line-height:20px;margin:0;white-space:nowrap}
+  .startHead.alert #startPlace,.startHead.alert #startTitle{display:none}
+  .startHead,.startFoot{border-width:9px;border-image-width:9px}
+  .startFoot{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:4px 8px;padding:0 .3em}
+  .startFoot .modes{margin:0}
+  #startGo{min-width:96px;min-height:44px;font-size:18px;border-width:10px 12px;border-image-width:10px 12px}
+  .modes button{min-height:44px;font-size:16px;border-width:8px 10px;border-image-width:8px 10px}
+  #startCredit{display:none}
+  body.inFrame #fbMsg{left:132px}
+}
+@media (max-height:420px) and (min-aspect-ratio:1/1){
+  .riverSong #startScreen .startFoot{position:absolute;left:216px;right:8px;width:auto;max-width:none}
+  .riverSong #startScreen .startFoot .row{width:100%;flex-wrap:nowrap}
+  .riverSong #startScreen .startFoot .row button{min-width:0;flex:1;padding-left:5px;padding-right:5px}
+}
+/* 세로 화면은 막는다(DECISIONS 2026-11-19 밤): 맨 위 층 창으로 노래 알기 족자까지 덮는다 */
+#turnCover{position:fixed;inset:0;width:100%;height:100%;max-width:none;max-height:none;margin:0;padding:16px;box-sizing:border-box;border:0;background:#2b2620;color:#3b2a1c;place-items:center}
+#turnCover[open]{display:grid}
+#turnCover::backdrop{background:#2b2620}
+.turnCard{display:grid;justify-items:center;gap:14px;max-width:min(480px,86vw);padding:8px 12px;text-align:center;font:700 clamp(22px,3.6vw,32px)/1.4 "Minyo Hahmlet",serif}
+.turnCard svg{width:clamp(72px,12vw,120px);height:clamp(72px,12vw,120px);color:#6b4933}
+.turnCard .turnFine{display:none}
+@media (pointer:fine){.turnCard .turnCoarse{display:none}.turnCard .turnFine{display:inline}}
+#turnRotate{min-height:48px;padding:0 20px;font:700 18px "Minyo Hahmlet",serif}
+</style>
+<link rel="stylesheet" href="ui-polish.css?v=4c5e743d5d">
+<link rel="stylesheet" href="scroll.css?v=4c5e743d5d">
+<link rel="stylesheet" href="songbook.css?v=4c5e743d5d">
+</head>
+<body>
+<canvas id="cv"></canvas>
+<div class="screen" id="mapScreen">
+  <div id="mapArt"></div>
+  <div class="plate" id="songPanel" data-test="song-panel" hidden></div>
+</div>
+<div class="screen" id="startScreen" hidden>
+  <div class="startHead plate">
+    <p id="startPlace"></p>
+    <h2 id="startTitle"></h2>
+    <p id="startAbout"></p>
+    <p id="startWork"></p>
+  </div>
+  <div class="startFoot plate">
+    <div class="modes" id="startModes" hidden><button id="modeEasy" data-test="mode-easy">쉬움 노랫말</button><button id="modeHard" data-test="mode-hard">어려움 장구 장단</button></div>
+    <div class="row">
+      <button class="go" id="startGo" data-test="start">시작</button>
+      <button class="go sub small" id="startPractice" data-test="practice" hidden>처음 배우기</button>
+      <button class="go sub small" id="startBack" data-test="back">지도</button>
+      <button class="go sub small" id="startCalib" data-test="calib-open">소리 맞추기</button>
+    </div>
+    <p class="note" id="startCredit" hidden></p>
+  </div>
+</div>
+<div id="edgeBand"></div>
+<div class="lyric" id="lyricMe" data-test="lyric-me" hidden><span></span><img class="lyricPaper" src="art/ui/polish/bubble2-call.abb46753df4b.webp" alt="" draggable="false"></div>
+<div class="lyric" id="lyricBa" data-test="lyric-ba" hidden><span></span><b class="ball" data-test="ball" hidden></b><b class="combo" data-test="combo" hidden></b><img class="lyricPaper" src="art/ui/polish/bubble2-response.44e465f81eb7.webp" alt="" draggable="false"></div>
+<div class="msg" id="topMsg" hidden></div>
+<div class="msg" id="fbMsg" hidden></div>
+<div class="plate" id="feastBand" data-test="feast-band" hidden><span></span><b></b><small></small><button class="go" id="feastRetry" data-test="feast-retry" hidden>다시 불러오기</button></div>
+<div class="screen" id="endScreen" hidden>
+  <div class="endTop plate" data-test="end">
+    <div id="endSeal" hidden><img id="endSealImg" alt=""><span id="endStamp" data-test="end-stamp"></span></div>
+    <div class="endInfo">
+      <p id="endSay" data-test="end-say"></p>
+      <p id="endCount"></p>
+      <p id="endNext"></p>
+      <p id="endTip" data-test="end-tip"></p>
+    </div>
+  </div>
+  <div class="endBottom plate">
+    <div class="endRecapRow" id="endRecapRow" hidden><p id="endRecap" data-test="end-recap"></p><button class="go sub small" id="endBook" data-test="end-songbook">노래 알기</button></div>
+    <div id="endBeads" data-test="end-beads"></div>
+    <div class="row">
+      <button class="go" id="endAgain" data-test="again">다시</button>
+      <button class="go sub" id="endHard" data-test="end-hard" hidden>어려움</button>
+      <button class="go sub" id="endMap" data-test="to-map">지도</button>
+      <button class="go sub" id="endOn" data-test="end-next-song" hidden><span class="endOnLabel">다음 곡</span><span id="endOnName"></span><i class="endOnPlay" aria-hidden="true"></i></button>
+      <button class="go sub small" id="endCalib" data-test="end-calib" hidden>소리 맞추기</button>
+    </div>
+  </div>
+</div>
+<div class="screen over" id="calibScreen" hidden>
+  <div class="card plate" data-test="calib">
+    <h2>소리 맞추기</h2>
+    <p class="calibReason"><span>소리와 누르는 때가 다르면</span> <span>여기서 맞춰요</span></p>
+    <p class="about">장구 소리에 맞춰 화면을 8번 눌러요</p>
+    <div id="calibDots"></div>
+    <button class="go" id="calibTap" data-test="calib-tap">여기를 톡</button>
+    <div class="row"><button class="go sub small" id="calibBack" data-test="calib-back">시작 화면으로</button></div>
+  </div>
+</div>
+<script src="../../kit/gf-kit.js?v=4c5e743d5d"></script>
+<script src="js/regions.js?v=4c5e743d5d"></script>
+<script src="js/songs.js?v=4c5e743d5d"></script>
+<script src="js/rules.js?v=4c5e743d5d"></script>
+<script src="js/audio.js?v=4c5e743d5d"></script>
+<script src="js/scene.js?v=4c5e743d5d"></script>
+<script src="js/yard.js?v=4c5e743d5d"></script>
+<script src="js/sky.js?v=4c5e743d5d"></script>
+<script src="js/ring.js?v=4c5e743d5d"></script>
+<script src="js/net.js?v=4c5e743d5d"></script>
+<script src="js/boat.js?v=4c5e743d5d"></script>
+<script src="js/villages.js?v=4c5e743d5d"></script>
+<script src="js/screens.js?v=4c5e743d5d"></script>
+<script src="js/pause-paper.js?v=4c5e743d5d"></script>
+<script src="js/intro.js?v=4c5e743d5d"></script>
+<script src="js/songbook-data.js?v=4c5e743d5d"></script>
+<script src="js/songbook.js?v=4c5e743d5d"></script>
+<script src="js/learn.js?v=4c5e743d5d"></script>
+<script src="js/feast.js?v=4c5e743d5d"></script>
+<script src="js/storycuts.js?v=4c5e743d5d"></script><script src="js/story.js?v=4c5e743d5d"></script>
+<script src="js/finale.js?v=4c5e743d5d"></script>
+<dialog id="turnCover" data-test="turn-cover" aria-labelledby="turnText">
+  <div class="plate turnCard">
+    <svg viewBox="0 0 64 64" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><rect x="8" y="20" width="22" height="36" rx="3"/><rect x="26" y="34" width="32" height="20" rx="3" stroke-dasharray="4 4"/><path d="M28 10a22 22 0 0 1 22 16"/><path d="M44 24l6 3 2-7"/></svg>
+    <p id="turnText"><span class="turnCoarse">가로로 돌려 주세요</span><span class="turnFine">창을 가로로 넓혀 주세요</span></p>
+    <button type="button" class="btnPaper" id="turnRotate" data-test="turn-rotate" hidden>가로로 보기</button>
+  </div>
+</dialog>
+<script src="js/game.js?v=4c5e743d5d"></script>
+</body>
+</html>

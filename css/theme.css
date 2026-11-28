@@ -1,0 +1,24 @@
+/* 2026-11-27: 색 시안 B와 C. 게임 화면에 쓰는 색은 이 파일에서 바꾸지 않는다. */
+:root, :root[data-theme="light"] {
+  --site-bg:#efe6d6; --site-panel:#fbf6ee; --site-ink:#2e2a24; --site-sub:#6b6152; --site-faint:#6b6152;
+  --site-chip:#f3e9da; --site-hover:#ead9c2; --site-edge:#e0d2bc; --site-soft:#f6eee2;
+  --site-accent:#e9793a; --site-press:#d4672b; --site-tint:#fbe2cf; --site-accent-ink:#9c3f10; --site-on-accent:#241b14;
+  --site-link:#225ca6; --site-gold:#845500; --site-silver:#58616d; --site-bronze:#985426;
+  --site-label:#2b2722e6; --site-label-ink:#fff4e6; --site-subject:#2b2722e6;
+  --site-shadow:0 1px 0 #d9c9ad,0 4px 14px #5a462a14;
+  --site-hero:#fbf6ee; --site-fame:#2b2722; --site-fame-ink:#fff4e6; --site-fame-sub:#cfc3b0; --site-fame-gold:#ffcf4a;
+  --site-foot:#2b2722; --site-foot-ink:#fff4e6; --site-foot-sub:#cfc3b0; --site-foot-line:#63594b;
+  --site-mark:#1e1e1e; --site-land:#e8590c; --site-white:#fff; --site-scrim:#000c;
+}
+:root[data-theme="dark"] {
+  --site-bg:#1b1916; --site-panel:#26231f; --site-ink:#f1e8da; --site-sub:#b9ad9a; --site-faint:#b1a590;
+  --site-chip:#2f2b26; --site-hover:#3a352f; --site-edge:#524a40; --site-soft:#2a2622;
+  --site-accent:#f08a4b; --site-press:#e0773a; --site-tint:#4a3324; --site-accent-ink:#ffb681; --site-on-accent:#1b1916;
+  --site-link:#91bdff; --site-gold:#f5cb68; --site-silver:#bac4d2; --site-bronze:#e3a77a;
+  --site-label:transparent; --site-label-ink:#fff; --site-subject:#171512bf;
+  --site-shadow:0 0 0 1px #34302a;
+  --site-hero:#26231ff5; --site-fame:#26231f; --site-fame-ink:#f1e8da; --site-fame-sub:#b9ad9a;
+  --site-mark:#f1e8da; --site-land:#f08a4b;
+}
+:root[data-theme="light"]:has(body.wall-page) { color-scheme:light; }
+:root[data-theme="dark"]:has(body.wall-page) { color-scheme:dark; }

@@ -1,0 +1,281 @@
+/* 홈 타일 벽(2026-11-26 대표 「A 타일벽을 기본안으로 가자」, 시안 docs/refs/site-dense-1126/mock/a.html).
+   칸: L 로고 · H 오늘의 활동 · C 오늘의 도전(1~3등) · g1~g7 활동 · st 내 도장 · P 오늘 많이 한 활동 · R 명예의 전당.
+   활동이 8개를 넘으면 남는 활동은 벽 아래에 2×2 칸으로 이어 붙는다(보고서 9번 가). */
+.home-wall { grid-template-areas:
+  "L  L  H  H  H  H  C  C"
+  "g1 g1 H  H  H  H  C  C"
+  "g1 g1 H  H  H  H  C  C"
+  "st st H  H  H  H  g2 g2"
+  "g3 g3 g4 g4 P  P  g2 g2"
+  "g3 g3 g4 g4 P  P  R  R"
+  "g5 g5 g6 g6 g7 g7 R  R"
+  "g5 g5 g6 g6 g7 g7 R  R"; }
+.home-wall .game.more { grid-column:span 2; grid-row:span 2; }
+.home-wall { grid-auto-rows:minmax(var(--row),auto); }
+.recent { grid-area:L; display:flex; flex-direction:column; gap:5px; padding:8px 12px; }
+.recent h2 { font-size:12px; margin:0; line-height:1.2; }
+.recent-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:8px; min-height:40px; flex:1; }
+.recent-grid button { position:relative; min-width:40px; min-height:40px; width:100%; padding:0; border:0; border-radius:8px; overflow:hidden; background:var(--chip); }
+.recent-picture, .recent-picture img { display:block; width:100%; height:100%; object-fit:cover; }
+.recent-grid button > span { position:absolute; bottom:0; left:0; right:0; padding:3px 4px; background:var(--site-label); color:var(--site-label-ink); font-size:12px; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+:root[data-theme="dark"] .recent-grid button > span { padding:14px 4px 3px; background:linear-gradient(transparent,var(--site-scrim) 14px); }
+.hero-text { background:var(--site-hero); }
+.all-activities { padding:24px 10px 8px; }
+.all-activities h2 { display:flex; align-items:baseline; gap:12px; margin:0 0 12px 6px; font-size:22px; }
+.all-activities h2 small { font-size:14px; color:var(--sub); }
+.activity-grid { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:12px; }
+.activity-card { display:block; min-width:0; width:100%; padding:0; overflow:hidden; border:0; border-radius:12px; background:var(--site-panel); box-shadow:var(--site-shadow); text-align:left; color:var(--ink); }
+.activity-picture { display:block; position:relative; width:100%; aspect-ratio:16/9; overflow:hidden; }
+.activity-picture img { display:block; width:100%; height:100%; object-fit:cover; }
+.activity-card > b { display:block; margin:8px 10px 2px; font-size:15px; line-height:1.4; }
+.activity-card > small { display:block; margin:0 10px 10px; color:var(--sub); font-size:12px; }
+.more-activities { display:block; min-height:40px; margin:18px auto 10px; padding:8px 28px; border:0; border-radius:999px; background:var(--chip); color:var(--ink); font-weight:900; }
+.more-activities[hidden] { display:none; }
+@media (min-width:700px) and (max-width:1100px) { .activity-grid { grid-template-columns:repeat(4,minmax(0,1fr)); } }
+@media (max-width:699px) { .activity-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:10px; } .all-activities { padding:20px 8px 8px; } }
+
+/* 오늘의 활동: 장들은 한 칸에 겹쳐 두고 보이는 장만 켠다(hero.js) */
+.hero { grid-area:H; touch-action:pan-y; }
+.hero-slide { position:absolute; inset:0; }
+.hero-slide.off { visibility:hidden; }
+.hero-slide.enter > * { animation:hero-in .35s ease-out; }
+@keyframes hero-in { from { opacity:0; } to { opacity:1; } }
+.hero-slide > .pixel-art { position:absolute; inset:0; width:100%; height:100%; aspect-ratio:auto; border-radius:0; }
+.hero-slide > .pixel-art img { width:100%; height:100%; object-fit:cover; }
+.hero .subj { left:12px; top:12px; height:1.6rem; font-size:.75rem; }
+.hero .subj .ic { width:1.15rem; height:1.15rem; }
+.hero-text { position:absolute; left:12px; bottom:12px; z-index:2; width:min(19rem, 52%); padding:.8rem .9rem .85rem; border-radius:12px; background:var(--site-panel); box-shadow:0 4px 14px #10182826; }
+.hero-text .label { margin:0; font-size:.75rem; font-weight:800; color:var(--sub); }
+.hero-text h2 { margin:.1rem 0 .15rem; font-size:1.375rem; font-weight:900; letter-spacing:-.02em; line-height:1.2; }
+.hero-text .sum { margin:0 0 .6rem; font-size:.8125rem; color:var(--sub); line-height:1.35; }
+.hero-cta { display:flex; flex-wrap:wrap; align-items:center; gap:.4rem .6rem; }
+.hero-cta .why { font-size:.75rem; font-weight:900; color:var(--coral-ink); }
+.hero-dots { position:absolute; right:10px; bottom:10px; z-index:3; display:flex; padding:0 .15rem; border-radius:999px; background:#1d243366; }
+.hero-dot { display:grid; place-items:center; width:2rem; height:2.75rem; min-width:0; min-height:0; padding:0; border:0; border-radius:999px; background:none; cursor:pointer; }
+.hero-dot::before { content:''; width:.45rem; height:.45rem; border-radius:999px; background:#ffffff99; transition:width .2s; }
+.hero-dot:hover::before { background:var(--site-panel); }
+.hero-dot[aria-current=true]::before { width:1.25rem; background:var(--site-panel); }
+.hero-dot:focus-visible { outline:3px solid #fff; outline-offset:-6px; }
+
+/* 오늘의 도전: 1~3등 이니셜까지. 단추는 하나, 자리만 크기마다 옮긴다 */
+.chal { grid-area:C; display:grid; grid-template-columns:minmax(0, 1fr) auto; grid-template-rows:auto minmax(0, 1fr) auto auto; grid-template-areas:"head head" "pic pic" "name go" "top top";
+  gap:.4rem .5rem; padding:.65rem .75rem .7rem; background:var(--site-panel); box-shadow:var(--site-shadow); }
+.chal .head { grid-area:head; display:flex; justify-content:space-between; align-items:center; gap:.5rem; }
+.chal .head h2 { margin:0; font-size:.8125rem; font-weight:900; }
+.chal .head a { color:var(--link); font-weight:800; font-size:.75rem; text-decoration:none; white-space:nowrap; }
+.chal .pic { grid-area:pic; position:relative; inset:auto; width:100%; height:100%; min-height:0; aspect-ratio:auto; border-radius:8px; overflow:hidden; }
+.chal .pic img { width:100%; height:100%; object-fit:cover; }
+.chal .name { grid-area:name; align-self:center; margin:0; min-width:0; font-size:.9375rem; font-weight:900; line-height:1.2; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.chal .go { grid-area:go; align-self:center; height:1.9rem; padding:0 .8rem; font-size:.8125rem; }
+.top3 { grid-area:top; margin:0; padding:0; list-style:none; display:grid; gap:1px; }
+.top3 li { display:grid; grid-template-columns:1.8rem 2.8rem minmax(0, 1fr); align-items:center; height:1.15rem; font-size:.75rem; font-weight:800; }
+.top3 li em { font-style:normal; text-align:right; font-variant-numeric:tabular-nums; }
+.top3 li.empty { color:var(--faint); grid-template-columns:1.8rem minmax(0, 1fr); }
+.top3 li.note { display:block; height:auto; color:var(--sub); font-weight:700; }
+.top3 .ini { font-size:.8125rem; }
+
+/* 활동 칸: 묶음 상자는 자리를 차지하지 않고 칸들이 바로 벽에 놓인다 */
+.tiles { display:contents; }
+.soon { display:grid; place-items:center; padding:.8rem; background:var(--site-panel); box-shadow:var(--site-shadow); color:var(--faint); font-size:.8125rem; font-weight:800; text-align:center; }
+
+/* 오늘 많이 한 활동 */
+.pop { grid-area:P; padding:.7rem .85rem; }
+.pop h2 { margin:0 0 .35rem; display:flex; justify-content:space-between; align-items:baseline; gap:.5rem; font-size:.8125rem; font-weight:900; }
+.pop h2 small { font-size:.6875rem; color:var(--faint); font-weight:700; white-space:nowrap; }
+.pop ol { margin:0; padding:0; list-style:none; display:grid; gap:.1rem; }
+.pop li button { display:grid; grid-template-columns:1.1rem minmax(0, 1fr) auto; align-items:center; gap:.35rem; width:100%; height:1.55rem; min-height:0; padding:0 .2rem; border:0; border-radius:6px; background:none; font:inherit; font-size:.8125rem; font-weight:800; color:var(--ink); text-align:left; cursor:pointer; }
+.pop li button:hover { background:var(--soft); }
+.pop li img { display:none; }
+.pop li .nm { overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.pop li em { font-style:normal; font-size:.75rem; color:var(--sub); font-weight:700; font-variant-numeric:tabular-nums; }
+.pop li:nth-child(n+6) { display:none; }
+.pop .note { margin:0; font-size:.75rem; color:var(--sub); font-weight:700; }
+
+/* 명예의 전당: 활동마다 1등 이니셜(오락실 도트 글자). 누르면 순위표(보고서 14번 가) */
+.fame { grid-area:R; display:flex; flex-direction:column; gap:.35rem; padding:.65rem .75rem .7rem; background:var(--site-fame); color:var(--site-fame-ink); box-shadow:none; }
+.fame .fh { display:flex; align-items:baseline; justify-content:space-between; gap:.5rem; color:inherit; text-decoration:none; }
+.fame .fh h2 { margin:0; font-size:.9375rem; line-height:1.2; color:var(--site-fame-gold); letter-spacing:.02em; }
+.fame .fh small { font-size:.6875rem; color:var(--site-fame-sub); font-weight:700; }
+.fame ol { flex:1; min-height:0; margin:0; padding:0; list-style:none; display:grid; align-content:space-between; }
+.fame li a { display:grid; grid-template-columns:3rem minmax(0, 1fr) auto 3.8rem; align-items:center; gap:.45rem; color:inherit; text-decoration:none; border-radius:6px; }
+.fame li a:hover { background:#ffffff14; }
+.fame li img { width:3rem; aspect-ratio:16 / 9; object-fit:cover; border-radius:4px; }
+.fame .gm { font-size:.75rem; font-weight:800; color:var(--site-fame-ink); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.fame .ini { color:var(--site-fame-gold); font-size:.875rem; }
+.fame .ini.none { color:var(--site-fame-sub); }
+.fame em { min-width:max-content; font-size:.75rem; font-style:normal; text-align:right; color:var(--site-fame-ink); white-space:nowrap; letter-spacing:.02em; }
+.fame .note { margin:0; font-size:.75rem; color:var(--site-fame-sub); font-weight:700; }
+
+/* 내 도장 */
+.mystamp { grid-area:st; display:flex; align-items:center; gap:.6rem; padding:0 .8rem; box-shadow:none; }
+.mystamp > .ic { flex:none; width:1.9rem; height:1.9rem; }
+.mystamp .tx { flex:1; min-width:0; display:grid; gap:.15rem; }
+.mystamp b { font-size:.875rem; font-weight:900; line-height:1.15; }
+.mystamp small { font-size:.6875rem; color:var(--sub); font-weight:700; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+.mystamp .go { flex:none; font-weight:900; color:var(--faint); font-size:1.1rem; }
+.mystamp .bar { height:.35rem; border-radius:999px; background:var(--chip); overflow:hidden; }
+.mystamp .bar i { display:block; height:100%; border-radius:999px; background:var(--coral); }
+
+/* 노트북: 10칸 × 9줄. 명예의 전당은 맨 아래 한 줄 띠 */
+@media (min-width:1500px) {
+  .home-wall { --rows:9; grid-template-areas:
+    "L  L  H  H  H  H  H  C  C  C"
+    "g2 g2 H  H  H  H  H  C  C  C"
+    "g2 g2 H  H  H  H  H  C  C  C"
+    "st st H  H  H  H  H  g1 g1 g1"
+    "g3 g3 H  H  H  H  H  g1 g1 g1"
+    "g3 g3 g4 g4 g4 g5 g5 g1 g1 g1"
+    "g6 g6 g4 g4 g4 g5 g5 P  P  P"
+    "g6 g6 g4 g4 g4 g7 g7 P  P  P"
+    "R  R  R  R  R  g7 g7 P  P  P"; }
+  .hero-text { width:min(21rem, 46%); padding:1rem 1.1rem 1.05rem; }
+  .hero-text h2 { font-size:1.625rem; }
+  .hero-text .sum { font-size:.875rem; }
+  .chal { grid-template-columns:56% minmax(0, 1fr); grid-template-rows:auto auto auto minmax(0, 1fr); grid-template-areas:"head head" "pic name" "pic go" "pic top"; gap:.45rem .8rem; padding:.8rem .9rem; }
+  .chal .name { font-size:1.0625rem; white-space:normal; }
+  .chal .go { justify-self:start; }
+  .chal .top3 { align-self:end; }
+  .top3 li { height:1.4rem; font-size:.8125rem; }
+  .top3 .ini { font-size:.875rem; }
+  .pop { padding:.75rem 1rem; }
+  .pop h2 { font-size:.9375rem; margin-bottom:.4rem; }
+  .pop li button { grid-template-columns:1.3rem 3.6rem minmax(0, 1fr) auto; height:2.2rem; font-size:.875rem; }
+  .pop li img { display:block; width:3.6rem; aspect-ratio:16 / 9; object-fit:cover; border-radius:6px; }
+  /* 사이트 글자는 1366 넘는 화면에서 조금씩 커진다(base.css html clamp). 1695에서 18px라 다섯 줄까지 */
+  .tile-name { font-size:.9375rem; }
+  .fame { flex-direction:row; align-items:center; gap:1rem; padding:.55rem 1rem; }
+  .fame .fh { flex-direction:column; align-items:flex-start; gap:.15rem; flex:none; }
+  .fame .fh h2 { font-size:1.0625rem; }
+  .fame ol { display:flex; gap:.9rem; align-content:normal; min-width:0; }
+  .fame li { flex:1; min-width:0; padding-left:.9rem; border-left:1px solid #2b3550; }
+  .fame li a { grid-template-columns:auto minmax(0, 1fr); grid-template-rows:auto auto; gap:.15rem .5rem; }
+  .fame li img { display:none; }
+  .fame .gm { grid-column:1 / -1; }
+  .fame .ini { grid-column:1; grid-row:2; font-size:.9375rem; }
+  .fame em { grid-column:2; grid-row:2; font-size:.875rem; text-align:left; }
+}
+
+/* 폰 세로 · 세로 태블릿: 4칸 자리. 도전 칸은 넓고 낮아 그림을 왼쪽에 둔다 */
+@media (max-width:699px), (orientation:portrait) and (max-width:1100px) {
+  .home-wall { grid-template-areas:
+    "L  L  L  L"
+    "H  H  H  H" "H  H  H  H" "H  H  H  H" "H  H  H  H"
+    "C  C  C  C" "C  C  C  C" "C  C  C  C"
+    "g1 g1 g2 g2" "g1 g1 g2 g2"
+    "g3 g3 g4 g4" "g3 g3 g4 g4"
+    "R  R  R  R" "R  R  R  R" "R  R  R  R" "R  R  R  R"
+    "g5 g5 g6 g6" "g5 g5 g6 g6"
+    "g7 g7 st st" "g7 g7 st st"
+    "P  P  P  P" "P  P  P  P" "P  P  P  P" "P  P  P  P"; }
+  .chal { grid-template-columns:40% minmax(0, 1fr); grid-template-rows:auto auto minmax(0, 1fr); grid-template-areas:"head go" "pic name" "pic top"; }
+  .chal .pic { height:auto; aspect-ratio:16 / 9; align-self:center; }
+  .chal .name { align-self:start; }
+  .chal .go { justify-self:end; }
+  .chal .top3 { align-self:end; }
+  .pop li:nth-child(6) { display:block; }
+}
+/* 세로 태블릿: 4칸 자리라 칸이 폰의 두 배쯤 크다. 도전 · 많이 한 활동의 글을 키우고 줄을 늘려 빈 곳을 채운다 */
+@media (orientation:portrait) and (min-width:700px) and (max-width:1100px) {
+  .chal { grid-template-columns:46% minmax(0, 1fr); gap:.7rem 1.2rem; padding:1rem 1.2rem; }
+  .chal .head h2 { font-size:.9375rem; }
+  .chal .head a { font-size:.875rem; }
+  .chal .name { font-size:1.375rem; }
+  .chal .go { height:2.4rem; padding:0 1rem; font-size:.9375rem; }
+  .top3 { gap:.2rem; }
+  .top3 li { height:2rem; font-size:1rem; grid-template-columns:2.4rem 3.8rem minmax(0, 1fr); }
+  .top3 .ini { font-size:1.0625rem; }
+  .pop { padding:1rem 1.2rem; }
+  .pop h2 { font-size:1rem; margin-bottom:.6rem; }
+  .pop li button { grid-template-columns:1.5rem 4.6rem minmax(0, 1fr) auto; gap:.6rem; height:2.6rem; font-size:.9375rem; }
+  .pop li img { display:block; width:4.6rem; aspect-ratio:16 / 9; object-fit:cover; border-radius:6px; }
+  .pop li:nth-child(-n+8) { display:block; }
+  .fame { padding:1rem 1.2rem; gap:.6rem; }
+  .fame .fh h2 { font-size:1.25rem; }
+  .fame .fh small { font-size:.8125rem; }
+  .fame li a { grid-template-columns:6rem minmax(0, 1fr) auto 5.5rem; gap:.9rem; padding:.2rem; }
+  .fame li img { width:6rem; border-radius:6px; }
+  .fame .gm { font-size:1rem; }
+  .fame .ini { font-size:1.375rem; }
+  .fame em { font-size:1.125rem; }
+  .mystamp { padding:0 1.4rem; gap:1rem; }
+  .mystamp > .ic { width:3rem; height:3rem; }
+  .mystamp b { font-size:1.25rem; }
+  .mystamp small { font-size:.875rem; white-space:normal; }
+  .mystamp .bar { height:.5rem; }
+}
+/* 폰 세로: 글을 줄인다 */
+@media (max-width:699px) {
+  .chal { gap:.3rem .6rem; padding:.55rem .65rem; }
+  .chal .head a { display:none; }
+  .chal .name { font-size:.875rem; }
+  .chal .go { height:1.9rem; padding:0 .7rem; font-size:.75rem; }
+  .hero-text { width:auto; right:12px; padding:.55rem .7rem .6rem; display:grid; grid-template-columns:minmax(0, 1fr) auto; align-items:center; gap:0 .6rem; }
+  .hero-text .label, .hero-text h2 { grid-column:1; }
+  .hero-text .sum { display:none; }
+  .hero-text .hero-cta { grid-column:2; grid-row:1 / span 2; }
+  .hero-cta .why { display:none; }
+  .hero-text .btn-play { height:2.4rem; padding:0 .8rem; font-size:.875rem; }
+  .hero-text h2 { font-size:1.125rem; margin:0; }
+  .hero-dots { top:6px; bottom:auto; right:8px; }
+  /* 장 넘기기 점도 누르는 칸이라 40px(폰 가로 F 시험) */
+  .hero-dot { width:2.5rem; height:2.5rem; }
+  .fame { padding:.55rem .7rem .6rem; }
+  .fame li a { grid-template-columns:2.6rem minmax(0, 1fr) auto 3.4rem; }
+  .fame li img { width:2.6rem; }
+  .mystamp { padding:0 .7rem; gap:.5rem; }
+  .mystamp small { white-space:normal; }
+  .mystamp > .ic { width:1.6rem; height:1.6rem; }
+  .mystamp .go { display:none; }
+}
+
+/* 폰 가로: 6칸 벽(wall.css). 첫 화면에 로고 · 오늘의 도전 · 오늘의 활동이 들고, 활동 칸과 명예의 전당 · 많이 한 활동 · 내 도장은 아래로 이어진다.
+   옛 8칸 블록은 한 화면에 넣으려고 글자를 9~11px로 줄였다(폰 가로 시험 실패). 이제 글자는 줄이지 않고, 누르는 줄은 40px(2026-11-27) */
+@media (orientation:landscape) and (max-height:520px) and (min-width:700px) {
+  .home-wall { grid-template-areas:
+    "L  L  H  H  H  H"
+    "C  C  H  H  H  H"
+    "C  C  H  H  H  H"
+    "C  C  H  H  H  H"
+    "g1 g1 g2 g2 R  R"
+    "g1 g1 g2 g2 R  R"
+    "g3 g3 g4 g4 R  R"
+    "g3 g3 g4 g4 R  R"
+    "g5 g5 g6 g6 P  P"
+    "g5 g5 g6 g6 P  P"
+    "g7 g7 st st P  P"
+    "g7 g7 st st P  P"; }
+  /* 로고 칸이 두 칸이라 소리 단추는 빼고 셋 */
+  .home-wall .logo nav .sound { display:none; }
+  /* 오늘의 도전은 기본 자리(머리 · 표지 · 이름과 단추 · 1~3등) 그대로 두고 표지가 남는 높이를 채운다. 작은 「순위표 ›」 글 단추만 뺀다 */
+  .chal .head a { display:none; }
+  .chal .go { height:2.5rem; }
+  .hero-dot { width:2.5rem; height:2.5rem; }
+  .pop h2 small, .fame .fh small, .mystamp small { font-size:.75rem; }
+  .pop li button { height:2.5rem; }
+  .fame .fh { min-height:2.5rem; align-items:center; }
+  .fame li a { min-height:2.5rem; grid-template-columns:minmax(0, 1fr) auto 3.8rem; }
+  .fame li img { display:none; }
+}
+
+/* 읽는 글 12px, 누르는 칸 40px. 필요한 칸만 내용 높이만큼 늘어난다. */
+.hero-dot { width:40px; min-height:40px; }
+.hero-text .btn-play, .chal .go { height:40px; }
+.chal .head a { display:inline-flex; align-items:center; min-width:40px; min-height:40px; }
+.pop h2 small, .fame .fh small, .mystamp small { font-size:max(12px,.75rem); }
+.pop li button, .fame li a, .fame .fh { min-height:40px; }
+.pop { min-height:260px; }
+.fame { min-height:290px; }
+@media (min-width:1500px) { .fame { min-height:80px; } }
+@media (max-width:699px), (orientation:portrait) and (max-width:1100px) {
+  .home-wall { grid-template-areas:
+    "L L L L" "L L L L"
+    "H H H H" "H H H H" "H H H H" "H H H H"
+    "C C C C" "C C C C" "C C C C"
+    "g1 g1 g2 g2" "g1 g1 g2 g2"
+    "g3 g3 g4 g4" "g3 g3 g4 g4"
+    "R R R R" "R R R R" "R R R R" "R R R R" "R R R R" "R R R R"
+    "g5 g5 g6 g6" "g5 g5 g6 g6"
+    "g7 g7 st st" "g7 g7 st st"
+    "P P P P" "P P P P" "P P P P" "P P P P" "P P P P" "P P P P";
+  }
+}

@@ -1,0 +1,286 @@
+/* 2026-11-10: list 2, bubble 2, foot 1. Reuse the chosen board artwork. */
+#songPanel.grouped{width:min(49%,690px);padding:8px 22px 28px 10px;border-width:22px;border-image-width:22px;overflow-x:hidden;overflow-y:auto;max-height:calc(100% - 24px)} /* 여섯 지역 · 잔치 줄이 들어가 큰 화면에서도 쪽지 안에서 내린다 */
+#songPanel.grouped h2{font-size:32px;margin:0 0 8px}
+.grouped .regionHeading{font-size:17px;line-height:1.2;margin:9px 0 3px;color:#734324}
+.grouped .song.open{display:grid;grid-template-columns:160px minmax(0,1fr) 64px;gap:12px;height:auto;min-height:98px;margin:4px 0 0;padding:3px 6px;border-width:9px 10px;border-image-width:9px 10px}
+.grouped .txt{min-width:0}
+.grouped .nm{display:block;white-space:nowrap;font-size:23px;line-height:1.2}
+.grouped .ds{font-size:16px;line-height:1.4;color:#433b30;white-space:normal;text-wrap:balance}
+.grouped .song.feast .ds{margin-top:2px} /* 「팔도 잔치」 제목 줄 상자와 1px 닿던 것을 띄움(그래프 검수 7회차 R2-03) */
+.grouped .listMeta,.grouped .lv{font-size:16px;line-height:1.5;white-space:nowrap}
+.grouped .lv{padding:0;background:none}
+.grouped .lv[data-level="1"]{color:#365d32}
+.grouped .lv[data-level="2"]{color:#80501d}
+.grouped .lv[data-level="3"]{color:#8d3429}
+.grouped .levelDots{display:inline-flex;gap:2px;vertical-align:middle;margin-left:4px}
+.grouped .levelDots i{width:5px;height:5px;border-radius:50%;background:currentColor}
+.grouped .side{height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px}
+.grouped .listStamp{width:100%;height:22px;display:flex;align-items:center;justify-content:center;white-space:nowrap;font-size:16px;color:#8f2f1c;font-weight:700}
+.grouped .song.open[data-test="song-singosan"]{grid-template-columns:var(--singosan-thumb,160px) minmax(0,1fr) 68px;padding-right:6px}
+.grouped .song[data-test="song-singosan"] .listStamp{font-size:16px}
+
+@media(min-width:500px) and (max-height:420px){.grouped .song[data-test="song-singosan"]{--singosan-thumb:80px}}
+.grouped .play{width:16px;height:20px}
+.grouped .got{display:none}
+.grouped .village{width:100%!important;height:auto!important;max-height:58px;object-fit:contain}
+@media(hover:hover){
+  button.song.open:hover{background:none}
+  /* 시작 창 단추는 그림 바탕이라 background를 건드리지 않는다. background:none이 크기 · 자리까지 지워 그림이 잘렸다(2026-11-13 대표) */
+  button.song.open:hover,.startFoot button:not(:disabled):hover{filter:brightness(1.06);transform:translateY(-1px)}
+}
+button.song.open:active,.startFoot button:not(:disabled):active{filter:brightness(.93);transform:translateY(2px) scale(.98)}
+button.song.open:disabled,.startFoot button:disabled{cursor:default;filter:grayscale(.65) brightness(.92);opacity:.6;transform:none}
+button.song.open:focus-visible,.startFoot button:focus-visible{outline:2px solid #8f2f1c;outline-offset:3px}
+
+.lyric{background:transparent;border-color:transparent;border-radius:0;isolation:isolate}
+#lyricBa{background:transparent}
+.lyric::after{display:none}
+.lyricPaper{position:absolute;left:-8px;top:-4px;width:calc(100% + 16px);height:calc(100% + 20px);z-index:-1;pointer-events:none}
+body:not(.onStart) .lyricPaper{will-change:transform}
+/* D: paper, tail and notices share the singer's fixed anchor. */
+body.captionD .lyric{font-size:20px;min-width:0;min-height:0;text-align:center;padding:.12em .6em .16em;border-width:0}
+body.captionD .lyric,body.captionD #lyricBa{transform:none}
+body.captionD #lyricBa,body.captionD.wideView #lyricBa,body.captionD.ringSong #lyricBa:not(.big),body.captionD #lyricBa.big{font-size:20px;min-width:0;padding-bottom:calc(var(--rb,12px) + 3px)}
+/* 지금 글자(i.now)는 1.16배로 살짝 뛴다. 뛴 글자 위끝도 종이 안에 있게 받는 말풍선 위 여백을 조금 둔다(captionDSize가 이 여백까지 재서 종이 크기를 정한다). */
+body.captionD #lyricBa{padding-top:.2em}
+/* The baked tail occupies 17.3% of both paper images. Crop it before stretching the body. */
+body.captionD .lyricPaper{clip-path:inset(0 0 17.3%);height:calc((100% + 8px)/.827)}
+body.captionD .lyric::after{display:block;left:var(--caption-tail-x);bottom:auto;top:calc(100% - 2px);width:10px;height:10px;background:#fff3d6;border-right:2px solid #6c5036;border-bottom:2px solid #6c5036;transform:translateX(-50%) rotate(45deg)}
+body.captionD #lyricMe::after{background:#fbf6e6}
+body.captionD .lyric::after{top:100%;width:16px;height:10px;clip-path:polygon(0 0,100% 0,50% 100%);border:0;transform:translateX(-50%)}
+body.captionD #lyricBa::after,body.captionD #lyricMe::after{left:var(--caption-tail-x);top:100%;bottom:auto;width:16px;height:10px;border:0;transform:translateX(-50%);clip-path:polygon(0 0,100% 0,50% 100%)}
+body.captionD #lyricMe{white-space:normal;word-break:keep-all;overflow-wrap:anywhere}
+body.captionD #lyricMe>span>i,body.captionD #lyricMe>span>.callKeep>i{font-style:normal;background:linear-gradient(90deg,#2a1f17 var(--call-fill,0%),#7b5c42 var(--call-fill,0%));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+body.captionD #lyricMe>span{background:none}
+/* 곡 자료 callKeep: 메김 줄에서 한 뜻 덩이는 한 줄에(가래질 세로 폰 「터를 닦는 이 / 집터는」, 곡별 검수 07 R2-05) */
+body.captionD #lyricMe .callKeep{white-space:nowrap}
+
+body.captionD .lyric[data-caption-side=right]::after,body.captionD .lyric[data-caption-side=left]::after{top:var(--caption-tail-y);left:-7px;transform:translateY(-50%) rotate(135deg)}
+body.captionD .lyric[data-caption-side=left]::after{left:calc(100% - 5px);transform:translateY(-50%) rotate(-45deg)}
+body.captionD .lyric[data-caption-side=right]::after{width:10px;height:16px;left:-10px;clip-path:polygon(100% 0,100% 100%,0 50%);transform:translateY(-50%)}
+body.captionD .lyric[data-caption-side=left]::after{width:10px;height:16px;left:100%;clip-path:polygon(0 0,100% 50%,0 100%);transform:translateY(-50%)}
+body.captionD #lyricBa[data-caption-side=right]::after,body.captionD #lyricMe[data-caption-side=right]::after{top:var(--caption-tail-y);width:10px;height:16px;left:-10px;clip-path:polygon(100% 0,100% 100%,0 50%);transform:translateY(-50%)}
+body.captionD #lyricBa[data-caption-side=left]::after,body.captionD #lyricMe[data-caption-side=left]::after{top:var(--caption-tail-y);width:10px;height:16px;left:100%;clip-path:polygon(0 0,100% 50%,0 100%);transform:translateY(-50%)}
+body.captionD .captionNotes{position:absolute;left:50%;bottom:calc(100% + var(--caption-hop,0px) + 4px);transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:2px;width:max-content;max-width:calc(100vw - 32px);font-size:16px}
+body.captionD .captionNotes .msg,body.captionD #lyricBa .captionNotes .combo,body.captionD #lyricMe .captionNotes .combo,body.captionD .captionNotes #holdCue{position:static;transform:none;inset:auto;margin:0;white-space:pre-line;max-width:calc(100vw - 32px);font-size:16px;line-height:1.3}
+body.captionD .captionNotes .msg{padding:2px 6px}
+body.captionD .captionNotes{left:0;transform:none;width:100%;max-width:100%}
+body.captionD .captionNotes>*{position:static!important;inset:auto!important;flex:none;box-sizing:border-box;max-width:100%!important}
+/* 연속 수는 오를 때 아래끝을 축으로 1.3배 커진다. 위 줄(위 글)과 겹치지 않게 줄 사이를 10px 띄운다. */
+body.captionD .captionNotes{flex-direction:row;flex-wrap:wrap;align-content:flex-end;justify-content:center;align-items:center;row-gap:10px}
+body.captionD .captionNotes>.combo{margin:0 16px;transform-origin:50% 100%;font-size:16px;position:static;inset:auto}
+body.captionD>.captionNotes{position:fixed;z-index:9;pointer-events:none}
+body.captionD .captionNotes>.combo{font-weight:700;line-height:1.3;color:#4a2412;border:2px solid;background:none;border-color:transparent;border-image:var(--notePaper);padding:0 .45em;white-space:nowrap}
+body.captionD #lyricBa .captionNotes>.combo,body.captionD #lyricMe .captionNotes>.combo{transform-origin:50% 50%}
+/* 이어 맞힘 단계: 5번부터 18px, 10번부터 20px · 금빛 바탕(그래프 검수 8회차 R2-03). 위 줄과 틈은 row-gap 10px 그대로 */
+/* 낮은 화면(높이 420 이하)은 자리가 없어 크기는 그대로 두고 색만 바꾼다. 연속 수는 말풍선 안(#lyricBa)에도 붙어서 같은 세기로 덮는다 */
+.combo[data-tier="3"],#lyricBa .combo[data-tier="3"],#lyricMe .combo[data-tier="3"]{color:#8a3412!important;filter:drop-shadow(0 0 3px rgba(255,206,92,.95)) drop-shadow(0 0 7px rgba(255,190,60,.75))} /* 2026-11-27 한지 종이로 바꾸며 금빛 바탕 대신 금빛 둘레 빛 */
+@media(min-height:421px){
+ .combo[data-tier="2"],#lyricBa .combo[data-tier="2"],#lyricMe .combo[data-tier="2"]{font-size:18px!important}
+ .combo[data-tier="3"],#lyricBa .combo[data-tier="3"],#lyricMe .combo[data-tier="3"]{font-size:20px!important}
+}
+/* 뗌 안내 「일찍 뗐어요\n구슬이 …에 닿을 때 떼요」는 두 문장 사이에서만 줄을 바꾼다. 곡마다 덧대던 pre-line(멸치 · 거문도 · 운재)을 모든 곡으로(2026-11-20, 다른 곡은 「…닿을 / 때 떼요」로 끊겼음) */
+body.captionD .captionNotes .msg{white-space:pre-line;word-break:keep-all;font-size:16px!important;line-height:1.3!important}
+/* 문장마다 줄 칸(scene.js setLines). 폰 가로 150px 칸(강강술래 · 풍구)에서 둘째 문장도 「구슬이 첫 강에 / 닿을 때 떼요」처럼 고르게 나뉜다 */
+.msg>.line{display:block;white-space:normal;text-wrap:balance}
+@media(min-width:900px) and (min-height:421px){
+ body.captionD .captionNotes #topMsg{font-size:22px!important;line-height:30px!important}
+ body.captionD .captionNotes:not(.learningNotes) #topMsg{width:340px;box-sizing:border-box;justify-self:center}
+ body.captionD .captionNotes #fbMsg{font-size:20px!important;line-height:28px!important}
+ body.captionD>.captionNotes.jajinariNotes:has(>#holdCue[hidden]){grid-template-columns:minmax(0,1fr)}
+ body.captionD>.captionNotes.jajinariNotes:has(>#holdCue[hidden])>.msg,
+ body.captionD>.captionNotes.jajinariNotes:has(>#holdCue[hidden])>.combo{grid-column:1}
+}
+body.captionD>.captionNotes.myeolchiNotes{display:flex;flex-direction:column;flex-wrap:nowrap;align-items:center;justify-content:flex-end;gap:12px}
+body.captionD .myeolchiNotes>.combo{margin:0}
+body.captionD .myeolchiNotes>#holdCue{order:-3}
+body.captionD .myeolchiNotes>#topMsg{order:-2}
+body.captionD .myeolchiNotes>.combo{order:-1}
+body.captionD>.captionNotes.geomunNotes{display:flex;flex-direction:column;flex-wrap:nowrap;align-items:center;justify-content:flex-end;gap:12px}
+body.captionD .geomunNotes>.combo{margin:0;order:-1}
+body.captionD .geomunNotes>#holdCue{order:-3}
+body.captionD .geomunNotes>#topMsg{order:-2}
+/* 자진뱃노래: 세로 폰(안내 칸 160px)에서 「구슬이 ‘어’에 닿을 때 / 떼요」처럼 꼬리 줄이 남지 않게 두 줄을 고르게 나눈다(곡별 검수 06 R1-02) */
+body.captionD .jajinNotes .msg{text-wrap:balance}
+@media(min-width:900px) and (min-height:421px){
+ body.captionD>.captionNotes.jajinNotes{gap:8px}
+}
+/* 가래질: 말풍선에 붙은 묶음(곡별 검수 07 R1-01). 세로 폰 160px 칸에서도 꼬리 줄이 남지 않게, 낮은 가로는 손 오른쪽에 「누르는 중」 */
+body.captionD .garaeNotes .msg{text-wrap:balance}
+body.captionD .garaeNotes>#holdCue{flex-wrap:nowrap}
+/* 가래질 꾹 표시는 묶음 맨 아래(말풍선 바로 위)에: 꾹 하는 동안 틀림 글 · 연속 수가 위에 떠도 손이 밀리지 않는다(1280 29px). 낮은 가로는 손을 가운데 칸에
+   고정하고 연속 수는 왼쪽, 글은 오른쪽 칸에(가운데 맞춤 한 줄이라 「구슬이 ‘어’에 닿을 때 떼요」가 뜨면 손이 100px 밀렸다, 곡별 검수 07 R2-04) */
+body.captionD>.captionNotes.garaeNotes>#holdCue{order:1}
+@media(max-height:420px){
+ body.captionD>.captionNotes.garaeNotes{display:grid;grid-template-columns:minmax(0,1fr) max-content minmax(0,1fr);column-gap:6px;align-items:end;align-content:end;justify-items:center}
+ body.captionD>.captionNotes.garaeNotes>#holdCue{grid-column:2;grid-row:1 / span 2;align-self:end}
+ body.captionD>.captionNotes.garaeNotes>.combo{grid-column:1;grid-row:1 / span 2;justify-self:end;align-self:end}
+ body.captionD>.captionNotes.garaeNotes>#topMsg,body.captionD>.captionNotes.garaeNotes>#fbMsg{grid-column:3;justify-self:start}
+ body.captionD>.captionNotes.garaeNotes .msg{max-width:100%!important}
+}
+@media(max-height:420px) and (orientation:landscape){
+ body.captionD>.captionNotes.garaeNotes:has(>#holdCue[hidden]):has(>#topMsg:not([hidden])):has(>#fbMsg:not([hidden]):not(.side)),
+ body.ganggangSong.captionD>.captionNotes:not(.learningNotes):has(>#holdCue[hidden]):has(>#topMsg:not([hidden])):has(>#fbMsg:not([hidden]):not(.side)){
+  top:76px!important;left:340px!important;width:310px!important;max-width:310px!important;height:auto!important;transform:none!important;
+  display:grid;grid-template-columns:minmax(0,1fr) max-content;grid-template-rows:32px 29px;align-items:start;align-content:start;justify-items:center;gap:0 12px;
+ }
+ body.captionD>.captionNotes.garaeNotes:has(>#holdCue[hidden]):has(>#topMsg:not([hidden])):has(>#fbMsg:not([hidden]):not(.side))>#topMsg,
+ body.ganggangSong.captionD>.captionNotes:not(.learningNotes):has(>#holdCue[hidden]):has(>#topMsg:not([hidden])):has(>#fbMsg:not([hidden]):not(.side))>#topMsg{grid-column:1/-1;grid-row:1;font-size:18px!important;line-height:24px!important;white-space:nowrap}
+ body.captionD>.captionNotes.garaeNotes:has(>#holdCue[hidden]):has(>#topMsg:not([hidden])):has(>#fbMsg:not([hidden]):not(.side))>#fbMsg,
+ body.ganggangSong.captionD>.captionNotes:not(.learningNotes):has(>#holdCue[hidden]):has(>#topMsg:not([hidden])):has(>#fbMsg:not([hidden]):not(.side))>#fbMsg{grid-column:1;grid-row:2;font-size:16px!important;line-height:20.8px!important}
+ body.captionD>.captionNotes.garaeNotes:has(>#holdCue[hidden]):has(>#topMsg:not([hidden])):has(>#fbMsg:not([hidden]):not(.side))>.combo,
+ body.ganggangSong.captionD>.captionNotes:not(.learningNotes):has(>#holdCue[hidden]):has(>#topMsg:not([hidden])):has(>#fbMsg:not([hidden]):not(.side))>.combo{grid-column:2;grid-row:2;margin:0}
+ body.ganggangSong.captionD>.captionNotes:not(.learningNotes):has(>#holdCue[hidden]):has(>#topMsg:not([hidden])):has(>#fbMsg:not([hidden]):not(.side)){left:116px!important}
+ body.ganggangSong.captionD>.captionNotes:not(.learningNotes):has(>#holdCue[hidden]):has(>#topMsg:not([hidden])):has(>#fbMsg:not([hidden]):not(.side))>#topMsg{justify-self:end}
+}
+/* 자진뱃노래 처음 배우기 4단계(노래)의 첫 메김 · 받음: 묶음을 말풍선에 붙이고(곡별 검수 06 R2-02) 단계 표는 맨 위, 안내는 말풍선 쪽. 낮은 가로도 위아래로 쌓는다 */
+body.captionD .jajinLearnNotes>#learnSteps{order:-4}
+@media(max-height:420px){
+ body.captionD>.captionNotes.geomunNotes.jajinLearnNotes{flex-direction:column;align-items:center;gap:4px}
+ body.captionD .geomunNotes.jajinLearnNotes .msg{max-width:100%!important}
+}
+@media(max-height:420px){
+ body.captionD>.captionNotes.myeolchiNotes{flex-direction:row;align-items:flex-end;justify-content:center;gap:24px}
+ body.captionD .myeolchiNotes .msg{max-width:calc(100% - 120px)!important}
+ body.captionD>.captionNotes.geomunNotes{flex-direction:row;align-items:flex-end;justify-content:center;gap:24px}
+ body.captionD .geomunNotes .msg{max-width:calc(100% - 120px)!important}
+ body.captionD>.captionNotes.garaeNotes{row-gap:4px}
+}
+body.captionD .captionNotes span{background:none;color:inherit;-webkit-text-fill-color:currentColor}
+body.captionD .captionNotes #learnSteps{font-size:16px;display:flex;flex-direction:column;flex-wrap:nowrap;align-items:flex-start;gap:4px}
+@media(max-height:420px) and (orientation:landscape){
+ body.captionD:not(.learnIntro) .captionNotes:not(.learningNotes) #holdCue{flex-direction:row;flex-wrap:nowrap;min-height:52px;gap:8px;inset:auto!important}
+ body.captionD:not(.learnIntro) .captionNotes:not(.learningNotes) #holdCue span{min-width:80px;white-space:nowrap}
+}
+body.captionD .captionNotes #learnHand{max-width:none!important;align-self:start}
+@media(max-height:420px){body.captionD .captionNotes>.combo{transform-origin:50% 50%}}
+body.captionD .narrowNotes .msg,body.captionD .narrowNotes .combo,body.captionD .narrowNotes #holdCue span{white-space:normal;word-break:normal;overflow-wrap:anywhere}
+body.captionD .captionNotes #holdCue{flex-wrap:wrap;justify-content:center}
+body.captionD .captionNotes #holdCue{display:flex;align-items:center;gap:4px;width:max-content!important}
+body.captionD .captionNotes #holdCue[hidden],body.captionD .captionNotes [hidden]{display:none}
+/* 강강술래: 꾹과 연속 수를 먼저 고정해 떼기 안내가 들어와도 가로 자리가 바뀌지 않는다. */
+body.ganggangSong.captionD>.captionNotes:not(.learningNotes){justify-content:flex-start}
+body.ganggangSong.captionD>.captionNotes:not(.learningNotes)>#holdCue{order:-2;flex:none}
+body.ganggangSong.captionD>.captionNotes:not(.learningNotes)>.combo{order:-1;min-width:6.2em;text-align:center}
+@media(max-width:899px),(max-height:420px){
+ body.ganggangSong.captionD>.captionNotes:not(.learningNotes)>#holdCue[hidden]{display:flex!important;visibility:hidden}
+ body.ganggangSong.captionD>.captionNotes:not(.learningNotes)[data-edge=right]{flex-direction:row-reverse}
+}
+
+@media(max-height:420px) and (orientation:landscape){
+ body.ganggangSong.captionD>.captionNotes:not(.learningNotes)[data-edge]{display:grid;grid-template-columns:minmax(0,1fr) max-content minmax(0,1fr);column-gap:24px;row-gap:4px;align-content:end;align-items:end;justify-items:center}
+ body.ganggangSong.captionD>.captionNotes:not(.learningNotes)>#holdCue{grid-column:1;grid-row:1 / span 2;justify-self:end}
+ body.ganggangSong.captionD>.captionNotes:not(.learningNotes)>.combo{grid-column:2;grid-row:1 / span 2;margin:0}
+ body.ganggangSong.captionD>.captionNotes:not(.learningNotes)>#topMsg{grid-column:3;grid-row:1;max-width:100%!important}
+ body.ganggangSong.captionD>.captionNotes:not(.learningNotes)>#fbMsg{grid-column:3;grid-row:2;max-width:100%!important}
+}
+@media(min-width:900px) and (min-height:421px){
+ body.captionD .lyric,body.captionD #lyricBa,body.captionD.wideView #lyricBa,body.captionD.ringSong #lyricBa:not(.big),body.captionD #lyricBa.big{font-size:28px}
+ body.captionD>.captionNotes{display:grid;grid-template-columns:minmax(0,1fr) 188px;align-items:start;align-content:start;justify-items:center;row-gap:10px}
+ body.captionD>.captionNotes[data-edge=left]{grid-template-columns:188px minmax(0,1fr)}
+ body.captionD>.captionNotes>*{grid-column:1;margin:0}
+ body.captionD>.captionNotes>#holdCue{grid-column:2;grid-row:1 / span 6;flex-direction:column}
+ body.captionD>.captionNotes[data-edge=left]>*{grid-column:2}
+ body.captionD>.captionNotes[data-edge=left]>#holdCue{grid-column:1}
+ body.ganggangSong.captionD>.captionNotes:not(.learningNotes){align-content:end;align-items:end}
+ /* 월월이: 손 칸(188px)을 뺀 170px 글 칸에서 「구슬이 ‘월’에 닿을 때 / 떼요」처럼 끝 줄에 낱말 하나가 남지 않게 한다(곡별 검수 05 고치기 2회차).
+    balance는 「구슬이 ‘월’ / 에 닿을 때 떼요」로 따옴표 뒤를 갈라서 pretty를 쓴다 */
+ body.wolSong.captionD>.captionNotes:not(.learningNotes)>.msg{text-wrap:pretty}
+ body.captionD>.captionNotes.jajinariNotes>.msg{text-wrap:pretty}
+}
+/* Reserve each lesson control before feedback appears; the hand keeps its scene scale. */
+body.captionD>.captionNotes.learningNotes{display:grid;grid-template-columns:minmax(0,1fr) max-content;grid-template-rows:86px 40px 40px 28px;gap:12px;align-items:start;align-content:start;justify-items:center}
+/* 1~3단계의 잠깐 숨은 손도 같은 칸을 유지해 뜬 글과 단계표가 옆으로 움직이지 않게 한다. */
+body.captionD>.captionNotes.lessonNotes>#learnHand[hidden]{display:block!important;visibility:hidden}
+body.captionD>.captionNotes.learningNotes>#topMsg{grid-column:1;grid-row:1}
+body.captionD>.captionNotes.learningNotes>#fbMsg{grid-column:1;grid-row:2}
+body.captionD>.captionNotes.learningNotes>.combo{grid-column:1;grid-row:3}
+body.captionD>.captionNotes.learningNotes>#learnSteps{grid-column:1;grid-row:1}
+body.captionD>.captionNotes.learningNotes>#topMsg{grid-row:2}
+body.captionD>.captionNotes.learningNotes>#fbMsg{grid-row:3}
+body.captionD>.captionNotes.learningNotes>#learnHand,body.captionD>.captionNotes.learningNotes>#holdCue{grid-column:2;grid-row:1 / span 4}
+body.captionD>.captionNotes.learningNotes>#learnHand{margin-top:-8px}
+/* 세로 폰: 손 그림은 묶음 바닥(꼬마 말풍선 쪽)에 둔다. 위끝 모서리 단추(멈춤 · 소리)와 떨어지고 구슬과 가깝다. */
+
+body.captionD>.captionNotes.learningNotes[data-edge=left]{grid-template-columns:max-content minmax(0,1fr)}
+body.captionD>.captionNotes.learningNotes[data-edge=left]>*{grid-column:2}
+body.captionD>.captionNotes.learningNotes[data-edge=left]>#learnSteps,body.captionD>.captionNotes.learningNotes[data-edge=left]>#topMsg,body.captionD>.captionNotes.learningNotes[data-edge=left]>#fbMsg{grid-column:2}
+body.captionD>.captionNotes.learningNotes[data-edge=left]>#learnHand,body.captionD>.captionNotes.learningNotes[data-edge=left]>#holdCue{grid-column:1}
+@media(min-width:900px) and (min-height:421px){body.captionD>.captionNotes.learningNotes{grid-template-rows:64px 54px 54px 28px}}
+body.captionD>.captionNotes.nearResponseNotes{display:flex;flex-direction:column;flex-wrap:nowrap;align-items:flex-end;justify-content:flex-end;gap:8px}
+body.captionD>.captionNotes.nearResponseNotes>.msg{width:max-content;margin:0}
+body.captionD>.captionNotes.nearResponseNotes>#holdCue{flex-direction:row;flex-wrap:wrap;align-self:flex-end}
+@media(max-height:420px){
+ body.captionD>.captionNotes.learningNotes{grid-template-columns:242px minmax(0,1fr) 104px;grid-template-rows:40px 64px;gap:12px}
+ body.captionD>.captionNotes.learningNotes>#learnSteps{grid-column:2;grid-row:1;width:242px;justify-self:start;flex-direction:row;align-items:center;gap:12px}
+ body.captionD>.captionNotes.learningNotes>#fbMsg{grid-column:2;grid-row:1;max-width:calc(100% - 254px)!important;justify-self:end}
+ body.captionD>.captionNotes.learningNotes>#topMsg{grid-column:2;grid-row:2;max-width:calc(100% - 116px)!important;justify-self:start}
+ body.captionD>.captionNotes.learningNotes>.combo{grid-column:2;grid-row:2;justify-self:end}
+ body.captionD>.captionNotes.learningNotes>#learnHand,body.captionD>.captionNotes.learningNotes>#holdCue{grid-column:3;grid-row:1 / span 2;justify-self:end;margin:60px 0 0}
+ body.captionD>.captionNotes.learningNotes[data-edge=left]{grid-template-columns:104px minmax(0,1fr) 242px}
+ body.captionD>.captionNotes.learningNotes[data-edge=left]>#learnSteps{grid-column:2;justify-self:end}
+ body.captionD>.captionNotes.learningNotes[data-edge=left]>#topMsg,body.captionD>.captionNotes.learningNotes[data-edge=left]>#fbMsg,body.captionD>.captionNotes.learningNotes[data-edge=left]>.combo{grid-column:2}
+ body.captionD>.captionNotes.learningNotes[data-edge=left]>#fbMsg,body.captionD>.captionNotes.learningNotes[data-edge=left]>.combo{justify-self:start}
+ body.captionD>.captionNotes.learningNotes[data-edge=left]>#topMsg{justify-self:end}
+ body.captionD>.captionNotes.learningNotes[data-edge=left]>#learnHand,body.captionD>.captionNotes.learningNotes[data-edge=left]>#holdCue{grid-column:1;justify-self:start;margin:60px 0 0}
+ /* 위 글은 말풍선(구슬 길) · 손 칸 · 모서리 단추를 비킨 빈 칸 가운데(scene.js captionDTopBand가 --band-x · --band-r · --band-w를 정한다) */
+ body.captionD>.captionNotes.learningNotes[data-edge]>#topMsg{grid-column:1 / -1;grid-row:2;justify-self:center;margin:0 var(--band-r,116px) 0 var(--band-x,0px);max-width:var(--band-w,100%)!important}
+}
+body.onStart #lyricMe::before,body.onStart #lyricBa::before{left:2px;line-height:1.6;padding:0 15px;min-width:180px;box-sizing:border-box;text-align:center;background:transparent url(art/ui/polish/bubble2-tag.b1e42bb2e614.webp) center/100% 100% no-repeat;border-radius:0}
+body.onStart #lyricBa::before{min-width:122px;background-image:url(art/ui/polish/bubble2-tag2.a8fee1241d19.webp)}
+/* 780×290: 이름표를 16px로 두되 줄 높이 · 옆 여백 · 최소 폭을 줄여 상자는 13px 때보다 작게(그래프 검수 6회차 R2-01. 5회차에 16px · 줄 높이 1.6 · 최소 폭 180px이면 받는 말풍선이 띠를 넘고 강강술래 묶음이 얼굴에 닿았다) */
+@media (max-height:420px) and (min-width:601px){body.onStart #lyricMe::before,body.onStart #lyricBa::before{font-size:16px;line-height:1.2;padding:0 8px 0 12px;min-width:0}} /* 왼쪽 12px: 이름표 그림 왼쪽 빨간 점과 첫 글자 사이 */
+
+.startFoot{border:0;border-image:none;min-width:0;width:680px;max-width:calc(100vw - 24px);padding:12px 14px 8px;background:url(art/ui/polish/foot1-tray.f29d29a698d6.webp) center/100% 100% no-repeat}
+.startFoot .row{display:grid;grid-template-columns:212px repeat(3,minmax(0,1fr));gap:8px;align-items:center;min-height:56px}
+.startFoot:has(#startPractice[hidden]) .row{grid-template-columns:212px repeat(2,minmax(0,1fr))}
+.startFoot .go{border:0;border-image:none;border-radius:0;padding:0 10px;min-width:0;font-weight:700;color:#493425;background:url(art/ui/polish/foot1-secondary.8f3f0cf37851.webp) center/100% 100% no-repeat}
+.startFoot .go.small{min-height:44px;font-size:18px}
+.startFoot #startGo{width:202px;min-width:0;min-height:56px;font-size:28px;font-weight:700;color:#fff7e8;background-image:url(art/ui/polish/foot1-primary.e5120245fc8b.webp)}
+.startFoot #startBack{background-image:url(art/ui/polish/foot1-secondary2.abcf481958b4.webp)}
+.startFoot #startCalib{background-image:url(art/ui/polish/foot1-secondary3.e700eeff44bc.webp)}
+#startCredit{font-size:16px;line-height:24px;color:#534936;padding:0;margin:8px 0 0;text-wrap:balance}
+.startFoot .modes{gap:8px;margin:0 0 8px}
+.startFoot .modes button{border:0;border-image:none;padding:0 14px;background:url(art/ui/polish/foot1-secondary.8f3f0cf37851.webp) center/100% 100% no-repeat;opacity:1;color:#6c5b49}
+.startFoot .modes button.on{color:#8f2f1c;text-decoration:underline;text-underline-offset:4px}
+
+
+/* 도장과 재생 표시는 그림 아래에 놓아 설명도 두 줄로 읽을 폭을 쓴다. */
+
+
+@media(max-width:600px) and (min-height:421px) and (orientation:landscape){
+  .startFoot{width:calc(100vw - 24px);padding:12px 14px 8px}
+  .startFoot .row,.startFoot:has(#startPractice[hidden]) .row{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px 8px}
+  .startFoot:has(#startPractice[hidden]) .row{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .startFoot #startGo{width:100%;grid-column:1 / -1;min-height:52px}
+  .startFoot .go.small{font-size:16px;padding:0 3px}
+  .startFoot .modes button{font-size:16px;padding:0 10px}
+}
+/* Preserve a scrollable song sheet and compact controls in short windows. */
+@media(max-height:420px){
+  #songPanel.grouped{max-height:calc(100% - 24px);overflow-y:auto;padding:4px 10px 20px;border-width:14px;border-image-width:14px}
+  .grouped .song.open{grid-template-columns:80px minmax(0,1fr) 64px;gap:6px}
+  .grouped .nm{font-size:16px}
+  .grouped .ds{font-size:16px}
+  .grouped .listMeta,.grouped .lv{font-size:16px;line-height:1.3} /* 폰 가로 난이도 글도 16px(곡별 검수 05 R2-03, 15px였음) */
+  .startFoot{display:block;width:540px;padding:7px 12px}
+  .startFoot .row,.startFoot:has(#startPractice[hidden]) .row{grid-template-columns:minmax(140px,1.3fr) repeat(3,minmax(0,1fr));min-height:44px;gap:6px}
+  .startFoot:has(#startPractice[hidden]) .row{grid-template-columns:minmax(140px,1.3fr) repeat(2,minmax(0,1fr))}
+  .startFoot #startGo{width:100%;min-height:44px;font-size:20px}
+  .startFoot .go.small{font-size:16px;padding:0 4px}
+  .startFoot .modes{margin-bottom:4px}
+  .startFoot .modes button{min-height:44px;font-size:16px}
+}
+
+/* 곡 목록 스크롤 막대: 회색 기본 막대 대신 한지 위 나무 빛 막대, 화살 단추 없음(2026-11-13 대표 「스크롤 부분이 주변과 어울리지 않으니까」) */
+#songPanel::-webkit-scrollbar{width:12px}
+#songPanel::-webkit-scrollbar-button{display:none;height:0}
+#songPanel::-webkit-scrollbar-track{margin:12px 0;border-radius:6px;background:linear-gradient(90deg,transparent 4px,rgba(122,80,46,.16) 4px,rgba(122,80,46,.16) 8px,transparent 8px)}
+#songPanel::-webkit-scrollbar-thumb{border:3px solid transparent;border-radius:6px;background:#a3714a padding-box;box-shadow:inset 1px 0 0 rgba(255,236,204,.35)}
+#songPanel::-webkit-scrollbar-thumb:hover{background-color:#8a5833}
+@supports not selector(::-webkit-scrollbar){#songPanel{scrollbar-width:thin;scrollbar-color:#a3714a transparent}}
+/* Keep phone reading text at the requested 16px minimum. */
+@media(max-width:600px) and (orientation:landscape){
+  #startPlace,#startCredit,body.onStart #lyricMe::before,body.onStart #lyricBa::before,#lyricBa .combo,#feastBand span,#feastBand small{font-size:16px}
+  #feastBand small{text-wrap:balance}
+}

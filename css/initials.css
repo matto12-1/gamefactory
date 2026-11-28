@@ -1,0 +1,75 @@
+@font-face { font-family:'Galmuri11 Wall'; src:url('../assets/fonts/galmuri11-bold-wall.woff2') format('woff2'); font-weight:700; font-display:swap; }
+.px { font-family:'Galmuri11 Wall',GF Sans,sans-serif; font-weight:700; letter-spacing:.06em; }
+.anonymous-rank .ini { color:var(--gf-ink); }
+.anonymous-rank .ini.none { color:#7b8494; }
+dialog.initials-panel { width:min(1060px,calc(100vw - 32px)); max-width:none; max-height:calc(100dvh - 24px); padding:22px 24px; border:3px solid var(--site-edge); border-radius:18px; background:var(--site-panel); color:var(--site-ink); box-shadow:0 24px 60px #000a; overflow:auto; }
+dialog.initials-panel[open] { display:grid; grid-template-columns:minmax(0,1.15fr) minmax(0,1fr); gap:22px; }
+dialog.initials-panel::backdrop { background:#070b16c9; }
+.initials-entry,.initials-board { display:flex; flex-direction:column; gap:12px; min-width:0; }
+.initials-top { display:flex; align-items:center; flex-wrap:wrap; gap:8px; }
+.initials-badge { padding:4px 9px; border-radius:6px; background:var(--site-accent); color:var(--site-on-accent); font-size:1rem; white-space:nowrap; }
+.initials-game { font-size:.8125rem; color:var(--site-sub); font-weight:800; flex:1; min-width:0; word-break:keep-all; }
+.initials-timer { font-size:.75rem; white-space:nowrap; }
+.initials-timer b { color:var(--site-accent-ink); font-size:1.25rem; }
+dialog.initials-panel h2 { font:800 1rem/1.5 GF Sans,sans-serif; margin:0; color:var(--site-ink); }
+dialog.initials-panel h3 { font-size:1.125rem; color:var(--site-gold); margin:0; }
+.initials-cover { width:100%; max-height:200px; aspect-ratio:16/9; object-fit:cover; border-radius:10px; }
+.initials-slots { display:flex; justify-content:center; gap:14px; }
+.initials-slot { display:grid; justify-items:center; gap:5px; }
+dialog.initials-panel :where(button) { min-height:44px; min-width:0; border:0; padding:0; cursor:pointer; font:800 .875rem/1.2 GF Sans,sans-serif; box-shadow:none; border-radius:8px; background:var(--site-chip); color:var(--site-ink); }
+.initials-slot button { width:4.6rem; }
+.initials-slot .ch { height:5rem; font:700 3.25rem/1 'Galmuri11 Wall',sans-serif; background:var(--site-bg); box-shadow:inset 0 0 0 3px var(--site-edge); }
+.initials-slot.on .ch { color:var(--site-gold); box-shadow:inset 0 0 0 3px var(--site-gold); }
+dialog.initials-panel button:focus-visible { outline:3px solid var(--site-gold); outline-offset:2px; }
+dialog.initials-panel button:disabled { cursor:default; }
+.initials-keys { display:grid; grid-template-columns:repeat(9,minmax(0,1fr)); gap:5px; }
+.initials-keys button { font-family:'Galmuri11 Wall',sans-serif; }
+.initials-actions { display:flex; gap:10px; align-items:center; }
+.initials-actions button { padding:0 14px; }
+.initials-actions [data-test="initials-save"] { min-width:80px; background:var(--site-accent); color:var(--site-on-accent); font-size:1rem; }
+.initials-actions [data-test="initials-skip"] { flex:1; font-size:.8125rem; }
+.initials-hint { margin:0; color:var(--site-sub); font-size:.8125rem; line-height:1.5; }
+.initials-error { min-height:1.2em; margin:0; font-size:.8125rem; color:var(--site-accent-ink); }
+.initials-lines { margin:0; padding:0; list-style:none; display:grid; gap:6px; }
+.initials-lines li { display:grid; grid-template-columns:2.2rem 4rem minmax(0,1fr); align-items:center; min-height:2.4rem; padding:0 12px; border-radius:8px; background:var(--site-soft); }
+.initials-lines .ini { color:var(--site-ink); }
+.initials-lines .none { color:var(--site-sub); }
+.initials-lines em { font-style:normal; text-align:right; color:var(--site-ink); }
+.initials-lines .r1 { color:var(--site-gold); } .initials-lines .r2 { color:var(--site-silver); } .initials-lines .r3 { color:var(--site-bronze); }
+.initials-lines li.me { background:var(--site-tint); box-shadow:inset 0 0 0 2px var(--site-accent-ink); }
+.initials-lines li.me b { color:var(--site-gold); }
+dialog.initials-panel.saved .me b { animation:initials-stamp .4s ease-out both; }
+@keyframes initials-stamp { from { transform:scale(1.65); opacity:.3; } to { transform:scale(1); opacity:1; } }
+@media (max-width:820px) and (orientation:portrait) { dialog.initials-panel { padding:14px 12px; } dialog.initials-panel[open] { grid-template-columns:minmax(0,1fr); gap:12px; } .initials-entry { grid-row:1; gap:8px; } .initials-cover { display:none; } .initials-slot button { width:4rem; } .initials-slot .ch { height:4rem; font-size:2.6rem; } .initials-lines li { min-height:1.8rem; font-size:.875rem; } }
+/* 폰 가로(가로 방향 · 높이 520 이하, 작은 아이폰 667×260 포함): 창 하나에 스크롤 없이 다 든다(2026-11-27).
+   위 줄(새 기록 · 활동 · 남은 시간)과 안내 한 줄은 가로 전체, 그 아래 왼쪽 1~5등 미리 보기 · 오른쪽 글자 칸 셋,
+   맨 아래 왼쪽 도움말(막는 말이면 그 자리에 고쳐 달라는 글) · 오른쪽 새기기 단추. 글자판(A~Z)과 표지는 빼고 ▲▼로 고른다.
+   읽는 글 12px · 누르는 칸 40px(폰 가로 시험 기준). 옛 블록은 11px 글 · 32px 단추였고 가장 낮은 화면에서 창 안이 넘쳤다. */
+@media (orientation:landscape) and (max-height:520px) {
+  dialog.initials-panel { width:calc(100vw - 24px); padding:8px 12px; max-height:calc(100dvh - 12px); }
+  dialog.initials-panel[open] { grid-template-columns:minmax(0,1fr) auto; grid-template-areas:"top top" "title title" "board slots" "msg acts"; gap:4px 16px; align-items:center; }
+  .initials-entry { display:contents; }
+  .initials-board { grid-area:board; gap:0; }
+  .initials-top { grid-area:top; }
+  dialog.initials-panel h2 { grid-area:title; font-size:12px; line-height:1.35; }
+  .initials-slots { grid-area:slots; gap:8px; }
+  .initials-actions { grid-area:acts; gap:8px; }
+  .initials-error, .initials-hint { grid-area:msg; }
+  .initials-error { min-height:0; font-size:12px; }
+  .initials-error:not(:empty) ~ .initials-hint { visibility:hidden; }
+  .initials-cover, .initials-board h3, .initials-keys { display:none; }
+  .initials-badge { font-size:12px; padding:3px 6px; }
+  .initials-game, .initials-timer { font-size:12px; }
+  .initials-timer b { font-size:14px; }
+  dialog.initials-panel button { min-height:40px; }
+  .initials-slot { gap:2px; }
+  .initials-slot button { width:44px; }
+  .initials-slot .ch { height:40px; font-size:28px; }
+  .initials-lines { gap:2px; }
+  .initials-lines li { min-height:24px; padding:0 10px; font-size:12px; grid-template-columns:1.6rem 3rem minmax(0,1fr); }
+  .initials-actions button { padding:0 10px; }
+  .initials-actions [data-test="initials-save"] { min-width:64px; font-size:14px; }
+  .initials-actions [data-test="initials-skip"] { flex:none; font-size:12px; }
+  .initials-hint { font-size:12px; line-height:1.35; }
+}
+@media (prefers-reduced-motion:reduce) { dialog.initials-panel.saved .me b { animation:none; } }
